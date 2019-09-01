@@ -1,13 +1,13 @@
-import * as React from 'react'
-import Head from 'next/head'
+import * as React from 'react';
+import Head from 'next/head';
 type LayoutProps = {
-  title?: string
-}
+  title?: string;
+};
 const layoutStyle = {
   margin: 20,
   padding: 20,
-  border: '1px solid #DDD'
-}
+  border: '1px solid #DDD',
+};
 const Layout: React.FunctionComponent<LayoutProps> = ({ children, title }) => (
   <div style={layoutStyle}>
     <Head>
@@ -17,5 +17,5 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children, title }) => (
     </Head>
     {children}
   </div>
-)
-export default Layout
+);
+export default Layout;

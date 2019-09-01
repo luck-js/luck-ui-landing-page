@@ -9,7 +9,7 @@ class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App:any) => (props: any) => sheet.collectStyles(<App {...props} />),
+          enhanceApp: (App: any) => (props: any) => sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -35,8 +35,8 @@ class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <body>
-        <Main />
-        <NextScript />
+          <Main />
+          <NextScript />
         </body>
       </Html>
     );
