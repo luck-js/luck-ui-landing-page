@@ -8,6 +8,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     width: 100%;
+    background-color: #d45858;
+    color: white;
   }
 `;
 

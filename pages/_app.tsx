@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyle from '../components/GlobalStyle';
 const theme = {
   colors: {
-    primary: '#444444',
+    primary: 'white',
   },
 };
 

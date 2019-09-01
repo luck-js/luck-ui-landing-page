@@ -2,13 +2,9 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Layout from '../components/Layout';
 
-const Title = styled.h1`
-  color: ${props => props.theme.colors.primary};
-`;
-
 const travel = keyframes`
   from { left: 0; }
-  to   { left: 640px; }
+  to   { left: 100%; }
 `;
 
 const bounce = keyframes`
@@ -21,14 +17,14 @@ const bounce = keyframes`
 `;
 
 const Container = styled.div`
-  position: relative;
-  margin: 1em auto;
-  width: 660px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   height: 240px;
-  border: 2px solid #666;
-  background: #cff;
+  background: transparent;
 
   #traveler {
+    top: 60px;
     position: absolute;
     width: 20px;
     height: 240px;
@@ -40,7 +36,7 @@ const Container = styled.div`
     position: absolute;
     width: 20px;
     height: 20px;
-    background: red;
+    background: white;
     border-radius: 10px;
 
     animation: ${bounce} 4.2s infinite;
@@ -50,7 +46,6 @@ const Container = styled.div`
 const Index: React.FunctionComponent = () => {
   return (
     <Layout title="Home">
-      <Title>Hello Next.js 👋</Title>
       <Container id="stage">
         <div id="traveler">
           <div id="bouncer"></div>
