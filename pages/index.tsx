@@ -1,30 +1,49 @@
-import React from 'react';
-import styled, {keyframes} from 'styled-components';
+import React, { useEffect } from 'react';
 import Layout from '../components/Layout';
-import { helper, getRandomInt } from '../utils/helper';
-
+import styled from 'styled-components';
+import { Circle, Layer, Stage } from 'react-konva';
+import Konva from 'konva';
+import { getRandomInt, helper } from '../utils/helper';
 const CONTAINER_HEIGHT = 160;
 if (typeof window === 'undefined') {
   // @ts-ignore
   global.window = {};
 }
 const innerWidth = window.innerWidth;
+interface Bubble {
+  time: number;
+  size: number;
+  opacity: number;
+  x: number;
+  y: number;
+  direction: number
+  direction2: number
+}
 
-const makeTravel = (x: number) => keyframes`
-  from { transform: translateX(${x > 0 ? x : x + innerWidth}px); }
-  to { transform: translateX(${x < 0 ? x : x + innerWidth}px); }
-`;
+const Bubble = ({ time, size, direction, direction2, ...props }: Bubble) => {
+  const config = { ...{ fill: 'white', radius: size }, ...props };
+  const [node, setNode] = React.useState();
+  useEffect(() => {
+    if (node) {
+      var amplitude = (innerWidth / 2) - size;
+      var period = 200 * time;
 
-const makeBounce = (y: number) => keyframes`
-  from, to  {
-    transform: translateY(${y}px);
-  }
-  50% {
-    transform: translateY(${CONTAINER_HEIGHT}px);
-  }
-`;
+      var yAmplitude = (CONTAINER_HEIGHT / 2) - size;
+      var yPeriod = 30 * time;
 
-const Container = styled('svg')`
+      const anim = new Konva.Animation(function(frame: any) {
+        // console.log(frame.time )
+        node.x(direction * amplitude * Math.sin((frame.time * 2 * Math.PI) / period) + amplitude + props.x + size);
+        node.y(direction2 * yAmplitude * Math.sin((frame.time * 2 * Math.PI) / yPeriod) + props.y + yAmplitude + size);
+      }, node.getLayer());
+      anim.start();
+
+    }
+  }, [node]);
+  return <Circle ref={node => setNode(node)} {...config} />;
+};
+
+const Container = styled('div')`
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -32,59 +51,28 @@ const Container = styled('svg')`
   background: transparent;
 `;
 
-interface Bubble {
-  time: number;
-  size: number;
-  opacity: number;
-  position: {
-    x: number;
-    y: number;
-  };
-}
-
-const Bubble = ({ time, ...props }: Bubble) => {
-  const travelerTime = time * 100;
-  const bounceTime = time * 96;
-  return (
-    <Bubble.Traveler time={travelerTime} {...props}>
-      <Bubble.Bouncer time={bounceTime} {...props}/>
-    </Bubble.Traveler>
-  );
-};
-//
-Bubble.Traveler = styled('g')<Bubble>`
-  animation: ${props => makeTravel(props.position.x)} ${props => props.time + 'ms'} linear infinite
-    alternate;
-`;
-
-Bubble.Bouncer = styled('circle')<any>`
-  fill: white;
-  fill-opacity: ${props => props.opacity};
-  r: ${props => props.size / 2};
-  cy: ${props => props.position.y}px;
-  animation: ${props => makeBounce(props.position.y)} ${props => props.time + "ms"} infinite;
-`;
-
 const Index: React.FunctionComponent = () => {
-  const timeRatio = innerWidth / 10;
-  const bubbles = helper(0, 1000);
+  const timeRatio = innerWidth / 2;
+  console.log(getRandomInt(timeRatio -3, timeRatio + 3))
+  const bubbles = helper(0, 600);
+
   return (
     <Layout title="Home">
-      <Container width="100%" height={`${CONTAINER_HEIGHT}px`}>
-
-
-        {bubbles.map(bubbles => {
-          const time = getRandomInt(timeRatio - 6, timeRatio + 6);
-          const size = getRandomInt(40, 60);
-          const position = {
-            x: getRandomInt(-200, innerWidth + 200),
-            y: getRandomInt(size, CONTAINER_HEIGHT),
-          };
-          const opacity = getRandomInt(60, 100) / 100;
-          return (
-            <Bubble key={bubbles} time={time} size={size} position={position} opacity={opacity} />
-          );
-        })}
+      <Container>
+        <Stage width={window.innerWidth} height={CONTAINER_HEIGHT}>
+          <Layer>
+            {bubbles.map(bubbles => {
+              const time = getRandomInt(timeRatio - 15, timeRatio + 15);
+              const size = getRandomInt(20, 40);
+              const x = getRandomInt(-innerWidth / 2, innerWidth / 2);
+              const y = getRandomInt(0, 60);
+              const direction = Math.random() >= 0.5 ? 1 : -1
+              const direction2 = Math.random() >= 0.5 ? 1 : -1
+              const opacity = 0.6;
+              return <Bubble key={bubbles} time={time} size={size} x={x} y={y} opacity={opacity} direction={direction} direction2={direction2}/>;
+            })}
+          </Layer>
+        </Stage>
       </Container>
     </Layout>
   );
