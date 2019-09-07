@@ -28,6 +28,7 @@
     "react-dom": "^16.9.0",
     "react-konva": "^16.9.0-0",
     "styled-components": "^4.3.2",
+    "styled-media-query": "^2.1.2",
     "styled-system": "^5.1.1"
   },
   "devDependencies": {

@@ -1,12 +1,25 @@
-export const breakpoints: any = ["490px", "640px", "1040px", "1920px"];
-breakpoints.small = breakpoints[0];
-breakpoints.medium = breakpoints[1];
-breakpoints.large = breakpoints[2];
+export const breakpoints = ["490px", "1040px", "1920px", "3824px"];
 
-export const colours = {
-  main: "#2d2d2d",
-  mainContrast: "#ffffff",
-  primary: "#f9c43c",
+export const space: any = [0, 4, 8, 12, 16, 24, 32, 48, 64, 96, 144, 172, 330];
+
+space.none = space[0];
+space.xxsmall = space[1];
+space.xsmall = space[2];
+space.small = space[3];
+space.medium = space[4];
+space.regular = space[5];
+space.xregular = space[6];
+space.large = space[7];
+space.xlarge = space[8];
+space.xxlarge = space[9];
+space.huge = space[10];
+space.xhuge = space[11];
+space.xxhuge = space[12];
+space.auto = "auto";
+
+export const colors = {
+  main: "#FFFFFF",
+  mainContrast: "#D45858",
 };
 
 export const fontFamilies = {
@@ -16,7 +29,7 @@ export const fontFamilies = {
 export const textStyles = {
   logoHeading: {
     tag: "p",
-    fontSize: [34, 50, 70, 80],
+    fontSize: [24, 38, 60, 90],
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },
@@ -24,3 +37,9 @@ export const textStyles = {
     textDecoration: "underline"
   }
 }
+
+export const Theme = {
+  space,
+  colors,
+  breakpoints
+};

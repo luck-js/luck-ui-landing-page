@@ -30,6 +30,8 @@ const makeGetFramePosition = (frameTime: any) => ({
 
 const Bubble: React.FunctionComponent<BubbleProps> = ({ ...props }) => {
   const startAnimate = (node: any) => {
+    if(!node) return
+
     const getRandomDirection = () => (Math.random() >= 0.5 ? 1 : -1);
     const time = getRandomInt(timeMin, timeMax);
     const duration = getRandomInt(10000, 50000, 100);
@@ -38,14 +40,14 @@ const Bubble: React.FunctionComponent<BubbleProps> = ({ ...props }) => {
       radius,
       direction: getRandomDirection(),
       amplitude: INNER_WIDTH / 2 - radius,
-      period: 150 * time,
+      period: 200 * time,
       position: props.x,
     };
     const yFramePositionConfig = {
       radius,
       direction: getRandomDirection(),
       amplitude: CONTAINER_HEIGHT / 2 - radius,
-      period: 30 * time,
+      period: 40 * time,
       position: props.y,
     };
 
