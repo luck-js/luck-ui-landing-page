@@ -10,6 +10,14 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     background-color: #d45858;
     color: white;
+    transition: color 0.1s;
+  }
+  
+  html body{
+    color: transparent !important;
+  }
+  html.lato body{
+    color: white !important;
   }
 `;
 
