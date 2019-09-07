@@ -9,14 +9,14 @@ import {CONTAINER_HEIGHT, INNER_WIDTH} from "../utils/global"
 
 const Container = styled('div')`
   position: fixed;
-  bottom: 0;
   width: 100%;
+  bottom: ${200 - CONTAINER_HEIGHT}px;
   height: ${CONTAINER_HEIGHT}px;
   background: transparent;
 `;
 
 const getBubbleProps = (): BubbleProps => {
-  const radius = getRandomInt(20, 40, 5);
+  const radius = getRandomInt(5, 40, 5);
   const x = getRandomInt(-INNER_WIDTH / 2, INNER_WIDTH / 2, 20);
   const y = getRandomInt(0, 60, 20);
   const opacity = 0.6;
@@ -25,7 +25,8 @@ const getBubbleProps = (): BubbleProps => {
 };
 
 const Index: React.FunctionComponent = () => {
-  const bubbles = helper(0, 600);
+  const bubblesLength = Math.floor((INNER_WIDTH / 10575) * 10000);
+  const bubbles = helper(0, bubblesLength);
 
   return (
     <Layout title="Home">

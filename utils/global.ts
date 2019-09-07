@@ -1,4 +1,4 @@
-export const CONTAINER_HEIGHT = 160;
+export const CONTAINER_HEIGHT = 300;
 
 if (typeof window === 'undefined') {
   // @ts-ignore
