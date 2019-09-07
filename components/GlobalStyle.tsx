@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     width: 100%;
     color: ${Theme.colors.main};
+    font-family: ${Theme.fontFamilies.body} ;
   }
 `;
 

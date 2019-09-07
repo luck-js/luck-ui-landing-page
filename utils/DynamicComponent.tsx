@@ -16,7 +16,7 @@ import {
   textStyle,
 } from 'styled-system';
 
-const StyledDynamicComponent = styled('div')`
+export const StyledDynamicComponent = styled('div')`
   ${space}
   ${fontSize}
   ${fontStyle}

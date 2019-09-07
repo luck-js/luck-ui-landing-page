@@ -41,5 +41,6 @@ export const textStyles = {
 export const Theme = {
   space,
   colors,
-  breakpoints
+  breakpoints,
+  fontFamilies
 };
