@@ -28,7 +28,7 @@ export const fontFamilies = {
 
 export const textStyles = {
   logoHeading: {
-    tag: "p",
+    tag: "h1",
     fontSize: [24, 38, 60, 90],
     fontWeight: 300,
     fontFamily: fontFamilies.body

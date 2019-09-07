@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import styled from 'styled-components';
 import { LogoHeading } from '../utils/Typography';
 import Fonts from '../utils/Fonts';
 import media from '../utils/media';
-import Bubbles from '../components/Bubbles';
+import Bubbles, {Container as BubblesContainer} from '../components/Bubbles';
+import {CONTAINER_HEIGHT} from "../utils/global"
 
 const Content = styled('div')`
   max-width: 400px;
@@ -60,11 +61,24 @@ const Background = styled('div')`
   z-index: 0;
 `;
 
-const Index: React.FunctionComponent = () => {
-  useEffect(() => Fonts());
+interface WelcomeSectionProps {
+  isFontLoaded: boolean;
+}
 
+const Container = styled('div')<WelcomeSectionProps>`
+  opacity: ${props => (props.isFontLoaded ? 1 : 0)};
+  transition: 0.5s;
+  
+  ${BubblesContainer} {
+    transform: ${props => (props.isFontLoaded ? 0 : `translateY(${CONTAINER_HEIGHT - 200}px)`)};
+    transition: transform 30s;
+    transition-timing-function: ease-out;
+  }
+`;
+
+const WelcomeSection = ({ ...pros }: WelcomeSectionProps) => {
   return (
-    <Layout title="Home">
+    <Container {...pros}>
       <Background />
       <Content>
         <Logo src="static/logo-shadow.png" />
@@ -73,6 +87,19 @@ const Index: React.FunctionComponent = () => {
         </LogoHeading>
       </Content>
       <Bubbles />
+    </Container>
+  );
+};
+
+const Index: React.FunctionComponent = () => {
+  const [isFontLoaded, setIsFontLoaded] = useState(false);
+  useEffect(() => {
+    Fonts().then(() => setIsFontLoaded(true));
+  });
+
+  return (
+    <Layout title="Home">
+      <WelcomeSection isFontLoaded={isFontLoaded} />
     </Layout>
   );
 };

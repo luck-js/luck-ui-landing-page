@@ -15,14 +15,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     width: 100%;
     color: ${Theme.colors.main};
-    transition: color 0.1s;
-  }
-  
-  html body{
-    color: transparent !important;
-  }
-  html.lato body{
-    color: white !important;
   }
 `;
 
