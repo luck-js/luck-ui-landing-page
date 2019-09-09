@@ -11,8 +11,8 @@ export interface BubbleProps {
   fill: string;
 }
 
-const timeRatio = INNER_WIDTH / 2;
-const timeStep = Math.round(0.013333333333333333 * INNER_WIDTH);
+const timeRatio = INNER_WIDTH;
+const timeStep = Math.round(0.5 * INNER_WIDTH);
 const timeMin = timeRatio - timeStep;
 const timeMax = timeRatio + timeStep;
 
@@ -30,7 +30,7 @@ const makeGetFramePosition = (frameTime: any) => ({
 
 const Bubble: React.FunctionComponent<BubbleProps> = ({ ...props }) => {
   const startAnimate = (node: any) => {
-    if(!node) return
+    if (!node) return;
 
     const getRandomDirection = () => (Math.random() >= 0.5 ? 1 : -1);
     const time = getRandomInt(timeMin, timeMax);
@@ -40,15 +40,15 @@ const Bubble: React.FunctionComponent<BubbleProps> = ({ ...props }) => {
       radius,
       direction: getRandomDirection(),
       amplitude: INNER_WIDTH / 2 - radius,
-      period: 200 * time,
-      position: props.x,
+      period: ((INNER_WIDTH / 4.5 ) * time * 300) / CONTAINER_HEIGHT,
+      position: props.x + radius,
     };
     const yFramePositionConfig = {
       radius,
       direction: getRandomDirection(),
       amplitude: CONTAINER_HEIGHT / 2 - radius,
-      period: 40 * time,
-      position: props.y,
+      period: ((CONTAINER_HEIGHT / 10) * time * 1240) / INNER_WIDTH,
+      position: props.y + radius,
     };
 
     const anim = new Konva.Animation(function(frame: any) {
