@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import Bubbles, { Container as BubblesContainer } from '../../components/Bubbles';
-import { CONTAINER_HEIGHT } from '../../utils/global';
 import { LogoHeading } from '../../utils/Typography';
+import Bubbles from '../../components/Bubbles';
 import React from 'react';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
-import NoSSR from 'react-no-ssr';
 
 const Background = styled('div')`
   width: 100%;
@@ -23,13 +21,6 @@ interface WelcomeSectionProps {
 const Container = styled('div')<WelcomeSectionProps>`
   opacity: ${props => (props.isFontLoaded ? 1 : 0)};
   transition: 0.5s;
-
-  ${BubblesContainer} {
-    // transform: ${props => (props.isFontLoaded ? 0 : `translateY(${CONTAINER_HEIGHT - 200}px)`)};
-   
-    transition: transform 30s;
-    transition-timing-function: ease-out;
-  }
 `;
 const WelcomeSection = ({ ...pros }: WelcomeSectionProps) => {
   return (
@@ -45,9 +36,7 @@ const WelcomeSection = ({ ...pros }: WelcomeSectionProps) => {
           href="https://luck.org.pl/#/happening"
         />
       </Content>
-      <NoSSR>
-        <Bubbles />
-      </NoSSR>
+      <Bubbles />
     </Container>
   );
 };
