@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 import media from '../../utils/media';
+import {Flex} from "../../utils/Flex"
 
-const Content = styled('div')`
+const Content = styled(Flex)`
   max-width: 400px;
   margin: 0 auto;
   padding: 30px 15px 0px 15px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  
   
   ${media.greaterThan('mobile')`
     max-width: 550px;

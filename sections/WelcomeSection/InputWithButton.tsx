@@ -1,12 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import {StyledDynamicComponent} from "../../utils/DynamicComponent"
+import { Flex } from '../../utils/Flex';
 
-const Container = styled(StyledDynamicComponent)`
+const Container = styled(Flex)`
   position: relative;
   max-width: 350px;
   margin: 0 auto;
   width: 100%;
+  flex-direction: column;
 `;
 const Input = styled('input')`
   width: 100%;
@@ -51,7 +52,7 @@ const Button = styled('a')`
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.13);
 `;
 
-const InputWithButton = ({ href, ...props}: any) => {
+const InputWithButton = ({ href, ...props }: any) => {
   return (
     <Container {...props}>
       <Input placeholder={'Wpisz nazwę...'} />
