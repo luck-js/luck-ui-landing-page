@@ -16,8 +16,8 @@ const Logo = styled('img')`
   `}
   
   ${media.greaterThan('desktop')`
-    width: 320px;
-    height: 320px;
+    width: 300px;
+    height: 300px;
   `}
 `;
 

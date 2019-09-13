@@ -1,6 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Flex } from '../../utils/Flex';
+import media from '../../utils/media';
+import * as Theme from '../../utils/Theme';
+import {BaseInput} from "../../utils/Input"
+import {BaseButton} from "../../utils/Button"
 
 const Container = styled(Flex)`
   position: relative;
@@ -8,37 +12,55 @@ const Container = styled(Flex)`
   margin: 0 auto;
   width: 100%;
   flex-direction: column;
+  
+  ${media.greaterThan('mobile')`
+    max-width: 350px;
+  `}
+  
+  ${media.greaterThan('tablet')`
+    max-width: 450px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+  
+    max-width: 500px;
+  `}
 `;
-const Input = styled('input')`
+const Input = styled(BaseInput)`
   width: 100%;
   border-radius: 30px;
 
-  border: 2px solid #f9f9f9;
-  font-size: 13px;
-  font-weight: 700;
+  border: 2px solid ${Theme.colors.mainDark};
+  font-weight: 500;
   letter-spacing: 0;
-  color: #212121;
+  color: ${Theme.colors.black};
   opacity: 0.98;
-  background-color: #f2f2f2;
-  padding: 8px 15px;
+  background-color: ${Theme.colors.main};
+  padding: 8px 20px;
   padding-right: calc(120px + 15px);
+  
+  
+  ${media.greaterThan('tablet')`
+    padding: 8px 30px;
+    padding-right: calc(180px + 15px);
+  `}
 `;
-const Button = styled('a')`
-  padding: 9px 8px 8px;
-  font-size: 12px;
+
+const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
+  padding: 9px 8px 9px;
 
   position: absolute;
   right: 0;
   width: 120px;
-  border: 2px solid #f9f9f9;
-  font-weight: 700;
+  border: 2px solid ${Theme.colors.main};
+  font-weight: 500;
   letter-spacing: 0;
 
   max-width: 240px;
   cursor: pointer;
-  background-color: #d45858;
+  background-color: ${Theme.colors.mainContrast};
 
-  color: #f9f9f9;
+  color: ${Theme.colors.main};
   text-align: center;
   text-transform: uppercase;
 
@@ -50,13 +72,18 @@ const Button = styled('a')`
     box-shadow 0.5s;
 
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.13);
+  
+  
+  ${media.greaterThan('tablet')`
+    width: 180px;
+  `}
 `;
 
 const InputWithButton = ({ href, ...props }: any) => {
   return (
     <Container {...props}>
-      <Input placeholder={'Wpisz nazwę...'} />
-      <Button href={href}> Utwórz </Button>
+      <Input placeholder={'Wpisz nazwę...'} {...Theme.textStyles.bodyText} />
+      <Button href={href} {...Theme.textStyles.smallText}>Utwórz</Button>
     </Container>
   );
 };

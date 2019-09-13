@@ -11,7 +11,7 @@ const Background = styled('div')`
   height: 100%;
   position: fixed;
   background-image: url(static/bg-bubbles.png);
-  z-index: 0;
+  z-index: -1;
 `;
 
 interface WelcomeSectionProps {
@@ -28,11 +28,11 @@ const WelcomeSection = ({ ...pros }: WelcomeSectionProps) => {
       <Background />
       <Content>
         <Logo src="static/logo-shadow.png" />
-        <LogoHeading pt={['regular', 'regular', 'large', 'large']}>
+        <LogoHeading pt={['regular', 'regular', 'xregular', 'xregular']}>
           Organizacja Mikołajek nie była nigdy tak łatwa!
         </LogoHeading>
         <InputWithButton
-          pt={['regular', 'regular', 'large', 'large']}
+          pt={['regular', 'large', 'xlarge', 'xlarge']}
           href="https://luck.org.pl/#/happening"
         />
       </Content>

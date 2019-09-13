@@ -18,8 +18,10 @@ space.xxhuge = space[12];
 space.auto = "auto";
 
 export const colors = {
-  main: "#FFFFFF",
+  main: "#f9f9f9",
+  mainDark: "#f9f9f9",
   mainContrast: "#D45858",
+  black: "#212121",
 };
 
 export const fontFamilies = {
@@ -30,6 +32,18 @@ export const textStyles = {
   logoHeading: {
     tag: "h1",
     fontSize: [24, 38, 60, 90],
+    fontWeight: 300,
+    fontFamily: fontFamilies.body
+  },
+  bodyText: {
+    tag: "p",
+    fontSize: [16, 18, 22, 24],
+    fontWeight: 300,
+    fontFamily: fontFamilies.body
+  },
+  smallText: {
+    tag: "p",
+    fontSize: [14, 16, 20, 22],
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },
