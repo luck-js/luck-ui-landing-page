@@ -20,3 +20,5 @@ yarn-error.log*
 
 id_rsa.pub
 id_rsa
+
+schema.graphql

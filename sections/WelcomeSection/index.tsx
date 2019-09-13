@@ -5,6 +5,8 @@ import React from 'react';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
+import Link from "next/link"
+import {Button} from "../../utils/Button/Button"
 
 const Background = styled('div')`
   width: 100%;
@@ -22,9 +24,26 @@ const Container = styled('div')<WelcomeSectionProps>`
   opacity: ${props => (props.isFontLoaded ? 1 : 0)};
   transition: 0.5s;
 `;
+
+const NavLink = ({ ...props }: { href: string }) => {
+  return (
+    <Link {...props}>
+      <NavLink.Button as="a">Blog</NavLink.Button>
+    </Link>
+  );
+};
+
+NavLink.Button = styled(Button)`
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 20px 30px;
+`;
+
 const WelcomeSection = ({ ...pros }: WelcomeSectionProps) => {
   return (
     <Container {...pros}>
+      <NavLink href="/posty" />
       <Background />
       <Content>
         <Logo src="static/logo-shadow.png" />

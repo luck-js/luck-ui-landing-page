@@ -4,7 +4,7 @@ import { Flex } from '../../utils/Flex';
 import media from '../../utils/media';
 import * as Theme from '../../utils/Theme';
 import {BaseInput} from "../../utils/Input"
-import {BaseButton} from "../../utils/Button"
+import {BaseButton} from "../../utils/Button/BaseButton"
 
 const Container = styled(Flex)`
   position: relative;
@@ -63,7 +63,8 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
   color: ${Theme.colors.main};
   text-align: center;
   text-transform: uppercase;
-
+  text-decoration: underline;
+  text-decoration-color: transparent;
   border-radius: 30px;
 
   margin: 0 auto;
@@ -77,6 +78,9 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
   ${media.greaterThan('tablet')`
     width: 180px;
   `}
+  &:hover {
+    text-decoration-color: ${Theme.colors.main};
+  }
 `;
 
 const InputWithButton = ({ href, ...props }: any) => {
