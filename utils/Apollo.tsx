@@ -128,7 +128,7 @@ function createApolloClient(initialState = {}) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
-      uri: process.env.APPOLO_CLIENT_URL, // Server URL (must be absolute)
+      uri: `${process.env.CLIENT_URL}/graphql`, // Server URL (must be absolute)
       headers: {
         Authorization: `Bearer ${token}`,
       },

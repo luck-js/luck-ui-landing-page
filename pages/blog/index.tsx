@@ -8,9 +8,9 @@ import { Post } from '../../utils/types';
 import Card from '../../components/Card';
 import { Flex } from '../../utils/Flex';
 import media from '../../utils/media';
-import BlogLayout from "../../components/BlogLayout"
+import BlogLayout from '../../components/BlogLayout';
 
-interface StatelessPage<P = {}> extends React.FunctionComponent<P> {
+interface StatelessPage<P = { cmsUrl: string }> extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
@@ -71,13 +71,17 @@ const CardContainer = styled(Flex)`
   `};
 `;
 
-const Index: StatelessPage = () => {
+export const mapToPost = ({ cover, ...post }: Post, cmsUrl: string): Post => {
+  cover = cover && { ...cover, url: `${cmsUrl}${cover.url}` };
+  return { cover, ...post };
+};
+
+const Index: StatelessPage = ({ cmsUrl }) => {
   const { loading, error, data } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
 
-  console.log(data);
 
   return (
     <BlogLayout title="Blog | Luck" backgroundColor={Theme.colors.main}>
@@ -85,6 +89,7 @@ const Index: StatelessPage = () => {
         {data &&
           [...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts]
             .filter(({ isDraft }) => !isDraft)
+            .map(post => mapToPost(post, cmsUrl))
             .map((post, index) => (
               <CardContainer>
                 <Card key={`${post._id}/${index}`} {...post} />
@@ -93,6 +98,10 @@ const Index: StatelessPage = () => {
       </Container>
     </BlogLayout>
   );
+};
+
+Index.getInitialProps = async function() {
+  return { cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '' };
 };
 
 export default withApollo(Index, {

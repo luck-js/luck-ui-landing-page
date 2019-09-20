@@ -9,9 +9,11 @@ module.exports = withTypescript({
       fs: "empty"
     };
 
+    const envFileName = process.env.NODE_ENV === "production" ? ".env" : ".env.develop";
+
     config.plugins.push(
       new Dotenv({
-        path: path.join(__dirname, ".env"),
+        path: path.join(__dirname, envFileName),
         systemvars: true
       })
     );

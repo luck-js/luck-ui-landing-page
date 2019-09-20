@@ -46,7 +46,8 @@ const Card: React.FunctionComponent<Post> = ({ title, description, slug, cover, 
         <Link href={`/blog/${slug}`} >
           <Box>
             <ImageContainer ratio="62.5%">
-              <Image src={`http://localhost:1337${cover.url}`} alt="" />
+              <p>{cover.url}</p>
+              <Image src={cover.url} alt="" />
             </ImageContainer>
             <Trafalgar tag="h3" pt={['regular', 'regular', 'xregular', 'xregular']}>
               {title}

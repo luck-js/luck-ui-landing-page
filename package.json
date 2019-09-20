@@ -5,7 +5,7 @@
   "scripts": {
     "develop": "nodemon --exec ts-node server/server.ts",
     "build": "next build",
-    "start": "NODE_ENV=production nodemon --exec ts-node  server/server.ts",
+    "start": "NODE_ENV=production nodemon --exec ts-node server/server.ts",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "husky": {

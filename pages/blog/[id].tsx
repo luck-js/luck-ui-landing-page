@@ -10,6 +10,7 @@ import { getProcessor } from '../../utils/render-ast';
 import { Theme } from '../../utils/Theme';
 import BlogLayout from '../../components/BlogLayout';
 import RatioContainer from '../../components/RatioContainer';
+import {mapToPost} from "./index"
 
 const components = {};
 
@@ -44,7 +45,7 @@ const PostContent: React.FunctionComponent<Post> = ({ title, content, cover }) =
     {cover && (
       <Fragment>
         <ImageContainer ratio="55%">
-          <Image src={`http://localhost:1337${cover.url}`} alt="" />
+          <Image src={cover.url} alt="" />
         </ImageContainer>
         <ContentContainer>
           <LogoHeading pt={['regular', 'regular', 'xregular', 'xregular']}>{title}</LogoHeading>
@@ -72,12 +73,12 @@ export const POST_QUERY = gql`
   }
 `;
 
-interface StatelessPage<P = { slug: string }> extends React.FunctionComponent<P> {
+interface StatelessPage<P = { slug: string; cmsUrl: string }>
+  extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
-const Index: StatelessPage = ({ slug }) => {
-  console.log('rest', slug);
+const Index: StatelessPage = ({ slug, cmsUrl }) => {
   const where = { slug };
   const { loading, error, data } = useQuery<{ posts: Post[] }, QueryPostsArgs>(POST_QUERY, {
     variables: { where },
@@ -88,13 +89,13 @@ const Index: StatelessPage = ({ slug }) => {
 
   return (
     <BlogLayout title="Blog | Luck" backgroundColor={Theme.colors.main}>
-      {data && data.posts[0] && <PostContent {...data.posts[0]} />}
+      {data && data.posts[0] && <PostContent {...mapToPost(data.posts[0], cmsUrl)} />}
     </BlogLayout>
   );
 };
 
 Index.getInitialProps = async function({ query }) {
-  return { slug: query.id };
+  return { slug: query.id, cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL  : '' };
 };
 
 export default withApollo(Index, {
