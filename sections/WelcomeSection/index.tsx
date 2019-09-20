@@ -5,8 +5,8 @@ import React from 'react';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
-import Link from 'next/link';
-import { Button } from '../../utils/Button/Button';
+import NavLink from '../../utils/Button/NavLink';
+import { Box } from '../../utils/Box';
 
 const Background = styled('div')`
   width: 100%;
@@ -25,15 +25,7 @@ const Container = styled('div')<WelcomeSectionProps>`
   transition: 0.5s;
 `;
 
-const NavLink = ({ ...props }: { href: string }) => {
-  return (
-    <NavLink.Button>
-      <Link {...props}>Blog</Link>
-    </NavLink.Button>
-  );
-};
-
-NavLink.Button = styled(Button)`
+const NavLinkContainer = styled(Box)`
   position: absolute;
   right: 0;
   top: 0;
@@ -43,7 +35,9 @@ NavLink.Button = styled(Button)`
 const WelcomeSection = ({ ...pros }: WelcomeSectionProps) => {
   return (
     <Container {...pros}>
-      <NavLink href="/blog" />
+      <NavLinkContainer>
+        <NavLink href="/blog" />
+      </NavLinkContainer>
       <Background />
       <Content>
         <Logo src="static/logo-shadow.png" />

@@ -5,8 +5,8 @@ import Layout from './Layout';
 import { Flex } from '../utils/Flex';
 import media from '../utils/media';
 import Link from 'next/link';
-import { Button } from '../utils/Button/Button';
-import {Theme} from "../utils/Theme"
+import { Theme } from '../utils/Theme';
+import NavLink from "../utils/Button/NavLink"
 type LayoutProps = {
   title?: string;
   backgroundColor: string;
@@ -59,17 +59,6 @@ const NavigationLogo = styled('img')`
   `}
 `;
 
-const NavLink = ({ ...props }: { href: string }) => {
-  return (
-    <NavLink.Button modifiers={['black']}>
-      <Link {...props}>Blog</Link>
-    </NavLink.Button>
-  );
-};
-
-NavLink.Button = styled(Button)`
-  
-`;
 
 const Navigation = () => {
   return (
@@ -77,7 +66,7 @@ const Navigation = () => {
       <Link href={`/`}>
         <NavigationLogo src="/static/logo-shadow.png" />
       </Link>
-      <NavLink href="/blog" />
+      <NavLink href="/blog" modifiers={['black']} />
     </NavigationContainer>
   );
 };
