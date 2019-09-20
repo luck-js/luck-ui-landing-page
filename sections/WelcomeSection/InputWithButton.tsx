@@ -30,7 +30,7 @@ const Input = styled(BaseInput)`
   width: 100%;
   border-radius: 30px;
 
-  border: 2px solid ${Theme.colors.mainDark};
+  border: 2px solid ${Theme.colors.main};
   font-weight: 500;
   letter-spacing: 0;
   color: ${Theme.colors.black};

@@ -19,7 +19,6 @@ space.auto = "auto";
 
 export const colors = {
   main: "#f9f9f9",
-  mainDark: "#f9f9f9",
   mainContrast: "#D45858",
   black: "#212121",
 };
@@ -32,6 +31,18 @@ export const textStyles = {
   logoHeading: {
     tag: "h1",
     fontSize: [24, 38, 60, 90],
+    fontWeight: 300,
+    fontFamily: fontFamilies.body
+  },
+  canon: {
+    tag: "h1",
+    fontSize: [23, 30, 37, 45],
+    fontWeight: 300,
+    fontFamily: fontFamilies.body
+  },
+  trafalgar: {
+    tag: "h1",
+    fontSize: [23, 24, 30, 37],
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },
