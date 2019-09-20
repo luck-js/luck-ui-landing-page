@@ -1,4 +1,5 @@
 import React from "react"
+// @ts-ignore
 import unified from "unified"
 import remarkParse from "remark-parse"
 // @ts-ignore
