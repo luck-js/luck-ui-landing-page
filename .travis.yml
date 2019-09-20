@@ -12,7 +12,7 @@ jobs:
     services:
     - docker
     script:
-    - docker build . -t $IMAGE_NAME
+    - docker build --build-arg CLIENT_URL=$CLIENT_URL --build-arg APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN . -t $IMAGE_NAME
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker push $IMAGE_NAME
     env: IMAGE_NAME=$DEV_IMAGE_NAME
@@ -28,6 +28,8 @@ jobs:
     - ssh-keyscan $HOST_IP > ~/.ssh/known_hosts
     script: skip
     env:
+    - APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN
+    - CLIENT_URL=$CLIENT_URL
     - IMAGE_NAME=$DEV_IMAGE_NAME
     - CONTAINER_NAME=$DEV_CONTAINER_NAME
     - VIRTUAL_HOST=$DEV_VIRTUAL_HOST
