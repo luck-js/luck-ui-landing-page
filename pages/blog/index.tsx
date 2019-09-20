@@ -82,17 +82,16 @@ const Index: StatelessPage = ({ cmsUrl }) => {
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
 
-
   return (
     <BlogLayout title="Blog | Luck" backgroundColor={Theme.colors.main}>
       <Container>
         {data &&
-          [...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts]
+          data.posts
             .filter(({ isDraft }) => !isDraft)
             .map(post => mapToPost(post, cmsUrl))
-            .map((post, index) => (
+            .map(post => (
               <CardContainer>
-                <Card key={`${post._id}/${index}`} {...post} />
+                <Card key={post._id} {...post} />
               </CardContainer>
             ))}
       </Container>
