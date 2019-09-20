@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
   html {
-    background-color: ${Theme.colors.mainContrast};
+    background-color: ${Theme.colors.main};
   }
   body {
     margin: 0;
