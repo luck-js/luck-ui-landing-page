@@ -13,17 +13,11 @@ const Background = styled('div')`
   height: 100%;
   position: fixed;
   background-image: url(static/bg-bubbles.png);
-  z-index: -1;
+  z-index: 0;
+  pointer-events: none;
 `;
 
-interface WelcomeSectionProps {
-  isFontLoaded: boolean;
-}
-
-const Container = styled('div')<WelcomeSectionProps>`
-  opacity: ${props => (props.isFontLoaded ? 1 : 0)};
-  transition: 0.5s;
-`;
+const Container = styled('div')``;
 
 const NavLinkContainer = styled(Box)`
   position: absolute;
@@ -32,13 +26,13 @@ const NavLinkContainer = styled(Box)`
   margin: 50px 60px;
 `;
 
-const WelcomeSection = ({ ...pros }: WelcomeSectionProps) => {
+const WelcomeSection = ({ ...pros }) => {
   return (
     <Container {...pros}>
+      <Background />
       <NavLinkContainer>
         <NavLink href="/blog" />
       </NavLinkContainer>
-      <Background />
       <Content>
         <Logo src="static/logo-shadow.png" />
         <LogoHeading pt={['regular', 'regular', 'xregular', 'xregular']}>
