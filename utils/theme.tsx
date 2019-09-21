@@ -67,5 +67,6 @@ export const Theme = {
   space,
   colors,
   breakpoints,
+  textStyles,
   fontFamilies
 };

@@ -1,9 +1,9 @@
 import {generateMedia} from "styled-media-query"
-import * as theme from "./Theme";
+import * as Theme from "./theme";
 
 export default generateMedia({
-  mobile: theme.breakpoints[0],
-  tablet: theme.breakpoints[1],
-  desktop: theme.breakpoints[2],
-  wideDesktop: theme.breakpoints[3],
+  mobile: Theme.breakpoints[0],
+  tablet: Theme.breakpoints[1],
+  desktop: Theme.breakpoints[2],
+  wideDesktop: Theme.breakpoints[3],
 })

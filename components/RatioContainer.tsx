@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import {Box} from "../utils/Box"
-import {Flex} from "../utils/Flex"
+import {Box} from "./Box"
+import {Flex} from "./Flex"
 
 
 const RatioContainer: React.FunctionComponent<any> = ({

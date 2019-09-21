@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { applyStyleModifiers } from 'styled-components-modifiers';
 import { BaseButton } from './BaseButton';
-import * as Theme from '../Theme';
+import * as Theme from '../../utils/theme';
 
 const BUTTON_VARIANTS = {
   black: () => css`

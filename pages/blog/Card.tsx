@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { Flex } from '../utils/Flex';
+import { Flex } from '../../components/Flex';
 import Link from 'next/link';
 import React, { Fragment } from 'react';
-import { SmallText, Trafalgar } from '../utils/Typography';
-import { Post } from '../utils/types';
-import RatioContainer from './RatioContainer';
-import { Theme } from '../utils/Theme';
-import {Box} from "../utils/Box"
+import { SmallText, Trafalgar } from '../../components/Typography';
+import { Post } from '../../utils/types';
+import RatioContainer from '../../components/RatioContainer';
+import { Theme } from '../../utils/theme';
+import {Box} from "../../components/Box"
 
 const Container = styled(Flex)`
   position: relative;

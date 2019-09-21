@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import { Box } from '../utils/Box';
+import { Box } from './Box';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Fonts from '../utils/Fonts';
+import Fonts from '../utils/fonts';
 type LayoutProps = {
   title?: string;
   backgroundColor: string;

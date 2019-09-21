@@ -9,9 +9,7 @@ const Fonts = async () => {
 
   const lato = new FontFaceObserver('Lato');
 
-  return await lato.load().then(() => {
-    document.documentElement.classList.add('lato');
-  });
+  return await lato.load();
 };
 
 export default Fonts;

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from '../../utils/Flex';
-import media from '../../utils/media';
-import * as Theme from '../../utils/Theme';
-import {BaseInput} from "../../utils/Input"
-import {BaseButton} from "../../utils/Button/BaseButton"
+import { Flex } from '../../../components/Flex';
+import media from '../../../utils/media';
+import * as Theme from '../../../utils/theme';
+import { BaseInput } from '../../../components/Input';
+import { BaseButton } from '../../../components/Button/BaseButton';
 
 const Container = styled(Flex)`
   position: relative;
@@ -38,8 +38,7 @@ const Input = styled(BaseInput)`
   background-color: ${Theme.colors.main};
   padding: 8px 20px;
   padding-right: calc(120px + 15px);
-  
-  
+
   ${media.greaterThan('tablet')`
     padding: 8px 30px;
     padding-right: calc(180px + 15px);
@@ -73,8 +72,7 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
     box-shadow 0.5s;
 
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.13);
-  
-  
+
   ${media.greaterThan('tablet')`
     width: 180px;
   `}
@@ -87,7 +85,9 @@ const InputWithButton = ({ href, ...props }: any) => {
   return (
     <Container {...props}>
       <Input placeholder={'Wpisz nazwę...'} {...Theme.textStyles.bodyText} />
-      <Button href={href} {...Theme.textStyles.smallText}>Utwórz</Button>
+      <Button href={href} {...Theme.textStyles.smallText}>
+        Utwórz
+      </Button>
     </Container>
   );
 };

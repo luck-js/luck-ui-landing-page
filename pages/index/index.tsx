@@ -1,7 +1,7 @@
 import React from 'react';
-import Layout from '../components/Layout';
-import WelcomeSection from '../sections/WelcomeSection';
-import {Theme} from "../utils/Theme"
+import Layout from '../../components/Layout';
+import WelcomeSection from './WelcomeSection';
+import {Theme} from "../../utils/theme"
 
 const Index: React.FunctionComponent = () => {
 

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Fragment } from 'react';
-import Layout from './Layout';
-import { Flex } from '../utils/Flex';
-import media from '../utils/media';
+import Layout from '../../components/Layout';
+import { Flex } from '../../components/Flex';
+import media from '../../utils/media';
 import Link from 'next/link';
-import { Theme } from '../utils/Theme';
-import NavLink from "../utils/Button/NavLink"
+import { Theme } from '../../utils/theme';
+import NavLink from "../../components/Button/NavLink"
 type LayoutProps = {
   title?: string;
   backgroundColor: string;

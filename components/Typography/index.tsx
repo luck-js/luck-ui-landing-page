@@ -1,6 +1,6 @@
 import React from 'react';
 import DynamicComponent from './DynamicComponent';
-import * as Theme from './Theme';
+import { Theme } from '../../utils/theme';
 
 const { logoHeading, canon, trafalgar, bodyText, smallText } = Theme.textStyles;
 

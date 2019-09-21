@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRandomInt } from '../utils/helper';
+import { getRandomInt } from '../../utils/helper';
 import Konva from 'konva';
 import { Circle } from 'react-konva';
 import { Size } from './Bubbles';

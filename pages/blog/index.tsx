@@ -1,14 +1,14 @@
 import React from 'react';
-import { withApollo } from '../../utils/Apollo';
+import { withApollo } from '../../utils/apollo';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { Theme } from '../../utils/Theme';
+import { Theme } from '../../utils/theme';
 import { Post } from '../../utils/types';
-import Card from '../../components/Card';
-import { Flex } from '../../utils/Flex';
+import Card from './Card';
+import { Flex } from '../../components/Flex';
 import media from '../../utils/media';
-import BlogLayout from '../../components/BlogLayout';
+import BlogLayout from './BlogLayout';
 
 interface StatelessPage<P = { cmsUrl: string }> extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;

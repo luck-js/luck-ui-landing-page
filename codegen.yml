@@ -2,6 +2,6 @@ overwrite: true
 schema: "http://localhost:1337/graphql"
 documents: null
 generates:
-  utils/types.ts:
+  utils/types.tsx:
     plugins:
       - "typescript"
