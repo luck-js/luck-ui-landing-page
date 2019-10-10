@@ -3,23 +3,27 @@ import styled from 'styled-components';
 import { Fragment } from 'react';
 import Layout from '../../components/Layout';
 import { Flex } from '../../components/Flex';
+import { Box } from '../../components/Box';
 import media from '../../utils/media';
 import Link from 'next/link';
 import { Theme } from '../../utils/theme';
-import NavLink from "../../components/Button/NavLink"
+import NavLink from '../../components/Button/NavLink';
 type LayoutProps = {
   title?: string;
   backgroundColor: string;
 };
 
+const NavigationHorizontalPadding = styled(Box)`
+  padding: ${Theme.space.small}px ${Theme.space.regular}px;
+`;
+
 const NavigationContainer = styled(Flex)`
   position: relative;
-  min-height: 70px;
+  min-height: 45px;
   justify-content: flex-end;
   align-items: center;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 ${Theme.space.large}px;
   
   ${media.greaterThan('mobile')`
     min-height: 110px;
@@ -39,35 +43,20 @@ const NavigationLogo = styled('img')`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
+  height: 100%;
   cursor: pointer;
-  
-  ${media.greaterThan('mobile')`
-    width: 110px;
-    height: 110px;
-  `}
-  
-  ${media.greaterThan('tablet')`
-    width: 130px;
-    height: 130px;
-  `}
-  
-  ${media.greaterThan('desktop')`
-    width: 150px;
-    height: 150px;
-  `}
 `;
-
 
 const Navigation = () => {
   return (
-    <NavigationContainer>
-      <Link href={`/`}>
-        <NavigationLogo src="/static/logo-shadow.png" />
-      </Link>
-      <NavLink href="/blog" modifiers={['black']} />
-    </NavigationContainer>
+    <NavigationHorizontalPadding>
+      <NavigationContainer>
+        <Link href={`/`}>
+          <NavigationLogo src="/static/logo-luck.png" />
+        </Link>
+        <NavLink href="/blog" modifiers={['black']} />
+      </NavigationContainer>
+    </NavigationHorizontalPadding>
   );
 };
 const BlogLayout: React.FunctionComponent<LayoutProps> = ({ children, ...props }) => (

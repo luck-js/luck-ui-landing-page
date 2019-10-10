@@ -86,12 +86,12 @@ const Index: StatelessPage = ({ cmsUrl }) => {
     <BlogLayout title="Blog | Luck" backgroundColor={Theme.colors.main}>
       <Container>
         {data &&
-          data.posts
+          [...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts, ...data.posts]
             .filter(({ isDraft }) => !isDraft)
             .map(post => mapToPost(post, cmsUrl))
-            .map(post => (
+            .map((post, index) => (
               <CardContainer>
-                <Card key={post._id} {...post} />
+                <Card key={`${post._id}-${index}`} {...post} />
               </CardContainer>
             ))}
       </Container>

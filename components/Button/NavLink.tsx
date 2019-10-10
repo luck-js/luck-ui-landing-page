@@ -8,13 +8,16 @@ const NavLink = ({ modifiers, ...props }: { modifiers?: any; href: string }) => 
   return (
     <NavLink.Container>
       <Link {...props}>
-        <Button as={'a'} modifiers={modifiers}>
+        <NavLink.Button as={'a'} modifiers={modifiers}>
           Blog
-        </Button>
+        </NavLink.Button>
       </Link>
     </NavLink.Container>
   );
 };
 
 NavLink.Container = styled(BaseButton)``;
-export default NavLink ;
+NavLink.Button = styled(Button)`
+  text-transform: uppercase;
+`;
+export default NavLink;
