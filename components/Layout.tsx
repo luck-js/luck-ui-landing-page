@@ -5,6 +5,7 @@ import { Box } from './Box';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Fonts from '../utils/fonts';
+
 type LayoutProps = {
   title?: string;
   backgroundColor: string;

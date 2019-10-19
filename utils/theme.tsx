@@ -42,19 +42,25 @@ export const textStyles = {
   },
   trafalgar: {
     tag: "h1",
-    fontSize: [23, 24, 30, 37],
-    fontWeight: 300,
+    fontSize: [18, 18, 18, 21],
+    fontWeight: 500,
     fontFamily: fontFamilies.body
   },
   bodyText: {
     tag: "p",
-    fontSize: [16, 18, 22, 24],
+    fontSize: [16, 16, 18, 21],
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },
   smallText: {
     tag: "p",
-    fontSize: [14, 16, 20, 22],
+    fontSize: [14, 14, 14, 14],
+    fontWeight: 300,
+    fontFamily: fontFamilies.body
+  },
+  tinyText: {
+    tag: "p",
+    fontSize: [10, 10, 10, 11],
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },

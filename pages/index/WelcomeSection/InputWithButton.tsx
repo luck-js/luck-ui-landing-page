@@ -1,10 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex } from '../../../components/Flex';
+import { Flex, BaseInput, BaseButton } from '../../../components';
 import media from '../../../utils/media';
 import * as Theme from '../../../utils/theme';
-import { BaseInput } from '../../../components/Input';
-import { BaseButton } from '../../../components/Button/BaseButton';
 
 const Container = styled(Flex)`
   position: relative;

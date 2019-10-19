@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { LogoHeading } from '../../../components/Typography';
+import { Box, LogoHeading } from '../../../components';
 import Bubbles from '../Bubbles';
 import React from 'react';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
 import NavLink from '../../../components/Button/NavLink';
-import { Box } from '../../../components/Box';
 
 const Background = styled('div')`
   width: 100%;

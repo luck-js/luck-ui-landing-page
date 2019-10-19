@@ -1,16 +1,12 @@
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import { withApollo } from '../../utils/apollo';
 import React, { Fragment } from 'react';
-import { Post, QueryPostsArgs } from '../../utils/types';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import styled from 'styled-components';
-import { Flex } from '../../components/Flex';
-import { BodyText, LogoHeading } from '../../components/Typography';
-import { getProcessor } from '../../utils/render-ast';
-import { Theme } from '../../utils/theme';
-import BlogLayout from './BlogLayout';
 import RatioContainer from '../../components/RatioContainer';
+import { BodyText, LogoHeading, Flex } from '../../components';
+import BlogLayout from './BlogLayout';
 import {mapToPost} from "./index"
+import { withApollo, getProcessor, Theme, Post, QueryPostsArgs } from '../../utils';
 
 const components = {};
 

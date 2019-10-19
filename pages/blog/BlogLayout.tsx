@@ -1,20 +1,31 @@
-import * as React from 'react';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
-import { Fragment } from 'react';
 import Layout from '../../components/Layout';
-import { Flex } from '../../components/Flex';
-import { Box } from '../../components/Box';
-import media from '../../utils/media';
+import { Flex, Box } from '../../components';
 import Link from 'next/link';
-import { Theme } from '../../utils/theme';
 import NavLink from '../../components/Button/NavLink';
+import media from '../../utils/media';
+import { Theme } from '../../utils';
+
 type LayoutProps = {
   title?: string;
   backgroundColor: string;
 };
 
 const NavigationHorizontalPadding = styled(Box)`
-  padding: ${Theme.space.small}px ${Theme.space.regular}px;
+  padding: ${Theme.space.small}px ${Theme.space.regular}px; 
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    padding: ${Theme.space.regular}px ${Theme.space.regular}px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+    padding: ${Theme.space.regular}px ${Theme.space.regular}px;
+  `}
 `;
 
 const NavigationContainer = styled(Flex)`
@@ -26,15 +37,16 @@ const NavigationContainer = styled(Flex)`
   margin: 0 auto;
   
   ${media.greaterThan('mobile')`
-    min-height: 110px;
+    
   `}
   
   ${media.greaterThan('tablet')`
-    min-height: 130px;
+    min-height: 77px;
   `}
   
   ${media.greaterThan('desktop')`
-    min-height: 150px;
+    max-width: 1740px;
+    min-height: 88px;
   `}
 `;
 

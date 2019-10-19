@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { getRandomInt, helper } from '../../utils/helper';
+import styled from 'styled-components';
 import { Layer, Stage } from 'react-konva';
 import Bubble, { BubbleConfig } from './Bubble';
-import styled from 'styled-components';
-import {Theme} from "../../utils/theme"
+import { getRandomInt, helper, Theme } from '../../utils';
+
 const CONTAINER_HEIGHTS = [200, 250, 300];
 
 export interface Size {
