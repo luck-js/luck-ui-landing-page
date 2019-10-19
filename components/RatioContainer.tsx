@@ -20,11 +20,12 @@ const RatioContainer: React.FunctionComponent<any> = ({
     transform: translateY(-50%);
   `;
 
-  const RatioKeeper = styled(Flex)`
+  const RatioKeeper = styled(Flex).attrs({
+    pt: ratio
+  })`
     overflow: hidden;
     position: relative;
     height: 0;
-    padding-top: ${ratio};
     width: 100%;
   `;
 

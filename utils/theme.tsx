@@ -30,8 +30,8 @@ export const fontFamilies = {
 export const textStyles = {
   logoHeading: {
     tag: "h1",
-    fontSize: [24, 38, 60, 90],
-    fontWeight: 300,
+    fontSize: [20, 20, 42, 48],
+    fontWeight: 500,
     fontFamily: fontFamilies.body
   },
   canon: {
@@ -52,9 +52,21 @@ export const textStyles = {
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },
+  mediumText: {
+    tag: "p",
+    fontSize: [16, 16, 16, 18],
+    fontWeight: 300,
+    fontFamily: fontFamilies.body
+  },
   smallText: {
     tag: "p",
     fontSize: [14, 14, 14, 14],
+    fontWeight: 300,
+    fontFamily: fontFamilies.body
+  },
+  tinySecond: {
+    tag: "p",
+    fontSize: [10, 10, 12, 14],
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },

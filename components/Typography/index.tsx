@@ -2,7 +2,7 @@ import React from 'react';
 import DynamicComponent from './DynamicComponent';
 import { Theme } from '../../utils';
 
-const { logoHeading, canon, trafalgar, bodyText, smallText, tinyText } = Theme.textStyles;
+const { logoHeading, canon, trafalgar, bodyText, mediumText, smallText, tinySecond, tinyText } = Theme.textStyles;
 
 export const LogoHeading = (props: any) => (
   <DynamicComponent {...logoHeading} {...props}>
@@ -28,8 +28,20 @@ export const BodyText = (props: any) => (
   </DynamicComponent>
 );
 
+export const MediumText = (props: any) => (
+  <DynamicComponent {...mediumText} {...props}>
+    {props.children}
+  </DynamicComponent>
+);
+
 export const SmallText = (props: any) => (
   <DynamicComponent {...smallText} {...props}>
+    {props.children}
+  </DynamicComponent>
+);
+
+export const TinySecond = (props: any) => (
+  <DynamicComponent {...tinySecond} {...props}>
     {props.children}
   </DynamicComponent>
 );

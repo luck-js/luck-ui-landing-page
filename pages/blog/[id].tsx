@@ -3,12 +3,35 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import RatioContainer from '../../components/RatioContainer';
-import { BodyText, LogoHeading, Flex } from '../../components';
+import {MediumText, LogoHeading, Flex, TinySecond} from '../../components';
 import BlogLayout from './BlogLayout';
-import {mapToPost} from "./index"
-import { withApollo, getProcessor, Theme, Post, QueryPostsArgs } from '../../utils';
+import { mapToPost } from './index';
+import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
+import media from '../../utils/media';
 
-const components = {};
+const ContentImage = styled("img")`
+  width: 100%;
+  
+  padding: ${Theme.space.small}px 0;
+  
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    padding: ${Theme.space.regular}px 0;
+  `}
+  
+  ${media.greaterThan('desktop')`
+    padding: ${Theme.space.xregular}px 0;
+  `}
+`
+
+const components = {
+  "p": MediumText,
+  "img": ContentImage
+};
 
 const processor = getProcessor(components);
 
@@ -31,27 +54,59 @@ const ImageContainer = styled(RatioContainer)`
 `;
 
 const ContentContainer = styled(Flex)`
-  max-width: 1000px;
+  max-width: 664px;
   margin: 0 auto;
-  flex-direction: column;
+  flex-direction: column;  
+  padding: ${Theme.space.small}px;
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    padding: ${Theme.space.regular}px ${Theme.space.xregular}px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+    padding: ${Theme.space.xregular}px ${Theme.space.xregular}px;
+  `}
 `;
 
-const PostContent: React.FunctionComponent<Post> = ({ title, content, cover }) => (
-  <Container>
+const HashtagsText = styled(TinySecond)`
+  span {
+    text-transform: uppercase;
+
+    &:not(:first-of-type) {
+      padding-left: ${Theme.space.medium}px;
+    }
+  }
+`;
+
+const PostContent: React.FunctionComponent<Post> = ({
+  title,
+  content,
+  cover,
+  hashtags = [],
+  ...props
+}) => (
+  <Fragment>
     {cover && (
-      <Fragment>
-        <ImageContainer ratio="55%">
+      <Container {...props}>
+        <ImageContainer ratio={["62.5%","34%"]}>
           <Image src={cover.url} alt="" />
         </ImageContainer>
         <ContentContainer>
-          <LogoHeading pt={['regular', 'regular', 'xregular', 'xregular']}>{title}</LogoHeading>
-          <BodyText pt={['regular', 'regular', 'xregular', 'xregular']}>
-            {processor.processSync(content).contents}
-          </BodyText>
+          <LogoHeading pb={['small', 'small', 'regular', 'regular']}>{title}</LogoHeading>
+          {processor.processSync(content).contents}
+          <HashtagsText pt={['small', 'small', 'regular', 'regular']}>
+            {(hashtags as Hashtag[]).map(({ name }, index) => (
+              <span key={`PostContent-${name}-${index}`}>#{name}</span>
+            ))}
+          </HashtagsText>
         </ContentContainer>
-      </Fragment>
+      </Container>
     )}
-  </Container>
+  </Fragment>
 );
 
 export const POST_QUERY = gql`
@@ -65,12 +120,14 @@ export const POST_QUERY = gql`
       cover {
         url
       }
+      hashtags {
+        name
+      }
     }
   }
 `;
 
-interface StatelessPage<P = { slug: string; cmsUrl: string }>
-  extends React.FunctionComponent<P> {
+interface StatelessPage<P = { slug: string; cmsUrl: string }> extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
@@ -91,7 +148,7 @@ const Index: StatelessPage = ({ slug, cmsUrl }) => {
 };
 
 Index.getInitialProps = async function({ query }) {
-  return { slug: query.id, cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL  : '' };
+  return { slug: query.id, cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '' };
 };
 
 export default withApollo(Index, {
