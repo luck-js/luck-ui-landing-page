@@ -6,4 +6,5 @@ export * from './Flex';
 export * from './GlobalStyle';
 export * from './Input';
 export * from './Layout';
+export * from './Navigation';
 export * from './RatioContainer';

@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import { Box, LogoHeading } from '../../../components';
+import {LogoHeading, Navigation} from '../../../components';
 import Bubbles from '../Bubbles';
 import React from 'react';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
-import NavLink from '../../../components/Button/NavLink';
 
 const Background = styled('div')`
   width: 100%;
@@ -18,20 +17,11 @@ const Background = styled('div')`
 
 const Container = styled('div')``;
 
-const NavLinkContainer = styled(Box)`
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 50px 60px;
-`;
-
-const WelcomeSection = ({ ...pros }) => {
+const  WelcomeSection = ({ ...pros }) => {
   return (
     <Container {...pros}>
       <Background />
-      <NavLinkContainer>
-        <NavLink href="/blog" />
-      </NavLinkContainer>
+      <Navigation />
       <Content>
         <Logo src="static/logo-shadow.png" />
         <LogoHeading pt={['regular', 'regular', 'xregular', 'xregular']}>
