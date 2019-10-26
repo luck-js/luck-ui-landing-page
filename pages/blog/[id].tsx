@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import RatioContainer from '../../components/RatioContainer';
-import {MediumText, LogoHeading, Flex, TinySecond} from '../../components';
+import {MediumText, Canon, Flex, TinySecond} from '../../components';
 import BlogLayout from './BlogLayout';
 import { mapToPost } from './index';
 import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
@@ -96,7 +96,7 @@ const PostContent: React.FunctionComponent<Post> = ({
           <Image src={cover.url} alt="" />
         </ImageContainer>
         <ContentContainer>
-          <LogoHeading pb={['small', 'small', 'regular', 'regular']}>{title}</LogoHeading>
+          <Canon pb={['small', 'small', 'regular', 'regular']}>{title}</Canon>
           {processor.processSync(content).contents}
           <HashtagsText pt={['small', 'small', 'regular', 'regular']}>
             {(hashtags as Hashtag[]).map(({ name }, index) => (

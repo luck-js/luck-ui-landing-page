@@ -14,6 +14,7 @@ const Container = styled(Flex)`
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  width: 100%;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -24,6 +25,7 @@ const InnerContainer = styled(Flex)`
   position: relative;
   flex-direction: column;
   cursor: pointer;
+  width: 100%;
 
   h3 {
     text-decoration: underline;

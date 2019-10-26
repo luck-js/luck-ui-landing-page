@@ -6,22 +6,20 @@ import * as Theme from '../../../utils/theme';
 
 const Container = styled(Flex)`
   position: relative;
-  max-width: 350px;
   margin: 0 auto;
   width: 100%;
   flex-direction: column;
   
   ${media.greaterThan('mobile')`
-    max-width: 350px;
+    
   `}
   
   ${media.greaterThan('tablet')`
-    max-width: 450px;
+    max-width: 316px;
   `}
   
   ${media.greaterThan('desktop')`
-  
-    max-width: 500px;
+    max-width: 421px;
   `}
 `;
 const Input = styled(BaseInput)`
@@ -29,17 +27,21 @@ const Input = styled(BaseInput)`
   border-radius: 30px;
 
   border: 2px solid ${Theme.colors.main};
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0;
   color: ${Theme.colors.black};
   opacity: 0.98;
   background-color: ${Theme.colors.main};
-  padding: 8px 20px;
+  padding: 9px 20px;
   padding-right: calc(120px + 15px);
+  
+  &::placeholder {
+    color: ${Theme.colors.gray};
+  }
 
-  ${media.greaterThan('tablet')`
-    padding: 8px 30px;
-    padding-right: calc(180px + 15px);
+  ${media.greaterThan('desktop')`
+    font-size: 17px;
+    padding: 12px 20px;
   `}
 `;
 
@@ -48,12 +50,12 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
 
   position: absolute;
   right: 0;
-  width: 120px;
+  width: 109px;
   border: 2px solid ${Theme.colors.main};
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0;
 
-  max-width: 240px;
+  //max-width: 240px;
   cursor: pointer;
   background-color: ${Theme.colors.mainContrast};
 
@@ -71,8 +73,10 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
 
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.13);
 
-  ${media.greaterThan('tablet')`
-    width: 180px;
+  ${media.greaterThan('desktop')`
+    width: 140px;
+    font-size: 17px;
+    padding: 12px 8px 12px;
   `}
   &:hover {
     text-decoration-color: ${Theme.colors.main};
@@ -82,7 +86,7 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
 const InputWithButton = ({ href, ...props }: any) => {
   return (
     <Container {...props}>
-      <Input placeholder={'Wpisz nazwę...'} {...Theme.textStyles.bodyText} />
+      <Input placeholder={'Wpisz nazwę...'} {...Theme.textStyles.smallText} />
       <Button href={href} {...Theme.textStyles.smallText}>
         Utwórz
       </Button>

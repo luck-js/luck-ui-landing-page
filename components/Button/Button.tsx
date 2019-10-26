@@ -14,7 +14,7 @@ const BUTTON_VARIANTS = {
 };
 
 export const Button = styled(BaseButton)<any>`
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0;
   cursor: pointer;
   background-color: transparent;

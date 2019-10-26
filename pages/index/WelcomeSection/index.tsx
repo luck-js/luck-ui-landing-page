@@ -23,12 +23,12 @@ const  WelcomeSection = ({ ...pros }) => {
       <Background />
       <Navigation />
       <Content>
-        <Logo src="static/logo-shadow.png" />
-        <LogoHeading pt={['regular', 'regular', 'xregular', 'xregular']}>
+        <Logo src="static/logo-luck.png" />
+        <LogoHeading pt={['50px', '50px', '50px', '50px']}>
           Organizacja Mikołajek nie była nigdy tak łatwa!
         </LogoHeading>
         <InputWithButton
-          pt={['regular', 'large', 'xlarge', 'xlarge']}
+          pt={['40px', '40px', '50px', '70px']}
           href="https://luck.org.pl/#/happening"
         />
       </Content>
