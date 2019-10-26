@@ -22,8 +22,10 @@ const InnerContainer = styled('div')<{ isFontLoaded: boolean }>`
 const Layout: React.FunctionComponent<LayoutProps> = ({ children, title, ...props }) => {
   const [isFontLoaded, setIsFontLoaded] = useState(false);
   useEffect(() => {
-    Fonts().then(() => setIsFontLoaded(true));
-  });
+    let isSubscribed = true
+    Fonts().then(() => isSubscribed ? setIsFontLoaded(true) : null);
+    return () => {(isSubscribed = false)};
+  }, []);
 
   return (
     <Container {...props}>
