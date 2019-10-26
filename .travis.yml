@@ -1,0 +1,42 @@
+language: node_js
+node_js:
+- '10'
+env:
+  global:
+  - DEV_IMAGE_NAME=luckjs/ts-luck-ui-landing-page
+  - DEV_CONTAINER_NAME=luck-ui-landing-page_develop
+  - DEV_VIRTUAL_HOST=testdevelop.luck.org.pl
+jobs:
+  include:
+  - stage: build
+    services:
+    - docker
+    script:
+    - docker build --build-arg CLIENT_URL=$CLIENT_URL --build-arg APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN . -t $IMAGE_NAME
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $IMAGE_NAME
+    env: IMAGE_NAME=$DEV_IMAGE_NAME
+  - stage: deploy
+    before_deploy:
+    - openssl aes-256-cbc -K $encrypted_83c7afdcaf7e_key -iv $encrypted_83c7afdcaf7e_iv
+      -in .travis/id_rsa.enc -out .travis/id_rsa -d
+    - eval "$(ssh-agent -s)"
+    - cp .travis/id_rsa ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-add ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $HOST_IP > ~/.ssh/known_hosts
+    script: skip
+    env:
+    - APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN
+    - CLIENT_URL=$CLIENT_URL
+    - IMAGE_NAME=$DEV_IMAGE_NAME
+    - CONTAINER_NAME=$DEV_CONTAINER_NAME
+    - VIRTUAL_HOST=$DEV_VIRTUAL_HOST
+    deploy:
+    - provider: script
+      skip_cleanup: true
+      script: bash .travis/deploy.sh $HOST_IP $DOCKER_PASSWORD $DOCKER_USERNAME $IMAGE_NAME
+        $CONTAINER_NAME
+      on:
+        branch: develop
