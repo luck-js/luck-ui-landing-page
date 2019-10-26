@@ -29,7 +29,7 @@ const  WelcomeSection = ({ ...pros }) => {
         </LogoHeading>
         <InputWithButton
           pt={['40px', '40px', '50px', '70px']}
-          href="https://luck.org.pl/#/happening"
+          href="https://app.luck.org.pl"
         />
       </Content>
       <Bubbles />

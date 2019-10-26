@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Flex, BaseInput, BaseButton } from '../../../components';
 import media from '../../../utils/media';
 import * as Theme from '../../../utils/theme';
+import {useState} from "react"
 
 const Container = styled(Flex)`
   position: relative;
@@ -84,10 +85,11 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
 `;
 
 const InputWithButton = ({ href, ...props }: any) => {
+  const [name, setName]=useState<string>("")
   return (
     <Container {...props}>
-      <Input placeholder={'Wpisz nazwę...'} {...Theme.textStyles.smallText} />
-      <Button href={href} {...Theme.textStyles.smallText}>
+      <Input onChange={(event) => setName(event.target.value)} placeholder={'Nazwa wydarzenia...'} {...Theme.textStyles.smallText} />
+      <Button href={`${href}?name=${name}`} {...Theme.textStyles.smallText}>
         Utwórz
       </Button>
     </Container>
