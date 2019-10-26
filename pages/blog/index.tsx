@@ -50,6 +50,10 @@ const MasonryContainer = styled(Container)`
   }
 `
 
+const breakpointCols = {
+  default: 3,
+};
+
 const CardsContainer: React.FunctionComponent<any> = ({children, ...props}) => {
   return (
     <Fragment>
@@ -58,7 +62,7 @@ const CardsContainer: React.FunctionComponent<any> = ({children, ...props}) => {
       </Container>
       <MasonryContainer display={['none', 'none', 'flex']} {...props}>
         <Masonry
-          breakpointCols={3}
+          breakpointCols={breakpointCols}
           className="my-masonry-grid"
           columnClassName="my-masonry-grid_column">
           {children}
