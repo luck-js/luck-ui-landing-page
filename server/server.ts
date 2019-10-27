@@ -10,6 +10,11 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const robots = `User-agent: *
+Allow: /
+Host: https://luck.org.pl
+`;
+
 app.prepare().then(() => {
   createServer((req: { url: any }, res: any) => {
     // Be sure to pass `true` as the second argument to `url.parse`.
@@ -19,6 +24,10 @@ app.prepare().then(() => {
 
     if (pathname === '/posts' || pathname === '/posty') {
       app.render(req, res, '/blog', query);
+    } else if (pathname === '/robots.txt') {
+      res.statusCode = 200;
+      res.write(robots);
+      res.end();
     } else {
       handle(req, res, parsedUrl);
     }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import media from '../../../utils/media';
 
-const Logo = styled('img')`
+const Logo = styled('img').attrs({alt: "Logo Luck"})`
   width: 115px;
   height: 115px;
 

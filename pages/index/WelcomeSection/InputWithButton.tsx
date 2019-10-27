@@ -84,12 +84,12 @@ const Button = styled(BaseButton).attrs({ as: 'a' })<any>`
   }
 `;
 
-const InputWithButton = ({ href, ...props }: any) => {
+const InputWithButton = ({ href, ariaLabel, ...props }: any) => {
   const [name, setName]=useState<string>("")
   return (
     <Container {...props}>
       <Input onChange={(event) => setName(event.target.value)} placeholder={'Nazwa wydarzenia...'} {...Theme.textStyles.smallText} />
-      <Button href={`${href}?name=${name}`} {...Theme.textStyles.smallText}>
+      <Button href={`${href}?name=${name}`} ariaLabel={ariaLabel} {...Theme.textStyles.smallText}>
         Utwórz
       </Button>
     </Container>
