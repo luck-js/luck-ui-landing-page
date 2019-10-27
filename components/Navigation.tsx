@@ -76,7 +76,7 @@ export const Navigation: React.FunctionComponent<NavigationProps> = ({
         {shouldDisplayLogo && (
           <Link href="/" >
             <NavigationLogoContainer as="a" href="/" aria-label={`przejdź do strony głownej`}>
-              <NavigationLogo src="/static/logo-luck.png" />
+              <NavigationLogo src="/static/logo-luck.png" alt="Logo Luck" />
             </NavigationLogoContainer>
           </Link>
         )}

@@ -10,7 +10,7 @@ import { mapToPost } from './index';
 import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
 import media from '../../utils/media';
 
-const ContentImage = styled('img')`
+const ContentImage = styled('img').attrs({alt: ""})`
   width: 100%;
   
   padding: ${Theme.space.small}px 0;
