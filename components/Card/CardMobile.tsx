@@ -74,7 +74,7 @@ const CardMobile: React.FunctionComponent<CardMobileProps> = ({
       <Container {...props}>
         <InnerContainer>
           <Link href={`/blog/${slug}`}>
-            <Box as="a" href={`/blog/${slug}`}>
+            <Box as="a" href={`/blog/${slug}`} aria-label={`przejdź do ${title}`}>
               <ImageContainer ratio="69%">
                 <p>{cover.url}</p>
                 <Image src={cover.url} alt="" />

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { BaseButton } from './BaseButton';
 import * as React from 'react';
 
-const NavLink = ({ modifiers, href, ...props }: { modifiers?: string[]; href: string }) => {
+const NavLink = ({ modifiers, href, ariaLabel, ...props }: { modifiers?: string[]; href: string, ariaLabel: string }) => {
   return (
     <NavLink.Container {...props}>
       <Link href={href}>
-        <NavLink.Button hrezf={href} as={'a'} modifiers={modifiers}>
+        <NavLink.Button href={href} ariaLabel={ariaLabel} as={'a'} modifiers={modifiers}>
           Blog
         </NavLink.Button>
       </Link>

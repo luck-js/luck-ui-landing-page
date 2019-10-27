@@ -75,13 +75,13 @@ export const Navigation: React.FunctionComponent<NavigationProps> = ({
       <NavigationContainer>
         {shouldDisplayLogo && (
           <Link href="/" >
-            <NavigationLogoContainer as="a" href="/">
+            <NavigationLogoContainer as="a" href="/" aria-label={`przejdź do strony głownej`}>
               <NavigationLogo src="/static/logo-luck.png" />
             </NavigationLogoContainer>
           </Link>
         )}
 
-        <NavLink href="/blog" modifiers={navLinkModifiers} />
+        <NavLink href="/blog" ariaLabel="przejdź do blog postow" modifiers={navLinkModifiers} />
       </NavigationContainer>
     </NavigationHorizontalPadding>
   );
