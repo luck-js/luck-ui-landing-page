@@ -17,7 +17,7 @@ jobs:
     services:
       - docker
     script:
-      - docker build --build-arg CLIENT_URL=$CLIENT_URL --build-arg APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN . -t $IMAGE_NAME
+      - docker build --build-arg TRACKING_ID=$TRACKING_ID --build-arg CLIENT_URL=$CLIENT_URL --build-arg APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN . -t $IMAGE_NAME
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker push $IMAGE_NAME
     if: branch = develop
@@ -42,8 +42,6 @@ jobs:
     script: skip
     if: branch = develop
     env:
-      - APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN
-      - CLIENT_URL=$CLIENT_URL
       - IMAGE_NAME=$DEV_IMAGE_NAME
       - CONTAINER_NAME=$DEV_CONTAINER_NAME
       - VIRTUAL_HOST=$DEV_VIRTUAL_HOST
@@ -58,8 +56,6 @@ jobs:
   - <<: *deploy
     if: branch = master OR tag =~ ^v.*$
     env:
-      - APPOLO_CLIENT_TOKEN=$APPOLO_CLIENT_TOKEN
-      - CLIENT_URL=$CLIENT_URL
       - IMAGE_NAME=$PROD_IMAGE_NAME
       - CONTAINER_NAME=$PROD_CONTAINER_NAME
       - VIRTUAL_HOST=$PROD_VIRTUAL_HOST
