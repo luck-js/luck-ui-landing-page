@@ -3,13 +3,20 @@ import Layout from '../../components/Layout';
 import WelcomeSection from './WelcomeSection';
 import {Theme} from "../../utils"
 
-const Index: React.FunctionComponent = () => {
+interface IndexProps {
+  analytics: any;
+}
+
+const Index = ({analytics}: IndexProps) => {
+
+  const handleClickBubble = () => {
+    analytics.event("Home", "onClickBubble")
+  }
 
   return (
     <Layout title="Home"
             backgroundColor={Theme.colors.mainContrast}>
-
-      <WelcomeSection />
+      <WelcomeSection handleClickBubble={handleClickBubble}/>
     </Layout>
   );
 };

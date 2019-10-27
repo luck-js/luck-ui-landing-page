@@ -7,15 +7,15 @@ import {Theme} from "../utils"
 // @ts-ignore
 import withGA from "next-ga";
 
-class MyApp extends App {
+class MyApp extends App<{analytics: any}> {
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, analytics } = this.props;
     return (
       <Container>
         <ThemeProvider theme={Theme}>
           <>
             <GlobalStyle />
-            <Component {...pageProps} />
+            <Component {...pageProps} analytics={analytics} />
           </>
         </ThemeProvider>
       </Container>

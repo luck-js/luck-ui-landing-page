@@ -11,6 +11,11 @@ export interface Size {
   height: number;
 }
 
+export interface BubblesProps {
+  handleClickBubble: any;
+}
+
+
 export const Container = styled('div')<Size>`
   position: fixed;
   width: 100%;
@@ -36,7 +41,7 @@ const getBubbleProps = ({ width, height }: Size): BubbleConfig => {
   return { radius, x, y, opacity, fill: 'white' };
 };
 
-const Bubbles: React.FunctionComponent = ({ ...props }) => {
+const Bubbles: React.FunctionComponent<BubblesProps> = ({ handleClickBubble, ...props }) => {
   const containerRef = useRef<{offsetWidth: number}>(null);
 
 
@@ -77,6 +82,7 @@ const Bubbles: React.FunctionComponent = ({ ...props }) => {
                     containerSize: size,
                     time: getTimeProp(size.width),
                     config: getBubbleProps(size),
+                    handleClickBubble: handleClickBubble,
                   }}
                 />
               );
