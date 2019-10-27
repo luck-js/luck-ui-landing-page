@@ -1,15 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
+import { NextSeo } from 'next-seo/lib';
 import RatioContainer from '../../components/RatioContainer';
-import {MediumText, Canon, Flex, TinySecond} from '../../components';
+import { MediumText, Canon, Flex, TinySecond } from '../../components';
 import BlogLayout from './BlogLayout';
 import { mapToPost } from './index';
 import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
 import media from '../../utils/media';
 
-const ContentImage = styled("img")`
+const ContentImage = styled('img')`
   width: 100%;
   
   padding: ${Theme.space.small}px 0;
@@ -26,11 +27,11 @@ const ContentImage = styled("img")`
   ${media.greaterThan('desktop')`
     padding: ${Theme.space.xregular}px 0;
   `}
-`
+`;
 
 const components = {
-  "p": MediumText,
-  "img": ContentImage
+  p: MediumText,
+  img: ContentImage,
 };
 
 const processor = getProcessor(components);
@@ -84,39 +85,63 @@ const HashtagsText = styled(TinySecond)`
 
 const PostContent: React.FunctionComponent<Post> = ({
   title,
+  description,
   content,
+  createdAt,
+  updatedAt,
   cover,
   hashtags = [],
   ...props
 }) => (
-  <Fragment>
+  <>
     {cover && (
-      <Container {...props}>
-        <ImageContainer ratio={["62.5%","34%"]}>
-          <Image src={cover.url} alt="" />
-        </ImageContainer>
-        <ContentContainer>
-          <Canon pb={['small', 'small', 'regular', 'regular']}>{title}</Canon>
-          {processor.processSync(content).contents}
-          <HashtagsText pt={['small', 'small', 'regular', 'regular']}>
-            {(hashtags as Hashtag[]).map(({ name }, index) => (
-              <span key={`PostContent-${name}-${index}`}>#{name}</span>
-            ))}
-          </HashtagsText>
-        </ContentContainer>
-      </Container>
+      <>
+        <NextSeo
+          title={`Luck - ${title}`}
+          description={description}
+          openGraph={{
+            title,
+            description,
+            url: window.location.href,
+            images: [{ url: cover.url }],
+            article: {
+              publishedTime: createdAt,
+              modifiedTime: updatedAt,
+              // authors: [authors],
+              // section: category.name,
+              tags: (hashtags as Hashtag[]).map(({ name }) => name),
+            },
+          }}
+        />
+        <Container {...props}>
+          <ImageContainer ratio={['62.5%', '34%']}>
+            <Image src={cover.url} alt="" />
+          </ImageContainer>
+          <ContentContainer>
+            <Canon pb={['small', 'small', 'regular', 'regular']}>{title}</Canon>
+            {processor.processSync(content).contents}
+            <HashtagsText pt={['small', 'small', 'regular', 'regular']}>
+              {(hashtags as Hashtag[]).map(({ name }, index) => (
+                <span key={`PostContent-${name}-${index}`}>#{name}</span>
+              ))}
+            </HashtagsText>
+          </ContentContainer>
+        </Container>
+      </>
     )}
-  </Fragment>
+  </>
 );
 
 export const POST_QUERY = gql`
   query getPosts($where: JSON) {
     posts(where: $where) {
       title
-      content
       description
+      content
       slug
       isDraft
+      createdAt
+      updatedAt
       cover {
         url
       }
@@ -141,7 +166,7 @@ const Index: StatelessPage = ({ slug, cmsUrl }) => {
   if (loading) return <div>Loading</div>;
 
   return (
-    <BlogLayout title="Blog | Luck" backgroundColor={Theme.colors.main}>
+    <BlogLayout backgroundColor={Theme.colors.main}>
       {data && data.posts[0] && <PostContent {...mapToPost(data.posts[0], cmsUrl)} />}
     </BlogLayout>
   );

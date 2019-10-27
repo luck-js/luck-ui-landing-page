@@ -81,7 +81,7 @@ const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
                     <span key={`CardDesktop-${name}-${index}`}>#{name}</span>
                   ))}
                 </Hashtags>
-                <Trafalgar tag="h3" pt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
+                <Trafalgar tag="h2" pt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
                   {title}
                 </Trafalgar>
               </ContentContainer>

@@ -80,7 +80,7 @@ const CardMobile: React.FunctionComponent<CardMobileProps> = ({
                 <Image src={cover.url} alt="" />
               </ImageContainer>
               <ContentContainer>
-                <Trafalgar tag="h3">{title}</Trafalgar>
+                <Trafalgar tag="h2">{title}</Trafalgar>
               </ContentContainer>
             </Box>
           </Link>

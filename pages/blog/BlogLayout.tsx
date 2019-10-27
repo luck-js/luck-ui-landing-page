@@ -3,7 +3,6 @@ import Layout from '../../components/Layout';
 import { Navigation } from '../../components';
 
 type LayoutProps = {
-  title?: string;
   backgroundColor: string;
 };
 
