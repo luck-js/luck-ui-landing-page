@@ -19,7 +19,7 @@ import {
   display,
 } from 'styled-system';
 
-export const Box = styled('div')(
+export const Box = styled('div')<any>(
   space,
   color,
   width,

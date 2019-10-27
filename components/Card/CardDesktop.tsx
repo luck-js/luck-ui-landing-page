@@ -69,8 +69,8 @@ const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
   <Fragment>
     {cover && (
       <Container {...props}>
-          <Link href={`/blog/${slug}`}>
-            <Box>
+        <Link href={`/blog/${slug}`}>
+          <Box as="a" href={`/blog/${slug}`}>
               <ImageContainer ratio="69%">
                 <p>{cover.url}</p>
                 <Image src={cover.url} alt="" />
