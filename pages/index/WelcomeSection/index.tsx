@@ -34,6 +34,7 @@ const  WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) =>
         <InputWithButton
           pt={['40px', '40px', '50px', '70px']}
           href="https://app.luck.org.pl"
+          ariaLabel={`przejdź do aplikacji`}
         />
       </Content>
       <Bubbles handleClickBubble={handleClickBubble} />

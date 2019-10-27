@@ -48,11 +48,20 @@ const NavigationContainer = styled(Flex)`
   `}
 `;
 
-const NavigationLogo = styled('img')`
+const NavigationLogoContainer = styled(Box)`
+  height: 100%;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  transition: transform 0.5s;
+  
+  &:hover {
+  transform: translateX(-50%) scale(1.11);
+  }
+`
+
+const NavigationLogo = styled('img')`
   height: 100%;
   cursor: pointer;
 `;
@@ -65,12 +74,14 @@ export const Navigation: React.FunctionComponent<NavigationProps> = ({
     <NavigationHorizontalPadding>
       <NavigationContainer>
         {shouldDisplayLogo && (
-          <Link href={`/`} >
-            <NavigationLogo src="/static/logo-luck.png" />
+          <Link href="/" >
+            <NavigationLogoContainer as="a" href="/" aria-label={`przejdź do strony głownej`}>
+              <NavigationLogo src="/static/logo-luck.png" alt="Logo Luck" />
+            </NavigationLogoContainer>
           </Link>
         )}
 
-        <NavLink href="/blog" modifiers={navLinkModifiers} />
+        <NavLink href="/blog" ariaLabel="przejdź do blog postow" modifiers={navLinkModifiers} />
       </NavigationContainer>
     </NavigationHorizontalPadding>
   );

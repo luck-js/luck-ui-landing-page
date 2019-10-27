@@ -69,8 +69,8 @@ const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
   <Fragment>
     {cover && (
       <Container {...props}>
-          <Link href={`/blog/${slug}`}>
-            <Box>
+        <Link href={`/blog/${slug}`}>
+          <Box as="a" href={`/blog/${slug}`} aria-label={`przejdź do ${title}`}>
               <ImageContainer ratio="69%">
                 <p>{cover.url}</p>
                 <Image src={cover.url} alt="" />
@@ -81,7 +81,7 @@ const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
                     <span key={`CardDesktop-${name}-${index}`}>#{name}</span>
                   ))}
                 </Hashtags>
-                <Trafalgar tag="h3" pt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
+                <Trafalgar tag="h2" pt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
                   {title}
                 </Trafalgar>
               </ContentContainer>

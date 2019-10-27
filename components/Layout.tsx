@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import Fonts from '../utils/fonts';
 
 type LayoutProps = {
-  title?: string;
   backgroundColor: string;
 };
 const Container = styled(Box)`
@@ -19,7 +18,7 @@ const InnerContainer = styled('div')<{ isFontLoaded: boolean }>`
   transition: 0.5s;
 `;
 
-const Layout: React.FunctionComponent<LayoutProps> = ({ children, title, ...props }) => {
+const Layout: React.FunctionComponent<LayoutProps> = ({ children, ...props }) => {
   const [isFontLoaded, setIsFontLoaded] = useState(false);
   useEffect(() => {
     let isSubscribed = true
@@ -30,7 +29,6 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children, title, ...prop
   return (
     <Container {...props}>
       <Head>
-        <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
