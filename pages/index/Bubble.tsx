@@ -15,6 +15,7 @@ export interface BubbleProps {
   config: BubbleConfig;
   time: number;
   containerSize: Size;
+  handleClickBubble: any;
 }
 
 const makeGetFramePosition = (frameTime: any) => ({
@@ -29,7 +30,7 @@ const makeGetFramePosition = (frameTime: any) => ({
   position +
   radius;
 
-const Bubble: React.FunctionComponent<BubbleProps> = ({ time, containerSize, config, ...props }) => {
+const Bubble: React.FunctionComponent<BubbleProps> = ({ time, containerSize, config, handleClickBubble}) => {
   const startAnimate = (node: any) => {
     if (!node) return;
 
@@ -59,7 +60,7 @@ const Bubble: React.FunctionComponent<BubbleProps> = ({ time, containerSize, con
     anim.start();
   };
 
-  return <Circle ref={node => startAnimate(node)} {...config} {...props} />;
+  return <Circle ref={node => startAnimate(node)} {...config} onClick={handleClickBubble} />;
 };
 
 export default Bubble;

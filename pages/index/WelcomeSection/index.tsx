@@ -6,6 +6,10 @@ import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
 
+export interface WelcomeSectionProps {
+  handleClickBubble: any;
+}
+
 const Background = styled('div')`
   width: 100%;
   height: 100%;
@@ -17,7 +21,7 @@ const Background = styled('div')`
 
 const Container = styled('div')``;
 
-const  WelcomeSection = ({ ...pros }) => {
+const  WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) => {
   return (
     <Container {...pros}>
       <Background />
@@ -32,7 +36,7 @@ const  WelcomeSection = ({ ...pros }) => {
           href="https://app.luck.org.pl"
         />
       </Content>
-      <Bubbles />
+      <Bubbles handleClickBubble={handleClickBubble} />
     </Container>
   );
 };
