@@ -90,6 +90,7 @@ const PostContent: React.FunctionComponent<Post> = ({
   createdAt,
   updatedAt,
   cover,
+  slug,
   hashtags = [],
   ...props
 }) => (
@@ -102,7 +103,7 @@ const PostContent: React.FunctionComponent<Post> = ({
           openGraph={{
             title,
             description,
-            url: window.location.href,
+            url: `https://luck.org.pl/blog/${slug}`,
             images: [{ url: cover.url }],
             article: {
               publishedTime: createdAt,
@@ -142,6 +143,7 @@ export const POST_QUERY = gql`
       isDraft
       createdAt
       updatedAt
+      slug
       cover {
         url
       }
