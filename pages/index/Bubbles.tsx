@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
+import useComponentSize from '@rehooks/component-size'
 //TODO: add react-konva as lazy
 import { Layer, Stage } from 'react-konva';
 import Bubble, { BubbleConfig } from './Bubble';
@@ -43,20 +44,8 @@ const getBubbleProps = ({ width, height }: Size): BubbleConfig => {
 };
 
 const Bubbles: React.FunctionComponent<BubblesProps> = ({ handleClickBubble, ...props }) => {
-  const containerRef = useRef<{offsetWidth: number}>(null);
-  //TODO: to utils.js
-  const [containerWidth, setContainerWidth] = useState();
-
-  useEffect(() => {
-    const reflow = () => {
-      if(!containerRef.current) return
-      setContainerWidth(containerRef.current.offsetWidth)
-    };
-
-    reflow()
-    window.addEventListener('resize', reflow, true);
-    return () => window.removeEventListener('resize', reflow, true);
-  }, []);
+  let containerRef = useRef(null);
+  let {width: containerWidth} = useComponentSize(containerRef);
 
   //TODO: break size & bubbles to separate effects
   const [bubbles, setBubbles] = useState<number[]>([]);
