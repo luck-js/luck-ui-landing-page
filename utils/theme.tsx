@@ -21,6 +21,7 @@ export const colors = {
   main: "#f9f9f9",
   mainContrast: "#d45858",
   black: "#212121",
+  darkGray: "#4d4d4d",
   gray: "#bababa",
 };
 
@@ -31,48 +32,56 @@ export const fontFamilies = {
 export const textStyles = {
   logoHeading: {
     tag: "h1",
+    width: "100%",
     fontSize: [27, 27, 46, 61],
     fontWeight: 300,
     fontFamily: fontFamilies.body
   },
   canon: {
     tag: "h1",
+    width: "100%",
     fontSize: [20, 20, 42, 48],
     fontWeight: 700,
     fontFamily: fontFamilies.body
   },
   trafalgar: {
     tag: "h1",
+    width: "100%",
     fontSize: [18, 18, 18, 21],
     fontWeight: 700,
     fontFamily: fontFamilies.body
   },
   bodyText: {
     tag: "p",
+    width: "100%",
     fontSize: [16, 16, 18, 21],
     fontWeight: 400,
     fontFamily: fontFamilies.body
   },
   mediumText: {
     tag: "p",
+    width: "100%",
     fontSize: [16, 16, 16, 18],
     fontWeight: 400,
     fontFamily: fontFamilies.body
   },
   smallText: {
     tag: "p",
+    width: "100%",
     fontSize: [14, 14, 14, 14],
     fontWeight: 400,
     fontFamily: fontFamilies.body
   },
   tinySecond: {
     tag: "p",
+    width: "100%",
     fontSize: [10, 10, 12, 14],
     fontWeight: 400,
     fontFamily: fontFamilies.body
   },
   tinyText: {
     tag: "p",
+    width: "100%",
     fontSize: [10, 10, 10, 11],
     fontWeight: 400,
     fontFamily: fontFamilies.body

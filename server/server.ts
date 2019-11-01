@@ -22,7 +22,12 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (pathname === '/posts' || pathname === '/posty') {
+    console.log(pathname);
+    if (pathname === '/polityka-prywatnosci-bota-pan-mikolaj') {
+      app.render(req, res, '/bot-politics', query);
+    } else if (pathname === '/polityka-prywatnosci-strony') {
+      app.render(req, res, '/webiste-politics', query);
+    } else if (pathname === '/posts' || pathname === '/posty') {
       app.render(req, res, '/blog', query);
     } else if (pathname === '/robots.txt') {
       res.statusCode = 200;

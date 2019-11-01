@@ -14,9 +14,11 @@ import {
   size,
   space,
   textStyle,
+  width,
 } from 'styled-system';
 
 export const StyledDynamicComponent = styled('div')`
+  ${width}
   ${space}
   ${fontSize}
   ${fontStyle}
