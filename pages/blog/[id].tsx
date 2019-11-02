@@ -115,7 +115,7 @@ const PostContent: React.FunctionComponent<Post> = ({
           }}
         />
         <Container {...props}>
-          <ImageContainer ratio={['62.5%', '34%']}>
+          <ImageContainer ratio={['69%', '34%']}>
             <Image src={cover.url} alt="" />
           </ImageContainer>
           <ContentContainer>
