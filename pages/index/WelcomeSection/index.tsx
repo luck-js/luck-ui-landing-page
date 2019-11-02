@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import {LogoHeading, Navigation} from '../../../components';
-import Bubbles from '../Bubbles';
 import React from 'react';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
+import dynamic from "next/dynamic";
+const Bubbles = dynamic(() => import("../Bubbles"), {ssr: false});
 
 export interface WelcomeSectionProps {
   handleClickBubble: any;
