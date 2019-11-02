@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+  html, body, #__next {
+    height: 100%;
+  }
   html {
     background-color: ${Theme.colors.main};
   }

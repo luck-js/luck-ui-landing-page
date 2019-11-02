@@ -13,13 +13,17 @@ export interface WelcomeSectionProps {
 const Background = styled('div')`
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   background-image: url(static/bg-bubbles.png);
   z-index: 0;
   pointer-events: none;
 `;
 
-const Container = styled('div')``;
+const Container = styled('div')`
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+`;
 
 const  WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) => {
   return (

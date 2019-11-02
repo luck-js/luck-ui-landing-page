@@ -11,7 +11,7 @@ type LayoutProps = {
 };
 const Container = styled(Box)`
   margin: 0;
-  height: 100vh;
+  height: 100%;
 `;
 const InnerContainer = styled('div')<{ isFontLoaded: boolean }>`
   opacity: ${props => (props.isFontLoaded ? 1 : 0)};

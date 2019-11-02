@@ -13,7 +13,7 @@ interface IndexProps {
 }
 
 export const Container = styled('div')<Size>`
-  position: fixed;
+  position: absolute;
   width: 100%;
   bottom: ${props => (props.height ? `${-(props.height / 2)}px` : 0)};
   height: ${props => (props.height ? `${props.height}px` : 0)};
