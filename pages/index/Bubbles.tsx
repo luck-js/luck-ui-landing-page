@@ -47,12 +47,10 @@ const Bubbles: React.FunctionComponent<BubblesProps> = ({ handleClickBubble, ...
   let containerRef = useRef(null);
   let {width: containerWidth} = useComponentSize(containerRef);
 
-  //TODO: break size & bubbles to separate effects
-  const [bubbles, setBubbles] = useState<number[]>([]);
   const [size, setSize] = useState();
-
   useEffect(() => {
     if(!containerWidth) return
+
     const breakpointIndex = Theme.breakpoints.findIndex(
       breakpoint => window.innerWidth < parseInt(breakpoint),
     );
@@ -60,6 +58,12 @@ const Bubbles: React.FunctionComponent<BubblesProps> = ({ handleClickBubble, ...
       ? CONTAINER_HEIGHTS[breakpointIndex]
       : CONTAINER_HEIGHTS[CONTAINER_HEIGHTS.length - 1];
     setSize({ width: containerWidth, height });
+  }, [containerWidth]);
+
+
+  const [bubbles, setBubbles] = useState<number[]>([]);
+  useEffect(() => {
+    if(!containerWidth) return
 
     const bubblesLength = Math.floor((containerWidth / 10575) * 10000);
     setBubbles(helper(0, bubblesLength))
