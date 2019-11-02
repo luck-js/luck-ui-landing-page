@@ -13,14 +13,14 @@ const Container = styled(Box)`
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
  
-  h3 {
+  h2 {
     text-decoration: underline;
     text-decoration-color: transparent;
     transition: text-decoration-color 0.5s, opacity 0.5s;
   }
   
   &:hover {
-    h3 {
+    h2 {
       opacity: 0.8;
       text-decoration-color: ${Theme.colors.black};
     }

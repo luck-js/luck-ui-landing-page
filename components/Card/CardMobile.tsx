@@ -27,13 +27,13 @@ const InnerContainer = styled(Flex)`
   cursor: pointer;
   width: 100%;
 
-  h3 {
+  h2 {
     text-decoration: underline;
     text-decoration-color: transparent;
     transition: text-decoration-color 0.5s, opacity 0.5s;
   }
   &:hover {
-    h3 {
+    h2 {
       opacity: 0.8;
       text-decoration-color: ${Theme.colors.black};
     }
