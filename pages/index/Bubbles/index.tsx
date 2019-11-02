@@ -18,6 +18,8 @@ export const Container = styled('div')<Size>`
   bottom: ${props => (props.height ? `${-(props.height / 2)}px` : 0)};
   height: ${props => (props.height ? `${props.height}px` : 0)};
   background: transparent;
+  opacity: ${props => (props.height ? 1 : 0)};
+  transition: opacity 0.5s;
 `;
 
 const Index: React.FunctionComponent<IndexProps> = ({ handleClickBubble, ...props }) => {
