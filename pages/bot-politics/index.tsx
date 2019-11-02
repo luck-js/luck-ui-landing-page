@@ -3,17 +3,8 @@ import BlogLayout from '../blog/BlogLayout';
 import { Theme } from '../../utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
-import {Canon, Flex, MediumText} from '../../components';
+import {Canon, Flex, MediumText, List, TextLink} from '../../components';
 import media from '../../utils/media';
-
-const List = styled('ul')`
-    display: block;
-    margin-block-start: ${Theme.space.medium}px;
-    margin-block-end: ${Theme.space.medium}px;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: ${Theme.space.xregular}px;
-`
 
 const Container = styled(Flex)`
   background-color: ${Theme.colors.main};
@@ -40,18 +31,6 @@ const Container = styled(Flex)`
 const Text = styled(MediumText).attrs({
   mt: ['small', 'small', 'medium', 'regular']
 })``
-
-const Link = styled('a')`
-  color: ${Theme.colors.darkGray};
-  
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: text-decoration-color 0.5s;
-
-  &:hover {
-    text-decoration-color: ${Theme.colors.darkGray};
-  }
-`
 
 const Index = () => {
   return (
@@ -94,7 +73,7 @@ const Index = () => {
             <li>
               <Text>
                 Administrator wyznaczył inspektora ochrony danych, z kt&oacute;rym można
-                skontaktować się poprzez email <Link href="mailto:info@luck.org.pl">info@luck.org.pl</Link>. Z Inspektorem ochrony danych można
+                skontaktować się poprzez email <TextLink href="mailto:info@luck.org.pl">info@luck.org.pl</TextLink>. Z Inspektorem ochrony danych można
                 się kontaktować we wszystkich sprawach dotyczących przetwarzania danych osobowych
                 oraz korzystania z praw związanych z przetwarzaniem danych.
               </Text>
