@@ -1,6 +1,6 @@
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {LogoHeading, Navigation} from '../../../components';
-import React from 'react';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
@@ -20,15 +20,20 @@ const Background = styled('div')`
   pointer-events: none;
 `;
 
-const Container = styled('div')`
-  height: 100%;
+const Container = styled('div')<{height: number}>`
+  height: ${props => (props.height ? `${props.height}px` : `100%`)};
   overflow: hidden;
   position: relative;
 `;
 
 const  WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) => {
+  const [height, setHeight] = useState<number>(0)
+  useEffect(() => {
+    setHeight(window.innerHeight)
+  },[])
+
   return (
-    <Container {...pros}>
+    <Container height={height} {...pros}>
       <Background />
       <Navigation />
       <Content>
