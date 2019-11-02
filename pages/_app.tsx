@@ -9,6 +9,7 @@ import SEO from '../next-seo.config';
 
 // @ts-ignore
 import withGA from "next-ga";
+import FontProvider from "../components/FontProvider"
 
 class MyApp extends App<{analytics: any}> {
   render() {
@@ -16,11 +17,13 @@ class MyApp extends App<{analytics: any}> {
     return (
       <Container>
         <ThemeProvider theme={Theme}>
-          <>
-            <GlobalStyle />
-            <DefaultSeo {...SEO} />
-            <Component {...pageProps} analytics={analytics} />
-          </>
+          <FontProvider>
+            <>
+              <GlobalStyle />
+              <DefaultSeo {...SEO} />
+              <Component {...pageProps} analytics={analytics} />
+            </>
+          </FontProvider>
         </ThemeProvider>
       </Container>
     );

@@ -34,7 +34,8 @@ const  WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) =>
       <Content>
         <Logo src="static/logo-luck.png" />
         <LogoHeading pt={['50px', '50px', '50px', '50px']}>
-          Organizacja Mikołajek nie była nigdy tak łatwa!
+          Organizacja Mikołajek <br/>
+          nie była nigdy tak łatwa!
         </LogoHeading>
         <InputWithButton
           pt={['40px', '40px', '50px', '70px']}

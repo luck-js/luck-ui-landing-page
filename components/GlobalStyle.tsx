@@ -13,12 +13,18 @@ const GlobalStyle = createGlobalStyle`
   html {
     background-color: ${Theme.colors.main};
   }
+  
   body {
     margin: 0;
     padding: 0;
     width: 100%;
     color: ${Theme.colors.main};
-    font-family: ${Theme.fontFamilies.body} ;
+  }
+  
+  .fonts-loaded {
+    body {
+      font-family: ${Theme.fontFamilies.body} ;
+    }
   }
   
   a {
