@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo/lib';
 import RatioContainer from '../../components/RatioContainer';
-import { MediumText, Canon, Flex, TinySecond } from '../../components';
+import { MediumText, Canon, Flex, TinySecond, List } from '../../components';
 import BlogLayout from './BlogLayout';
 import { mapToPost } from './index';
 import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
@@ -12,26 +12,16 @@ import media from '../../utils/media';
 
 const ContentImage = styled('img').attrs({alt: ""})`
   width: 100%;
-  
-  padding: ${Theme.space.small}px 0;
-  
-  
-  ${media.greaterThan('mobile')`
-    
-  `}
-  
-  ${media.greaterThan('tablet')`
-    padding: ${Theme.space.regular}px 0;
-  `}
-  
-  ${media.greaterThan('desktop')`
-    padding: ${Theme.space.xregular}px 0;
-  `}
 `;
 
+const Text = styled(MediumText).attrs({
+  mt: ['small', 'small', 'medium', 'regular']
+})``
+
 const components = {
-  p: MediumText,
+  p: Text,
   img: ContentImage,
+  ul: List,
 };
 
 const processor = getProcessor(components);
@@ -58,7 +48,7 @@ const ContentContainer = styled(Flex)`
   max-width: 664px;
   margin: 0 auto;
   flex-direction: column;  
-  padding: ${Theme.space.small}px;
+  padding: ${Theme.space.medium}px ${Theme.space.small}px;
   
   ${media.greaterThan('mobile')`
     
@@ -119,7 +109,7 @@ const PostContent: React.FunctionComponent<Post> = ({
             <Image src={cover.url} alt="" />
           </ImageContainer>
           <ContentContainer>
-            <Canon pb={['small', 'small', 'regular', 'regular']}>{title}</Canon>
+            <Canon>{title}</Canon>
             {processor.processSync(content).contents}
             <HashtagsText pt={['small', 'small', 'regular', 'regular']}>
               {(hashtags as Hashtag[]).map(({ name }, index) => (
