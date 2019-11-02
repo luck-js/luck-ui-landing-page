@@ -79,7 +79,7 @@ interface StatelessPage<P = { cmsUrl: string }> extends React.FunctionComponent<
 
 export const ALL_POSTS_QUERY = gql`
   query getPosts {
-    posts {
+    posts(limit: 999, sort: "date:desc") {
       _id
       title
       content
