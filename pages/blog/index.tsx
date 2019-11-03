@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { NextSeo } from 'next-seo';
-import { withApollo, Theme, Post } from '../../utils';
+import { withApollo, Theme, Post, UploadFile } from '../../utils';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
@@ -77,32 +77,83 @@ interface StatelessPage<P = { cmsUrl: string }> extends React.FunctionComponent<
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
-export const ALL_POSTS_QUERY = gql`
-  query getPosts {
-    posts(limit: 999, sort: "date:desc") {
-      _id
-      title
-      content
-      description
-      slug
-      isDraft
-      cover {
-        url
-      }
-      hashtags {
-        name
-      }
+export const POST_FRAGMENT = gql`
+  fragment Post on Post {
+    _id
+    title
+    description
+    content
+    slug
+    isDraft
+    createdAt
+    updatedAt
+    slug
+    cover {
+      url
+    }
+    coverPlaceholder {
+      url
+    }
+    wideCover {
+      url
+    }
+    wideCoverPlaceholder {
+      url
+    }
+    hashtags {
+      name
     }
   }
 `;
 
-export const mapToPost = ({ cover, ...post }: Post, cmsUrl: string): Post => {
-  cover = cover && { ...cover, url: `${cmsUrl}${cover.url}` };
-  return { cover, ...post };
+export const ALL_POSTS_QUERY = gql`
+  ${POST_FRAGMENT}
+  query getPosts {
+    posts(limit: 999, sort: "date:desc") {
+      ...Post  
+    }
+  }
+`;
+
+export interface ViewPost extends Post {
+  cover: UploadFile;
+  coverPlaceholder: UploadFile;
+  wideCover: UploadFile;
+  wideCoverPlaceholder: UploadFile;
+}
+
+const isSomeCoverUndefined = ({
+  cover,
+  coverPlaceholder,
+  wideCover,
+  wideCoverPlaceholder,
+}: Post): boolean => {
+  return ![cover, coverPlaceholder, wideCover, wideCoverPlaceholder].some(c => !c);
 };
 
+const mapCoverUrls = (
+  { cover, coverPlaceholder, wideCover, wideCoverPlaceholder, ...post }: ViewPost,
+  cmsUrl: string,
+): ViewPost => {
+  const mapCoverUrl = (c: any) => ({ ...c, url: `${cmsUrl}${c.url}` });
+  cover = mapCoverUrl(cover);
+  coverPlaceholder = mapCoverUrl(coverPlaceholder);
+  wideCover = mapCoverUrl(wideCover);
+  wideCoverPlaceholder = mapCoverUrl(wideCoverPlaceholder);
+  return { cover, coverPlaceholder, wideCover, wideCoverPlaceholder, ...post };
+};
+
+export const mapToViewPosts = (posts: Post[], cmsUrl: string):ViewPost[]  => {
+  return posts
+    .filter(({ isDraft }) => !isDraft)
+    .filter(isSomeCoverUndefined)
+    .map(post => mapCoverUrls(post as ViewPost, cmsUrl))
+}
+
 const Index: StatelessPage = ({ cmsUrl }) => {
-  const { loading, error, data } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
+  const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
+
+  const viewPosts = mapToViewPosts(data.posts, cmsUrl);
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
@@ -115,11 +166,9 @@ const Index: StatelessPage = ({ cmsUrl }) => {
       />
       <BlogLayout backgroundColor={Theme.colors.main}>
         <CardsContainer>
-          {data &&
-            data.posts
-              .filter(({ isDraft }) => !isDraft)
-              .map(post => mapToPost(post, cmsUrl))
-              .map((post, index) => <Card key={`${post._id}-${index}`} {...post} />)}
+          {viewPosts.map((post, index) => (
+            <Card key={`${post._id}-${index}`} {...post} />
+          ))}
         </CardsContainer>
       </BlogLayout>
     </>

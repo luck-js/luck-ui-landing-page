@@ -2,9 +2,10 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { TinyText, Trafalgar } from '../Typography';
-import RatioContainer from '../../components/RatioContainer';
 import { Box } from '../Box';
-import { Theme, Hashtag, Post } from '../../utils';
+import { Theme, Hashtag } from '../../utils';
+import {ViewPost} from "../../pages/blog"
+import {RatioLazyImage} from "../RatioLazyImage"
 
 const Container = styled(Box)`
   position: relative;
@@ -31,18 +32,6 @@ const ContentContainer = styled(Box)`
   padding: ${Theme.space.medium}px;
 `;
 
-const Image = styled('img')`
-  width: 100%;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-`;
-const ImageContainer = styled(RatioContainer)`
-  position: relative;
-`;
-
 const Hashtags = styled(TinyText)`
   span {
     text-transform: uppercase;
@@ -53,8 +42,12 @@ const Hashtags = styled(TinyText)`
   }
 `;
 
+const Image = styled(RatioLazyImage)`
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+`;
 
-export interface CardDesktopProps extends Post {
+export interface CardDesktopProps extends ViewPost {
   display: any;
 }
 
@@ -63,33 +56,32 @@ const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
   description,
   slug,
   cover,
+  coverPlaceholder,
   hashtags = [],
   ...props
-}) => (
+}) => {
+  return (
   <Fragment>
     {cover && (
       <Container {...props}>
         <Link href={`/blog/${slug}`}>
           <Box as="a" href={`/blog/${slug}`} aria-label={`przejdź do ${title}`}>
-              <ImageContainer ratio="69%">
-                <p>{cover.url}</p>
-                <Image src={cover.url} alt="" />
-              </ImageContainer>
-              <ContentContainer>
-                <Hashtags>
-                  {(hashtags as Hashtag[]).map(({ name }, index) => (
-                    <span key={`CardDesktop-${name}-${index}`}>#{name}</span>
-                  ))}
-                </Hashtags>
-                <Trafalgar tag="h2" pt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
-                  {title}
-                </Trafalgar>
-              </ContentContainer>
-            </Box>
-          </Link>
+            <Image url={cover.url} placeholderUrl={coverPlaceholder.url} ratio="69%" />
+            <ContentContainer>
+              <Hashtags>
+                {(hashtags as Hashtag[]).map(({ name }, index) => (
+                  <span key={`CardDesktop-${name}-${index}`}>#{name}</span>
+                ))}
+              </Hashtags>
+              <Trafalgar tag="h2" pt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
+                {title}
+              </Trafalgar>
+            </ContentContainer>
+          </Box>
+        </Link>
       </Container>
     )}
   </Fragment>
-);
+)};
 
 export default CardDesktop;

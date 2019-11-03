@@ -1016,6 +1016,11 @@
   resolved "https://registry.yarnpkg.com/@rehooks/component-size/-/component-size-1.0.3.tgz#823eabeb42084893d46d43e3a9d1d0e34252b3cb"
   integrity sha512-pnYld+8SSF2vXwdLOqBGUyOrv/SjzwLjIUcs/4c1JJgR0q4E9eBtBfuZMD6zUD51fvSehSsbnlQMzotSmPTXPg==
 
+"@rooks/use-visibility-sensor@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@rooks/use-visibility-sensor/-/use-visibility-sensor-3.4.0.tgz#76b0523129913a4ec09ef1661807a141d1cdf83e"
+  integrity sha512-bjDt27TCvRn3DBRT9rm8Is2MeMK8kBJX9NJEszOYxCZnbfHNQu2Nmgt+fobyhLyRnwP5j4mchDxeL9dIazJlog==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"
