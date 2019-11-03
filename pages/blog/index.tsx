@@ -73,7 +73,7 @@ const CardsContainer: React.FunctionComponent<any> = ({ children, ...props }) =>
   );
 };
 
-interface StatelessPage<P = { cmsUrl: string }> extends React.FunctionComponent<P> {
+interface StatelessPage<P = { cmsUrl: string, shouldShowDraft:boolean }> extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
@@ -143,17 +143,19 @@ const mapCoverUrls = (
   return { cover, coverPlaceholder, wideCover, wideCoverPlaceholder, ...post };
 };
 
-export const mapToViewPosts = (posts: Post[], cmsUrl: string):ViewPost[]  => {
-  return posts
-    .filter(({ isDraft }) => !isDraft)
+export const mapToViewPosts = (posts: Post[], cmsUrl: string, shouldShowDraft: boolean):ViewPost[]  => {
+  const viewPost = posts
     .filter(isSomeCoverUndefined)
     .map(post => mapCoverUrls(post as ViewPost, cmsUrl))
+
+  return shouldShowDraft ? viewPost : viewPost.filter(({ isDraft }) => !isDraft);
 }
 
-const Index: StatelessPage = ({ cmsUrl }) => {
+const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
 
-  const viewPosts = mapToViewPosts(data.posts, cmsUrl);
+  const viewPosts = mapToViewPosts(data.posts, cmsUrl, shouldShowDraft);
+  console.log(shouldShowDraft, viewPosts[0] && viewPosts[0].isDraft)
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
@@ -176,7 +178,10 @@ const Index: StatelessPage = ({ cmsUrl }) => {
 };
 
 Index.getInitialProps = async function() {
-  return { cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '' };
+  return {
+    cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === "true"
+  };
 };
 
 export default withApollo(Index, {

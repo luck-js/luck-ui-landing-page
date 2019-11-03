@@ -132,11 +132,11 @@ export const POST_QUERY = gql`
   }
 `;
 
-interface StatelessPage<P = { slug: string; cmsUrl: string }> extends React.FunctionComponent<P> {
+interface StatelessPage<P = { slug: string; cmsUrl: string, shouldShowDraft: boolean }> extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
-const Index: StatelessPage = ({ slug, cmsUrl }) => {
+const Index: StatelessPage = ({ slug, cmsUrl, shouldShowDraft }) => {
   const where = { slug };
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
     POST_QUERY,
@@ -145,7 +145,7 @@ const Index: StatelessPage = ({ slug, cmsUrl }) => {
     },
   );
 
-  const viewPost = mapToViewPosts(data.posts, cmsUrl)[0];
+  const viewPost = mapToViewPosts(data.posts, cmsUrl, shouldShowDraft)[0];
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
@@ -158,7 +158,10 @@ const Index: StatelessPage = ({ slug, cmsUrl }) => {
 };
 
 Index.getInitialProps = async function({ query }) {
-  return { slug: query.id, cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '' };
+  return {
+    slug: query.id, cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === "true"
+  };
 };
 
 export default withApollo(Index, {
