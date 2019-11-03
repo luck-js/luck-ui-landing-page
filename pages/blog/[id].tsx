@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo/lib';
-import { MediumText, Canon, Flex, TinySecond, List, RatioLazyImage } from '../../components';
+import {MediumText, Canon, Flex, TinySecond, List, RatioLazyImage, Trafalgar} from '../../components';
 import BlogLayout from './BlogLayout';
 import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
 import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
@@ -17,8 +17,13 @@ const Text = styled(MediumText).attrs({
   mt: ['small', 'small', 'medium', 'regular'],
 })``;
 
+const Header = styled(Trafalgar).attrs({
+  mt: ['small', 'small', 'medium', 'regular'],
+})``;
+
 const components = {
   p: Text,
+  h2: Header,
   img: ContentImage,
   ul: List,
 };
