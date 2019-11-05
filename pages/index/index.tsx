@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
-import WelcomeSection from './WelcomeSection';
+import WelcomeSection from '../../components/WelcomeSection';
 import { Theme } from '../../utils';
 
 interface IndexProps {

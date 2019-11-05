@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogLayout from '../blog/BlogLayout';
+import BlogLayout from '../../components/BlogLayout';
 import { Theme } from '../../utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';

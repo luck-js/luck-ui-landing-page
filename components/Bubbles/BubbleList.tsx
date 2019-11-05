@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Bubble, { BubbleConfig } from './Bubble';
-import { getRandomInt, helper} from '../../../utils';
+import { getRandomInt, helper} from '../../utils';
 
 export interface Size {
   width: number;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import media from '../../../utils/media';
-import {Flex} from "../../../components"
+import media from '../../utils/media';
+import {Flex} from "../index"
 
 const Content = styled(Flex)`
   max-width: 374px;

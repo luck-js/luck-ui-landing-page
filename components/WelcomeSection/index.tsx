@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {LogoHeading, Navigation} from '../../../components';
+import {LogoHeading, Navigation} from '../index';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';

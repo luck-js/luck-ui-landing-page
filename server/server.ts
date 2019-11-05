@@ -10,6 +10,9 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+const fs = require('fs');
+const { DESTINATION, createSitemap } = require('./sitemap');
+
 const robots = `User-agent: *
 Allow: /
 Host: https://luck.org.pl
@@ -22,7 +25,6 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    console.log(pathname);
     if (pathname === '/polityka-prywatnosci-bota-pan-mikolaj') {
       app.render(req, res, '/bot-politics', query);
     } else if (pathname === '/polityka-prywatnosci-strony') {
@@ -33,6 +35,17 @@ app.prepare().then(() => {
       res.statusCode = 200;
       res.write(robots);
       res.end();
+    } else if (pathname === '/sitemap.xml') {
+      res.setHeader('Content-Type', 'application/xml');
+      (async function sendXML() {
+        let xmlFile = await createSitemap();
+        // Send it to the browser
+        res.statusCode = 200;
+        res.write(xmlFile);
+        // Create a file on the selected destination
+        fs.writeFileSync(DESTINATION, xmlFile);
+        res.end();
+      })();
     } else {
       handle(req, res, parsedUrl);
     }
