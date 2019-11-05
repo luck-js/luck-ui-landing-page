@@ -4,6 +4,7 @@ import {Flex} from "../../../components"
 
 const Content = styled(Flex)`
   max-width: 374px;
+  align-content: space-between;
   margin: 0 auto;
   padding: 50px 40px 0px 40px;
   text-align: center;

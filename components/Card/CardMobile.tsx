@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { Flex } from '../Flex';
 import { Trafalgar } from '../Typography';
-import RatioContainer from '../../components/RatioContainer';
 import { Box } from '../Box';
-import { Theme, Post } from '../../utils';
+import { Theme } from '../../utils';
+import { ViewPost } from '../../pages/blog';
+import { RatioLazyImage } from '../RatioLazyImage';
 
 const Container = styled(Flex)`
   margin-bottom: ${Theme.space.small}px;
@@ -27,30 +28,17 @@ const InnerContainer = styled(Flex)`
   cursor: pointer;
   width: 100%;
 
-  h3 {
+  h2 {
     text-decoration: underline;
     text-decoration-color: transparent;
     transition: text-decoration-color 0.5s, opacity 0.5s;
   }
   &:hover {
-    h3 {
+    h2 {
       opacity: 0.8;
       text-decoration-color: ${Theme.colors.black};
     }
   }
-`;
-
-const Image = styled('img')`
-  width: 100%;
-  height: auto;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-`;
-
-const ImageContainer = styled(RatioContainer)`
-  position: relative;
 `;
 
 const ContentContainer = styled(Box)`
@@ -58,7 +46,12 @@ const ContentContainer = styled(Box)`
   text-align: center;
 `;
 
-export interface CardMobileProps extends Post {
+const Image = styled(RatioLazyImage)`
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+`;
+
+export interface CardMobileProps extends ViewPost {
   display: any;
 }
 
@@ -67,6 +60,7 @@ const CardMobile: React.FunctionComponent<CardMobileProps> = ({
   description,
   slug,
   cover,
+  coverPlaceholder,
   ...props
 }) => (
   <Fragment>
@@ -75,10 +69,7 @@ const CardMobile: React.FunctionComponent<CardMobileProps> = ({
         <InnerContainer>
           <Link href={`/blog/${slug}`}>
             <Box as="a" href={`/blog/${slug}`} aria-label={`przejdź do ${title}`}>
-              <ImageContainer ratio="69%">
-                <p>{cover.url}</p>
-                <Image src={cover.url} alt="" />
-              </ImageContainer>
+              <Image url={cover.url} placeholderUrl={coverPlaceholder.url} ratio="69%" />
               <ContentContainer>
                 <Trafalgar tag="h2">{title}</Trafalgar>
               </ContentContainer>

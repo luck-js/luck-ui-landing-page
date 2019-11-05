@@ -1,8 +1,8 @@
 import React from 'react';
 import Konva from 'konva';
 import { Circle } from 'react-konva';
-import { Size } from './Bubbles';
-import { getRandomInt } from '../../utils';
+import { Size } from './BubbleList';
+import { getRandomInt } from '../../../utils';
 
 export interface BubbleConfig {
   radius: number;

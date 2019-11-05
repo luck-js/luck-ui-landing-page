@@ -118,7 +118,11 @@ export type EditPostInput = {
   slug?: Maybe<Scalars['String']>,
   isDraft?: Maybe<Scalars['Boolean']>,
   cover?: Maybe<Scalars['ID']>,
+  coverPlaceholder?: Maybe<Scalars['ID']>,
+  wideCover?: Maybe<Scalars['ID']>,
+  wideCoverPlaceholder?: Maybe<Scalars['ID']>,
   description?: Maybe<Scalars['String']>,
+  date?: Maybe<Scalars['DateTime']>,
   hashtags?: Maybe<Array<Maybe<Scalars['ID']>>>,
 };
 
@@ -235,7 +239,7 @@ export type InputId = {
 
 
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | Hashtag | CreateHashtagPayload | UpdateHashtagPayload | DeleteHashtagPayload | HashtagConnection | HashtagAggregator | HashtagGroupBy | HashtagConnectionName | HashtagConnection_Id | HashtagConnectionId | HashtagConnectionCreatedAt | HashtagConnectionUpdatedAt | Post | CreatePostPayload | UpdatePostPayload | DeletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnectionTitle | PostConnectionContent | PostConnectionSlug | PostConnectionIsDraft | PostConnectionCover | PostConnectionDescription | PostConnection_Id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_Id | UploadFileConnection_Id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UsersPermissionsPermission | UsersPermissionsRole | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnection_Id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionCreatedAt | UsersPermissionsRoleConnectionUpdatedAt | UsersPermissionsUser | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnection_Id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | Hashtag | CreateHashtagPayload | UpdateHashtagPayload | DeleteHashtagPayload | HashtagConnection | HashtagAggregator | HashtagGroupBy | HashtagConnectionName | HashtagConnection_Id | HashtagConnectionId | HashtagConnectionCreatedAt | HashtagConnectionUpdatedAt | Post | CreatePostPayload | UpdatePostPayload | DeletePostPayload | PostConnection | PostAggregator | PostGroupBy | PostConnectionTitle | PostConnectionContent | PostConnectionSlug | PostConnectionIsDraft | PostConnectionCover | PostConnectionCoverPlaceholder | PostConnectionWideCover | PostConnectionWideCoverPlaceholder | PostConnectionDescription | PostConnectionDate | PostConnection_Id | PostConnectionId | PostConnectionCreatedAt | PostConnectionUpdatedAt | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UploadFileConnectionPublic_Id | UploadFileConnection_Id | UploadFileConnectionId | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UsersPermissionsPermission | UsersPermissionsRole | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsRoleConnection_Id | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionCreatedAt | UsersPermissionsRoleConnectionUpdatedAt | UsersPermissionsUser | CreateUserPayload | UpdateUserPayload | DeleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnection_Id | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreatedAt | UsersPermissionsUserConnectionUpdatedAt;
 
 export type Mutation = {
   __typename?: 'Mutation',
@@ -346,7 +350,11 @@ export type Post = {
   slug?: Maybe<Scalars['String']>,
   isDraft?: Maybe<Scalars['Boolean']>,
   cover?: Maybe<UploadFile>,
+  coverPlaceholder?: Maybe<UploadFile>,
+  wideCover?: Maybe<UploadFile>,
+  wideCoverPlaceholder?: Maybe<UploadFile>,
   description: Scalars['String'],
+  date: Scalars['DateTime'],
   hashtags?: Maybe<Array<Maybe<Hashtag>>>,
   _id: Scalars['ID'],
   id: Scalars['ID'],
@@ -393,8 +401,20 @@ export type PostConnectionCover = {
   connection?: Maybe<PostConnection>,
 };
 
+export type PostConnectionCoverPlaceholder = {
+  __typename?: 'PostConnectionCoverPlaceholder',
+  key?: Maybe<Scalars['ID']>,
+  connection?: Maybe<PostConnection>,
+};
+
 export type PostConnectionCreatedAt = {
   __typename?: 'PostConnectionCreatedAt',
+  key?: Maybe<Scalars['DateTime']>,
+  connection?: Maybe<PostConnection>,
+};
+
+export type PostConnectionDate = {
+  __typename?: 'PostConnectionDate',
   key?: Maybe<Scalars['DateTime']>,
   connection?: Maybe<PostConnection>,
 };
@@ -435,6 +455,18 @@ export type PostConnectionUpdatedAt = {
   connection?: Maybe<PostConnection>,
 };
 
+export type PostConnectionWideCover = {
+  __typename?: 'PostConnectionWideCover',
+  key?: Maybe<Scalars['ID']>,
+  connection?: Maybe<PostConnection>,
+};
+
+export type PostConnectionWideCoverPlaceholder = {
+  __typename?: 'PostConnectionWideCoverPlaceholder',
+  key?: Maybe<Scalars['ID']>,
+  connection?: Maybe<PostConnection>,
+};
+
 export type PostGroupBy = {
   __typename?: 'PostGroupBy',
   title?: Maybe<Array<Maybe<PostConnectionTitle>>>,
@@ -442,7 +474,11 @@ export type PostGroupBy = {
   slug?: Maybe<Array<Maybe<PostConnectionSlug>>>,
   isDraft?: Maybe<Array<Maybe<PostConnectionIsDraft>>>,
   cover?: Maybe<Array<Maybe<PostConnectionCover>>>,
+  coverPlaceholder?: Maybe<Array<Maybe<PostConnectionCoverPlaceholder>>>,
+  wideCover?: Maybe<Array<Maybe<PostConnectionWideCover>>>,
+  wideCoverPlaceholder?: Maybe<Array<Maybe<PostConnectionWideCoverPlaceholder>>>,
   description?: Maybe<Array<Maybe<PostConnectionDescription>>>,
+  date?: Maybe<Array<Maybe<PostConnectionDate>>>,
   _id?: Maybe<Array<Maybe<PostConnection_Id>>>,
   id?: Maybe<Array<Maybe<PostConnectionId>>>,
   createdAt?: Maybe<Array<Maybe<PostConnectionCreatedAt>>>,
@@ -455,7 +491,11 @@ export type PostInput = {
   slug?: Maybe<Scalars['String']>,
   isDraft?: Maybe<Scalars['Boolean']>,
   cover?: Maybe<Scalars['ID']>,
+  coverPlaceholder?: Maybe<Scalars['ID']>,
+  wideCover?: Maybe<Scalars['ID']>,
+  wideCoverPlaceholder?: Maybe<Scalars['ID']>,
   description: Scalars['String'],
+  date: Scalars['DateTime'],
   hashtags?: Maybe<Array<Maybe<Scalars['ID']>>>,
 };
 
