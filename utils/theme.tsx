@@ -1,3 +1,16 @@
+export interface TextStyle {
+  tag?: string;
+  width?: string;
+  fontSize?: number[];
+  fontWeight?: number;
+  fontFamily?: string;
+  textDecoration?: string
+}
+
+export interface TextStyles {
+  [key: string]: TextStyle;
+}
+
 export const breakpoints = ["490px", "1040px", "1920px", "3824px"];
 
 export const space: any = [0, 4, 8, 12, 16, 24, 32, 48, 64, 96, 144, 172, 330];
@@ -29,7 +42,7 @@ export const fontFamilies = {
   body: "'Lato', sans-serif",
 };
 
-export const textStyles = {
+export const textStyles:TextStyles = {
   logoHeading: {
     tag: "h1",
     width: "100%",

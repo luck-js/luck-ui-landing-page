@@ -73,7 +73,7 @@ const Index = () => {
             <li>
               <Text>
                 Administrator wyznaczył inspektora ochrony danych, z kt&oacute;rym można
-                skontaktować się poprzez email <TextLink href="mailto:info@luck.org.pl">info@luck.org.pl</TextLink>. Z Inspektorem ochrony danych można
+                skontaktować się poprzez email <TextLink modifiers={["darkGray"]} href="mailto:info@luck.org.pl">info@luck.org.pl</TextLink>. Z Inspektorem ochrony danych można
                 się kontaktować we wszystkich sprawach dotyczących przetwarzania danych osobowych
                 oraz korzystania z praw związanych z przetwarzaniem danych.
               </Text>
