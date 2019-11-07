@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Bubble, { BubbleConfig } from './Bubble';
-import { getRandomInt, helper} from '../../../utils';
+import {getRandomInt, helper, Theme} from '../../../utils';
 
 export interface Size {
   width: number;
@@ -26,7 +26,7 @@ const getBubbleProps = ({ width, height }: Size): BubbleConfig => {
   const y = getRandomInt(-height / 5, 0, 20);
   const opacity = 0.6;
 
-  return { radius, x, y, opacity, fill: 'white' };
+  return { radius, x, y, opacity, fill: `${Theme.colors.main}` };
 };
 
 const BubbleList: React.FunctionComponent<BubbleListProps> = ({ size, handleClickBubble }) => {

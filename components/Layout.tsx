@@ -8,7 +8,7 @@ type LayoutProps = {
 };
 const Container = styled(Box)`
   margin: 0;
-  min-height: 100%;
+  height: 100%;
 `;
 
 const Layout: React.FunctionComponent<LayoutProps> = ({ children, ...props }) => {
