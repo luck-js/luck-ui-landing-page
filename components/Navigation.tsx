@@ -7,13 +7,10 @@ import Link from 'next/link';
 import NavLink from './Button/NavLink';
 import React from 'react';
 
-interface NavigationProps {
-  shouldDisplayLogo?: boolean;
-  navLinkModifiers?: string[];
-}
+interface NavigationProps {}
 
 const NavigationHorizontalPadding = styled(Box)`
-  padding: ${Theme.space.small}px ${Theme.space.regular}px; 
+  padding: ${Theme.space.small}px ${Theme.space.regular}px;
   
   ${media.greaterThan('mobile')`
     
@@ -30,10 +27,10 @@ const NavigationHorizontalPadding = styled(Box)`
 
 const NavigationContainer = styled(Flex)`
   position: relative;
-  min-height: 45px;
-  justify-content: flex-end;
+  justify-content: ${props => props.withLogo ? "space-between" : "flex-end"};
   align-items: center;
   margin: 0 auto;
+  min-height: 26px;
   
   ${media.greaterThan('mobile')`
     
@@ -49,15 +46,11 @@ const NavigationContainer = styled(Flex)`
 `;
 
 const NavigationLogoContainer = styled(Box)`
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  height: 22px;
   transition: transform 0.5s;
   
   &:hover {
-  transform: translateX(-50%) scale(1.11);
+    transform: scale(1.11);
   }
 `
 
@@ -66,22 +59,26 @@ const NavigationLogo = styled('img')`
   cursor: pointer;
 `;
 
-export const Navigation: React.FunctionComponent<NavigationProps> = ({
-  shouldDisplayLogo = false,
-  navLinkModifiers = [],
-}) => {
+export const Navigation: React.FunctionComponent<NavigationProps> = () => {
   return (
-    <NavigationHorizontalPadding>
+    <NavigationHorizontalPadding bg="transparent">
       <NavigationContainer>
-        {shouldDisplayLogo && (
+        <NavLink href="/blog" ariaLabel="przejdź do blog postow"/>
+      </NavigationContainer>
+    </NavigationHorizontalPadding>
+  );
+};
+
+export const NavigationWithLogo: React.FunctionComponent<NavigationProps> = () => {
+  return (
+    <NavigationHorizontalPadding bg={Theme.colors.mainContrast}>
+      <NavigationContainer withLogo>
           <Link href="/" >
             <NavigationLogoContainer as="a" href="/" aria-label={`przejdź do strony głownej`}>
-              <NavigationLogo src="/static/logo-luck.png" alt="Logo Luck" />
+              <NavigationLogo src="/static/logo-luck-horizontal.svg" alt="Logo Luck" />
             </NavigationLogoContainer>
           </Link>
-        )}
-
-        <NavLink href="/blog" ariaLabel="przejdź do blog postow" modifiers={navLinkModifiers} />
+        <NavLink href="/blog" ariaLabel="przejdź do blog postow"/>
       </NavigationContainer>
     </NavigationHorizontalPadding>
   );
