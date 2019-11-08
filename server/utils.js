@@ -3,6 +3,7 @@ const ROUTE_MAP = {
   'webiste-politics': ['polityka-prywatnosci-strony'],
   blog: ['posts', 'posty'],
   'app/happening': ['app'],
+  'app/happening/share': ['app/udostepnij-linki'],
 };
 
 const ROUTE_MAP_SITEMAP = {
@@ -14,6 +15,8 @@ const ROUTE_MAP_SITEMAP = {
 
 const ROUTE_MAP_CONFIG = {
   'blog/[id]': false,
+  'app/happening': false,
+  'app/happening/share': false,
 }
 
 const withousSlash = (pathname) => {
