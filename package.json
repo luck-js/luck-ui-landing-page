@@ -41,6 +41,7 @@
     "nodemon": "^1.19.2",
     "react": "^16.9.0",
     "react-apollo": "^3.1.0",
+    "react-autosize-textarea": "^7.0.0",
     "react-dom": "^16.9.0",
     "react-konva": "^16.9.0-0",
     "react-masonry-css": "^1.0.13",

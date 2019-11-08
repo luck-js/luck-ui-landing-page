@@ -152,7 +152,7 @@ const Index: StatelessPage = ({ slug, cmsUrl, shouldShowDraft }) => {
   if (loading) return <div>Loading</div>;
 
   return (
-    <BlogLayout backgroundColor={Theme.colors.main}>
+    <BlogLayout>
       {viewPost && <PostContent {...viewPost} />}
     </BlogLayout>
   );

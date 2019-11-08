@@ -7,8 +7,8 @@ import {TextStyle} from "../../utils"
 interface ButtonProps extends TextStyle{
   modifiers?:ModifierKeys;
   href?: string;
-  ariaLabel: string;
-
+  ariaLabel?: string;
+  colorfull?: boolean;
 }
 
 const BUTTON_VARIANTS:ModifiersConfig  = {
@@ -23,22 +23,29 @@ const BUTTON_VARIANTS:ModifiersConfig  = {
 
 
 export const Button = styled(BaseButton)<ButtonProps>`
+  width: auto;
   font-weight: 700;
   letter-spacing: 0;
   cursor: pointer;
-  background-color: transparent;
+  background-color: ${props => props.colorfull ? Theme.colors.mainContrast : "transparent"};
 
   color: ${Theme.colors.main};
-  text-align: center;
-  border: none;
+  border: 2px solid ${props => props.colorfull ? Theme.colors.main : "transparent"};
 
+  padding: 9px 20px 9px;
+  
+  text-align: center;
+  text-transform: uppercase;
   text-decoration: underline;
   text-decoration-color: transparent;
   transition: text-decoration-color 0.5s;
+  
+  border-radius: 30px;
 
   &:hover {
     text-decoration-color: ${Theme.colors.main};
   }
+  
   ${applyStyleModifiers(BUTTON_VARIANTS)};
 `;
 

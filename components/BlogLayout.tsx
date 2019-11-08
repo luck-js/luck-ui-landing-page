@@ -1,14 +1,12 @@
 import React, { Fragment } from 'react';
 import Layout from './Layout';
 import { Navigation } from './index';
+import {Theme} from "../utils"
+import {LayoutProps} from "styled-system"
 
-type LayoutProps = {
-  backgroundColor: string;
-};
-
-const BlogLayout: React.FunctionComponent<LayoutProps> = ({ children, ...props }) => (
+const BlogLayout: React.FunctionComponent<LayoutProps> = ({ children }) => (
   <Fragment>
-    <Layout {...props}>
+    <Layout backgroundColor={Theme.colors.main}>
       <Navigation shouldDisplayLogo navLinkModifiers={['black']} />
       {children}
     </Layout>

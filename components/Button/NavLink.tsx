@@ -19,6 +19,7 @@ const NavLink = ({ modifiers, href, ariaLabel, ...props }: { modifiers?: Modifie
 
 NavLink.Container = styled(BaseButton)``;
 NavLink.Button = styled(Button)`
-  text-transform: uppercase;
+  padding-left: 0;
+  padding-right: 0;
 `;
 export default NavLink;

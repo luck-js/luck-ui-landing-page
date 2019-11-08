@@ -2,6 +2,7 @@ const ROUTE_MAP = {
   'bot-politics': ['polityka-prywatnosci-pan-mikolaj-luck'],
   'webiste-politics': ['polityka-prywatnosci-strony'],
   blog: ['posts', 'posty'],
+  'app/happening': ['app'],
 };
 
 const ROUTE_MAP_SITEMAP = {
