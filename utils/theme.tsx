@@ -32,10 +32,12 @@ space.auto = "auto";
 
 export const colors = {
   main: "#ffffff",
+  darkMain: "#FBFBFB",
   mainContrast: "#d45858",
   black: "#212121",
   darkGray: "#4d4d4d",
   gray: "#bababa",
+  gray2: "#B8B8B8",
 };
 
 export const fontFamilies = {
