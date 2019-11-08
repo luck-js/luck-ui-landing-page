@@ -24,6 +24,7 @@
     "@apollo/react-ssr": "^3.1.0",
     "@rehooks/component-size": "^1.0.3",
     "@rooks/use-visibility-sensor": "^3.4.0",
+    "@svgr/webpack": "^4.3.3",
     "@types/react-no-ssr": "^1.1.1",
     "apollo-boost": "^0.4.4",
     "apollo-link-state": "^0.4.2",

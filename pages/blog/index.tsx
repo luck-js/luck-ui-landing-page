@@ -155,7 +155,6 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
 
   const viewPosts = mapToViewPosts(data.posts, cmsUrl, shouldShowDraft);
-  console.log(shouldShowDraft, viewPosts[0] && viewPosts[0].isDraft)
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
@@ -166,7 +165,7 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
         title="Luck - blog posty dotyczące aplikacji"
         description="Blog posty związane z aplikacją Luck. Znajdziesz tu podsumowania, najbliższe plany dotyczące rozwoju, ale także i ciekawostki dotyczące Mikołajek"
       />
-      <BlogLayout backgroundColor={Theme.colors.main}>
+      <BlogLayout>
         <CardsContainer>
           {viewPosts.map((post, index) => (
             <Card key={`${post._id}-${index}`} {...post} />
