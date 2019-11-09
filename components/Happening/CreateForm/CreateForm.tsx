@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import TextareaAutosize from 'react-autosize-textarea';
 import { Box, Button, Flex, Input, Canon } from '../../../components';
-import { Theme } from '../../../utils';
+import { Theme, usePrevious } from '../../../utils';
 import Link from 'next/link';
 import { ElementList } from './ElementList';
 import { InputWithButton } from './InputWithButton';
@@ -32,7 +32,7 @@ const INIT_HAPPENING: Happening = {
 const NAVIGATION_HEIGHT = 50;
 
 const Container = styled(Box)`
-  height: calc(100% - ${NAVIGATION_HEIGHT }px);
+  height: calc(100% - ${NAVIGATION_HEIGHT}px);
   position: relative;
 `;
 
@@ -65,11 +65,12 @@ const Background = styled('div')`
 `;
 
 const scrollToRef = (ref: any) => {
-  window.scrollTo(0, ref.current.offsetTop + NAVIGATION_HEIGHT)
-}// General scroll to element function
+  window.scrollTo(0, ref.current.offsetTop + NAVIGATION_HEIGHT);
+}; // General scroll to element function
 
 const CreateForm: StatelessPage = () => {
   const [happening, setHappening] = useState<Happening>(INIT_HAPPENING);
+  const previousParticipants = usePrevious<Participant[]>(happening.participants)
 
   const handleOnChangeTitle = ({ target: { value } }: any) => {
     setHappening(happening => ({ ...happening, title: value }));
@@ -87,7 +88,6 @@ const CreateForm: StatelessPage = () => {
 
   const handleOnEnterParticipantName = () => {
     if (isEmpty(participantName)) return;
-    executeScroll();
     setHappening(happening => ({
       ...happening,
       participants: [...happening.participants, { name: participantName }],
@@ -96,9 +96,9 @@ const CreateForm: StatelessPage = () => {
   };
 
   const handleOnCloseParticipantName = (value: string) => {
-    const participants = happening.participants.filter(({name}) => name !== value);
-    setHappening(happening => ({...happening, participants }))
-  }
+    const participants = happening.participants.filter(({ name }) => name !== value);
+    setHappening(happening => ({ ...happening, participants }));
+  };
 
   const handleKeyPress = (e: any) => {
     if (e.charCode == 13) {
@@ -112,9 +112,9 @@ const CreateForm: StatelessPage = () => {
   const myRef = useRef(null)
   const executeScroll = () => scrollToRef(myRef)
 
-  useEffect(()=>{
-    executeScroll()
-  },[])
+  useEffect(() => {
+    if(previousParticipants && previousParticipants.length < happening.participants.length) executeScroll();
+  }, [happening.participants]);
 
   return (
     <Container>
