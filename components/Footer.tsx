@@ -43,14 +43,14 @@ const Footer = () => {
           </TextLink>
         </Link>{' '}
         &{' '}
-        <Link href={'./polityka-prywatnosci-bota-pan-mikolaj'}>
+        <Link href={'./polityka-prywatnosci-pan-mikolaj-luck'}>
           <TextLink
-            href={'./polityka-prywatnosci-bota-pan-mikolaj'}
-            aria-label={'przejdź do polityki prywatnosci bota'}
+            href={'./polityka-prywatnosci-pan-mikolaj-luck'}
+            aria-label={'przejdź do polityki prywatnosci Pan Mikołaj Luck'}
             modifiers={['black']}
             underline
           >
-            bota
+            Pan Mikołaj Luck
           </TextLink>
         </Link>
       </SmallText>

@@ -25,7 +25,7 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (pathname === '/polityka-prywatnosci-bota-pan-mikolaj') {
+    if (pathname === '/polityka-prywatnosci-pan-mikolaj-luck') {
       app.render(req, res, '/bot-politics', query);
     } else if (pathname === '/polityka-prywatnosci-strony') {
       app.render(req, res, '/webiste-politics', query);
