@@ -31,7 +31,7 @@ space.xxhuge = space[12];
 space.auto = "auto";
 
 export const colors = {
-  main: "#f9f9f9",
+  main: "#ffffff",
   mainContrast: "#d45858",
   black: "#212121",
   darkGray: "#4d4d4d",
