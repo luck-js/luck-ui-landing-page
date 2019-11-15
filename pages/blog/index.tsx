@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Card from '../../components/Card';
 import { Flex } from '../../components';
-import BlogLayout from './BlogLayout';
+import BlogLayout from '../../components/BlogLayout';
 import media from '../../utils/media';
 // @ts-ignore
 import Masonry from 'react-masonry-css';

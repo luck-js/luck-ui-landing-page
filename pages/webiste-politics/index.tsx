@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogLayout from '../blog/BlogLayout';
+import BlogLayout from '../../components/BlogLayout';
 import { Theme } from '../../utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
@@ -52,7 +52,7 @@ const Index = () => {
           <Text>
             (2) Podmiotem odpowiedzialnym zgodnie z art. 4 ust. 7 Og&oacute;lnego rozporządzenia o
             ochronie danych (RODO) jest zesp&oacute;ł LUCK,{' '}
-            <TextLink href="mailto:info@luck.org.pl">info@luck.org.pl</TextLink>. Z naszym pełnomocnikiem do
+            <TextLink href="mailto:info@luck.org.pl" modifiers={["darkGray"]}>info@luck.org.pl</TextLink>. Z naszym pełnomocnikiem do
             spraw ochrony danych osobowych można skontaktować się przez e-mail lub tradycyjną pocztą
             z dopiskiem &bdquo;Pełnomocnik ds. ochrony danych osobowych&rdquo;.
           </Text>

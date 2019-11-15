@@ -3,8 +3,8 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo/lib';
-import {MediumText, Canon, Flex, TinySecond, List, RatioLazyImage, Trafalgar} from '../../components';
-import BlogLayout from './BlogLayout';
+import {MediumText, Canon, Flex, TinySecond, List, RatioLazyImage, Trafalgar, TextLink} from '../../components';
+import BlogLayout from '../../components/BlogLayout';
 import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
 import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
 import media from '../../utils/media';
@@ -24,6 +24,7 @@ const Header = styled(Trafalgar).attrs({
 const components = {
   p: Text,
   h2: Header,
+  a: ({children}:any) => <TextLink modifiers={["darkGray"]} >{children}</TextLink>,
   img: ContentImage,
   ul: List,
 };

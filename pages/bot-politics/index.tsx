@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogLayout from '../blog/BlogLayout';
+import BlogLayout from '../../components/BlogLayout';
 import { Theme } from '../../utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
@@ -36,16 +36,16 @@ const Index = () => {
   return (
     <>
       <NextSeo
-        title="Luck - Polityka prywatności bota Pan Mikołaj"
+        title="Luck - Polityka prywatności Pan Mikołaj Luck"
         description="Zespół LUCK, jako twórca aplikacji LUCK, ułatwiającej organizowanie losowań prezentów, w swoich działaniach szanuje Twoją prywatność."
       />
       <BlogLayout backgroundColor={Theme.colors.main}>
         <Container>
-          <Canon>Polityka prywatności bota Pan Mikołaj</Canon>
+          <Canon>Polityka prywatności Pan Mikołaj Luck</Canon>
           <Text>
             Zesp&oacute;ł LUCK, jako tw&oacute;rca aplikacji LUCK, ułatwiającej organizowanie
             losowań prezent&oacute;w, w swoich działaniach szanuje Twoją prywatność. Chronimy
-            prywatność os&oacute;b korzystających z bota Pan Mikołaj na platformie Google Asystent,
+            prywatność os&oacute;b korzystających z Pan Mikołaj Luck na platformie Google Asystent,
             w spos&oacute;b opisany poniżej.
           </Text>
           <Text>
@@ -73,14 +73,14 @@ const Index = () => {
             <li>
               <Text>
                 Administrator wyznaczył inspektora ochrony danych, z kt&oacute;rym można
-                skontaktować się poprzez email <TextLink href="mailto:info@luck.org.pl">info@luck.org.pl</TextLink>. Z Inspektorem ochrony danych można
+                skontaktować się poprzez email <TextLink modifiers={["darkGray"]} href="mailto:info@luck.org.pl">info@luck.org.pl</TextLink>. Z Inspektorem ochrony danych można
                 się kontaktować we wszystkich sprawach dotyczących przetwarzania danych osobowych
                 oraz korzystania z praw związanych z przetwarzaniem danych.
               </Text>
             </li>
             <li>
               <Text>
-                Twoje dane osobowe przetwarzane są w związku z komunikacją przy użyciu bota. Twoje
+                Twoje dane osobowe przetwarzane są w związku z komunikacją przy użyciu Pan Mikołaj Luck. Twoje
                 dane mogą być także przetwarzane, jeśli udzieliłeś odpowiedniej zgody, w celu
                 prowadzenie komunikacji marketingowej, czyli wysyłki wiadomości z materiałami
                 dotyczącymi aplikacji LUCK.
@@ -100,12 +100,12 @@ const Index = () => {
                 </Text>
               </li>
               <li>
-                <Text>dane przekazane za pomocą bota.</Text>
+                <Text>dane przekazane za pomocą Pan Mikołaj Luck.</Text>
               </li>
             </List>
             <li>
               <Text>
-                Przetwarzamy za pomocą usługi bota następujące dane osobowe naszych
+                Przetwarzamy za pomocą usługi Pan Mikołaj Luck następujące dane osobowe naszych
                 użytkownik&oacute;w:
               </Text>
             </li>
@@ -129,7 +129,7 @@ const Index = () => {
                 przetwarzanie jest niezbędne do realizacje prawnie uzasadnionego interesu
                 administratora danych, polegającego na komunikacji z użytkownikami za pomocą
                 narzędzia bot, na platformie Google Asystent, oraz prowadzenia marketingu
-                bezpośredniego do użytkownik&oacute;w bota po wyrażeniu przez Ciebie zgody na
+                bezpośredniego do użytkownik&oacute;w Pan Mikołaj Luck po wyrażeniu przez Ciebie zgody na
                 otrzymywanie wiadomości marketingowych od zespołu LUCK, zawierających informacje o
                 naszych usługach.
               </Text>

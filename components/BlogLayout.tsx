@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import Layout from '../../components/Layout';
-import { Navigation } from '../../components';
+import Layout from './Layout';
+import { Navigation } from './index';
 
 type LayoutProps = {
   backgroundColor: string;

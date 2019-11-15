@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Flex, BaseInput, BaseButton } from '../../../components';
-import media from '../../../utils/media';
-import * as Theme from '../../../utils/theme';
+import { Flex, BaseInput, BaseButton } from '../index';
+import media from '../../utils/media';
+import * as Theme from '../../utils/theme';
 import {useState} from "react"
 
 const Container = styled(Flex)`

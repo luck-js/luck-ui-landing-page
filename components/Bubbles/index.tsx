@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import useComponentSize from '@rehooks/component-size';
 //TODO: add react-konva as lazy
 import { Layer, Stage } from 'react-konva';
-import { Theme } from '../../../utils';
+import { Theme } from '../../utils';
 import BubbleList, { Size } from './BubbleList';
 
 const CONTAINER_HEIGHTS = [200, 250, 300];
