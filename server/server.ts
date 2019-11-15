@@ -18,6 +18,12 @@ Allow: /
 Host: https://luck.org.pl
 `;
 
+const ROUTE_MAP: { [key: string]: string[] } = {
+  'bot-politics': ['polityka-prywatnosci-pan-mikolaj-luck'],
+  'webiste-politics': ['polityka-prywatnosci-strony'],
+  blog: ['posts', 'posty'],
+};
+
 app.prepare().then(() => {
   createServer((req: { url: any }, res: any) => {
     // Be sure to pass `true` as the second argument to `url.parse`.
@@ -25,13 +31,16 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (pathname === '/polityka-prywatnosci-pan-mikolaj-luck') {
-      app.render(req, res, '/bot-politics', query);
-    } else if (pathname === '/polityka-prywatnosci-strony') {
-      app.render(req, res, '/webiste-politics', query);
-    } else if (pathname === '/posts' || pathname === '/posty') {
-      app.render(req, res, '/blog', query);
-    } else if (pathname === '/robots.txt') {
+    const isRendered = Object.keys(ROUTE_MAP).some(key => {
+      if (ROUTE_MAP[key].some(p => pathname === `/${p}`)) {
+        app.render(req, res, `/${key}`, query);
+        return true;
+      }
+    });
+
+    if (isRendered) return;
+
+    if (pathname === '/robots.txt') {
       res.statusCode = 200;
       res.write(robots);
       res.end();
