@@ -2,7 +2,7 @@ const path = require('path');
 const glob = require('glob');
 const fs = require('fs');
 const axios = require('axios');
-
+const { getPathnameByKey, isRouteDisabled, withousSlash } = require('./utils');
 // If you use Dotenv you can include your .env variables uncommenting the following line
 require("dotenv").config();
 
@@ -28,7 +28,10 @@ const API_SOURCE = `${process.env.CLIENT_URL}/graphql`;
 // By default is .next/static/sitemap.xml
 const DESTINATION = process.env.DESTINATION || path.join(resolveApp('.next/static'), 'sitemap.xml');
 
-const createSitemap = () => {
+const dateTemplate = (date) => `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`
+
+//https://www.sitemaps.org/pl/protocol.html
+const createSitemap = async () => {
   /**
    * STEP 1: Store all static pages url
    **/
@@ -37,21 +40,32 @@ const createSitemap = () => {
   let xml = '';
   xml += '<?xml version="1.0" encoding="UTF-8"?>';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+  xml += '<url>';
+  xml += `<loc>${SITE_ROOT}/robots.txt</loc>`;
+  xml += `<changefreq>always</changefreq>`;
+  xml += `<priority>0.1</priority>`;
+  xml += '</url>';
+
 
   diskPages.forEach(page => {
     let stats = fs.statSync(page);
-    let modDate = new Date(stats.mtime);
-    let lastMod = `${modDate.getFullYear()}-${('0' + (modDate.getMonth() + 1)).slice(-2)}-${(
-      '0' + modDate.getDate()
-    ).slice(-2)}`;
+    let lastMod = dateTemplate(new Date(stats.mtime));
 
     page = page.replace(resolveApp('pages'), '');
     page = page.replace(/.tsx$/, '');
-    page = `${SITE_ROOT}${page}`;
 
     if (page.match(/.*\/index$/)) {
       page = page.replace(/(.*)index$/, '$1');
     }
+
+    if(isRouteDisabled(page)){
+      return;
+    }
+
+    const pathname = getPathnameByKey(page);
+    console.log("getPathnameByKey: ", pathname, page)
+    page = pathname !== undefined ? pathname : withousSlash(page);
+    page = page ? `${SITE_ROOT}/${page}` : SITE_ROOT;
 
     xml += '<url>';
     xml += `<loc>${page}</loc>`;
@@ -72,7 +86,8 @@ const createSitemap = () => {
       {
         query: `{
         posts(limit: 999, sort: "date:desc", where: {isDraft: false}) {
-          slug  
+          slug 
+          updatedAt 
         }
       }`,
       },
@@ -87,7 +102,7 @@ const createSitemap = () => {
       posts.forEach((post, index) => {
         xml += '<url><loc>';
         xml += `${SITE_ROOT}/blog/${post.slug}`;
-        xml += '</loc><changefreq>always</changefreq><priority>0.5</priority></url>';
+        xml += `</loc><lastmod>${dateTemplate(new Date(post.updatedAt))}</lastmod><changefreq>always</changefreq><priority>0.5</priority></url>`;
         if (index === posts.length - 1) {
           xml += '</urlset>';
         }

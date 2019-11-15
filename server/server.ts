@@ -12,17 +12,12 @@ const handle = app.getRequestHandler();
 
 const fs = require('fs');
 const { DESTINATION, createSitemap } = require('./sitemap');
+const { getKeyByPathname } = require('./utils');
 
 const robots = `User-agent: *
 Allow: /
 Host: https://luck.org.pl
 `;
-
-const ROUTE_MAP: { [key: string]: string[] } = {
-  'bot-politics': ['polityka-prywatnosci-pan-mikolaj-luck'],
-  'webiste-politics': ['polityka-prywatnosci-strony'],
-  blog: ['posts', 'posty'],
-};
 
 app.prepare().then(() => {
   createServer((req: { url: any }, res: any) => {
@@ -31,16 +26,11 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    const isRendered = Object.keys(ROUTE_MAP).some(key => {
-      if (ROUTE_MAP[key].some(p => pathname === `/${p}`)) {
-        app.render(req, res, `/${key}`, query);
-        return true;
-      }
-    });
+    const key = getKeyByPathname(pathname);
 
-    if (isRendered) return;
-
-    if (pathname === '/robots.txt') {
+    if (key) {
+      app.render(req, res, `/${key}`, query);
+    } else if (pathname === '/robots.txt') {
       res.statusCode = 200;
       res.write(robots);
       res.end();
