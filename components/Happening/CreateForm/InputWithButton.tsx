@@ -24,7 +24,7 @@ export const InputWithButton = ({
         type="text"
         placeholder={placeholder}
       />
-      <InputWithButton.Button disabled={disabled} onClick={onClick}>
+      <InputWithButton.Button disabled={disabled} onClick={onClick} onMouseDown={(e:any) => e.preventDefault()}>
         <Arrow />
       </InputWithButton.Button>
     </InputWithButton.Container >

@@ -49,9 +49,9 @@ const Input = styled(BaseInput)`
 const InputWithButton = ({ href, ariaLabel, linkAs,...props }: any) => {
   return (
     <Container {...props}>
-      <Input placeholder={'Nazwa wydarzenia...'} {...Theme.textStyles.smallText} />
+      <Input placeholder={'Nazwa wydarzenia...'} {...Theme.textStyles.smallText}/>
       <Link href={href} as={linkAs}>
-        <InputWithButton.Button  colorfull href={href} ariaLabel={ariaLabel} {...Theme.textStyles.smallText}>
+        <InputWithButton.Button  colorfull href={href} ariaLabel={ariaLabel} {...Theme.textStyles.smallText} onMouseDown={(e:any) => e.preventDefault()}>
           Utwórz
         </InputWithButton.Button >
       </Link>

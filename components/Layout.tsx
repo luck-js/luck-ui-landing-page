@@ -17,7 +17,7 @@ const Layout: React.FunctionComponent<LayoutProps> = ({ children, ...props }) =>
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&subset=latin-ext" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,600,700&subset=latin-ext" rel="stylesheet" />
       </Head>
       {children}
     </Container>

@@ -10,8 +10,4 @@ export const BaseButton = styled('button')`
   ${width};
   background: none;
   border: none;
-  
-  &:focus {
-    outline: none;
-  }
 `;

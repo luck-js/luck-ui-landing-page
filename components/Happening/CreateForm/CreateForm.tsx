@@ -171,6 +171,7 @@ const CreateForm: StatelessPage = () => {
             as="a"
             href="/app/udostepnij-linki"
             ariaLabel={`przejdź do aplikacji`}
+            onMouseDown={(e:any) => e.preventDefault()}
           >
             UTWÓRZ WYDARZENIE
           </CreateForm.Button>

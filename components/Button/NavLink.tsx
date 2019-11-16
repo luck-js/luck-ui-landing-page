@@ -9,7 +9,7 @@ const NavLink = ({ modifiers, href, ariaLabel, ...props }: { modifiers?: Modifie
   return (
     <NavLink.Container {...props}>
       <Link href={href}>
-        <NavLink.Button href={href} ariaLabel={ariaLabel} as={'a'} modifiers={modifiers}>
+        <NavLink.Button onMouseDown={(e:any) => e.preventDefault()} href={href} ariaLabel={ariaLabel} as={'a'} modifiers={modifiers}>
           Blog
         </NavLink.Button>
       </Link>

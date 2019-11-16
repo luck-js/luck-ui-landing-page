@@ -19,7 +19,7 @@ const Element = ({ value, onClose }: any) => {
   return (
     <Element.Container>
       <Element.Text>{value}</Element.Text>
-      <Element.Button onClick={onClose}>
+      <Element.Button onClick={onClose} onMouseDown={(e:any) => e.preventDefault()}>
         <Close />
       </Element.Button>
     </Element.Container>
