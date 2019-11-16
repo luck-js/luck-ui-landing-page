@@ -4,6 +4,7 @@ const ROUTE_MAP = {
   blog: ['posts', 'posty'],
   'app/happening': ['app'],
   'app/happening/share': ['app/udostepnij-linki'],
+  'app/participation-happening': ['app/losuj'],
 };
 
 const ROUTE_MAP_SITEMAP = {
