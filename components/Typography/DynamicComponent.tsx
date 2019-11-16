@@ -1,40 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
-import {
-  borderRadius,
-  color,
-  colorStyle,
-  fontFamily,
-  fontSize,
-  fontStyle,
-  fontWeight,
-  letterSpacing,
-  lineHeight,
-  size,
-  space,
-  textStyle,
-  width,
-} from 'styled-system';
-
-export const StyledDynamicComponent = styled('div')`
-  ${width}
-  ${space}
-  ${fontSize}
-  ${fontStyle}
-  ${color}
-  ${size}
-  ${colorStyle}
-  ${textStyle}
-  ${lineHeight}
-  ${letterSpacing}
-  ${fontFamily}
-  ${fontWeight}
-  ${borderRadius}
-`;
+import {BaseTypography} from "./BaseTypography"
 
 const DynamicComponent = ({ tag = 'div', children, ...props }: any) => {
-  const WithComponent = StyledDynamicComponent.withComponent(tag);
+  const WithComponent = BaseTypography.withComponent(tag);
   return <WithComponent {...props}>{children}</WithComponent>;
 };
 

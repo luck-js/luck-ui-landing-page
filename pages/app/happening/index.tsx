@@ -1,6 +1,7 @@
 import React from 'react';
-import BlogLayout from '../../../components/BlogLayout';
+
 import CreateForm from "../../../components/Happening/CreateForm/CreateForm"
+import AppLayout from "../../../components/Layout/AppLayout"
 
 interface IndexProps {}
 
@@ -11,9 +12,9 @@ interface StatelessPage<P = IndexProps> extends React.FunctionComponent<P> {
 const Index: StatelessPage = () => {
 
   return (
-    <BlogLayout>
+    <AppLayout>
       <CreateForm />
-    </BlogLayout>
+    </AppLayout>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import BlogLayout from '../../../../components/BlogLayout';
 import ShareView from '../../../../components/Happening/ShareView/ShareView';
 import axios from "axios"
+import AppLayout from "../../../../components/Layout/AppLayout"
 
 interface Participant {
   name: string;
@@ -23,9 +23,9 @@ interface StatelessPage<P = IndexProps > extends React.FunctionComponent<P> {
 
 const Index: StatelessPage = ({happening}) => {
   return (
-    <BlogLayout>
+    <AppLayout>
       <ShareView happening={happening} />
-    </BlogLayout>
+    </AppLayout>
   );
 };
 Index.getInitialProps = async ({ query }) => {

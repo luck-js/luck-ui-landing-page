@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogLayout from '../../components/BlogLayout';
+import BlogLayout from '../../components/Layout/BlogLayout';
 import { Theme } from '../../utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
@@ -39,7 +39,7 @@ const Index = () => {
         title="Luck - Polityka prywatności Pan Mikołaj Luck"
         description="Zespół LUCK, jako twórca aplikacji LUCK, ułatwiającej organizowanie losowań prezentów, w swoich działaniach szanuje Twoją prywatność."
       />
-      <BlogLayout backgroundColor={Theme.colors.main}>
+      <BlogLayout >
         <Container>
           <Canon>Polityka prywatności Pan Mikołaj Luck</Canon>
           <Text>

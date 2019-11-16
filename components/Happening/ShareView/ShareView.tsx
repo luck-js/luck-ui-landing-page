@@ -20,7 +20,6 @@ interface ShareViewProps {
 }
 
 const Container = styled(Box)`
-  height: calc(100% - 69px);
   padding: 0 ${Theme.space.small}px;
   color: ${Theme.colors.black};
   text-align: center;

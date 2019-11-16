@@ -7,7 +7,9 @@ import Link from 'next/link';
 import NavLink from './Button/NavLink';
 import React from 'react';
 
-interface NavigationProps {}
+interface NavigationProps {
+  boxShadow?: string;
+}
 
 const NavigationHorizontalPadding = styled(Box)`
   padding: ${Theme.space.small}px ${Theme.space.regular}px;
@@ -47,11 +49,6 @@ const NavigationContainer = styled(Flex)`
 
 const NavigationLogoContainer = styled(Box)`
   height: 22px;
-  transition: transform 0.5s;
-  
-  &:hover {
-    transform: scale(1.11);
-  }
 `
 
 const NavigationLogo = styled('img')`
@@ -59,9 +56,11 @@ const NavigationLogo = styled('img')`
   cursor: pointer;
 `;
 
-export const Navigation: React.FunctionComponent<NavigationProps> = () => {
+export const NAVIGATION_HEIGHT = 50;
+
+export const Navigation: React.FunctionComponent<NavigationProps> = ({...props}) => {
   return (
-    <NavigationHorizontalPadding bg="transparent">
+    <NavigationHorizontalPadding bg="transparent" {...props}>
       <NavigationContainer>
         <NavLink href="/blog" ariaLabel="przejdź do blog postow"/>
       </NavigationContainer>
@@ -69,9 +68,9 @@ export const Navigation: React.FunctionComponent<NavigationProps> = () => {
   );
 };
 
-export const NavigationWithLogo: React.FunctionComponent<NavigationProps> = () => {
+export const NavigationWithLogo: React.FunctionComponent<NavigationProps> = ( {...props}) => {
   return (
-    <NavigationHorizontalPadding bg={Theme.colors.mainContrast}>
+    <NavigationHorizontalPadding bg={Theme.colors.mainContrast} {...props}>
       <NavigationContainer withLogo>
           <Link href="/" >
             <NavigationLogoContainer as="a" href="/" aria-label={`przejdź do strony głownej`}>

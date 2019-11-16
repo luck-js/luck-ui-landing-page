@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import TextareaAutosize from 'react-autosize-textarea';
-import { Box, Button, Flex, Input, Canon } from '../../../components';
+import {Box, Button, Flex, Input, Canon, NAVIGATION_HEIGHT} from '../../../components';
 import { Theme, usePrevious } from '../../../utils';
 import axios from 'axios';
 import Router from 'next/router';
@@ -30,10 +30,7 @@ const INIT_HAPPENING: Happening = {
   participants: [],
 };
 
-const NAVIGATION_HEIGHT = 50;
-
 const Container = styled(Box)`
-  height: calc(100% - ${NAVIGATION_HEIGHT}px);
   position: relative;
 `;
 

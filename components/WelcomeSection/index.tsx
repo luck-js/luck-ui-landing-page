@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {LogoHeading, Navigation} from '../index';
+import {LogoHeading, NAVIGATION_HEIGHT} from '../index';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
@@ -11,15 +11,6 @@ export interface WelcomeSectionProps {
   handleClickBubble: any;
 }
 
-const Background = styled('div')`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-image: url(static/bg-bubbles.png);
-  z-index: 0;
-  pointer-events: none;
-`;
-
 const Container = styled('div')<{height: number}>`
   height: ${props => (props.height ? `${props.height}px` : `100%`)};
   overflow: hidden;
@@ -29,13 +20,11 @@ const Container = styled('div')<{height: number}>`
 const  WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) => {
   const [height, setHeight] = useState<number>(0)
   useEffect(() => {
-    setHeight(window.innerHeight)
+    setHeight(window.innerHeight - NAVIGATION_HEIGHT)
   },[])
 
   return (
     <Container height={height} {...pros}>
-      <Background />
-      <Navigation />
       <Content>
         <Logo src="static/logo-luck.png" />
         <LogoHeading pt={['50px', '50px', '50px', '50px']}>

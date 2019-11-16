@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogLayout from '../../components/BlogLayout';
+import BlogLayout from '../../components/Layout/BlogLayout';
 import { Theme } from '../../utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
@@ -39,7 +39,7 @@ const Index = () => {
         title="Luck - Polityka prywatności strony"
         description="Polityka prywatności strony. OŚWIADCZENIE O OCHRONIE DANYCH OSOBOWYCH. Informacja dotycząca zbierania danych osobowych"
       />
-      <BlogLayout backgroundColor={Theme.colors.main}>
+      <BlogLayout>
         <Container>
           <Canon>Polityka prywatności strony</Canon>
           <Text>OŚWIADCZENIE O OCHRONIE DANYCH OSOBOWYCH</Text>
