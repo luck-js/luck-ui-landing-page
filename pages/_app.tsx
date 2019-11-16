@@ -11,6 +11,9 @@ import SEO from '../next-seo.config';
 import withGA from "next-ga";
 import FontProvider from "../components/FontProvider"
 
+// @ts-ignore
+if (typeof global.navigator === 'undefined') global.navigator = {};
+
 class MyApp extends App<{analytics: any}> {
   render() {
     const { Component, pageProps, analytics } = this.props;
