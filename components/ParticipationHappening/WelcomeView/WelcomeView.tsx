@@ -72,7 +72,6 @@ WelcomeView.Button = styled(BaseButton)`
     font-weight: 800;
     transition: border-color .4s,color .4s,background-color .4s,box-shadow .4s,transform .4s,scale .4s;
     box-shadow: 0 0 50px 0 rgba(0,0,0,.28);
-
 `
 
 export default WelcomeView;
