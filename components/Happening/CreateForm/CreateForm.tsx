@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
-import TextareaAutosize from 'react-autosize-textarea';
-import {Box, Button, Flex, Input, Canon, NAVIGATION_HEIGHT} from '../../../components';
-import { Theme, usePrevious } from '../../../utils';
 import axios from 'axios';
 import Router from 'next/router';
-import { ElementList } from './ElementList';
-import { InputWithButton } from './InputWithButton';
+import TextareaAutosize from 'react-autosize-textarea';
+import {Box, Button, Canon, Flex, Input, NAVIGATION_HEIGHT} from '../../../components';
+import {Theme, usePrevious} from '../../../utils';
+import {ElementList} from './ElementList';
+import {InputWithButton} from './InputWithButton';
+import {BubblesShadowBackground} from "../../BubblesShadowBackground"
 
 interface IndexProps {}
 
@@ -22,6 +23,7 @@ interface Happening {
 interface StatelessPage<P = IndexProps> extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
   Button: any;
+  Background: any;
 }
 
 const INIT_HAPPENING: Happening = {
@@ -50,16 +52,6 @@ const ButtonContainer = styled(Flex)`
   padding: ${Theme.space.small}px ${Theme.space.small}px 50px;
   background-color: ${Theme.colors.main};
   justify-content: center;
-`;
-
-const Background = styled('div')`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: -100%;
-  background-image: url(static/bubbles-shadow.png);
-  z-index: 0;
-  pointer-events: none;
 `;
 
 const scrollToRef = (ref: any) => {
@@ -127,7 +119,7 @@ const CreateForm: StatelessPage = () => {
     <Container>
       <ContentContainer>
         <Canon
-          mt={['xregular', 'xregular', 'xregular', 'xregular']}
+          pt={['xregular', 'xregular', 'xregular', 'xregular']}
           mb={['regular', 'regular', 'regular', 'regular']}
         >
           STWÓRZ WYDARZENIE
@@ -171,7 +163,7 @@ const CreateForm: StatelessPage = () => {
         />
       </ContentContainer>
       <ButtonContainer>
-        <Background />
+        <CreateForm.Background  />
 
           <CreateForm.Button
             colorfull
@@ -192,6 +184,13 @@ function isEmpty(str: string): boolean {
 
 CreateForm.Button = styled(Button)`
   width: 270px;
+`;
+
+CreateForm.Background = styled(BubblesShadowBackground)`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -100%;
 `;
 
 export default CreateForm;

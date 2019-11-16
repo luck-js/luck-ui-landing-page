@@ -40,7 +40,7 @@ const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
     if (happening.description) {
       return (
         <HappeningContentContainer
-          mt={['xregular', 'xregular', 'xregular', 'xregular']}
+          pt={['xregular', 'xregular', 'xregular', 'xregular']}
           mb={['regular', 'regular', 'regular', 'regular']}
         >
           <Canon as="h1" mt={['small', 'small', 'medium', 'regular']}>{happening.name}</Canon>
@@ -51,7 +51,7 @@ const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
       return (
         <WelcomeView.Text
           as="h1"
-          mt={['xregular', 'xregular', 'xregular', 'xregular']}
+          pt={['xregular', 'xregular', 'xregular', 'xregular']}
           mb={['regular', 'regular', 'regular', 'regular']}
         >
           {happening.name}
@@ -65,7 +65,7 @@ const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
       <HappeningContentWrapper>
         {renderHappeningContent()}
       </HappeningContentWrapper>
-      <WelcomeView.Text as="h2" mt={['xregular', 'xregular', 'xregular', 'xregular']}>
+      <WelcomeView.Text as="h2" pt={['xregular', 'xregular', 'xregular', 'xregular']}>
         <b>{member.name}</b>, to Ty?
       </WelcomeView.Text>
       <WelcomeView.Text as="p" mb={['regular', 'regular', 'regular', 'regular']}>
