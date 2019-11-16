@@ -1,44 +1,21 @@
-import React , {useEffect, useState} from "react"
+import React, {useEffect, useState} from "react"
 import Link from "next/link"
 import styled from 'styled-components';
-import { Happening, Member } from '../../../pages/app/participation-happening';
-import { Box } from '../../Box';
-import { Theme } from '../../../utils';
-import { BaseTypography } from '../../Typography/BaseTypography';
+import {Happening, Member} from '../../../pages/app/participation-happening';
+import {Box} from '../../Box';
+import {Theme} from '../../../utils';
+import {BaseTypography} from '../../Typography/BaseTypography';
 import {BaseButton} from "../../Button"
 import {Canon, Trafalgar} from "../../Typography"
-import {BubblesShadowBackground} from "../../BubblesShadowBackground"
 import {Background} from "../../Layout"
 import {NAVIGATION_HEIGHT, NAVIGATION_SHADOW} from "../../Navigation"
+import {Footer} from "../shared/Footer"
 
 interface ShareViewProps {
   happening: Happening;
   member: Member;
   id: string;
 }
-
-const Footer = () => {
-  return (
-    <Footer.Container>
-      <Footer.Background/>
-    </Footer.Container>
-  )
-}
-
-Footer.Container = styled(Box)`
-  width: 100%;
-  height: 103px;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  background-color: ${Theme.colors.main};
-`
-Footer.Background = styled(BubblesShadowBackground)`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: -100%;
-`;
 
 const HappeningContentContainer = styled(Box)`
   padding: 0 15px;
@@ -104,7 +81,7 @@ const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
       <WelcomeView.Text as="p" mb={['regular', 'regular', 'regular', 'regular']}>
         Przejdź do losowania.
       </WelcomeView.Text>
-      <Link href={href}>
+      <Link href={`/app/participation-happening/match?id=${id}`}>
         <WelcomeView.Button href={href} ariaLabel={"przejdź do losowania"} as={'a'} onMouseDown={(e:any) => e.preventDefault()} >
           LOSUJ
         </WelcomeView.Button>
