@@ -1,13 +1,12 @@
-import { Happening, Member } from '../../../pages/app/participation-happening';
+import React , {useEffect, useState} from "react"
+import Link from "next/link"
 import styled from 'styled-components';
+import { Happening, Member } from '../../../pages/app/participation-happening';
 import { Box } from '../../Box';
 import { Theme } from '../../../utils';
 import { BaseTypography } from '../../Typography/BaseTypography';
-import Link from "next/link"
-import * as React from "react"
 import {BaseButton} from "../../Button"
-import {useEffect} from "react"
-import {useState} from "react"
+import {Canon, Trafalgar} from "../../Typography"
 
 interface ShareViewProps {
   happening: Happening;
@@ -15,20 +14,57 @@ interface ShareViewProps {
   id: string;
 }
 
+const HappeningContentContainer = styled(Box)`
+  padding: 0 15px;
+  border-radius: 15px;
+  border: 2px dashed rgba(249, 249, 249, 0.2);
+  text-align: center;
+`;
+const HappeningContentWrapper = styled(Box)`
+  min-height: 15%;
+`
 const Container = styled(Box)`
   padding: 0 ${Theme.space.small}px;
   color: ${Theme.colors.main};
   text-align: center;
+  height: 100%;
 `;
-const WelcomeView: any = ({ id, member }: ShareViewProps) => {
+const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
   const [href, setHref] = useState()
 
   useEffect(() => {
     setHref(`http://${window.location.host}/app/twoj-los?id=${id}`);
   },[])
 
+  const renderHappeningContent = () => {
+    if (happening.description) {
+      return (
+        <HappeningContentContainer
+          mt={['xregular', 'xregular', 'xregular', 'xregular']}
+          mb={['regular', 'regular', 'regular', 'regular']}
+        >
+          <Canon as="h1" mt={['small', 'small', 'medium', 'regular']}>{happening.name}</Canon>
+          <Trafalgar as="p" mt={['small', 'small', 'medium', 'regular']} mb={['small', 'small', 'medium', 'regular']}>{happening.description}</Trafalgar>
+        </HappeningContentContainer>
+      );
+    } else if (happening.name) {
+      return (
+        <WelcomeView.Text
+          as="h1"
+          mt={['xregular', 'xregular', 'xregular', 'xregular']}
+          mb={['regular', 'regular', 'regular', 'regular']}
+        >
+          {happening.name}
+        </WelcomeView.Text>
+      );
+    } else return null;
+  };
+
   return (
     <Container>
+      <HappeningContentWrapper>
+        {renderHappeningContent()}
+      </HappeningContentWrapper>
       <WelcomeView.Text as="h2" mt={['xregular', 'xregular', 'xregular', 'xregular']}>
         <b>{member.name}</b>, to Ty?
       </WelcomeView.Text>
@@ -50,11 +86,12 @@ WelcomeView.Text = styled(BaseTypography)`
 `;
 
 WelcomeView.Button = styled(BaseButton)`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -66px;
-    margin-top: calc(-66px - 15px);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // margin-left: -66px;
+    // margin-top: calc(-66px - 15px);
+    margin: 0 auto;
     width: 132px;
     height: 132px;
     display: flex;

@@ -35,7 +35,7 @@ Index.getInitialProps = async ({ query }) => {
 
   return {
     id: query.id,
-    happening: data.happening,
+    happening: false ? data.happening : {name: "", description:""},
     member: data.member
   }
 };
