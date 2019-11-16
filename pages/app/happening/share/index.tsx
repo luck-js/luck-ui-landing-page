@@ -1,39 +1,37 @@
 import React from 'react';
-import styled from 'styled-components';
 import BlogLayout from '../../../../components/BlogLayout';
-import {Box, Button, Canon} from '../../../../components';
-import {Theme} from "../../../../utils"
+import ShareView from '../../../../components/Happening/ShareView/ShareView';
+import axios from "axios"
 
-interface IndexProps {}
-
-interface StatelessPage<P = IndexProps> extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<P>;
-  Button: any;
+interface Participant {
+  name: string;
+  uniqueLink: string;
 }
-const Container = styled(Box)`
-  height: calc(100% - 69px);]
-  padding: 0 ${Theme.space.small}px;
-  color: ${Theme.colors.black};
-  text-align: center;
-`;
+export interface Happening {
+  name: string;
+  description: string;
+  participants: Participant[];
+}
 
-const Index: StatelessPage = () => {
+interface IndexProps {
+  happening: Happening;
+}
+
+interface StatelessPage<P = IndexProps > extends React.FunctionComponent<P> {
+  getInitialProps?: (ctx: any) => Promise<P>;
+}
+
+const Index: StatelessPage = ({happening}) => {
   return (
     <BlogLayout>
-      <Container>
-          <Canon
-            mt={['xregular', 'xregular', 'xregular', 'xregular']}
-            mb={['regular', 'regular', 'regular', 'regular']}
-          >
-            UDOSTĘPNIJ LINKI
-          </Canon>
-      </Container>
+      <ShareView happening={happening} />
     </BlogLayout>
   );
 };
-
-Index.Button = styled(Button)`
-  width: 270px;
-`
-
+Index.getInitialProps = async ({ query }) => {
+  const {data} = await axios.get(`http://localhost:9001/api/v1/published-happening/${query.id}`)
+  return {
+    happening: data
+  }
+};
 export default Index;

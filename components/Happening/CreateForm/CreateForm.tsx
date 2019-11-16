@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import TextareaAutosize from 'react-autosize-textarea';
 import { Box, Button, Flex, Input, Canon } from '../../../components';
 import { Theme, usePrevious } from '../../../utils';
-import Link from 'next/link';
+import axios from 'axios';
+import Router from 'next/router';
 import { ElementList } from './ElementList';
 import { InputWithButton } from './InputWithButton';
 
@@ -13,7 +14,7 @@ interface Participant {
   name: string;
 }
 interface Happening {
-  title: string;
+  name: string;
   description: string;
   participants: Participant[];
 }
@@ -24,7 +25,7 @@ interface StatelessPage<P = IndexProps> extends React.FunctionComponent<P> {
 }
 
 const INIT_HAPPENING: Happening = {
-  title: '',
+  name: '',
   description: '',
   participants: [],
 };
@@ -73,7 +74,7 @@ const CreateForm: StatelessPage = () => {
   const previousParticipants = usePrevious<Participant[]>(happening.participants)
 
   const handleOnChangeTitle = ({ target: { value } }: any) => {
-    setHappening(happening => ({ ...happening, title: value }));
+    setHappening(happening => ({ ...happening, name: value }));
   };
 
   const handleOnChangeDescription = ({ target: { value } }: any) => {
@@ -109,6 +110,15 @@ const CreateForm: StatelessPage = () => {
     }
   };
 
+  const handleOnClickButton = () => {
+    axios.post('http://localhost:9001/api/v1/published-happening', {happening}).then(({data}) => {
+      Router.push({
+        pathname: '/app/udostepnij-linki',
+        query: { id: data.id },
+      })
+    })
+  }
+
   const myRef = useRef(null)
   const executeScroll = () => scrollToRef(myRef)
 
@@ -128,7 +138,7 @@ const CreateForm: StatelessPage = () => {
         <Input
           type="text"
           placeholder="Nazwa wydarzenia..."
-          value={happening.title}
+          value={happening.name}
           onChange={handleOnChangeTitle}
         />
         <Input
@@ -165,17 +175,15 @@ const CreateForm: StatelessPage = () => {
       </ContentContainer>
       <ButtonContainer>
         <Background />
-        <Link href="/app/happening/share" as="/app/udostepnij-linki">
+
           <CreateForm.Button
             colorfull
-            as="a"
-            href="/app/udostepnij-linki"
-            ariaLabel={`przejdź do aplikacji`}
+            onClick={handleOnClickButton}
             onMouseDown={(e:any) => e.preventDefault()}
           >
             UTWÓRZ WYDARZENIE
           </CreateForm.Button>
-        </Link>
+
       </ButtonContainer>
     </Container>
   );
