@@ -8,11 +8,16 @@ import NavLink from './Button/NavLink';
 import React from 'react';
 
 interface NavigationProps {
-  boxShadow?: string;
+  shouldShowShadow?: boolean;
 }
 
-const NavigationHorizontalPadding = styled(Box)`
+export const NAVIGATION_HEIGHT = 50;
+export const NAVIGATION_SHADOW = 4;
+
+const NavigationHorizontalPadding = styled(Box)<{shouldShowShadow: boolean}>`
   padding: ${Theme.space.small}px ${Theme.space.regular}px;
+  margin-bottom: ${props => props.shouldShowShadow ? `${NAVIGATION_SHADOW}px` : "0"};
+  box-shadow: ${props => props.shouldShowShadow ? `0px ${NAVIGATION_SHADOW}px ${NAVIGATION_SHADOW}px rgba(0, 0, 0, 0.05)` : "none"};
   
   ${media.greaterThan('mobile')`
     
@@ -55,8 +60,6 @@ const NavigationLogo = styled('img')`
   height: 100%;
   cursor: pointer;
 `;
-
-export const NAVIGATION_HEIGHT = 50;
 
 export const Navigation: React.FunctionComponent<NavigationProps> = ({...props}) => {
   return (

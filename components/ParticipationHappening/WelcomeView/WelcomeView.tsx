@@ -7,6 +7,9 @@ import { Theme } from '../../../utils';
 import { BaseTypography } from '../../Typography/BaseTypography';
 import {BaseButton} from "../../Button"
 import {Canon, Trafalgar} from "../../Typography"
+import {BubblesShadowBackground} from "../../BubblesShadowBackground"
+import {Background} from "../../Layout"
+import {NAVIGATION_HEIGHT, NAVIGATION_SHADOW} from "../../Navigation"
 
 interface ShareViewProps {
   happening: Happening;
@@ -14,20 +17,45 @@ interface ShareViewProps {
   id: string;
 }
 
+const Footer = () => {
+  return (
+    <Footer.Container>
+      <Footer.Background/>
+    </Footer.Container>
+  )
+}
+
+Footer.Container = styled(Box)`
+  width: 100%;
+  height: 103px;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  background-color: ${Theme.colors.main};
+`
+Footer.Background = styled(BubblesShadowBackground)`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -100%;
+`;
+
 const HappeningContentContainer = styled(Box)`
   padding: 0 15px;
   border-radius: 15px;
   border: 2px dashed rgba(249, 249, 249, 0.2);
   text-align: center;
 `;
-const HappeningContentWrapper = styled(Box)`
-  min-height: 15%;
+const HappeningContentWrapper = styled(Box)<{height: number}>`
+  min-height: ${props => props.height ? `${props.height}px`: "15%"};
 `
 const Container = styled(Box)`
-  padding: 0 ${Theme.space.small}px;
+  position: relative;
+  padding: ${Theme.space.xregular - NAVIGATION_SHADOW}px ${Theme.space.small}px 200px ${Theme.space.small}px;
   color: ${Theme.colors.main};
   text-align: center;
-  height: 100%;
+  background-color: ${Theme.colors.mainContrast};
+  min-height: 100%;
 `;
 const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
   const [href, setHref] = useState()
@@ -36,13 +64,16 @@ const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
     setHref(`http://${window.location.host}/app/twoj-los?id=${id}`);
   },[])
 
+  const [height, setHeight] = useState()
+
+  useEffect(() => {
+    setHeight((window.innerHeight - NAVIGATION_HEIGHT) * 0.15)
+  },[])
+
   const renderHappeningContent = () => {
     if (happening.description) {
       return (
-        <HappeningContentContainer
-          pt={['xregular', 'xregular', 'xregular', 'xregular']}
-          mb={['regular', 'regular', 'regular', 'regular']}
-        >
+        <HappeningContentContainer>
           <Canon as="h1" mt={['small', 'small', 'medium', 'regular']}>{happening.name}</Canon>
           <Trafalgar as="p" mt={['small', 'small', 'medium', 'regular']} mb={['small', 'small', 'medium', 'regular']}>{happening.description}</Trafalgar>
         </HappeningContentContainer>
@@ -62,7 +93,9 @@ const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
 
   return (
     <Container>
-      <HappeningContentWrapper>
+      <Background />
+      <HappeningContentWrapper
+        height={height}>
         {renderHappeningContent()}
       </HappeningContentWrapper>
       <WelcomeView.Text as="h2" pt={['xregular', 'xregular', 'xregular', 'xregular']}>
@@ -76,6 +109,7 @@ const WelcomeView: any = ({ id, member, happening }: ShareViewProps) => {
           LOSUJ
         </WelcomeView.Button>
       </Link>
+      <Footer />
     </Container>
   );
 };
@@ -86,11 +120,6 @@ WelcomeView.Text = styled(BaseTypography)`
 `;
 
 WelcomeView.Button = styled(BaseButton)`
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // margin-left: -66px;
-    // margin-top: calc(-66px - 15px);
     margin: 0 auto;
     width: 132px;
     height: 132px;
