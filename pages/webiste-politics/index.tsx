@@ -1,10 +1,10 @@
 import React from 'react';
-import BlogLayout from '../../components/Layout/BlogLayout';
-import { Theme } from '../../utils';
+import BlogLayout from '../../src/blog/BlogLayout';
+import { Theme } from '../../src/utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
-import {Canon, Flex, List, MediumText, TextLink} from '../../components';
-import media from '../../utils/media';
+import {Canon, Flex, List, MediumText, TextLink} from '../../src/components';
+import media from '../../src/utils/media';
 
 const Container = styled(Flex)`
   background-color: ${Theme.colors.main};
@@ -366,4 +366,5 @@ const Index = () => {
     </>
   );
 };
+
 export default Index;

@@ -3,11 +3,20 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo/lib';
-import {MediumText, Canon, Flex, TinySecond, List, RatioLazyImage, Trafalgar, TextLink} from '../../components';
-import BlogLayout from '../../components/Layout/BlogLayout';
 import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
-import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
-import media from '../../utils/media';
+import BlogLayout from '../../src/blog/BlogLayout';
+import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../src/utils';
+import media from '../../src/utils/media';
+import {
+  MediumText,
+  Canon,
+  Flex,
+  TinySecond,
+  List,
+  RatioLazyImage,
+  Trafalgar,
+  TextLink,
+} from '../../src/components';
 
 const ContentImage = styled('img').attrs({ alt: '' })`
   width: 100%;
@@ -24,7 +33,7 @@ const Header = styled(Trafalgar).attrs({
 const components = {
   p: Text,
   h2: Header,
-  a: ({children}:any) => <TextLink modifiers={["darkGray"]} >{children}</TextLink>,
+  a: ({ children }: any) => <TextLink modifiers={['darkGray']}>{children}</TextLink>,
   img: ContentImage,
   ul: List,
 };
@@ -133,7 +142,8 @@ export const POST_QUERY = gql`
   }
 `;
 
-interface StatelessPage<P = { slug: string; cmsUrl: string, shouldShowDraft: boolean }> extends React.FunctionComponent<P> {
+interface StatelessPage<P = { slug: string; cmsUrl: string; shouldShowDraft: boolean }>
+  extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
@@ -151,17 +161,14 @@ const Index: StatelessPage = ({ slug, cmsUrl, shouldShowDraft }) => {
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
 
-  return (
-    <BlogLayout>
-      {viewPost && <PostContent {...viewPost} />}
-    </BlogLayout>
-  );
+  return <BlogLayout>{viewPost && <PostContent {...viewPost} />}</BlogLayout>;
 };
 
 Index.getInitialProps = async function({ query }) {
   return {
-    slug: query.id, cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
-    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === "true"
+    slug: query.id,
+    cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
   };
 };
 

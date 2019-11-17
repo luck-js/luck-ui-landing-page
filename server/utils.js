@@ -2,10 +2,10 @@ const ROUTE_MAP = {
   'bot-politics': ['polityka-prywatnosci-pan-mikolaj-luck'],
   'webiste-politics': ['polityka-prywatnosci-strony'],
   blog: ['posts', 'posty'],
-  'app/happening': ['app'],
+  'app/happening/new-happening': ['app'],
   'app/happening/share': ['app/udostepnij-linki'],
-  'app/participation-happening': ['app/losuj'],
-  'app/participation-happening/match': ['app/twoj-los'],
+  'app/participation-happening/welcome-member': ['app/losuj'],
+  'app/participation-happening/matched-member': ['app/twoj-los'],
 };
 
 const ROUTE_MAP_SITEMAP = {
@@ -17,9 +17,10 @@ const ROUTE_MAP_SITEMAP = {
 
 const ROUTE_MAP_CONFIG = {
   'blog/[id]': false,
-  'app/happening': false,
-  'app/participation-happening': false,
-  'app/participation-happening/match': false,
+  'app/happening/new-happening': false,
+  'app/happening/share': false,
+  'app/participation-happening/welcome-member': false,
+  'app/participation-happening/matched-member': false,
 }
 
 const withousSlash = (pathname) => {

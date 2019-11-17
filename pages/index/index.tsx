@@ -1,7 +1,7 @@
 import React from 'react';
-import WelcomeSection from '../../components/WelcomeSection';
-import Footer from "../../components/Footer"
-import HomeLayout from "../../components/Layout/HomeLayout"
+import WelcomeSection from '../../src/home/WelcomeSection';
+import Footer from '../../src/home/Footer';
+import HomeLayout from '../../src/home/HomeLayout';
 
 interface IndexProps {
   analytics: any;
@@ -19,4 +19,5 @@ const Index = ({ analytics }: IndexProps) => {
     </HomeLayout>
   );
 };
+
 export default Index;

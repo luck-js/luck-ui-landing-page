@@ -1,10 +1,10 @@
 import React from 'react';
-import BlogLayout from '../../components/Layout/BlogLayout';
-import { Theme } from '../../utils';
-import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
-import {Canon, Flex, MediumText, List, TextLink} from '../../components';
-import media from '../../utils/media';
+import BlogLayout from '../../src/blog/BlogLayout';
+import { Theme } from '../../src/utils';
+import { NextSeo } from 'next-seo/lib';
+import { Canon, Flex, MediumText, List, TextLink } from '../../src/components';
+import media from '../../src/utils/media';
 
 const Container = styled(Flex)`
   background-color: ${Theme.colors.main};
@@ -29,8 +29,8 @@ const Container = styled(Flex)`
 `;
 
 const Text = styled(MediumText).attrs({
-  mt: ['small', 'small', 'medium', 'regular']
-})``
+  mt: ['small', 'small', 'medium', 'regular'],
+})``;
 
 const Index = () => {
   return (
@@ -39,7 +39,7 @@ const Index = () => {
         title="Luck - Polityka prywatności Pan Mikołaj Luck"
         description="Zespół LUCK, jako twórca aplikacji LUCK, ułatwiającej organizowanie losowań prezentów, w swoich działaniach szanuje Twoją prywatność."
       />
-      <BlogLayout >
+      <BlogLayout>
         <Container>
           <Canon>Polityka prywatności Pan Mikołaj Luck</Canon>
           <Text>
@@ -73,16 +73,20 @@ const Index = () => {
             <li>
               <Text>
                 Administrator wyznaczył inspektora ochrony danych, z kt&oacute;rym można
-                skontaktować się poprzez email <TextLink modifiers={["darkGray"]} href="mailto:info@luck.org.pl">info@luck.org.pl</TextLink>. Z Inspektorem ochrony danych można
-                się kontaktować we wszystkich sprawach dotyczących przetwarzania danych osobowych
-                oraz korzystania z praw związanych z przetwarzaniem danych.
+                skontaktować się poprzez email{' '}
+                <TextLink modifiers={['darkGray']} href="mailto:info@luck.org.pl">
+                  info@luck.org.pl
+                </TextLink>
+                . Z Inspektorem ochrony danych można się kontaktować we wszystkich sprawach
+                dotyczących przetwarzania danych osobowych oraz korzystania z praw związanych z
+                przetwarzaniem danych.
               </Text>
             </li>
             <li>
               <Text>
-                Twoje dane osobowe przetwarzane są w związku z komunikacją przy użyciu Pan Mikołaj Luck. Twoje
-                dane mogą być także przetwarzane, jeśli udzieliłeś odpowiedniej zgody, w celu
-                prowadzenie komunikacji marketingowej, czyli wysyłki wiadomości z materiałami
+                Twoje dane osobowe przetwarzane są w związku z komunikacją przy użyciu Pan Mikołaj
+                Luck. Twoje dane mogą być także przetwarzane, jeśli udzieliłeś odpowiedniej zgody, w
+                celu prowadzenie komunikacji marketingowej, czyli wysyłki wiadomości z materiałami
                 dotyczącymi aplikacji LUCK.
               </Text>
             </li>
@@ -129,13 +133,15 @@ const Index = () => {
                 przetwarzanie jest niezbędne do realizacje prawnie uzasadnionego interesu
                 administratora danych, polegającego na komunikacji z użytkownikami za pomocą
                 narzędzia bot, na platformie Google Asystent, oraz prowadzenia marketingu
-                bezpośredniego do użytkownik&oacute;w Pan Mikołaj Luck po wyrażeniu przez Ciebie zgody na
-                otrzymywanie wiadomości marketingowych od zespołu LUCK, zawierających informacje o
-                naszych usługach.
+                bezpośredniego do użytkownik&oacute;w Pan Mikołaj Luck po wyrażeniu przez Ciebie
+                zgody na otrzymywanie wiadomości marketingowych od zespołu LUCK, zawierających
+                informacje o naszych usługach.
               </Text>
             </li>
             <li>
-              <Text>Dane osobowe nie będą przetwarzane na podstawie art. 6 ust. 1 lit. b) RODO.</Text>
+              <Text>
+                Dane osobowe nie będą przetwarzane na podstawie art. 6 ust. 1 lit. b) RODO.
+              </Text>
             </li>
             <li>
               <Text>
@@ -188,4 +194,5 @@ const Index = () => {
     </>
   );
 };
+
 export default Index;

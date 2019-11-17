@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { NextSeo } from 'next-seo';
-import { withApollo, Theme, Post, UploadFile } from '../../utils';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
-import Card from '../../components/Card';
-import { Flex } from '../../components';
-import BlogLayout from '../../components/Layout/BlogLayout';
-import media from '../../utils/media';
+import Card from '../../src/blog/Card';
+import { Flex } from '../../src/components';
+import BlogLayout from '../../src/blog/BlogLayout';
+import media from '../../src/utils/media';
+import { withApollo, Theme, Post, UploadFile } from '../../src/utils';
 // @ts-ignore
 import Masonry from 'react-masonry-css';
 
@@ -73,7 +73,8 @@ const CardsContainer: React.FunctionComponent<any> = ({ children, ...props }) =>
   );
 };
 
-interface StatelessPage<P = { cmsUrl: string, shouldShowDraft:boolean }> extends React.FunctionComponent<P> {
+interface StatelessPage<P = { cmsUrl: string; shouldShowDraft: boolean }>
+  extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
@@ -110,7 +111,7 @@ export const ALL_POSTS_QUERY = gql`
   ${POST_FRAGMENT}
   query getPosts {
     posts(limit: 999, sort: "date:desc") {
-      ...Post  
+      ...Post
     }
   }
 `;
@@ -143,13 +144,17 @@ const mapCoverUrls = (
   return { cover, coverPlaceholder, wideCover, wideCoverPlaceholder, ...post };
 };
 
-export const mapToViewPosts = (posts: Post[], cmsUrl: string, shouldShowDraft: boolean):ViewPost[]  => {
+export const mapToViewPosts = (
+  posts: Post[],
+  cmsUrl: string,
+  shouldShowDraft: boolean,
+): ViewPost[] => {
   const viewPost = posts
     .filter(isSomeCoverUndefined)
-    .map(post => mapCoverUrls(post as ViewPost, cmsUrl))
+    .map(post => mapCoverUrls(post as ViewPost, cmsUrl));
 
   return shouldShowDraft ? viewPost : viewPost.filter(({ isDraft }) => !isDraft);
-}
+};
 
 const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
@@ -179,7 +184,7 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
 Index.getInitialProps = async function() {
   return {
     cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
-    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === "true"
+    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
   };
 };
 
