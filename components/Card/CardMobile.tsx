@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { Flex } from '../Flex';
 import { Trafalgar } from '../Typography';
 import { Box } from '../Box';
@@ -67,14 +66,12 @@ const CardMobile: React.FunctionComponent<CardMobileProps> = ({
     {cover && (
       <Container {...props}>
         <InnerContainer>
-          <Link href={`/blog/${slug}`}>
-            <Box as="a" href={`/blog/${slug}`} aria-label={`przejdź do ${title}`}>
-              <Image url={cover.url} placeholderUrl={coverPlaceholder.url} ratio="69%" />
-              <ContentContainer>
-                <Trafalgar tag="h2">{title}</Trafalgar>
-              </ContentContainer>
-            </Box>
-          </Link>
+          <Box as="a" href={`/blog/${slug}`} aria-label={`przejdź do ${title}`}>
+            <Image url={cover.url} placeholderUrl={coverPlaceholder.url} ratio="69%" />
+            <ContentContainer>
+              <Trafalgar tag="h2">{title}</Trafalgar>
+            </ContentContainer>
+          </Box>
         </InnerContainer>
       </Container>
     )}
