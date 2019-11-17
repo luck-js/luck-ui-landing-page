@@ -11,4 +11,5 @@ export * from './List';
 export * from './Navigation';
 export * from './RatioContainer';
 export * from './RatioLazyImage';
+export * from './Spinner';
 export * from './TextLink';
