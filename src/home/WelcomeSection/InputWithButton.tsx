@@ -4,6 +4,7 @@ import { Flex, BaseInput, Button } from '../../components';
 import media from '../../utils/media';
 import * as Theme from '../../utils/theme';
 import Link from 'next/link';
+import {useState} from "react"
 
 const Container = styled(Flex)`
   position: relative;
@@ -34,7 +35,7 @@ const Input = styled(BaseInput)`
   opacity: 0.98;
   background-color: ${Theme.colors.main};
   padding: 9px 20px;
-  padding-right: calc(120px + 15px);
+  padding-right: calc(109px + 15px);
 
   &::placeholder {
     color: ${Theme.colors.gray};
@@ -43,17 +44,26 @@ const Input = styled(BaseInput)`
   ${media.greaterThan('desktop')`
     font-size: 17px;
     padding: 12px 20px;
+    padding-right: calc(140px + 15px);
   `}
 `;
 
 const InputWithButton = ({ href, ariaLabel, linkAs, ...props }: any) => {
+  const [name, setName]= useState("")
+  const handleOnChange = ({ target: { value } }: any) => {
+    setName(value);
+  };
+
+  const getUrlWithNameParam = (url: string) => {
+    return `${url}?name=${name}`;
+  }
   return (
     <Container {...props}>
-      <Input placeholder={'Nazwa wydarzenia...'} {...Theme.textStyles.smallText} />
-      <Link href={href} as={linkAs}>
+      <Input onChange={handleOnChange} value={name} placeholder={'Nazwa wydarzenia...'} {...Theme.textStyles.smallText} />
+      <Link href={getUrlWithNameParam(href)} as={getUrlWithNameParam(linkAs)}>
         <InputWithButton.Button
           colorfull
-          href={href}
+          href={getUrlWithNameParam(href)}
           ariaLabel={ariaLabel}
           {...Theme.textStyles.smallText}
           onMouseDown={(e: any) => e.preventDefault()}

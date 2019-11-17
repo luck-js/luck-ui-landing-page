@@ -10,7 +10,13 @@ import { BubblesShadowBackground } from '../../BubblesShadowBackground';
 import { INIT_NEW_HAPPENING, NewHappening, NewParticipant } from '../model';
 import {apiAxios} from "../../api.axios"
 
-interface NewHappeningViewProps {}
+export interface NewHappeningViewData {
+  name: string;
+}
+
+interface NewHappeningViewProps {
+  data: NewHappeningViewData;
+}
 
 interface NewHappeningViewPage<P = NewHappeningViewProps> extends React.FunctionComponent<P> {
   Button: any;
@@ -24,8 +30,8 @@ const scrollToRef = (ref: any) => {
   window.scrollTo(0, ref.current.offsetTop + NAVIGATION_HEIGHT);
 };
 
-const Index: NewHappeningViewPage = () => {
-  const [happening, setHappening] = useState<NewHappening>(INIT_NEW_HAPPENING);
+const Index: NewHappeningViewPage = ({data: {name}}) => {
+  const [happening, setHappening] = useState<NewHappening>({...INIT_NEW_HAPPENING, name});
   const previousParticipants = usePrevious<NewParticipant[]>(happening.participants);
 
   const handleOnChangeTitle = ({ target: { value } }: any) => {
