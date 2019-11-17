@@ -76,6 +76,7 @@ const HashtagsText = styled(TinySecond)`
 `;
 
 const PostContent: React.FunctionComponent<ViewPost> = ({
+  host,
   title,
   description,
   content,
@@ -96,7 +97,7 @@ const PostContent: React.FunctionComponent<ViewPost> = ({
       openGraph={{
         title,
         description,
-        url: `https://${window.location.host}/blog/${slug}`,
+        url: `https://${host}/blog/${slug}`,
         images: [{ url: cover.url }],
         article: {
           publishedTime: createdAt,
@@ -142,12 +143,12 @@ export const POST_QUERY = gql`
   }
 `;
 
-interface StatelessPage<P = { slug: string; cmsUrl: string; shouldShowDraft: boolean }>
+interface IndexPage<P = { host:string;slug: string; cmsUrl: string; shouldShowDraft: boolean }>
   extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
-const Index: StatelessPage = ({ slug, cmsUrl, shouldShowDraft }) => {
+const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const where = { slug };
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
     POST_QUERY,
@@ -161,11 +162,12 @@ const Index: StatelessPage = ({ slug, cmsUrl, shouldShowDraft }) => {
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
 
-  return <BlogLayout>{viewPost && <PostContent {...viewPost} />}</BlogLayout>;
+  return <BlogLayout>{viewPost && <PostContent {...viewPost} host={host} />}</BlogLayout>;
 };
 
 Index.getInitialProps = async function({ query }) {
   return {
+    host: process.env.VIRTUAL_HOST ? process.env.VIRTUAL_HOST : '',
     slug: query.id,
     cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
     shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',

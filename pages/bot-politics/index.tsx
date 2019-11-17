@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import BlogLayout from '../../src/blog/BlogLayout';
 import { Theme } from '../../src/utils';
 import { NextSeo } from 'next-seo/lib';
-import { Canon, Flex, MediumText, List, TextLink } from '../../src/components';
+import {Canon, MediumText, List, TextLink, Box} from '../../src/components';
 import media from '../../src/utils/media';
 
-const Container = styled(Flex)`
+const Container = styled(Box)`
   background-color: ${Theme.colors.main};
   color: ${Theme.colors.black};
-  flex-wrap: wrap;
   max-width: 1012px;
   margin: 0 auto;
   padding: ${Theme.space.small}px ${Theme.space.xregular}px;

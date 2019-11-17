@@ -121,6 +121,7 @@ export interface ViewPost extends Post {
   coverPlaceholder: UploadFile;
   wideCover: UploadFile;
   wideCoverPlaceholder: UploadFile;
+  host:string;
 }
 
 const isSomeCoverUndefined = ({
