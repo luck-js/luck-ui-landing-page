@@ -10,10 +10,9 @@ import {
   Trafalgar,
   BaseButton,
   Background,
-  NAVIGATION_HEIGHT,
   NAVIGATION_SHADOW,
 } from '../../../components';
-import {Happening, Member} from "../model"
+import { Happening, Member } from '../model';
 
 export interface WelcomeMemberViewData {
   happening: Happening;
@@ -25,17 +24,11 @@ interface WelcomeMemberViewProps {
   data: WelcomeMemberViewData;
 }
 
-const Index: any = ({data :{ id, member, happening }}: WelcomeMemberViewProps) => {
+const Index: any = ({ data: { id, member, happening } }: WelcomeMemberViewProps) => {
   const [href, setHref] = useState();
 
   useEffect(() => {
     setHref(`https://${window.location.host}/app/twoj-los?id=${id}`);
-  }, []);
-
-  const [height, setHeight] = useState();
-
-  useEffect(() => {
-    setHeight((window.innerHeight - NAVIGATION_HEIGHT) * 0.15);
   }, []);
 
   const renderHappeningContent = () => {
@@ -70,9 +63,7 @@ const Index: any = ({data :{ id, member, happening }}: WelcomeMemberViewProps) =
   return (
     <Index.Container>
       <Background />
-      <Index.HappeningContentWrapper height={height}>
-        {renderHappeningContent()}
-      </Index.HappeningContentWrapper>
+      <Index.HappeningContentWrapper>{renderHappeningContent()}</Index.HappeningContentWrapper>
       <Index.Text as="h2" pt={['xregular', 'xregular', 'xregular', 'xregular']}>
         <b>{member.name}</b>, to Ty?
       </Index.Text>
@@ -104,8 +95,8 @@ Index.Container = styled(Box)`
   min-height: 100%;
 `;
 
-Index.HappeningContentWrapper = styled(Box)<{ height: number }>`
-  min-height: ${props => (props.height ? `${props.height}px` : '15%')};
+Index.HappeningContentWrapper = styled(Box)`
+  min-height: 80px;
 `;
 
 Index.HappeningContentContainer = styled(Box)`
@@ -140,6 +131,11 @@ Index.Button = styled(BaseButton)`
   transition: border-color 0.4s, color 0.4s, background-color 0.4s, box-shadow 0.4s, transform 0.4s,
     scale 0.4s;
   box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.28);
+
+  &:hover {
+    box-shadow: none;
+    transform: scale(0.95);
+  }
 `;
 
 export default Index;
