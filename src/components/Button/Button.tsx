@@ -37,12 +37,20 @@ export const Button = styled(BaseButton)<ButtonProps>`
   text-transform: uppercase;
   text-decoration: underline;
   text-decoration-color: transparent;
-  transition: text-decoration-color 0.5s;
+  transition: text-decoration-color 0.5s, background-color 0.5s, color 0.5s, opacity 0.5s, border-color 0.5s;
 
   border-radius: 30px;
 
   &:hover {
     text-decoration-color: ${Theme.colors.main};
+  }
+  
+  :disabled{
+    cursor: not-allowed;
+    background-color: transparent;
+    color: ${props => (props.colorfull ? Theme.colors.mainContrast : Theme.colors.main)};
+    border: 2px solid ${props => (props.colorfull ? Theme.colors.mainContrast : 'transparent')};
+    opacity: 0.6;
   }
 
   ${applyStyleModifiers(BUTTON_VARIANTS)};

@@ -86,8 +86,15 @@ const Index: NewHappeningViewPage = ({data: {name}}) => {
   const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
-    if (previousParticipants && previousParticipants.length < happening.participants.length)
+    if (previousParticipants && previousParticipants.length < happening.participants.length) {
       executeScroll();
+    }
+  }, [happening.participants]);
+
+  const [isValid, setIsValid] = useState<boolean>(false);
+
+  useEffect(() => {
+     setIsValid(happening.participants.length > 2)
   }, [happening.participants]);
 
   return (
@@ -144,6 +151,7 @@ const Index: NewHappeningViewPage = ({data: {name}}) => {
           colorfull
           onClick={handleOnClickButton}
           onMouseDown={(e: any) => e.preventDefault()}
+          disabled={!isValid}
         >
           UTWÓRZ WYDARZENIE
         </Index.Button>
