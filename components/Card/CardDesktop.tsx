@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import { TinyText, Trafalgar } from '../Typography';
 import { Box } from '../Box';
 import { Theme, Hashtag } from '../../utils';
-import {ViewPost} from "../../pages/blog"
-import {RatioLazyImage} from "../RatioLazyImage"
+import { ViewPost } from '../../pages/blog';
+import { RatioLazyImage } from '../RatioLazyImage';
 
 const Container = styled(Box)`
   position: relative;
@@ -13,13 +12,13 @@ const Container = styled(Box)`
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
- 
+
   h2 {
     text-decoration: underline;
     text-decoration-color: transparent;
     transition: text-decoration-color 0.5s, opacity 0.5s;
   }
-  
+
   &:hover {
     h2 {
       opacity: 0.8;
@@ -61,10 +60,9 @@ const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
   ...props
 }) => {
   return (
-  <Fragment>
-    {cover && (
-      <Container {...props}>
-        <Link href={`/blog/${slug}`}>
+    <Fragment>
+      {cover && (
+        <Container {...props}>
           <Box as="a" href={`/blog/${slug}`} aria-label={`przejdź do ${title}`}>
             <Image url={cover.url} placeholderUrl={coverPlaceholder.url} ratio="69%" />
             <ContentContainer>
@@ -78,10 +76,10 @@ const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
               </Trafalgar>
             </ContentContainer>
           </Box>
-        </Link>
-      </Container>
-    )}
-  </Fragment>
-)};
+        </Container>
+      )}
+    </Fragment>
+  );
+};
 
 export default CardDesktop;

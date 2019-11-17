@@ -155,7 +155,6 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
 
   const viewPosts = mapToViewPosts(data.posts, cmsUrl, shouldShowDraft);
-  console.log(shouldShowDraft, viewPosts[0] && viewPosts[0].isDraft)
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
