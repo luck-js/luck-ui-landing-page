@@ -22,7 +22,7 @@ const BUTTON_VARIANTS: ModifiersConfig = {
 };
 
 export const Button = styled(BaseButton)<ButtonProps>`
-  width: auto;
+  //width: auto;
   font-weight: 700;
   letter-spacing: 0;
   cursor: pointer;
@@ -50,7 +50,7 @@ export const Button = styled(BaseButton)<ButtonProps>`
     background-color: transparent;
     color: ${props => (props.colorfull ? Theme.colors.mainContrast : Theme.colors.main)};
     border: 2px solid ${props => (props.colorfull ? Theme.colors.mainContrast : 'transparent')};
-    opacity: 0.6;
+    opacity: 0.8;
   }
 
   ${applyStyleModifiers(BUTTON_VARIANTS)};

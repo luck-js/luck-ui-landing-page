@@ -33,6 +33,7 @@ InputWithButton.Container = styled(Box)`
 `;
 
 InputWithButton.Input = styled(Input)`
+  width: 100%;
   padding-right: 60px;
 `
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Router from 'next/router';
 import TextareaAutosize from 'react-autosize-textarea';
-import { Box, Button, Canon, Flex, Input, NAVIGATION_HEIGHT } from '../../../components';
+import {Box, ButtonWithIcon, Canon, Flex, Input, NAVIGATION_HEIGHT, Spinner} from '../../../components';
 import { Theme, usePrevious } from '../../../utils';
 import { ElementList } from './ElementList';
 import { InputWithButton } from './InputWithButton';
@@ -71,7 +71,10 @@ const Index: NewHappeningViewPage = ({data: {name}}) => {
     }
   };
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const handleOnClickButton = () => {
+    setIsLoading(true);
     apiAxios
       .post('/api/v1/published-happening', { happening })
       .then(({ data }) => {
@@ -152,6 +155,7 @@ const Index: NewHappeningViewPage = ({data: {name}}) => {
           onClick={handleOnClickButton}
           onMouseDown={(e: any) => e.preventDefault()}
           disabled={!isValid}
+          Icon={isLoading ? Spinner: null}
         >
           UTWÓRZ WYDARZENIE
         </Index.Button>
@@ -186,7 +190,7 @@ Index.Container = styled(Box)`
   position: relative;
 `;
 
-Index.Button = styled(Button)`
+Index.Button = styled(ButtonWithIcon)`
   width: 270px;
 `;
 
