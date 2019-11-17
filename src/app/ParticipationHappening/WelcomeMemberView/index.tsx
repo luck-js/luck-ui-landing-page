@@ -29,7 +29,7 @@ const Index: any = ({data :{ id, member, happening }}: WelcomeMemberViewProps) =
   const [href, setHref] = useState();
 
   useEffect(() => {
-    setHref(`http://${window.location.host}/app/twoj-los?id=${id}`);
+    setHref(`https://${window.location.host}/app/twoj-los?id=${id}`);
   }, []);
 
   const [height, setHeight] = useState();

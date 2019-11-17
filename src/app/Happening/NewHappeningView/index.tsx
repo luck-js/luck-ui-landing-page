@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import Router from 'next/router';
 import TextareaAutosize from 'react-autosize-textarea';
 import { Box, Button, Canon, Flex, Input, NAVIGATION_HEIGHT } from '../../../components';
@@ -9,6 +8,7 @@ import { ElementList } from './ElementList';
 import { InputWithButton } from './InputWithButton';
 import { BubblesShadowBackground } from '../../BubblesShadowBackground';
 import { INIT_NEW_HAPPENING, NewHappening, NewParticipant } from '../model';
+import {apiAxios} from "../../api.axios"
 
 interface NewHappeningViewProps {}
 
@@ -66,8 +66,8 @@ const Index: NewHappeningViewPage = () => {
   };
 
   const handleOnClickButton = () => {
-    axios
-      .post('http://localhost:9001/api/v1/published-happening', { happening })
+    apiAxios
+      .post('/api/v1/published-happening', { happening })
       .then(({ data }) => {
         Router.push({
           pathname: '/app/udostepnij-linki',

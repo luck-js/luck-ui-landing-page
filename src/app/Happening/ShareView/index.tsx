@@ -26,7 +26,7 @@ const CONTAINER_BOTTOM_PADDING = 60
 const Index = ({ data: { happening }}: ShareViewProps) => {
   const handleOnClick = (uniqueLink: string) => () => {
     if (window.navigator.share) {
-      window.navigator.share({ url: `http://${window.location.host}/app/losuj?id=${uniqueLink}` });
+      window.navigator.share({ url: `https://${window.location.host}/app/losuj?id=${uniqueLink}` });
     }
   };
 

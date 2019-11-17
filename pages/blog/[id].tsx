@@ -96,7 +96,7 @@ const PostContent: React.FunctionComponent<ViewPost> = ({
       openGraph={{
         title,
         description,
-        url: `https://luck.org.pl/blog/${slug}`,
+        url: `https://${window.location.host}/blog/${slug}`,
         images: [{ url: cover.url }],
         article: {
           publishedTime: createdAt,

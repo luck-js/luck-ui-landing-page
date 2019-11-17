@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from "axios"
 import AppLayout from "../../../src/app/AppLayout"
 import WelcomeView, {WelcomeMemberViewData} from "../../../src/app/ParticipationHappening/WelcomeMemberView"
+import {apiAxios} from "../../../src/app/api.axios"
 
 interface WelcomeMemberProps {
   data: WelcomeMemberViewData;
@@ -21,7 +21,7 @@ const WelcomeMember: WelcomeMemberPage = ({data}) => {
 };
 
 WelcomeMember.getInitialProps = async ({ query }) => {
-  const {data} = await axios.get(`http://localhost:9001/api/v1/participation-happening/${query.id}`)
+  const {data} = await apiAxios.get(`/api/v1/participation-happening/${query.id}`)
 
   return {
     data: {

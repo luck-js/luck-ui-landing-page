@@ -1,7 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 import ShareView, { ShareViewData } from '../../../src/app/Happening/ShareView';
 import AppLayout from '../../../src/app/AppLayout';
+import {apiAxios} from "../../../src/app/api.axios"
 
 interface ShareProps {
   data: ShareViewData;
@@ -20,7 +20,7 @@ const Share: SharePage = ({ data }) => {
 };
 
 Share.getInitialProps = async ({ query }) => {
-  const { data } = await axios.get(`http://localhost:9001/api/v1/published-happening/${query.id}`);
+  const { data } = await apiAxios.get(`/api/v1/published-happening/${query.id}`);
   return {
     data: { happening: data },
   };
