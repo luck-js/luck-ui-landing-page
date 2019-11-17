@@ -1,19 +1,19 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import {helper, Theme} from '../utils';
-import {Box} from "./Box"
+import {helper, Theme} from '../../utils';
+import {Box} from "../Box"
 
 const ANIMATION_DURATION = 1.2;
 const CIRCLE_COUNT = 12;
 const CIRCLES = helper(0, CIRCLE_COUNT);
 
-export const Spinner = () => {
+export const SpinnerFadingCircle = () => {
   return (
-    <Spinner.Container>
+    <SpinnerFadingCircle.Container>
       {CIRCLES.map(index => (
-        <Spinner.Circle className={`circle-${index}`} />
+        <SpinnerFadingCircle.Circle className={`circle-${index}`} />
       ))}
-    </Spinner.Container>
+    </SpinnerFadingCircle.Container>
   );
 };
 
@@ -31,20 +31,18 @@ function createCSS() {
     return previousValue;
   }, '');
 
-  console.log(styles)
-
   return css`
     ${styles}
   `;
 }
 
-Spinner.Container = styled(Box)`
+SpinnerFadingCircle.Container = styled(Box)`
   width: 100%;
   height: 100%;
   position: relative;
   ${createCSS()};
 `
-Spinner.Circle = styled('div')`
+SpinnerFadingCircle.Circle = styled('div')`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -59,10 +57,10 @@ Spinner.Circle = styled('div')`
     height: 15%;
     background-color: ${Theme.colors.main};
     border-radius: 100%;
-    animation: dk-circleFadeDelay ${ANIMATION_DURATION}s infinite ease-in-out both;
+    animation: CircleFadeDelay ${ANIMATION_DURATION}s infinite ease-in-out both;
   }
 
-  @keyframes dk-circleFadeDelay {
+  @keyframes CircleFadeDelay {
     0%,
     39%,
     100% {

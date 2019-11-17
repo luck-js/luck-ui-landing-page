@@ -2,13 +2,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Router from 'next/router';
 import TextareaAutosize from 'react-autosize-textarea';
-import {Box, ButtonWithIcon, Canon, Flex, Input, NAVIGATION_HEIGHT, Spinner} from '../../../components';
 import { Theme, usePrevious } from '../../../utils';
 import { ElementList } from './ElementList';
 import { InputWithButton } from './InputWithButton';
 import { BubblesShadowBackground } from '../../BubblesShadowBackground';
 import { INIT_NEW_HAPPENING, NewHappening, NewParticipant } from '../model';
-import {apiAxios} from "../../api.axios"
+import { apiAxios } from '../../api.axios';
+import {
+  Box,
+  ButtonWithIcon,
+  Canon,
+  Flex,
+  Input,
+  NAVIGATION_HEIGHT,
+  SpinnerFadingCircle,
+} from '../../../components';
 
 export interface NewHappeningViewData {
   name: string;
@@ -30,8 +38,8 @@ const scrollToRef = (ref: any) => {
   window.scrollTo(0, ref.current.offsetTop + NAVIGATION_HEIGHT);
 };
 
-const Index: NewHappeningViewPage = ({data: {name}}) => {
-  const [happening, setHappening] = useState<NewHappening>({...INIT_NEW_HAPPENING, name});
+const Index: NewHappeningViewPage = ({ data: { name } }) => {
+  const [happening, setHappening] = useState<NewHappening>({ ...INIT_NEW_HAPPENING, name });
   const previousParticipants = usePrevious<NewParticipant[]>(happening.participants);
 
   const handleOnChangeTitle = ({ target: { value } }: any) => {
@@ -75,14 +83,12 @@ const Index: NewHappeningViewPage = ({data: {name}}) => {
 
   const handleOnClickButton = () => {
     setIsLoading(true);
-    apiAxios
-      .post('/api/v1/published-happening', { happening })
-      .then(({ data }) => {
-        Router.push({
-          pathname: '/app/udostepnij-linki',
-          query: { id: data.id },
-        });
+    apiAxios.post('/api/v1/published-happening', { happening }).then(({ data }) => {
+      Router.push({
+        pathname: '/app/udostepnij-linki',
+        query: { id: data.id },
       });
+    });
   };
 
   const myRef = useRef(null);
@@ -97,7 +103,7 @@ const Index: NewHappeningViewPage = ({data: {name}}) => {
   const [isValid, setIsValid] = useState<boolean>(false);
 
   useEffect(() => {
-     setIsValid(happening.participants.length > 2)
+    setIsValid(happening.participants.length > 2);
   }, [happening.participants]);
 
   return (
@@ -155,7 +161,7 @@ const Index: NewHappeningViewPage = ({data: {name}}) => {
           onClick={handleOnClickButton}
           onMouseDown={(e: any) => e.preventDefault()}
           disabled={!isValid}
-          Icon={isLoading ? Spinner: null}
+          Icon={isLoading ? SpinnerFadingCircle : null}
         >
           UTWÓRZ WYDARZENIE
         </Index.Button>
