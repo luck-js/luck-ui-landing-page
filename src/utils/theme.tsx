@@ -33,8 +33,12 @@ space.auto = 'auto';
 export const colors = {
   main: '#ffffff',
   darkMain: '#FBFBFB',
+  darkMain2: '#F4F4F4',
+  darkMain3: '#e3e3e3',
   mainContrast: '#d45858',
+  darkMainContrast: '#b64c4c',
   black: '#212121',
+  black2: '#272727',
   darkGray: '#4d4d4d',
   gray: '#bababa',
   gray2: '#B8B8B8',

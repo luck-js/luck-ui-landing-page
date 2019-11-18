@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ShareView, { ShareViewData } from '../../../src/app/Happening/ShareView';
 import AppLayout from '../../../src/app/AppLayout';
-import {apiAxios} from "../../../src/app/api.axios"
+import { apiAxios } from '../../../src/app/api.axios';
 
 interface ShareProps {
   data: ShareViewData;
@@ -12,9 +12,18 @@ interface SharePage<P = ShareProps> extends React.FunctionComponent<P> {
 }
 
 const Share: SharePage = ({ data }) => {
+  const [viewData, setViewData] = useState<ShareViewData>(data);
+  useEffect(() => {
+    const participants = data.happening.participants.map(participant => ({
+      ...participant,
+      uniqueLink: `https://${window.location.host}/app/losuj?id=${participant.uniqueLink}`,
+    }));
+    setViewData({ happening: { ...data.happening, participants } });
+  }, []);
+
   return (
     <AppLayout>
-      <ShareView data={data} />
+      <ShareView data={viewData} />
     </AppLayout>
   );
 };
