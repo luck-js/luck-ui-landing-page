@@ -14,3 +14,5 @@ export const getRandomInt = (min: number, max: number, scale = 1): number => {
   max = Math.floor(max / scale);
   return (Math.floor(Math.random() * (max - min + 1)) + min) * scale;
 };
+
+export const delay = async (ms:number) => new Promise(resolve => setTimeout(() => resolve(true), ms));

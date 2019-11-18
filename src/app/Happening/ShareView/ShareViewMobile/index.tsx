@@ -5,7 +5,7 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import { ShareStatic } from 'react-native';
 import ShareButton from './ShareButton';
 import { BubblesShadowBackground } from '../../../BubblesShadowBackground';
-import { CanonApp, Flex, Box, NAVIGATION_HEIGHT } from '../../../../components';
+import { CanonApp, Flex, Box, NAVIGATION_HEIGHT, usePopup } from '../../../../components';
 import { Theme } from '../../../../utils';
 import { ShareViewProps } from '../index';
 
@@ -16,9 +16,12 @@ declare global {
 const CONTAINER_BOTTOM_PADDING = 60;
 
 const Index = ({ data: { happening }, ...props }: ShareViewProps) => {
+  const { showPopup } = usePopup();
   const handleOnClick = (uniqueLink: string) => () => {
     if (window.navigator.share) {
-      window.navigator.share({ url: `https://${window.location.host}/app/losuj?id=${uniqueLink}` });
+      window.navigator.share({ url: uniqueLink });
+    } else {
+      showPopup('Skopiowano !');
     }
   };
 
