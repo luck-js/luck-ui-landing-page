@@ -4,6 +4,7 @@ import { Member } from '../model';
 import { Footer } from '../shared';
 import { Background, Box, NAVIGATION_SHADOW, BaseTypography, Spinner } from '../../../components';
 import { Theme } from '../../../utils';
+import media from "../../../utils/media"
 
 export interface MatchedMemberViewData {
   me: Member;
@@ -47,11 +48,35 @@ Index.Container = styled(Box)`
 Index.Text = styled(BaseTypography)`
   font-size: 26px;
   font-weight: 400;
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    font-size: 42px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+  
+  `}
 `;
 
 Index.BigText = styled(BaseTypography)`
-  font-size: 41px;
+  font-size: 42px;
   font-weight: 400;
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    font-size: 60px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+  
+  `}
 `;
 
 Index.SpinnerContainer = styled('div')``;

@@ -13,6 +13,7 @@ import {
   NAVIGATION_SHADOW,
 } from '../../../components';
 import { Happening, Member } from '../model';
+import media from "../../../utils/media"
 
 export interface WelcomeMemberViewData {
   happening: Happening;
@@ -109,6 +110,18 @@ Index.HappeningContentContainer = styled(Box)`
 Index.Text = styled(BaseTypography)`
   font-size: 26px;
   font-weight: 400;
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    font-size: 42px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+  
+  `}
 `;
 
 Index.Button = styled(BaseButton)`
@@ -131,6 +144,19 @@ Index.Button = styled(BaseButton)`
   transition: border-color 0.4s, color 0.4s, background-color 0.4s, box-shadow 0.4s, transform 0.4s,
     scale 0.4s;
   box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.28);
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    width: 162px;
+    height: 162px
+  `}
+  
+  ${media.greaterThan('desktop')`
+  
+  `}
 
   &:hover {
     box-shadow: none;
