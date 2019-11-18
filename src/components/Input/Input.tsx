@@ -24,5 +24,5 @@ export const Input = styled(BaseInput)<any>`
 `;
 
 Input.defaultProps = {
-  ...Theme.textStyles.bodyText,
+  ...Theme.textStyles.inputApp,
 };

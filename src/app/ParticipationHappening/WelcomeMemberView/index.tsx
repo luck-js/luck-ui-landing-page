@@ -51,7 +51,7 @@ const Index: any = ({ data: { id, member, happening } }: WelcomeMemberViewProps)
       return (
         <Index.Text
           as="h1"
-          pt={['xregular', 'xregular', 'xregular', 'xregular']}
+          pt={['xregular', 'xregular', 'large', 'large']}
           mb={['regular', 'regular', 'regular', 'regular']}
         >
           {happening.name}
@@ -64,7 +64,7 @@ const Index: any = ({ data: { id, member, happening } }: WelcomeMemberViewProps)
     <Index.Container>
       <Background />
       <Index.HappeningContentWrapper>{renderHappeningContent()}</Index.HappeningContentWrapper>
-      <Index.Text as="h2" pt={['xregular', 'xregular', 'xregular', 'xregular']}>
+      <Index.Text as="h2" pt={['xregular', 'xregular', 'large', 'large']}>
         <b>{member.name}</b>, to Ty?
       </Index.Text>
       <Index.Text as="p" mb={['regular', 'regular', 'regular', 'regular']}>

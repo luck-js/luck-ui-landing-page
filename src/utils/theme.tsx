@@ -57,6 +57,12 @@ export const textStyles: TextStyles = {
     fontWeight: 700,
     fontFamily: fontFamilies.body,
   },
+  canonApp: {
+    tag: 'h1',
+    fontSize: [20, 20, 24, 24],
+    fontWeight: 700,
+    fontFamily: fontFamilies.body,
+  },
   trafalgar: {
     tag: 'h1',
     fontSize: [18, 18, 18, 21],
@@ -66,6 +72,18 @@ export const textStyles: TextStyles = {
   bodyText: {
     tag: 'p',
     fontSize: [16, 16, 18, 21],
+    fontWeight: 400,
+    fontFamily: fontFamilies.body,
+  },
+  inputApp: {
+    tag: 'p',
+    fontSize: [16, 16, 16, 16],
+    fontWeight: 400,
+    fontFamily: fontFamilies.body,
+  },
+  buttonApp: {
+    tag: 'p',
+    fontSize: [14, 14, 14, 14],
     fontWeight: 400,
     fontFamily: fontFamilies.body,
   },

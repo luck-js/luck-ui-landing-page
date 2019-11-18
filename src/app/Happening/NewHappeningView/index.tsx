@@ -11,12 +11,13 @@ import { apiAxios } from '../../api.axios';
 import {
   Box,
   ButtonWithIcon,
-  Canon,
+  CanonApp,
   Flex,
   Input,
   NAVIGATION_HEIGHT,
   SpinnerFadingCircle,
 } from '../../../components';
+import media from '../../../utils/media';
 
 export interface NewHappeningViewData {
   name: string;
@@ -109,12 +110,12 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
   return (
     <Index.Container>
       <Index.ContentContainer>
-        <Canon
-          pt={['xregular', 'xregular', 'xregular', 'xregular']}
-          mb={['regular', 'regular', 'regular', 'regular']}
+        <CanonApp
+          pt={['xregular', 'xregular', 'large', 'large']}
+          mb={['regular', 'regular', 'large', 'large']}
         >
           STWÓRZ WYDARZENIE
-        </Canon>
+        </CanonApp>
         <Input
           type="text"
           placeholder="Nazwa wydarzenia..."
@@ -132,12 +133,12 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
           placeholder="Opis wydarzenia..."
         />
         <Box ref={myRef}>
-          <Canon
-            mt={['xregular', 'xregular', 'xregular', 'xregular']}
-            mb={['regular', 'regular', 'regular', 'regular']}
+          <CanonApp
+            mt={['xregular', 'xregular', 'large', 'large']}
+            mb={['regular', 'regular', 'large', 'large']}
           >
             DODAJ UCZESTNIKÓW
-          </Canon>
+          </CanonApp>
         </Box>
         <InputWithButton
           value={participantName}
@@ -181,22 +182,50 @@ Index.ButtonContainer = styled(Flex)`
   padding: ${Theme.space.small}px ${Theme.space.small}px 50px;
   background-color: ${Theme.colors.main};
   justify-content: center;
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    max-width: 558px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: ${Theme.space.small}px ${Theme.space.small}px 74px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+  
+  `}
 `;
 
 Index.ContentContainer = styled(Flex)`
   flex-direction: column;
   overflow: hidden;
   padding: 0 ${Theme.space.small}px calc(103px + 60px) ${Theme.space.small}px;
+  margin: 0 auto;
 
   color: ${Theme.colors.black};
   text-align: center;
+     
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    max-width: 558px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+  
+  `}
 `;
 
 Index.Container = styled(Box)`
   position: relative;
 `;
 
-Index.Button = styled(ButtonWithIcon)`
+Index.Button = styled(ButtonWithIcon).attrs({...Theme.textStyles.buttonApp})`
   width: 270px;
 `;
 

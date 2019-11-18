@@ -48,7 +48,7 @@ const Index = ({ data: { happening }}: ShareViewProps) => {
   return (
     <Index.Container>
       <Canon
-        pt={['xregular', 'xregular', 'xregular', 'xregular']}
+        pt={['xregular', 'xregular', 'large', 'large']}
         mb={['regular', 'regular', 'regular', 'regular']}
       >
         UDOSTĘPNIJ LINKI

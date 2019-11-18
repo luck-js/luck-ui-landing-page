@@ -16,45 +16,31 @@ export const ElementList = ({ list, onClose = () => {}, ...props }: ListContaine
 
   return (
     <ElementList.Container {...props}>
-      {list.map((value, index) => (
+      {list.reverse().map((value, index) => (
         <Element key={`${value}-${index}`} value={value} onClose={handleOnClose(value)} />
       ))}
     </ElementList.Container>
   );
 };
 
-// function getGridStyles(space: number) {
-//   return `
-//       width: calc(33% - ${(space / 3) * 2}px);
-//       margin-top: ${space / 2}px;
-//       margin-bottom: ${space / 2}px;
-//
-//       &:nth-child(3n + 1) {
-//         margin-right: ${(space / 3) * 2}px;
-//       }
-//
-//       &:nth-child(3n - 1) {
-//         margin-left: ${space / 3}px;
-//         margin-right: ${space / 3}px;
-//       }
-//
-//       &:nth-child(3n) {
-//         margin-left: ${(space / 3) * 2}px;
-//       }
-//   `;
-// }
-
 function getGridStyles(space: number) {
   return `
-      width: calc(50% - ${space / 2}px);
+      width: calc(33% - ${(space / 3) * 2}px);
       margin-bottom: ${space / 2}px;
-  
-      &:nth-child(odd) {
-        margin-right: ${space / 2}px;
+
+      &:nth-child(3n + 1) {
+        margin-right: ${(space / 3) * 2}px;
+        margin-left: 0;
       }
-  
-      &:nth-child(even) {
-        margin-left: ${space / 2}px;
+
+      &:nth-child(3n - 1) {
+        margin-left: ${space / 3}px;
+        margin-right: ${space / 3}px;
+      }
+
+      &:nth-child(3n) {
+        margin-left: ${(space / 3) * 2}px;
+        margin-right: 0;
       }
   `;
 }
@@ -83,11 +69,11 @@ ElementList.Container = styled(Flex)`
     `}
     
     ${media.greaterThan('tablet')`
-      ${getGridStyles(Theme.space.xlarge)}
+      ${getGridStyles(Theme.space.medium)}
     `}
     
     ${media.greaterThan('desktop')`
-      ${getGridStyles(Theme.space.xlarge)}
+      
     `}
   }
 `;

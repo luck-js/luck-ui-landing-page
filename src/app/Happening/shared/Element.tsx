@@ -1,23 +1,23 @@
-import React from "react"
-import styled from "styled-components"
-import {Box, BodyText, BaseButton} from "../../../components"
-import {Theme} from "../../../utils"
+import React from 'react';
+import styled from 'styled-components';
+import { Box, BaseButton, InputApp } from '../../../components';
+import { Theme } from '../../../utils';
 
 // @ts-ignore
-import Close from "../../../../static/close.svg"
+import Close from '../../../../static/close.svg';
 
-interface IElement<P = any > extends React.FunctionComponent<P> {
+interface IElement<P = any> extends React.FunctionComponent<P> {
   Container: any;
   Text: any;
   Button: any;
 }
 
-export const Element: IElement = ({value, onClose}: any) => {
+export const Element: IElement = ({ value, onClose }: any) => {
   return (
     <Element.Container>
       <Element.Text>{value}</Element.Text>
       <Element.Button onClick={onClose} onMouseDown={(e: any) => e.preventDefault()}>
-        <Close/>
+        <Close />
       </Element.Button>
     </Element.Container>
   );
@@ -26,7 +26,7 @@ export const Element: IElement = ({value, onClose}: any) => {
 Element.Container = styled(Box)`
   position: relative;
   display: flex;
-  flex: 0 0 calc(50% - 8px);
+  //flex: 0 0 calc(50% - 8px);
   border-radius: 8px;
   padding: 9px 40px 8px 10px;
   background-color: ${Theme.colors.mainContrast};
@@ -34,13 +34,13 @@ Element.Container = styled(Box)`
   overflow: hidden;
 `;
 
-Element.Text = styled(BodyText)`
-    text-align: left;
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-`
+Element.Text = styled(InputApp)`
+  text-align: left;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`;
 Element.Button = styled(BaseButton)`
   cursor: pointer;
   position: absolute;

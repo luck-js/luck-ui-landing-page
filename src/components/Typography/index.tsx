@@ -5,8 +5,11 @@ import { Theme } from '../../utils';
 const {
   logoHeading,
   canon,
+  canonApp,
   trafalgar,
   bodyText,
+  inputApp,
+  buttonApp,
   mediumText,
   smallText,
   tinySecond,
@@ -25,6 +28,12 @@ export const Canon = (props: any) => (
   </DynamicComponent>
 );
 
+export const CanonApp = (props: any) => (
+  <DynamicComponent {...canonApp} {...props}>
+    {props.children}
+  </DynamicComponent>
+);
+
 export const Trafalgar = (props: any) => (
   <DynamicComponent {...trafalgar} {...props}>
     {props.children}
@@ -33,6 +42,17 @@ export const Trafalgar = (props: any) => (
 
 export const BodyText = (props: any) => (
   <DynamicComponent {...bodyText} {...props}>
+    {props.children}
+  </DynamicComponent>
+);
+
+export const InputApp = (props: any) => (
+  <DynamicComponent {...inputApp} {...props}>
+    {props.children}
+  </DynamicComponent>
+);
+export const ButtonApp = (props: any) => (
+  <DynamicComponent {...buttonApp} {...props}>
     {props.children}
   </DynamicComponent>
 );
