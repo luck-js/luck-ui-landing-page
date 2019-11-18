@@ -11,7 +11,6 @@ interface ButtonWithIconComponent<P = { Icon: React.FunctionComponent }>
 }
 
 export const ButtonWithIcon: ButtonWithIconComponent = ({ children, Icon, ...props }) => {
-  console.log(props)
   return (
     <ButtonWithIcon.Button {...props}>
       <ButtonWithIcon.Text>{children}</ButtonWithIcon.Text>

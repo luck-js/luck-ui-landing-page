@@ -28,7 +28,6 @@ const ShareViewMobile = ({ data: { happening }, ...props }: ShareViewProps) => {
   const [shouldShowBackground, setShouldShowBackground] = useState(false);
 
   useEffect(() => {
-    console.log(window.innerHeight, height + CONTAINER_BOTTOM_PADDING + NAVIGATION_HEIGHT);
     setShouldShowBackground(
       window.innerHeight < height + CONTAINER_BOTTOM_PADDING + NAVIGATION_HEIGHT,
     );
