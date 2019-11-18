@@ -12,6 +12,7 @@ interface NavigationProps {
 }
 
 export const NAVIGATION_HEIGHT = 50;
+export const NAVIGATION_DESKTOP_HEIGHT = 74;
 export const NAVIGATION_SHADOW = 4;
 
 const NavigationHorizontalPadding = styled(Box)<{ shouldShowShadow: boolean }>`
@@ -47,11 +48,11 @@ const NavigationContainer = styled(Flex)`
   `}
   
   ${media.greaterThan('tablet')`
-    min-height: 77px;
+    
   `}
   
   ${media.greaterThan('desktop')`
-    min-height: 88px;
+  
   `}
 `;
 
