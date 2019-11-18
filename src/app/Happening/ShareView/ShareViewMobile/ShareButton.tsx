@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BaseButton } from '../../../components';
-import { Theme } from '../../../utils';
-import { Element } from '../shared';
+import { BaseButton } from '../../../../components';
+import { Theme } from '../../../../utils';
+import { Element } from '../../shared';
 // @ts-ignore
-import Copy from '../../../../static/copy.svg';
+import Copy from '../../../../../static/copy.svg';
 
 const ShareButton = ({ children, onClick }: any) => {
   return (

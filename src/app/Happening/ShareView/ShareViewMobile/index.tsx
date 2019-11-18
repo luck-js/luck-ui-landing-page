@@ -4,10 +4,10 @@ import useComponentSize from '@rehooks/component-size';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { ShareStatic } from 'react-native';
 import ShareButton from './ShareButton';
-import { BubblesShadowBackground } from '../../BubblesShadowBackground';
-import { CanonApp, Flex, Box, NAVIGATION_HEIGHT } from '../../../components';
-import { Theme } from '../../../utils';
-import { ShareViewProps } from './index';
+import { BubblesShadowBackground } from '../../../BubblesShadowBackground';
+import { CanonApp, Flex, Box, NAVIGATION_HEIGHT } from '../../../../components';
+import { Theme } from '../../../../utils';
+import { ShareViewProps } from '../index';
 
 declare global {
   interface Navigator extends ShareStatic {}
@@ -15,7 +15,7 @@ declare global {
 
 const CONTAINER_BOTTOM_PADDING = 60;
 
-const ShareViewMobile = ({ data: { happening }, ...props }: ShareViewProps) => {
+const Index = ({ data: { happening }, ...props }: ShareViewProps) => {
   const handleOnClick = (uniqueLink: string) => () => {
     if (window.navigator.share) {
       window.navigator.share({ url: `https://${window.location.host}/app/losuj?id=${uniqueLink}` });
@@ -32,35 +32,36 @@ const ShareViewMobile = ({ data: { happening }, ...props }: ShareViewProps) => {
       window.innerHeight < height + CONTAINER_BOTTOM_PADDING + NAVIGATION_HEIGHT,
     );
   }, [height]);
+
   return (
-    <ShareViewMobile.Container {...props}>
+    <Index.Container {...props}>
       <CanonApp
         pt={['xregular', 'xregular', 'large', 'large']}
         mb={['regular', 'regular', 'large', 'large']}
       >
         UDOSTĘPNIJ LINKI
       </CanonApp>
-      <ShareViewMobile.ShareButtonsContainer ref={containerRef}>
+      <Index.ShareButtonsContainer ref={containerRef}>
         {happening.participants.map(participant => (
-          <CopyToClipboard text={participant.uniqueLink}>
+          <CopyToClipboard key={participant.uniqueLink} text={participant.uniqueLink}>
             <ShareButton onClick={handleOnClick(participant.uniqueLink)}>
               {participant.name}
             </ShareButton>
           </CopyToClipboard>
         ))}
-      </ShareViewMobile.ShareButtonsContainer>
-      <ShareViewMobile.Background shouldShow={shouldShowBackground} />
-    </ShareViewMobile.Container>
+      </Index.ShareButtonsContainer>
+      <Index.Background shouldShow={shouldShowBackground} />
+    </Index.Container>
   );
 };
 
-ShareViewMobile.Container = styled(Box)`
+Index.Container = styled(Box)`
   padding: 0 ${Theme.space.small}px calc(${CONTAINER_BOTTOM_PADDING}px) ${Theme.space.small}px;
   color: ${Theme.colors.black};
   text-align: center;
 `;
 
-ShareViewMobile.ShareButtonsContainer = styled(Flex)`
+Index.ShareButtonsContainer = styled(Flex)`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: self-start;
@@ -78,7 +79,7 @@ ShareViewMobile.ShareButtonsContainer = styled(Flex)`
   }
 `;
 
-ShareViewMobile.Background = styled(BubblesShadowBackground)<{ shouldShow: boolean }>`
+Index.Background = styled(BubblesShadowBackground)<{ shouldShow: boolean }>`
   width: 100%;
   bottom: 0;
   left: 0;
@@ -88,4 +89,4 @@ ShareViewMobile.Background = styled(BubblesShadowBackground)<{ shouldShow: boole
   transition: 0.5s opacity;
 `;
 
-export default ShareViewMobile;
+export default Index;

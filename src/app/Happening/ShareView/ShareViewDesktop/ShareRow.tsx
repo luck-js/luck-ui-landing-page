@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState} from "react"
+import styled from "styled-components"
 import CopyToClipboard from "react-copy-to-clipboard"
-import styled from 'styled-components';
-import { ShareViewProps } from './index';
-import { Participant } from '../model';
-import { Theme } from '../../../utils';
-import { CanonApp, BaseButton, Box, Flex } from '../../../components';
+import {Participant} from "../../model"
+import {Theme} from "../../../../utils"
+import {BaseButton, Box, Flex} from "../../../../components"
 // @ts-ignore
-import Copy from '../../../../static/copy.svg';
+import WideArrow from "../../../../../static/wide-arrow.svg"
 // @ts-ignore
-import WideArrow from '../../../../static/wide-arrow.svg';
+import Copy from "../../../../../static/copy.svg"
 
-const ShareRow = ({ participant }: { participant: Participant }) => {
+export const ShareRow = ({participant}: { participant: Participant }) => {
   const [isCopied, setIsCopied] = useState(false)
   const handleOnCopy = () => setIsCopied(true)
   return (
@@ -20,10 +19,10 @@ const ShareRow = ({ participant }: { participant: Participant }) => {
       </ShareRow.Element>
       <CopyToClipboard text={participant.uniqueLink} onCopy={handleOnCopy}>
         <ShareRow.Element {...Theme.textStyles.buttonApp} className="uniqueLink">
-          <WideArrow className="wideArrow" />
+          <WideArrow className="wideArrow"/>
           <span>{participant.uniqueLink}</span>
           <ShareRow.Button onMouseDown={(e: any) => e.preventDefault()}>
-            <Copy />
+            <Copy/>
           </ShareRow.Button>
         </ShareRow.Element>
       </CopyToClipboard>
@@ -79,7 +78,7 @@ ShareRow.Element = styled(Box)`
   }
 `;
 
-ShareRow.Container = styled(Flex)<{isCopied: boolean}>`
+ShareRow.Container = styled(Flex)<{ isCopied: boolean }>`
   ${ShareRow.Element}{
     background-color: ${props => props.isCopied ? Theme.colors.darkMain3 : Theme.colors.darkMain2};
   }
@@ -130,28 +129,3 @@ ShareRow.Button = styled(BaseButton)`
     }
   }
 `;
-
-const ShareViewDesktop = ({ data: { happening }, ...props }: ShareViewProps) => {
-  return (
-    <ShareViewDesktop.Container {...props}>
-      <CanonApp
-        pt={['xregular', 'xregular', 'large', 'large']}
-        mb={['regular', 'regular', 'large', 'large']}
-      >
-        UDOSTĘPNIJ LINKI
-      </CanonApp>
-      {happening.participants.map(participant => (
-        <ShareRow participant={participant} />
-      ))}
-    </ShareViewDesktop.Container>
-  );
-};
-
-ShareViewDesktop.Container = styled(Box)`
-  margin: 0 auto;
-  max-width: 700px;
-  color: ${Theme.colors.black};
-  text-align: center;
-`;
-
-export default ShareViewDesktop;
