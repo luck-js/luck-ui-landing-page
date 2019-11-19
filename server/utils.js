@@ -4,8 +4,7 @@ const ROUTE_MAP = {
   blog: ['posts', 'posty'],
   'app/happening/new-happening': ['app'],
   'app/happening/share': ['app/udostepnij-linki'],
-  'app/participation-happening/welcome-member': ['app/losuj'],
-  'app/participation-happening/matched-member': ['app/twoj-los'],
+  'app/participation-happening/participation-happening': ['app/losuj'],
 };
 
 const ROUTE_MAP_SITEMAP = {
@@ -19,8 +18,7 @@ const ROUTE_MAP_CONFIG = {
   'blog/[id]': false,
   'app/happening/new-happening': false,
   'app/happening/share': false,
-  'app/participation-happening/welcome-member': false,
-  'app/participation-happening/matched-member': false,
+  'app/participation-happening/participation-happening': false,
 }
 
 const withousSlash = (pathname) => {

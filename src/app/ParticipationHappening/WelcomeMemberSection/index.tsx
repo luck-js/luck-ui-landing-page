@@ -1,36 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import styled from 'styled-components';
 import { Theme } from '../../../utils';
-import { Footer } from '../shared';
+
 import {
   Box,
   BaseTypography,
   Canon,
   Trafalgar,
-  BaseButton,
-  Background,
-  NAVIGATION_SHADOW,
+  BaseButton, NAVIGATION_SHADOW,
 } from '../../../components';
 import { Happening, Member } from '../model';
-import media from "../../../utils/media"
+import media from '../../../utils/media';
 
-export interface WelcomeMemberViewData {
+export interface WelcomeMemberSectionData {
   happening: Happening;
   member: Member;
-  id: string;
 }
 
-interface WelcomeMemberViewProps {
-  data: WelcomeMemberViewData;
+interface WelcomeMemberSectionProps {
+  data: WelcomeMemberSectionData;
+  onClick: any;
 }
 
-const Index: any = ({ data: { id, member, happening } }: WelcomeMemberViewProps) => {
-  const [href, setHref] = useState();
-
-  useEffect(() => {
-    setHref(`https://${window.location.host}/app/twoj-los?id=${id}`);
-  }, []);
+const Index: any = ({ data: { member, happening }, onClick }: WelcomeMemberSectionProps) => {
 
   const renderHappeningContent = () => {
     if (happening.description) {
@@ -63,7 +55,6 @@ const Index: any = ({ data: { id, member, happening } }: WelcomeMemberViewProps)
 
   return (
     <Index.Container>
-      <Background />
       <Index.HappeningContentWrapper>{renderHappeningContent()}</Index.HappeningContentWrapper>
       <Index.Text as="h2" pt={['xregular', 'xregular', 'large', 'large']}>
         <b>{member.name}</b>, to Ty?
@@ -71,17 +62,9 @@ const Index: any = ({ data: { id, member, happening } }: WelcomeMemberViewProps)
       <Index.Text as="p" mb={['regular', 'regular', 'regular', 'regular']}>
         Przejdź do losowania.
       </Index.Text>
-      <Link href={`/app/participation-happening/matched-member?id=${id}`}>
-        <Index.Button
-          href={href}
-          ariaLabel={'przejdź do losowania'}
-          as={'a'}
-          onMouseDown={(e: any) => e.preventDefault()}
-        >
-          LOSUJ
-        </Index.Button>
-      </Link>
-      <Footer />
+      <Index.Button onClick={onClick} onMouseDown={(e: any) => e.preventDefault()}>
+        LOSUJ
+      </Index.Button>
     </Index.Container>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import useComponentSize from '@rehooks/component-size';
 import { Layer, Stage } from 'react-konva';
@@ -29,12 +29,13 @@ const CONTAINER_STYLE_MAP = [
 ];
 
 interface IndexProps {
-  handleClickBubble: any;
+  onClickBubble: any;
 }
 
 export const Container = styled('div')<{styleMap: ContainerStyleMap | undefined}>`
   position: absolute;
   width: 100%;
+  left:0;
   bottom: ${props => (props.styleMap ? `${-props.styleMap.paddingBottom}px` : 0)};
   height: ${props => (props.styleMap ? `${props.styleMap.height}px` : 0)};
   background: transparent;
@@ -42,7 +43,8 @@ export const Container = styled('div')<{styleMap: ContainerStyleMap | undefined}
   transition: opacity 0.5s;
 `;
 
-const Index: React.FunctionComponent<IndexProps> = ({ handleClickBubble, ...props }) => {
+const Index: React.FunctionComponent<IndexProps>  = React.memo(({ onClickBubble, ...props }) => {
+  console.log("test", onClickBubble, props )
   let containerRef = useRef(null);
   let { width } = useComponentSize(containerRef);
 
@@ -68,7 +70,7 @@ const Index: React.FunctionComponent<IndexProps> = ({ handleClickBubble, ...prop
       {size ? (
         <Stage {...size}>
           <Layer>
-            <BubbleList handleClickBubble={handleClickBubble} size={size} />
+            <BubbleList onClickBubble={onClickBubble} size={size} />
           </Layer>
         </Stage>
       ) : (
@@ -76,6 +78,6 @@ const Index: React.FunctionComponent<IndexProps> = ({ handleClickBubble, ...prop
       )}
     </Container>
   );
-};
+});
 
 export default Index;

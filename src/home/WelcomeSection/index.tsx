@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 const Bubbles = dynamic(() => import('../Bubbles'), { ssr: false });
 
 export interface WelcomeSectionProps {
-  handleClickBubble: any;
+  onClickBubble: any;
 }
 
 const Container = styled('div')<{ height: number }>`
@@ -17,7 +17,7 @@ const Container = styled('div')<{ height: number }>`
   position: relative;
 `;
 
-const WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) => {
+const WelcomeSection = ({ onClickBubble, ...pros }: WelcomeSectionProps) => {
   const [height, setHeight] = useState<number>(0);
   useEffect(() => {
     setHeight(window.innerHeight - NAVIGATION_HEIGHT);
@@ -38,7 +38,7 @@ const WelcomeSection = ({ handleClickBubble, ...pros }: WelcomeSectionProps) => 
           ariaLabel={`przejdź do aplikacji`}
         />
       </Content>
-      <Bubbles handleClickBubble={handleClickBubble} />
+      <Bubbles onClickBubble={onClickBubble} />
     </Container>
   );
 };

@@ -8,13 +8,13 @@ interface IndexProps {
 }
 
 const Index = ({ analytics }: IndexProps) => {
-  const handleClickBubble = () => {
+  const handleOnClickBubble = () => {
     analytics.event('Home', 'onClickBubble');
   };
 
   return (
     <HomeLayout>
-      <WelcomeSection handleClickBubble={handleClickBubble} />
+      <WelcomeSection onClickBubble={handleOnClickBubble} />
       <Footer />
     </HomeLayout>
   );

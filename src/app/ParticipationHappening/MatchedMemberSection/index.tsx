@@ -1,24 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Member } from '../model';
-import { Footer } from '../shared';
-import { Background, Box, NAVIGATION_SHADOW, BaseTypography, Spinner } from '../../../components';
+import { Box, NAVIGATION_SHADOW, BaseTypography, Spinner } from '../../../components';
 import { Theme } from '../../../utils';
-import media from "../../../utils/media"
+import media from '../../../utils/media';
 
-export interface MatchedMemberViewData {
+export interface MatchedMemberSectionData {
   me: Member;
   matchedMember: Member;
 }
 
-interface MatchedMemberViewProps {
-  data: MatchedMemberViewData;
+interface MatchedMemberSectionProps {
+  data: MatchedMemberSectionData;
 }
 
-const Index = ({ data: { me, matchedMember } }: MatchedMemberViewProps) => {
+const Index = ({ data: { me, matchedMember } }: MatchedMemberSectionProps) => {
   return (
     <Index.Container>
-      <Background />
       <Index.Text as="h1">
         <b>{me.name}</b>, Twój los to:
       </Index.Text>
@@ -28,10 +26,10 @@ const Index = ({ data: { me, matchedMember } }: MatchedMemberViewProps) => {
         </Index.SpinnerContainer>
         <Index.BigText as="p">{matchedMember.name}</Index.BigText>
       </Index.BigTextContainer>
-      <Footer />
     </Index.Container>
   );
 };
+
 Index.Container = styled(Box)`
   position: relative;
   padding: ${Theme.space.xregular - NAVIGATION_SHADOW}px ${Theme.space.small}px 200px

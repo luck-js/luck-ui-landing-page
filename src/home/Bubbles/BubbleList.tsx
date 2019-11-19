@@ -9,7 +9,7 @@ export interface Size {
 
 interface BubbleListProps {
   size: Size;
-  handleClickBubble: any;
+  onClickBubble: any;
 }
 
 const getTimeProp = (width: number) => {
@@ -29,7 +29,7 @@ const getBubbleProps = ({ width, height }: Size): BubbleConfig => {
   return { radius, x, y, opacity, fill: `${Theme.colors.main}` };
 };
 
-const BubbleList: React.FunctionComponent<BubbleListProps> = ({ size, handleClickBubble }) => {
+const BubbleList: React.FunctionComponent<BubbleListProps> = ({ size, onClickBubble }) => {
   const [bubbles, setBubbles] = useState<number[]>([]);
   useEffect(() => {
     if (!size.width) return;
@@ -48,7 +48,7 @@ const BubbleList: React.FunctionComponent<BubbleListProps> = ({ size, handleClic
               containerSize: size,
               time: getTimeProp(size.width),
               config: getBubbleProps(size),
-              handleClickBubble: handleClickBubble,
+              onClickBubble: onClickBubble,
             }}
           />
         );
