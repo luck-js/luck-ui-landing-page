@@ -7,5 +7,5 @@ export const List = styled('ul')`
   margin-block-end: ${Theme.space.medium}px;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  padding-inline-start: ${Theme.space.xregular}px;
+  padding-inline-start: 18px;
 `;
