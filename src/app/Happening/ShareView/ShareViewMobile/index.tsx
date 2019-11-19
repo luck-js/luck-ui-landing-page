@@ -1,10 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import useComponentSize from '@rehooks/component-size';
 import { ShareStatic } from 'react-native';
 import ShareElement, {ShareButton} from './ShareElement';
-import { BubblesShadowBackground } from '../../../BubblesShadowBackground';
-import { CanonApp, Flex, Box, NAVIGATION_HEIGHT, usePopup } from '../../../../components';
+import { BubblesNarrowBackground } from '../../../BubblesNarrowBackground';
+import { CanonApp, Flex, Box, usePopup } from '../../../../components';
 import { Theme } from '../../../../utils';
 import { ShareViewProps } from '../index';
 
@@ -16,25 +15,14 @@ const CONTAINER_BOTTOM_PADDING = 60;
 
 const Index = ({ data: { happening }, ...props }: ShareViewProps) => {
   const { showPopup } = usePopup();
+
   const handleOnClick = (uniqueLink: string) => {
-    console.log('handleOnClick')
     if (window.navigator.share) {
       window.navigator.share({ url: uniqueLink });
     } else {
       showPopup('Skopiowano !');
     }
   };
-
-  let containerRef = useRef(null);
-  let { height } = useComponentSize(containerRef);
-
-  const [shouldShowBackground, setShouldShowBackground] = useState(false);
-
-  useEffect(() => {
-    setShouldShowBackground(
-      window.innerHeight < height + CONTAINER_BOTTOM_PADDING + NAVIGATION_HEIGHT,
-    );
-  }, [height]);
 
   return (
     <Index.Container {...props}>
@@ -44,12 +32,12 @@ const Index = ({ data: { happening }, ...props }: ShareViewProps) => {
       >
         UDOSTĘPNIJ LINKI
       </CanonApp>
-      <Index.ShareButtonsContainer ref={containerRef}>
+      <Index.ShareButtonsContainer>
         {happening.participants.map(participant => (
           <ShareElement key={participant.uniqueLink} participant={participant} onClick={handleOnClick}/>
         ))}
       </Index.ShareButtonsContainer>
-      <Index.Background shouldShow={shouldShowBackground} />
+      <Index.Background/>
     </Index.Container>
   );
 };
@@ -78,13 +66,12 @@ Index.ShareButtonsContainer = styled(Flex)`
   }
 `;
 
-Index.Background = styled(BubblesShadowBackground)<{ shouldShow: boolean }>`
+Index.Background = styled(BubblesNarrowBackground)`
   width: 100%;
   bottom: 0;
   left: 0;
   height: 103px;
   position: fixed;
-  opacity: ${props => (props.shouldShow ? 1 : 0)};
   transition: 0.5s opacity;
 `;
 

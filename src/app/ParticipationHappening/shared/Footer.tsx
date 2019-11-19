@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import {BubblesShadowBackground} from "../../BubblesShadowBackground"
+import {BubblesNarrowBackground} from "../../BubblesNarrowBackground"
 import {Box} from "../../../components"
 import {Theme} from "../../../utils"
 
@@ -20,7 +20,7 @@ Footer.Container = styled(Box)`
   position: absolute;
   background-color: ${Theme.colors.main};
 `
-Footer.Background = styled(BubblesShadowBackground)`
+Footer.Background = styled(BubblesNarrowBackground)`
   width: 100%;
   height: 100%;
   position: absolute;

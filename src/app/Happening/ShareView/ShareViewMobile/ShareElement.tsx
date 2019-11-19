@@ -9,7 +9,6 @@ import Share from '../../../../../static/share.svg';
 import { Participant } from '../../model';
 
 export const ShareButton = ({ children, contrast = false, ...props }: any) => {
-  console.log("ShareButton: ", {contrast})
   return (
     <ShareButton.Button contrast={contrast} onMouseDown={(e: any) => e.preventDefault()} {...props} >
       <Element.Text>{children}</Element.Text>
@@ -44,7 +43,6 @@ ShareButton.Button = styled(Element.Container).attrs({ as: BaseButton })`
 const ShareElement = ({ participant, onClick }: { participant: Participant, onClick: any }) => {
   const [isCopied, setIsCopied] = useState(false);
   const handleOnCopy = () => {
-    console.log('handleOnCopy')
     setIsCopied(true)
     onClick(participant.uniqueLink);
   };

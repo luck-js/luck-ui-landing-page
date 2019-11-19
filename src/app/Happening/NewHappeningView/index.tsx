@@ -5,7 +5,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import { Theme, usePrevious } from '../../../utils';
 import { ElementList } from './ElementList';
 import { InputWithButton } from './InputWithButton';
-import { BubblesShadowBackground } from '../../BubblesShadowBackground';
+import { BubblesNarrowBackground } from '../../BubblesNarrowBackground';
 import { INIT_NEW_HAPPENING, NewHappening, NewParticipant } from '../model';
 import { apiAxios } from '../../api.axios';
 import {
@@ -249,7 +249,7 @@ Index.Button = styled(ButtonWithIcon).attrs({...Theme.textStyles.buttonApp})`
   width: 270px;
 `;
 
-Index.Background = styled(BubblesShadowBackground)`
+Index.Background = styled(BubblesNarrowBackground)`
   width: 100%;
   height: 100%;
   position: absolute;
