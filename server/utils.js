@@ -2,6 +2,9 @@ const ROUTE_MAP = {
   'bot-politics': ['polityka-prywatnosci-pan-mikolaj-luck'],
   'webiste-politics': ['polityka-prywatnosci-strony'],
   blog: ['posts', 'posty'],
+  'app/happening/new-happening': ['app'],
+  'app/happening/share': ['app/udostepnij-linki'],
+  'app/participation-happening/participation-happening': ['app/losuj'],
 };
 
 const ROUTE_MAP_SITEMAP = {
@@ -13,6 +16,9 @@ const ROUTE_MAP_SITEMAP = {
 
 const ROUTE_MAP_CONFIG = {
   'blog/[id]': false,
+  'app/happening/new-happening': false,
+  'app/happening/share': false,
+  'app/participation-happening/participation-happening': false,
 }
 
 const withousSlash = (pathname) => {

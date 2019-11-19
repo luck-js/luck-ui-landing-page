@@ -3,11 +3,20 @@ import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import { NextSeo } from 'next-seo/lib';
-import {MediumText, Canon, Flex, TinySecond, List, RatioLazyImage, Trafalgar, TextLink} from '../../components';
-import BlogLayout from '../../components/BlogLayout';
 import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
-import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../utils';
-import media from '../../utils/media';
+import BlogLayout from '../../src/blog/BlogLayout';
+import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../src/utils';
+import media from '../../src/utils/media';
+import {
+  MediumText,
+  Canon,
+  Flex,
+  TinySecond,
+  List,
+  RatioLazyImage,
+  Trafalgar,
+  TextLink,
+} from '../../src/components';
 
 const ContentImage = styled('img').attrs({ alt: '' })`
   width: 100%;
@@ -24,7 +33,7 @@ const Header = styled(Trafalgar).attrs({
 const components = {
   p: Text,
   h2: Header,
-  a: ({children}:any) => <TextLink modifiers={["darkGray"]} >{children}</TextLink>,
+  a: ({ children }: any) => <TextLink modifiers={['darkGray']}>{children}</TextLink>,
   img: ContentImage,
   ul: List,
 };
@@ -67,6 +76,7 @@ const HashtagsText = styled(TinySecond)`
 `;
 
 const PostContent: React.FunctionComponent<ViewPost> = ({
+  host,
   title,
   description,
   content,
@@ -87,7 +97,7 @@ const PostContent: React.FunctionComponent<ViewPost> = ({
       openGraph={{
         title,
         description,
-        url: `https://luck.org.pl/blog/${slug}`,
+        url: `https://${host}/blog/${slug}`,
         images: [{ url: cover.url }],
         article: {
           publishedTime: createdAt,
@@ -133,11 +143,12 @@ export const POST_QUERY = gql`
   }
 `;
 
-interface StatelessPage<P = { slug: string; cmsUrl: string, shouldShowDraft: boolean }> extends React.FunctionComponent<P> {
+interface IndexPage<P = { host:string;slug: string; cmsUrl: string; shouldShowDraft: boolean }>
+  extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
-const Index: StatelessPage = ({ slug, cmsUrl, shouldShowDraft }) => {
+const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const where = { slug };
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
     POST_QUERY,
@@ -151,17 +162,15 @@ const Index: StatelessPage = ({ slug, cmsUrl, shouldShowDraft }) => {
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
 
-  return (
-    <BlogLayout backgroundColor={Theme.colors.main}>
-      {viewPost && <PostContent {...viewPost} />}
-    </BlogLayout>
-  );
+  return <BlogLayout>{viewPost && <PostContent {...viewPost} host={host} />}</BlogLayout>;
 };
 
 Index.getInitialProps = async function({ query }) {
   return {
-    slug: query.id, cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
-    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === "true"
+    host: process.env.VIRTUAL_HOST ? process.env.VIRTUAL_HOST : '',
+    slug: query.id,
+    cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
   };
 };
 

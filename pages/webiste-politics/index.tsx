@@ -1,15 +1,14 @@
 import React from 'react';
-import BlogLayout from '../../components/BlogLayout';
-import { Theme } from '../../utils';
+import BlogLayout from '../../src/blog/BlogLayout';
+import { Theme } from '../../src/utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
-import {Canon, Flex, List, MediumText, TextLink} from '../../components';
-import media from '../../utils/media';
+import {Box, Canon, List, MediumText, TextLink} from '../../src/components';
+import media from '../../src/utils/media';
 
-const Container = styled(Flex)`
+const Container = styled(Box)`
   background-color: ${Theme.colors.main};
   color: ${Theme.colors.black};
-  flex-wrap: wrap;
   max-width: 1012px;
   margin: 0 auto;
   padding: ${Theme.space.small}px ${Theme.space.xregular}px;
@@ -39,7 +38,7 @@ const Index = () => {
         title="Luck - Polityka prywatności strony"
         description="Polityka prywatności strony. OŚWIADCZENIE O OCHRONIE DANYCH OSOBOWYCH. Informacja dotycząca zbierania danych osobowych"
       />
-      <BlogLayout backgroundColor={Theme.colors.main}>
+      <BlogLayout>
         <Container>
           <Canon>Polityka prywatności strony</Canon>
           <Text>OŚWIADCZENIE O OCHRONIE DANYCH OSOBOWYCH</Text>
@@ -366,4 +365,5 @@ const Index = () => {
     </>
   );
 };
+
 export default Index;

@@ -1,23 +1,23 @@
 import React from 'react';
-import Layout from '../../components/Layout';
-import WelcomeSection from '../../components/WelcomeSection';
-import { Theme } from '../../utils';
-import Footer from "../../components/Footer"
+import WelcomeSection from '../../src/home/WelcomeSection';
+import Footer from '../../src/home/Footer';
+import HomeLayout from '../../src/home/HomeLayout';
 
 interface IndexProps {
   analytics: any;
 }
 
 const Index = ({ analytics }: IndexProps) => {
-  const handleClickBubble = () => {
+  const handleOnClickBubble = () => {
     analytics.event('Home', 'onClickBubble');
   };
 
   return (
-    <Layout backgroundColor={Theme.colors.mainContrast}>
-      <WelcomeSection handleClickBubble={handleClickBubble} />
+    <HomeLayout>
+      <WelcomeSection onClickBubble={handleOnClickBubble} />
       <Footer />
-    </Layout>
+    </HomeLayout>
   );
 };
+
 export default Index;
