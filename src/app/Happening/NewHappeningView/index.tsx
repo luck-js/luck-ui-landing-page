@@ -118,7 +118,7 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
         </CanonApp>
         <Input
           type="text"
-          placeholder="Nazwa wydarzenia..."
+          label="Nazwa wydarzenia"
           value={happening.name}
           onChange={handleOnChangeTitle}
         />
@@ -130,7 +130,7 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
           as={TextareaAutosize}
           value={happening.description}
           onChange={handleOnChangeDescription}
-          placeholder="Opis wydarzenia..."
+          label="Opis wydarzenia"
         />
         <Box ref={myRef}>
           <CanonApp
@@ -146,7 +146,7 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
           onClick={handleOnEnterParticipantName}
           onKeyPress={handleKeyPress}
           disabled={isEmpty(participantName)}
-          placeholder="Imię uczestnika..."
+          label="Imię uczestnika"
         />
         <ElementList
           mt={['small', 'small', 'small', 'small']}
