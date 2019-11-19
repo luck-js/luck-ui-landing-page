@@ -92,8 +92,12 @@ ShareRow.Element = styled(Box)`
     top: 50%;
     margin-top: -6px;
     width: 13px;
-    transform: rotate(270deg);
+    height: auto;
     transition: left 1s;
+    
+    path  {
+      stroke: ${Theme.colors.black};
+    }
   }
 `;
 
