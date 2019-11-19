@@ -45,11 +45,11 @@ Element.Button = styled(BaseButton)`
   cursor: pointer;
   position: absolute;
   top: 50%;
-  margin-top: -7.5px;
+  margin-top: -7px;
   right: 15px;
-  width: 15px;
+  width: 14px;
+  height: 14px;
   text-align: center;
-  height: 15px;
   display: block;
 
   svg {
