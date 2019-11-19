@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Member } from '../model';
-import { Box, NAVIGATION_SHADOW, BaseTypography, Spinner } from '../../../components';
+import { Box, BaseTypography, Spinner } from '../../../components';
 import { Theme } from '../../../utils';
 import media from '../../../utils/media';
 
@@ -32,15 +32,8 @@ const Index = ({ data: { me, matchedMember } }: MatchedMemberSectionProps) => {
 
 Index.Container = styled(Box)`
   position: relative;
-  padding: ${Theme.space.xregular - NAVIGATION_SHADOW}px ${Theme.space.small}px 200px
-    ${Theme.space.small}px;
   color: ${Theme.colors.main};
-  text-align: center;
-  background-color: ${Theme.colors.mainContrast};
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  text-align: center;;
 `;
 
 Index.Text = styled(BaseTypography)`

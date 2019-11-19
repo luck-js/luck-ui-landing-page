@@ -7,7 +7,7 @@ import {
   BaseTypography,
   Canon,
   Trafalgar,
-  BaseButton, NAVIGATION_SHADOW,
+  BaseButton,
 } from '../../../components';
 import { Happening, Member } from '../model';
 import media from '../../../utils/media';
@@ -54,7 +54,7 @@ const Index: any = ({ data: { member, happening }, onClick }: WelcomeMemberSecti
   };
 
   return (
-    <Index.Container>
+    <>
       <Index.HappeningContentWrapper>{renderHappeningContent()}</Index.HappeningContentWrapper>
       <Index.Text as="h2" pt={['xregular', 'xregular', 'large', 'large']}>
         <b>{member.name}</b>, to Ty?
@@ -65,19 +65,9 @@ const Index: any = ({ data: { member, happening }, onClick }: WelcomeMemberSecti
       <Index.Button onClick={onClick} onMouseDown={(e: any) => e.preventDefault()}>
         LOSUJ
       </Index.Button>
-    </Index.Container>
+    </>
   );
 };
-
-Index.Container = styled(Box)`
-  position: relative;
-  padding: ${Theme.space.xregular - NAVIGATION_SHADOW}px ${Theme.space.small}px 200px
-    ${Theme.space.small}px;
-  color: ${Theme.colors.main};
-  text-align: center;
-  background-color: ${Theme.colors.mainContrast};
-  min-height: 100%;
-`;
 
 Index.HappeningContentWrapper = styled(Box)`
   min-height: 80px;
