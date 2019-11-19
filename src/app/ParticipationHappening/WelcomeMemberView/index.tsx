@@ -105,6 +105,8 @@ Index.HappeningContentContainer = styled(Box)`
   border-radius: 15px;
   border: 2px dashed rgba(249, 249, 249, 0.2);
   text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
 `;
 
 Index.Text = styled(BaseTypography)`
@@ -138,7 +140,7 @@ Index.Button = styled(BaseButton)`
   color: ${Theme.colors.mainContrast};
   text-align: center;
   text-transform: uppercase;
-  border-radius: 20px;
+  border-radius: 23px;
   padding: 8px 15px;
   font-weight: 800;
   transition: border-color 0.4s, color 0.4s, background-color 0.4s, box-shadow 0.4s, transform 0.4s,
@@ -150,6 +152,8 @@ Index.Button = styled(BaseButton)`
   `}
   
   ${media.greaterThan('tablet')`
+    border-radius: 28px;
+    font-size: 42px;
     width: 162px;
     height: 162px
   `}
