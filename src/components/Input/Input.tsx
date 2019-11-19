@@ -6,7 +6,7 @@ import { Box } from '../Box';
 import { useState } from 'react';
 
 export const Input = ({ id, label, onBlur, onFocus, type, refs, className, mt, ...otherProps }: any) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(otherProps.value.length !== 0);
   const [isFocus, setIsFocus] = useState(false);
 
   const handleFocus = (event: any) => {
@@ -54,7 +54,7 @@ Input.Container = styled(Flex)<any>`
   box-shadow: inset 0px 1px 4px rgba(0, 0, 0, 0.05);
 
   font-weight: 600;
-  padding: 9px 10px 6px;
+  padding: 9px 0 6px;
   border: 1px solid transparent;
   border-color: ${props => (props.isFocus ? Theme.colors.gray2 : "transparent")};
   transition: 0.5s border;
