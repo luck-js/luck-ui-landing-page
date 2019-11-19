@@ -35,7 +35,7 @@ export const ShareRow = ({ participant }: { participant: Participant }) => {
           <ShareRow.Element className="uniqueLink" {...Theme.textStyles.buttonApp} >
             <WideArrow className="wideArrow" />
             <ShareRow.Input ref={inputRef} type="text" value={participant.uniqueLink}
-                            onFocus={ handleFocus }/>
+                            onFocus={ handleFocus } readOnly/>
             <ShareRow.Button onMouseDown={(e: any) => e.preventDefault()}>
               <Copy />
             </ShareRow.Button>

@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import useComponentSize from '@rehooks/component-size';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import { ShareStatic } from 'react-native';
-import ShareButton from './ShareButton';
+import ShareElement, {ShareButton} from './ShareElement';
 import { BubblesShadowBackground } from '../../../BubblesShadowBackground';
 import { CanonApp, Flex, Box, NAVIGATION_HEIGHT, usePopup } from '../../../../components';
 import { Theme } from '../../../../utils';
@@ -17,7 +16,8 @@ const CONTAINER_BOTTOM_PADDING = 60;
 
 const Index = ({ data: { happening }, ...props }: ShareViewProps) => {
   const { showPopup } = usePopup();
-  const handleOnClick = (uniqueLink: string) => () => {
+  const handleOnClick = (uniqueLink: string) => {
+    console.log('handleOnClick')
     if (window.navigator.share) {
       window.navigator.share({ url: uniqueLink });
     } else {
@@ -46,11 +46,7 @@ const Index = ({ data: { happening }, ...props }: ShareViewProps) => {
       </CanonApp>
       <Index.ShareButtonsContainer ref={containerRef}>
         {happening.participants.map(participant => (
-          <CopyToClipboard key={participant.uniqueLink} text={participant.uniqueLink}>
-            <ShareButton onClick={handleOnClick(participant.uniqueLink)}>
-              {participant.name}
-            </ShareButton>
-          </CopyToClipboard>
+          <ShareElement key={participant.uniqueLink} participant={participant} onClick={handleOnClick}/>
         ))}
       </Index.ShareButtonsContainer>
       <Index.Background shouldShow={shouldShowBackground} />
