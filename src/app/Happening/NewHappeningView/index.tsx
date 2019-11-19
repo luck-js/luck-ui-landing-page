@@ -18,6 +18,7 @@ import {
   SpinnerFadingCircle,
 } from '../../../components';
 import media from '../../../utils/media';
+import useComponentSize from "@rehooks/component-size"
 
 export interface NewHappeningViewData {
   name: string;
@@ -38,6 +39,8 @@ interface NewHappeningViewPage<P = NewHappeningViewProps> extends React.Function
 const scrollToRef = (ref: any) => {
   window.scrollTo(0, ref.current.offsetTop + NAVIGATION_HEIGHT);
 };
+
+const TEXTAREA_ROWS_NUMBERS = [5, 5, 7];
 
 const Index: NewHappeningViewPage = ({ data: { name } }) => {
   const [happening, setHappening] = useState<NewHappening>({ ...INIT_NEW_HAPPENING, name });
@@ -107,8 +110,25 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
     setIsValid(happening.participants.length > 2);
   }, [happening.participants]);
 
+  const [textareaRows, setTextareaRows] = useState<number>(5);
+
+  let containerRef = useRef(null);
+  let { width } = useComponentSize(containerRef);
+
+  useEffect(() => {
+    const breakpointIndex = Theme.breakpoints.findIndex(
+      breakpoint => window.innerWidth < parseInt(breakpoint),
+    );
+
+    const textareaRowsNumber = TEXTAREA_ROWS_NUMBERS[breakpointIndex]
+      ? TEXTAREA_ROWS_NUMBERS[breakpointIndex]
+      : TEXTAREA_ROWS_NUMBERS[TEXTAREA_ROWS_NUMBERS.length - 1];
+    setTextareaRows(textareaRowsNumber);
+
+  }, [width]);
+
   return (
-    <Index.Container>
+    <Index.Container ref={containerRef} >
       <Index.ContentContainer>
         <CanonApp
           pt={['xregular', 'xregular', 'large', 'large']}
@@ -126,7 +146,7 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
           autosize
           mt={['xregular', 'xregular', 'xregular', 'xregular']}
           type="text"
-          rows={5}
+          rows={textareaRows}
           as={TextareaAutosize}
           value={happening.description}
           onChange={handleOnChangeDescription}
