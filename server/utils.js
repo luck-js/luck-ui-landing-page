@@ -1,6 +1,7 @@
 const ROUTE_MAP = {
   'bot-politics': ['polityka-prywatnosci-pan-mikolaj-luck'],
   'webiste-politics': ['polityka-prywatnosci-strony'],
+  'facebook-contest': ['regulamin-facebook-konkurs'],
   blog: ['posts', 'posty'],
   'app/happening/new-happening': ['app'],
   'app/happening/share': ['app/udostepnij-linki'],
@@ -11,6 +12,7 @@ const ROUTE_MAP_SITEMAP = {
   'index': '',
   'bot-politics': 'polityka-prywatnosci-pan-mikolaj-luck',
   'webiste-politics': 'polityka-prywatnosci-strony',
+  'facebook-contest': 'regulamin-facebook-konkurs',
   // 'blog/[id]': false,
 };
 

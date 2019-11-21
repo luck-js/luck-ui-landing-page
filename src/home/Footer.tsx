@@ -52,6 +52,17 @@ const Footer = () => {
           >
             Pan Mikołaj Luck
           </TextLink>
+        </Link>{' '}
+        &{' '}
+        <Link href={'./regulamin-facebook-konkurs'}>
+          <TextLink
+            href={'./regulamin-facebook-konkurs'}
+            aria-label={'przejdź do regulaminu facebook konkursu'}
+            modifiers={['black']}
+            underline
+          >
+            konkurs
+          </TextLink>
         </Link>
       </SmallText>
     </Container>

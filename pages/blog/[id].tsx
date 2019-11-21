@@ -15,7 +15,7 @@ import {
   List,
   RatioLazyImage,
   Trafalgar,
-  TextLink,
+  TextLink, ListOl,
 } from '../../src/components';
 
 const ContentImage = styled('img').attrs({ alt: '' })`
@@ -33,9 +33,10 @@ const Header = styled(Trafalgar).attrs({
 const components = {
   p: Text,
   h2: Header,
-  a: ({ children }: any) => <TextLink modifiers={['darkGray']}>{children}</TextLink>,
+  a: ({ children, ...props }: any) => <TextLink modifiers={['darkGray']} {...props}>{children}</TextLink>,
   img: ContentImage,
   ul: List,
+  ol: ListOl,
 };
 
 const processor = getProcessor(components);
