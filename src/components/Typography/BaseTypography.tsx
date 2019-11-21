@@ -9,6 +9,9 @@ import {
   fontWeight,
   letterSpacing,
   lineHeight,
+  overflow,
+  minHeight,
+  maxHeight,
   size,
   space,
   textStyle,
@@ -17,6 +20,9 @@ import {
 
 export const BaseTypography = styled('div')`
   ${width}
+  ${overflow}
+  ${minHeight}
+  ${maxHeight}
   ${space}
   ${fontSize}
   ${fontStyle}
