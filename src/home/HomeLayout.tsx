@@ -6,7 +6,7 @@ const HomeLayout: React.FunctionComponent = ({ children }) => (
   <Fragment>
     <BaseLayout backgroundColor={Theme.colors.mainContrast}>
       <Background />
-      <Navigation />
+      <Navigation isAbsolutePosition />
       {children}
     </BaseLayout>
   </Fragment>

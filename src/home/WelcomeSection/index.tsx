@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { LogoHeading, NAVIGATION_HEIGHT } from '../../components';
+import { LogoHeading } from '../../components';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
@@ -11,23 +11,19 @@ export interface WelcomeSectionProps {
   onClickBubble: any;
 }
 
-const Container = styled('div')<{ height: number }>`
-  height: ${props => (props.height ? `${props.height}px` : `100%`)};
+const Container = styled('div')`
+  height: 100%;
   overflow: hidden;
   position: relative;
 `;
 
 const WelcomeSection = ({ onClickBubble, ...pros }: WelcomeSectionProps) => {
-  const [height, setHeight] = useState<number>(0);
-  useEffect(() => {
-    setHeight(window.innerHeight - NAVIGATION_HEIGHT);
-  }, []);
 
   return (
-    <Container height={height} {...pros}>
+    <Container {...pros}>
       <Content>
         <Logo src="static/logo-luck.png" />
-        <LogoHeading pt={['50px', '50px', '50px', '50px']}>
+        <LogoHeading pt={['50px', '50px', '50px', '50px']} maxHeight={['116px', '116px', '160px', '196px']} overflow="hidden">
           Organizacja Mikołajek <br />
           nie była nigdy tak łatwa!
         </LogoHeading>

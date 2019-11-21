@@ -9,13 +9,14 @@ import { Theme } from '../utils';
 
 interface NavigationProps {
   shouldShowShadow?: boolean;
+  isAbsolutePosition?: boolean;
 }
 
 export const NAVIGATION_HEIGHT = 50;
 export const NAVIGATION_DESKTOP_HEIGHT = 74;
 export const NAVIGATION_SHADOW = 4;
 
-const NavigationHorizontalPadding = styled(Box)<{ shouldShowShadow: boolean }>`
+const NavigationHorizontalPadding = styled(Box)<{ shouldShowShadow: boolean, isAbsolutePosition:boolean }>`
   padding: ${Theme.space.small}px ${Theme.space.regular}px;
   margin-bottom: ${props => (props.shouldShowShadow ? `${NAVIGATION_SHADOW}px` : '0')};
   box-shadow: ${props =>
@@ -23,6 +24,9 @@ const NavigationHorizontalPadding = styled(Box)<{ shouldShowShadow: boolean }>`
       ? `0px ${NAVIGATION_SHADOW}px ${NAVIGATION_SHADOW}px rgba(0, 0, 0, 0.05)`
       : 'none'};
   
+  width: 100%;
+  position: ${props => props.isAbsolutePosition ? 'absolute' : 'inherit'};
+  z-index: 2;
   ${media.greaterThan('mobile')`
     
   `}
