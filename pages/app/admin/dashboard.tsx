@@ -2,6 +2,7 @@ import React from 'react';
 import DashboardView, { DashboardViewData } from '../../../src/app/Admin/DashboardView';
 
 import AppLayout from '../../../src/app/AppLayout';
+import {apiAxios} from "../../../src/app/api.axios"
 
 interface DashboardProps {
   data: DashboardViewData;
@@ -19,10 +20,11 @@ const Dashboard: NewHappeningPage = ({ data }) => {
   );
 };
 
-Dashboard.getInitialProps = async ({ query }) => {
+Dashboard.getInitialProps = async ( ) => {
+  const { data } = await apiAxios.get(`/api/v1/happening`);
   return {
     data: {
-      name: query.name ? query.name : '',
+      happenings: data,
     },
   };
 };

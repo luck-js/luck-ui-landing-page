@@ -7787,6 +7787,11 @@ react-sizeme@^2.6.7:
     shallowequal "^1.1.0"
     throttle-debounce "^2.1.0"
 
+react-table@^7.0.0-beta.14:
+  version "7.0.0-beta.14"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.0.0-beta.14.tgz#17824db22de1b082ed9fdb8e3bcb21612abd6523"
+  integrity sha512-5pUAq+Dv/Dwo/iMZHRjxlBpphOclgDDJ0BBW26MgzWPZY+PfhqzIWVk7HnIFa8GJW8dzpMu20/jiWRhwav1N/A==
+
 react@^16.9.0:
   version "16.10.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.10.2.tgz#a5ede5cdd5c536f745173c8da47bda64797a4cf0"
