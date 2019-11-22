@@ -1,12 +1,15 @@
-import { useTable } from 'react-table';
+import { useSortBy, useTable } from 'react-table';
 import styled from 'styled-components';
 
 export const Table = ({ columns, data }: any) => {
   // Use the state and functions returned from useTable to build your UI
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
-    columns,
-    data,
-  });
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
+    {
+      columns,
+      data,
+    },
+    useSortBy,
+  );
 
   // Render the UI for your table
   return (
@@ -14,8 +17,13 @@ export const Table = ({ columns, data }: any) => {
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+            {headerGroup.headers.map((column: any) => (
+              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                <>
+                  {column.render('Header')}
+                  <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
+                </>
+              </th>
             ))}
           </tr>
         ))}
