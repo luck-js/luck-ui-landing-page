@@ -10,6 +10,7 @@ interface IParticipantsView {
 
 interface IPublishedHappeningView {
   id: string;
+  createdAt: string;
   name: string;
   description: string;
   participants: IParticipantsView[];
@@ -23,10 +24,25 @@ export interface DashboardViewProps {
   data: DashboardViewData;
 }
 
+function timeConverter(dateString: string){
+  const a = new Date(dateString);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const year = a.getFullYear();
+  const month = months[a.getMonth()];
+  const date = a.getDate();
+  const hour = a.getHours();
+  const min = a.getMinutes();
+  const sec = a.getSeconds();
+  if(Number.isNaN(date)) return ""
+  return date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+}
+
 const mapToTableData: any = (happening: IPublishedHappeningView, lp: number) => {
-  const { name, description, participants } = happening;
+  const { name, createdAt, description, participants } = happening;
+
   return {
     lp,
+    createdAt: createdAt ? timeConverter(createdAt) : "",
     name,
     description,
     participants: participants.reduce((prev, {name}) => `${prev} ${name},`,""),
@@ -41,6 +57,10 @@ const Index = ({ data: { happenings }, ...props }: DashboardViewProps) => {
       {
         Header: 'Lp',
         accessor: 'lp',
+      },
+      {
+        Header: 'Created',
+        accessor: 'createdAt',
       },
       {
         Header: 'Name',
