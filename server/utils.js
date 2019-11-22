@@ -6,6 +6,7 @@ const ROUTE_MAP = {
   'app/happening/new-happening': ['app'],
   'app/happening/share': ['app/udostepnij-linki'],
   'app/participation-happening/participation-happening': ['app/losuj'],
+  'app/admin/dashboard': ['app/admin'],
 };
 
 const ROUTE_MAP_SITEMAP = {
@@ -21,6 +22,7 @@ const ROUTE_MAP_CONFIG = {
   'app/happening/new-happening': false,
   'app/happening/share': false,
   'app/participation-happening/participation-happening': false,
+  'app/admin/dashboard': false,
 }
 
 const withousSlash = (pathname) => {
