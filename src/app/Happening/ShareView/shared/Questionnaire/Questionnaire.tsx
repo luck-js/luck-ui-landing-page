@@ -21,7 +21,7 @@ interface QuestionnaireComponent extends React.FunctionComponent<QuestionnairePr
 }
 
 const Questionnaire: QuestionnaireComponent = () => {
-  const [stepIndex, setStepIndex] = useState(2);
+  const [stepIndex, setStepIndex] = useState(0);
   const handleOnClickStar = (index: number) => {
     console.log(index)
     setStepIndex(1)
@@ -39,6 +39,7 @@ const Questionnaire: QuestionnaireComponent = () => {
 
   const handleOnSubmit = () => {
     console.log("handleOnSubmit")
+    setStepIndex(3)
   };
 
   return (
@@ -78,6 +79,14 @@ const Questionnaire: QuestionnaireComponent = () => {
         />
         <Questionnaire.Button mt={['regular', 'regular', 'xlarge', 'xlarge']} colorfull onClick={handleOnSubmit} onMouseDown={(e: any) => e.preventDefault()}>Wyślij!</Questionnaire.Button>
       </Box>
+
+      <Box display={stepIndex === 3 ? "block" : "none"}>
+        <Questionnaire.Header mb={['regular', 'regular', 'xlarge', 'xlarge']}>
+          Jesteś wspaniały! <br/> Dziękujemy!
+        </Questionnaire.Header>
+        <Questionnaire.TextLink underline modifiers={['black']} onMouseDown={(e: any) => e.preventDefault()}>Wróć do udostępniania linków</Questionnaire.TextLink>
+      </Box>
+
 
     </Questionnaire.Container>
   );
