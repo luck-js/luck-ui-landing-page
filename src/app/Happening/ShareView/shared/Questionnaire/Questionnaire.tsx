@@ -1,10 +1,11 @@
 import React, { createContext, useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from '../../../../../components/Modal';
-import { CanonApp } from '../../../../../components/Typography';
+import {CanonApp, InputApp} from '../../../../../components/Typography';
 import { Theme } from '../../../../../utils';
-import {Box, Flex, TextLink} from '../../../../../components';
+import {Box, Button, Flex, Input, TextLink} from '../../../../../components';
 import { Stars } from './Stars';
+import TextareaAutosize from 'react-autosize-textarea';
 
 interface QuestionnaireProps {}
 
@@ -14,15 +15,31 @@ interface QuestionnaireComponent extends React.FunctionComponent<QuestionnairePr
   Content: any;
   StarsContainer: any;
   Stars: any;
+  TextLink: any;
   Button: any;
+  Text: any;
 }
 
 const Questionnaire: QuestionnaireComponent = () => {
-  const [stepIndex, setStepIndex] = useState(0);
+  const [stepIndex, setStepIndex] = useState(2);
   const handleOnClickStar = (index: number) => {
     console.log(index)
     setStepIndex(1)
   }
+
+  const handleOnClickNext = () => {
+    setStepIndex(2)
+  }
+
+  const [opinion, setOpinion] = useState('');
+
+  const handleOnChangeOpinion = ({ target: { value } }: any) => {
+    setOpinion(value);
+  }
+
+  const handleOnSubmit = () => {
+    console.log("handleOnSubmit")
+  };
 
   return (
     <Questionnaire.Container>
@@ -37,20 +54,37 @@ const Questionnaire: QuestionnaireComponent = () => {
         </Questionnaire.Content>
       </Box>
 
-
-
       <Box display={stepIndex === 1 ? "block" : "none"}>
         <Questionnaire.Header mb={['regular', 'regular', 'xlarge', 'xlarge']}>
           Dziękujemy!
         </Questionnaire.Header>
-        <Questionnaire.Button underline modifiers={['black']}>Podziel się z nami swoją opinią!</Questionnaire.Button>
+        <Questionnaire.TextLink underline modifiers={['black']} onClick={handleOnClickNext} onMouseDown={(e: any) => e.preventDefault()}>Podziel się z nami swoją opinią!</Questionnaire.TextLink>
+      </Box>
+
+      <Box display={stepIndex === 2 ? "block" : "none"}>
+        <Questionnaire.Header mb={['small', 'small', 'large', 'large']}>
+          Co sądzisz o aplikacji?
+        </Questionnaire.Header>
+        <Questionnaire.Text mb={['small', 'small', 'large', 'large']}>
+          Będziemy ogromnie wdzięczni, gdy napiszesz nam np.: Jak byś sugerował rozwijać aplikacje bądź coś co byś poprawił?
+        </Questionnaire.Text>
+        <Input
+          autosize
+          type="text"
+          rows={5}
+          value={opinion}
+          as={TextareaAutosize}
+          onChange={handleOnChangeOpinion}
+        />
+        <Questionnaire.Button mt={['regular', 'regular', 'xlarge', 'xlarge']} colorfull onClick={handleOnSubmit} onMouseDown={(e: any) => e.preventDefault()}>Wyślij!</Questionnaire.Button>
       </Box>
 
     </Questionnaire.Container>
   );
 };
 
-Questionnaire.Button = styled(TextLink)``;
+Questionnaire.Button = styled(Button)``;
+Questionnaire.TextLink = styled(TextLink)``;
 
 Questionnaire.Stars = styled(Stars)``;
 
@@ -69,6 +103,10 @@ Questionnaire.StarsContainer = styled(Flex)`
 
 Questionnaire.Header = styled(CanonApp)`
   color: ${Theme.colors.black};
+`;
+Questionnaire.Text = styled(InputApp)`
+  color: ${Theme.colors.black};
+  text-align: left;
 `;
 
 const QuestionnaireContext = createContext<any>(null);
