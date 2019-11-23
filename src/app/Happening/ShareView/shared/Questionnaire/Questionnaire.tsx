@@ -1,11 +1,10 @@
 import React, { createContext, useState } from 'react';
 import styled from 'styled-components';
-import { Modal } from '../../../../../components/Modal';
-import {CanonApp, InputApp} from '../../../../../components/Typography';
-import { Theme } from '../../../../../utils';
-import {Box, Button, Flex, Input, TextLink} from '../../../../../components';
-import { Stars } from './Stars';
 import TextareaAutosize from 'react-autosize-textarea';
+import {delay, Theme} from '../../../../../utils';
+import {CanonApp, InputApp} from '../../../../../components/Typography';
+import {Box, Button, Flex, Input, TextLink, Modal} from '../../../../../components';
+import { Stars } from './Stars';
 
 interface QuestionnaireProps {
   onClose: any;
@@ -24,8 +23,11 @@ interface QuestionnaireComponent extends React.FunctionComponent<QuestionnairePr
 
 const Questionnaire: QuestionnaireComponent = ({onClose}) => {
   const [stepIndex, setStepIndex] = useState(0);
-  const handleOnClickStar = (index: number) => {
-    console.log(index)
+  const [isStarClicked, setIsStarCliked] = useState(false);
+  const handleOnClickStar = async () => {
+    if(isStarClicked) return
+    setIsStarCliked(true)
+    await delay(500);
     setStepIndex(1)
   }
 
@@ -40,35 +42,34 @@ const Questionnaire: QuestionnaireComponent = ({onClose}) => {
   }
 
   const handleOnSubmit = () => {
-    console.log("handleOnSubmit")
     setStepIndex(3)
   };
 
   return (
     <Questionnaire.Container>
       <Box display={stepIndex === 0 ? "block" : "none"}>
-        <Questionnaire.Header mb={['small', 'small', 'large', 'large']}>
+        <Questionnaire.Header mb={['small', 'small', 'medium', 'medium']}>
           Oceń Aplikację:
         </Questionnaire.Header>
         <Questionnaire.Content>
           <Questionnaire.StarsContainer>
-            <Questionnaire.Stars count={5} onClick={handleOnClickStar}/>
+            <Questionnaire.Stars count={5} isShouldBeFreeze={isStarClicked} onClick={handleOnClickStar}/>
           </Questionnaire.StarsContainer>
         </Questionnaire.Content>
       </Box>
 
       <Box display={stepIndex === 1 ? "block" : "none"}>
-        <Questionnaire.Header mb={['regular', 'regular', 'xlarge', 'xlarge']}>
+        <Questionnaire.Header mb={['regular', 'regular', 'xregular', 'xregular']}>
           Dziękujemy!
         </Questionnaire.Header>
         <Questionnaire.TextLink underline modifiers={['black']} onClick={handleOnClickNext} onMouseDown={(e: any) => e.preventDefault()}>Podziel się z nami swoją opinią!</Questionnaire.TextLink>
       </Box>
 
       <Box display={stepIndex === 2 ? "block" : "none"}>
-        <Questionnaire.Header mb={['small', 'small', 'large', 'large']}>
+        <Questionnaire.Header mb={['small', 'small', 'medium', 'medium']}>
           Co sądzisz o aplikacji?
         </Questionnaire.Header>
-        <Questionnaire.Text mb={['small', 'small', 'large', 'large']}>
+        <Questionnaire.Text mb={['small', 'small', 'medium', 'medium']}>
           Będziemy ogromnie wdzięczni, gdy napiszesz nam np.: Jak byś sugerował rozwijać aplikacje bądź coś co byś poprawił?
         </Questionnaire.Text>
         <Input
@@ -79,11 +80,11 @@ const Questionnaire: QuestionnaireComponent = ({onClose}) => {
           as={TextareaAutosize}
           onChange={handleOnChangeOpinion}
         />
-        <Questionnaire.Button mt={['regular', 'regular', 'xlarge', 'xlarge']} colorfull onClick={handleOnSubmit} onMouseDown={(e: any) => e.preventDefault()}>Wyślij!</Questionnaire.Button>
+        <Questionnaire.Button mt={['regular', 'regular', 'xregular', 'xregular']} colorfull onClick={handleOnSubmit} onMouseDown={(e: any) => e.preventDefault()}>Wyślij!</Questionnaire.Button>
       </Box>
 
       <Box display={stepIndex === 3 ? "block" : "none"}>
-        <Questionnaire.Header mb={['regular', 'regular', 'xlarge', 'xlarge']}>
+        <Questionnaire.Header mb={['regular', 'regular', 'xregular', 'xregular']}>
           Jesteś wspaniały! <br/> Dziękujemy!
         </Questionnaire.Header>
         <Questionnaire.TextLink underline modifiers={['black']} onClick={onClose} onMouseDown={(e: any) => e.preventDefault()}>Wróć do udostępniania linków</Questionnaire.TextLink>

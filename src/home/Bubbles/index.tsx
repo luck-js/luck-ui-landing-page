@@ -44,7 +44,6 @@ export const Container = styled('div')<{styleMap: ContainerStyleMap | undefined}
 `;
 
 const Index: React.FunctionComponent<IndexProps>  = React.memo(({ onClickBubble, ...props }) => {
-  console.log("test", onClickBubble, props )
   let containerRef = useRef(null);
   let { width } = useComponentSize(containerRef);
 

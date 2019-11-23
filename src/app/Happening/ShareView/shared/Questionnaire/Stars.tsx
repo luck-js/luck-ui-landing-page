@@ -9,28 +9,32 @@ import Star from '../../../../../../static/star.svg';
 interface StarsProps {
   count: number;
   onClick: any;
+  isShouldBeFreeze: boolean;
 }
 
 interface StarsComponent extends React.FunctionComponent<StarsProps> {
   Button: any;
 }
 
-export const Stars: StarsComponent = ({ count, onClick }) => {
+export const Stars: StarsComponent = ({ count, onClick, isShouldBeFreeze }) => {
   const stars = helper(0, count);
 
   const [hoverStarIndex, setHoverStarIndex] = useState(-1);
 
   const handleMouseOver = (index: number) => {
+    if(isShouldBeFreeze) return;
     setHoverStarIndex(index);
   };
 
   const handleMouseOut = () => {
+    if(isShouldBeFreeze) return;
     setHoverStarIndex(-1);
   };
 
   const [activeStarIndex, setActiveStarIndex] = useState(-1);
 
   const handleOnClick = (index: number) => () => {
+    if(isShouldBeFreeze) return;
     setActiveStarIndex(prevState => (prevState === index ? -1 : index));
     onClick(index)
   };
