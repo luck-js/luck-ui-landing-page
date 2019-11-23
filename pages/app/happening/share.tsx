@@ -17,6 +17,7 @@ const mapShareViewData = (host: string, data: ShareViewData): ShareViewData => {
   const participants = data.happening.participants.map(participant => ({
     ...participant,
     uniqueLink: `https://${host}/app/losuj?id=${participant.uniqueLink}`,
+    isCopied: false,
   }));
 
   return { happening: { ...data.happening, participants } };

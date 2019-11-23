@@ -41,6 +41,7 @@ export const Stars: StarsComponent = ({ count, onClick }) => {
         let [hoverRef] = useHover(() => handleMouseOver(index), () => handleMouseOut());
         return (
           <Stars.Button
+            key={index}
             ref={hoverRef}
             isHover={index <= hoverStarIndex}
             isActive={index <= activeStarIndex}

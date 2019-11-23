@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ShareStatic } from 'react-native';
 import ShareElement, {ShareButton} from './ShareElement';
 import { BubblesNarrowBackground } from '../../../BubblesNarrowBackground';
-import { CanonApp, Flex, Box, usePopup } from '../../../../components';
+import { CanonApp, Flex, Box } from '../../../../components';
 import { Theme } from '../../../../utils';
 import { ShareViewProps } from '../index';
 
@@ -13,15 +13,12 @@ declare global {
 
 const CONTAINER_BOTTOM_PADDING = 60;
 
-const Index = ({ data: { happening }, onCopy, ...props }: ShareViewProps) => {
-  const { showPopup } = usePopup();
-
+const Index = ( { happening , onCopy, ...props }: ShareViewProps) => {
   const handleOnClick = (uniqueLink: string) => {
-    onCopy(uniqueLink)
     if (window.navigator.share) {
-      window.navigator.share({ url: uniqueLink });
+      window.navigator.share({ url: uniqueLink }).then(() => onCopy(uniqueLink));
     } else {
-      showPopup('Skopiowano !');
+      onCopy(uniqueLink)
     }
   };
 

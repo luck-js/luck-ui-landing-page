@@ -1,9 +1,9 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Participant } from '../../model';
 import { Theme } from '../../../../utils';
-import {BaseButton, BaseInput, Box, Flex, usePopup} from '../../../../components';
+import {BaseButton, BaseInput, Box, Flex} from '../../../../components';
 // @ts-ignore
 import WideArrow from '../../../../../static/wide-arrow.svg';
 // @ts-ignore
@@ -18,12 +18,8 @@ interface ShareRowComponent extends React.FunctionComponent<ShareRowProps> {
   Button: any;
 }
 export const ShareRow:ShareRowComponent = ({ participant, onCopy }) => {
-  const [isCopied, setIsCopied] = useState(false);
-  const {showPopup} = usePopup()
   const inputRef = useRef(null);
   const handleOnCopy = () => {
-    showPopup("Skopiowano !")
-    setIsCopied(true)
     onCopy()
     if(inputRef && inputRef.current){
       // @ts-ignore
@@ -36,7 +32,7 @@ export const ShareRow:ShareRowComponent = ({ participant, onCopy }) => {
   }
 
   return (
-      <ShareRow.Container isCopied={isCopied}>
+      <ShareRow.Container isCopied={participant.isCopied}>
         <ShareRow.Element {...Theme.textStyles.inputApp} className="name">
           {participant.name}
         </ShareRow.Element>

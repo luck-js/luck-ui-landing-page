@@ -1,6 +1,7 @@
 export interface Participant {
   name: string;
   uniqueLink: string;
+  isCopied: boolean;
 }
 
 export interface PublishedHappening {

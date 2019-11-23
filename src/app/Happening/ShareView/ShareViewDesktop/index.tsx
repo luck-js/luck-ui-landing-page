@@ -6,7 +6,7 @@ import { Box, CanonApp } from '../../../../components';
 import { ShareRow } from './ShareRow';
 import { BubblesNarrowBackground } from '../../../BubblesNarrowBackground';
 
-const Index = ({ data: { happening }, onCopy, ...props }: ShareViewProps) => {
+const Index = ({  happening , onCopy, ...props }: ShareViewProps) => {
 
   const handleOnCopy = (uniqueLink: string) => () => {
     onCopy(uniqueLink)

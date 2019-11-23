@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { BaseButton } from '../../../../components';
@@ -41,15 +41,13 @@ ShareButton.Button = styled(Element.Container).attrs({ as: BaseButton })`
 `;
 
 const ShareElement = ({ participant, onClick }: { participant: Participant, onClick: any }) => {
-  const [isCopied, setIsCopied] = useState(false);
   const handleOnCopy = () => {
-    setIsCopied(true)
     onClick(participant.uniqueLink);
   };
 
   return (
     <CopyToClipboard text={participant.uniqueLink} onCopy={handleOnCopy}>
-      <ShareButton contrast={isCopied}>{participant.name}</ShareButton>
+      <ShareButton contrast={participant.isCopied}>{participant.name}</ShareButton>
     </CopyToClipboard>
 
   )

@@ -1,55 +1,64 @@
 import React, { useEffect, useState } from 'react';
 import ShareViewMobile from './ShareViewMobile';
 import ShareViewDesktop from './ShareViewDesktop';
-import { Participant, PublishedHappening } from '../model';
-import {useQuestionnaire} from "./shared/Questionnaire/Questionnaire"
-
+import { PublishedHappening } from '../model';
+import { useQuestionnaire } from './shared/Questionnaire/Questionnaire';
+import {usePopup} from "../../../components/Popup"
 
 export interface ShareViewData {
   happening: PublishedHappening;
 }
 
 export interface ShareViewProps {
-  data: ShareViewData;
+  happening: PublishedHappening;
   display: string[];
   onCopy: any;
 }
 
-const getInitParticipantCopiedMap = (participants: Participant[]): { [key: string]: boolean } => {
-  return participants.reduce((prev: any, { uniqueLink }) => {
-    prev[uniqueLink] = false;
-    return prev;
-  }, {});
-};
-
 const Index: React.FunctionComponent<{ data: ShareViewData }> = ({ ...props }) => {
   const { setShouldBeOpen } = useQuestionnaire();
-
-  const [participantCopiedMap, setParticipantCopiedMap] = useState<{ [key: string]: boolean }>(
-    getInitParticipantCopiedMap(props.data.happening.participants),
-  );
+  const {showPopup} = usePopup()
+  const [happening, setHappening] = useState<PublishedHappening>(props.data.happening);
 
   const handleOnCopy = (uniqueLink: string) => {
-    setParticipantCopiedMap(prevState => {
-      prevState[uniqueLink] = true;
-      return { ...prevState };
+    showPopup("Skopiowano !")
+    setHappening(prevHappening => {
+      const participants = prevHappening.participants.map((participant) => {
+        if (participant.uniqueLink === uniqueLink) {
+          return { ...participant, isCopied: true };
+        } else{
+          return participant;
+        }
+      });
+
+      return { ...prevHappening, participants };
     });
   };
 
   const [isQuestionnaireShowed, setIsQuestionnaireShowed] = useState(false);
 
   useEffect(() => {
-    console.log(participantCopiedMap);
-    if (!Object.keys(participantCopiedMap).some(key => !participantCopiedMap[key]) && !isQuestionnaireShowed) {
+    if (
+      !happening.participants.some(participant => !participant.isCopied) &&
+      !isQuestionnaireShowed
+    ) {
       setShouldBeOpen(true);
-      setIsQuestionnaireShowed(true)
+      setIsQuestionnaireShowed(true);
     }
-  }, [participantCopiedMap]);
+  }, [happening.participants]);
 
   return (
     <>
-      <ShareViewMobile display={['block', 'block', 'none']} onCopy={handleOnCopy} {...props} />
-      <ShareViewDesktop display={['none', 'none', 'block']} onCopy={handleOnCopy} {...props} />
+      <ShareViewMobile
+        display={['block', 'block', 'none']}
+        happening={happening}
+        onCopy={handleOnCopy}
+      />
+      <ShareViewDesktop
+        display={['none', 'none', 'block']}
+        happening={happening}
+        onCopy={handleOnCopy}
+      />
     </>
   );
 };
