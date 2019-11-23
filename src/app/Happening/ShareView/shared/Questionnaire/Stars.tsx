@@ -8,13 +8,14 @@ import Star from '../../../../../../static/star.svg';
 
 interface StarsProps {
   count: number;
+  onClick: any;
 }
 
 interface StarsComponent extends React.FunctionComponent<StarsProps> {
   Button: any;
 }
 
-export const Stars: StarsComponent = ({ count }) => {
+export const Stars: StarsComponent = ({ count, onClick }) => {
   const stars = helper(0, count);
 
   const [hoverStarIndex, setHoverStarIndex] = useState(-1);
@@ -31,6 +32,7 @@ export const Stars: StarsComponent = ({ count }) => {
 
   const handleOnClick = (index: number) => () => {
     setActiveStarIndex(prevState => (prevState === index ? -1 : index));
+    onClick(index)
   };
 
   return (
