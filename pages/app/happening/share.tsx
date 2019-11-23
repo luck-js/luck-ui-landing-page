@@ -7,10 +7,11 @@ import { QuestionnaireProvider } from '../../../src/app/Happening/ShareView/shar
 
 interface ShareProps {
   data: ShareViewData;
+  analytics: any;
 }
 
 interface SharePage<P = ShareProps> extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<P>;
+  getInitialProps?: (ctx: any) => Promise<{data: ShareViewData}>;
 }
 
 const mapShareViewData = (host: string, data: ShareViewData): ShareViewData => {
@@ -23,11 +24,11 @@ const mapShareViewData = (host: string, data: ShareViewData): ShareViewData => {
   return { happening: { ...data.happening, participants } };
 };
 
-const Share: SharePage = ({ data }) => {
+const Share: SharePage = ({ data, analytics }) => {
   return (
     <AppLayout>
       <PopupProvider>
-        <QuestionnaireProvider>
+        <QuestionnaireProvider analytics={analytics}>
           <ShareView data={data} />
         </QuestionnaireProvider>
       </PopupProvider>

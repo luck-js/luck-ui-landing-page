@@ -8,6 +8,8 @@ import { Stars } from './Stars';
 
 interface QuestionnaireProps {
   onClose: any;
+  onClickStar: any;
+  onClickSubmit: any;
 }
 
 interface QuestionnaireComponent extends React.FunctionComponent<QuestionnaireProps> {
@@ -21,12 +23,13 @@ interface QuestionnaireComponent extends React.FunctionComponent<QuestionnairePr
   Text: any;
 }
 
-const Questionnaire: QuestionnaireComponent = ({onClose}) => {
+const Questionnaire: QuestionnaireComponent = ({onClose, onClickStar, onClickSubmit}) => {
   const [stepIndex, setStepIndex] = useState(0);
   const [isStarClicked, setIsStarCliked] = useState(false);
-  const handleOnClickStar = async () => {
+  const handleOnClickStar = async (index: number) => {
     if(isStarClicked) return
     setIsStarCliked(true)
+    onClickStar(index)
     await delay(500);
     setStepIndex(1)
   }
@@ -42,6 +45,7 @@ const Questionnaire: QuestionnaireComponent = ({onClose}) => {
   }
 
   const handleOnSubmit = () => {
+    onClickSubmit(opinion)
     setStepIndex(3)
   };
 
@@ -133,13 +137,26 @@ export function useQuestionnaire() {
   return context;
 }
 
-export const QuestionnaireProvider = ({ children }: any) => {
+export const QuestionnaireProvider = ({ children, analytics }: any) => {
   const [shouldBeOpen, setShouldBeOpen] = useState<boolean>(false);
   const context = { shouldBeOpen, setShouldBeOpen };
+
+  const handleOnClickStar = (index: number) => {
+    analytics.event('Questionnaire', index);
+  }
+
+  const handleOnClickSubmit = (message: string) => {
+    analytics.event('Questionnaire', message);
+  }
+
   return (
     <QuestionnaireContext.Provider value={context}>
       <Modal shouldBeOpen={shouldBeOpen} onClose={() => setShouldBeOpen(false)}>
-        <Questionnaire onClose={() => setShouldBeOpen(false)}/>
+        <Questionnaire
+          onClose={() => setShouldBeOpen(false)}
+          onClickStar={handleOnClickStar}
+          onClickSubmit={handleOnClickSubmit}
+        />
       </Modal>
       {children}
     </QuestionnaireContext.Provider>
