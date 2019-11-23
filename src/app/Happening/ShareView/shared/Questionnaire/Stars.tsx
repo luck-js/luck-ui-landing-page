@@ -14,7 +14,7 @@ interface StarsComponent extends React.FunctionComponent<StarsProps> {
   Button: any;
 }
 
-const Stars: StarsComponent = ({ count }) => {
+export const Stars: StarsComponent = ({ count }) => {
   const stars = helper(0, count);
 
   const [hoverStarIndex, setHoverStarIndex] = useState(-1);
@@ -27,6 +27,12 @@ const Stars: StarsComponent = ({ count }) => {
     setHoverStarIndex(-1);
   };
 
+  const [activeStarIndex, setActiveStarIndex] = useState(-1);
+
+  const handleOnClick = (index: number) => () => {
+    setActiveStarIndex(prevState => (prevState === index ? -1 : index));
+  };
+
   return (
     <>
       {stars.map(index => {
@@ -35,7 +41,9 @@ const Stars: StarsComponent = ({ count }) => {
           <Stars.Button
             ref={hoverRef}
             isHover={index <= hoverStarIndex}
+            isActive={index <= activeStarIndex}
             onMouseDown={(e: any) => e.preventDefault()}
+            onClick={handleOnClick(index)}
           >
             <Star />
           </Stars.Button>
@@ -58,14 +66,15 @@ Stars.Button = styled(BaseButton)<any>`
   svg {
     height: 100%;
     width: auto;
-    opacity: ${props => (props.isHover ? 0.6 : 1)};
+    opacity: ${props => (!props.isHover || props.isActive ? 1 : 0.6)};
     transition: opacity 0.5s;
 
     path {
       transition: fill 0.5s;
-      fill: ${props => (props.isHover ? Theme.colors.mainContrast : Theme.colors.darkMain3)};
+      fill: ${props =>
+        props.isHover || props.isActive ? Theme.colors.mainContrast : Theme.colors.darkMain3};
     }
   }
 `;
 
-export default Stars.Button;
+

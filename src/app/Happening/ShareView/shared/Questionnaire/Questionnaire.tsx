@@ -4,7 +4,7 @@ import { Modal } from '../../../../../components/Modal';
 import { CanonApp } from '../../../../../components/Typography';
 import { Theme } from '../../../../../utils';
 import { Box, Flex } from '../../../../../components';
-import Stars from'./Stars';
+import { Stars } from './Stars';
 
 interface QuestionnaireProps {}
 
