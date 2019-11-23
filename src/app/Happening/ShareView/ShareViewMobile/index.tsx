@@ -13,10 +13,11 @@ declare global {
 
 const CONTAINER_BOTTOM_PADDING = 60;
 
-const Index = ({ data: { happening }, ...props }: ShareViewProps) => {
+const Index = ({ data: { happening }, onCopy, ...props }: ShareViewProps) => {
   const { showPopup } = usePopup();
 
   const handleOnClick = (uniqueLink: string) => {
+    onCopy(uniqueLink)
     if (window.navigator.share) {
       window.navigator.share({ url: uniqueLink });
     } else {

@@ -9,13 +9,22 @@ import WideArrow from '../../../../../static/wide-arrow.svg';
 // @ts-ignore
 import Copy from '../../../../../static/copy.svg';
 
-export const ShareRow = ({ participant }: { participant: Participant }) => {
+interface ShareRowProps { participant: Participant, onCopy: any }
+
+interface ShareRowComponent extends React.FunctionComponent<ShareRowProps> {
+  Container: any;
+  Element: any;
+  Input: any;
+  Button: any;
+}
+export const ShareRow:ShareRowComponent = ({ participant, onCopy }) => {
   const [isCopied, setIsCopied] = useState(false);
   const {showPopup} = usePopup()
   const inputRef = useRef(null);
   const handleOnCopy = () => {
     showPopup("Skopiowano !")
     setIsCopied(true)
+    onCopy()
     if(inputRef && inputRef.current){
       // @ts-ignore
       inputRef.current.focus()
@@ -112,7 +121,6 @@ ShareRow.Container = styled(Flex)<{ isCopied: boolean }>`
       flex: 1 1 40%;
     }
     .uniqueLink {
-      color: red;
       flex: 1 1 100%;
     }
 

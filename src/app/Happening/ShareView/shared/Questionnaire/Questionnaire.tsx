@@ -7,7 +7,9 @@ import {Box, Button, Flex, Input, TextLink} from '../../../../../components';
 import { Stars } from './Stars';
 import TextareaAutosize from 'react-autosize-textarea';
 
-interface QuestionnaireProps {}
+interface QuestionnaireProps {
+  onClose: any;
+}
 
 interface QuestionnaireComponent extends React.FunctionComponent<QuestionnaireProps> {
   Container: any;
@@ -20,7 +22,7 @@ interface QuestionnaireComponent extends React.FunctionComponent<QuestionnairePr
   Text: any;
 }
 
-const Questionnaire: QuestionnaireComponent = () => {
+const Questionnaire: QuestionnaireComponent = ({onClose}) => {
   const [stepIndex, setStepIndex] = useState(0);
   const handleOnClickStar = (index: number) => {
     console.log(index)
@@ -84,7 +86,7 @@ const Questionnaire: QuestionnaireComponent = () => {
         <Questionnaire.Header mb={['regular', 'regular', 'xlarge', 'xlarge']}>
           Jesteś wspaniały! <br/> Dziękujemy!
         </Questionnaire.Header>
-        <Questionnaire.TextLink underline modifiers={['black']} onMouseDown={(e: any) => e.preventDefault()}>Wróć do udostępniania linków</Questionnaire.TextLink>
+        <Questionnaire.TextLink underline modifiers={['black']} onClick={onClose} onMouseDown={(e: any) => e.preventDefault()}>Wróć do udostępniania linków</Questionnaire.TextLink>
       </Box>
 
 
@@ -136,7 +138,7 @@ export const QuestionnaireProvider = ({ children }: any) => {
   return (
     <QuestionnaireContext.Provider value={context}>
       <Modal shouldBeOpen={shouldBeOpen} onClose={() => setShouldBeOpen(false)}>
-        <Questionnaire />
+        <Questionnaire onClose={() => setShouldBeOpen(false)}/>
       </Modal>
       {children}
     </QuestionnaireContext.Provider>

@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ShareView, { ShareViewData } from '../../../src/app/Happening/ShareView';
 import AppLayout from '../../../src/app/AppLayout';
 import { apiAxios } from '../../../src/app/api.axios';
+import { PopupProvider } from '../../../src/components/Popup';
+import { QuestionnaireProvider } from '../../../src/app/Happening/ShareView/shared/Questionnaire/Questionnaire';
 
 interface ShareProps {
   data: ShareViewData;
@@ -11,27 +13,32 @@ interface SharePage<P = ShareProps> extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
-const Share: SharePage = ({ data }) => {
-  const [viewData, setViewData] = useState<ShareViewData>(data);
-  useEffect(() => {
-    const participants = data.happening.participants.map(participant => ({
-      ...participant,
-      uniqueLink: `https://${window.location.host}/app/losuj?id=${participant.uniqueLink}`,
-    }));
-    setViewData({ happening: { ...data.happening, participants } });
-  }, []);
+const mapShareViewData = (host: string, data: ShareViewData): ShareViewData => {
+  const participants = data.happening.participants.map(participant => ({
+    ...participant,
+    uniqueLink: `https://${host}/app/losuj?id=${participant.uniqueLink}`,
+  }));
 
+  return { happening: { ...data.happening, participants } };
+};
+
+const Share: SharePage = ({ data }) => {
   return (
     <AppLayout>
-      <ShareView data={viewData} />
+      <PopupProvider>
+        <QuestionnaireProvider>
+          <ShareView data={data} />
+        </QuestionnaireProvider>
+      </PopupProvider>
     </AppLayout>
   );
 };
 
 Share.getInitialProps = async ({ query }) => {
   const { data } = await apiAxios.get(`/api/v1/published-happening/${query.id}`);
+  const host = process.env.VIRTUAL_HOST ? process.env.VIRTUAL_HOST : '';
   return {
-    data: { happening: data },
+    data: mapShareViewData(host, { happening: data }),
   };
 };
 

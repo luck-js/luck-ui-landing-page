@@ -85,8 +85,8 @@ Modal.Container = styled(Box)`
   left: 0;
   top: 0;
   position: fixed;
-  z-index: 100;
-  opacity: ${props => (props.shouldBeOpen ? '1' : '0')};
+  z-index: ${props => (props.shouldBeOpen ? 100 : -1)};
+  opacity: ${props => (props.shouldBeOpen ? 1 : 0)};
   transition: opacity 0.5s;
 
   ${Modal.Content} {
