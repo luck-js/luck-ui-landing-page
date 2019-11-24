@@ -20,7 +20,7 @@ export const Table = ({ columns, data }: any) => {
             {headerGroup.headers.map((column: any) => (
               <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                 <>
-                  {column.render('Header')}
+                  {column.render('SubHeader')}
                   <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
                 </>
               </th>

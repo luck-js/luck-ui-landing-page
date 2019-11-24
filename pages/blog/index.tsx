@@ -121,7 +121,6 @@ export interface ViewPost extends Post {
   coverPlaceholder: UploadFile;
   wideCover: UploadFile;
   wideCoverPlaceholder: UploadFile;
-  host:string;
 }
 
 const isSomeCoverUndefined = ({
@@ -148,19 +147,17 @@ const mapCoverUrls = (
 export const mapToViewPosts = (
   posts: Post[],
   cmsUrl: string,
-  shouldShowDraft: boolean,
 ): ViewPost[] => {
-  const viewPost = posts
+  return posts
     .filter(isSomeCoverUndefined)
     .map(post => mapCoverUrls(post as ViewPost, cmsUrl));
-
-  return shouldShowDraft ? viewPost : viewPost.filter(({ isDraft }) => !isDraft);
 };
 
 const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
 
-  const viewPosts = mapToViewPosts(data.posts, cmsUrl, shouldShowDraft);
+  const posts = shouldShowDraft ? data.posts : data.posts.filter(({ isDraft }) => !isDraft)
+  const viewPosts = mapToViewPosts(posts, cmsUrl);
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;

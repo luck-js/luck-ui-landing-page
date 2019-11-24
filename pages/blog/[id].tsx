@@ -1,39 +1,39 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
-import { NextSeo } from 'next-seo/lib';
-import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
+import styled, {css} from 'styled-components';
+import {NextSeo} from 'next-seo/lib';
+import {mapToViewPosts, POST_FRAGMENT, ViewPost} from './index';
 import BlogLayout from '../../src/blog/BlogLayout';
-import { withApollo, getProcessor, Theme, Post, QueryPostsArgs, Hashtag } from '../../src/utils';
+import {getProcessor, Hashtag, Post, QueryPostsArgs, Theme, withApollo} from '../../src/utils';
 import media from '../../src/utils/media';
-import {
-  MediumText,
-  Canon,
-  Flex,
-  TinySecond,
-  List,
-  RatioLazyImage,
-  Trafalgar,
-  TextLink, ListOl,
-} from '../../src/components';
+import {Box, Flex, RatioLazyImage, TinySecond,} from '../../src/components';
+import Pagination, {PaginationSlugs} from "../../src/blog/Pagination"
+import {SubHeader, Text, BlogTextLink, List, ListOl, Header} from "../../src/blog/Typography"
 
-const ContentImage = styled('img').attrs({ alt: '' })`
+
+const cssTextMinusMargin = css`
+  margin-top: -${Theme.space.small}px;
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    margin-top: -${Theme.space.medium}px;
+  `}
+  
+  ${media.greaterThan('desktop')`
+    margin-top: -${Theme.space.regular}px;
+  `}
+`
+const ContentImage = styled(Box).attrs({ as:'img', alt: '' ,  py: ['small', 'small', 'medium', 'regular']})`
   width: 100%;
 `;
 
-const Text = styled(MediumText).attrs({
-  mt: ['small', 'small', 'medium', 'regular'],
-})``;
-
-const Header = styled(Trafalgar).attrs({
-  mt: ['small', 'small', 'medium', 'regular'],
-})``;
-
 const components = {
   p: Text,
-  h2: Header,
-  a: ({ children, ...props }: any) => <TextLink modifiers={['darkGray']} {...props}>{children}</TextLink>,
+  h2: SubHeader,
+  a: BlogTextLink ,
   img: ContentImage,
   ul: List,
   ol: ListOl,
@@ -49,6 +49,7 @@ const Container = styled(Flex)`
 
 const ContentContainer = styled(Flex)`
   max-width: 664px;
+  width: 100%;
   margin: 0 auto;
   flex-direction: column;  
   padding: ${Theme.space.medium}px ${Theme.space.small}px;
@@ -67,6 +68,7 @@ const ContentContainer = styled(Flex)`
 `;
 
 const HashtagsText = styled(TinySecond)`
+  ${cssTextMinusMargin};
   span {
     text-transform: uppercase;
 
@@ -76,19 +78,29 @@ const HashtagsText = styled(TinySecond)`
   }
 `;
 
-const PostContent: React.FunctionComponent<ViewPost> = ({
+
+
+
+const PostContent: React.FunctionComponent<{
+  paginationSlugs: PaginationSlugs;
+  viewPost: ViewPost;
+  host: string;
+}> = ({
+  viewPost: {
+    title,
+    description,
+    content,
+    createdAt,
+    updatedAt,
+    cover,
+    coverPlaceholder,
+    wideCover,
+    wideCoverPlaceholder,
+    slug,
+    hashtags = [],
+  },
+  paginationSlugs,
   host,
-  title,
-  description,
-  content,
-  createdAt,
-  updatedAt,
-  cover,
-  coverPlaceholder,
-  wideCover,
-  wideCoverPlaceholder,
-  slug,
-  hashtags = [],
   ...props
 }) => (
   <>
@@ -123,13 +135,14 @@ const PostContent: React.FunctionComponent<ViewPost> = ({
         ratio="34%"
       />
       <ContentContainer>
-        <Canon>{title}</Canon>
+        <Header mb={['small', 'small', 'medium', 'regular']}>{title}</Header>
         {processor.processSync(content).contents}
-        <HashtagsText pt={['small', 'small', 'regular', 'regular']}>
+        <HashtagsText mb={['regular', 'regular', 'large', 'xlarge']}>
           {(hashtags as Hashtag[]).map(({ name }, index) => (
             <span key={`PostContent-${name}-${index}`}>#{name}</span>
           ))}
         </HashtagsText>
+        <Pagination mb={[]}{...paginationSlugs} />
       </ContentContainer>
     </Container>
   </>
@@ -141,29 +154,52 @@ export const POST_QUERY = gql`
     posts(where: $where) {
       ...Post
     }
+    all: posts(limit: 999, sort: "date:desc") {
+      slug
+    }
   }
 `;
 
-interface IndexPage<P = { host:string;slug: string; cmsUrl: string; shouldShowDraft: boolean }>
+const getPaginationSlugs = (slug: string, posts: Post[]): PaginationSlugs => {
+  const index = posts.findIndex(post => post.slug === slug);
+
+  const nextIndex = index <= 0 ? null : index - 1;
+  const previousIndex = index === posts.length - 1 ? null : index + 1;
+  console.log(index, nextIndex, previousIndex, posts)
+
+  return {
+    next: nextIndex === 0 || !!nextIndex ? posts[nextIndex].slug : null,
+    previous: previousIndex ? posts[previousIndex].slug : null,
+  };
+};
+
+interface IndexPage<P = { host: string; slug: string; cmsUrl: string; shouldShowDraft: boolean }>
   extends React.FunctionComponent<P> {
   getInitialProps?: (ctx: any) => Promise<P>;
 }
 
 const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const where = { slug };
-  const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
-    POST_QUERY,
-    {
-      variables: { where },
-    },
-  );
+  const { loading, error, data = { posts: [], all: [] } } = useQuery<
+    { posts: Post[]; all: Post[] },
+    QueryPostsArgs
+  >(POST_QUERY, {
+    variables: { where },
+  });
+  const posts = shouldShowDraft ? data.posts : data.posts.filter(({ isDraft }) => !isDraft);
+  const all = shouldShowDraft ? data.all : data.all.filter(({ isDraft }) => !isDraft);
 
-  const viewPost = mapToViewPosts(data.posts, cmsUrl, shouldShowDraft)[0];
+  const viewPost = mapToViewPosts(posts, cmsUrl)[0];
+  const paginationSlugs = getPaginationSlugs(slug, all);
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
 
-  return <BlogLayout>{viewPost && <PostContent {...viewPost} host={host} />}</BlogLayout>;
+  return (
+    <BlogLayout>
+      {viewPost && <PostContent paginationSlugs={paginationSlugs} viewPost={viewPost} host={host} />}
+    </BlogLayout>
+  );
 };
 
 Index.getInitialProps = async function({ query }) {

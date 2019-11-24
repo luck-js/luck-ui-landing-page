@@ -3,8 +3,9 @@ import BlogLayout from '../../src/blog/BlogLayout';
 import { Theme } from '../../src/utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
-import {Box, Canon, ListOl, MediumText, TextLink, Trafalgar} from '../../src/components';
+import {Box} from '../../src/components';
 import media from '../../src/utils/media';
+import {Header, Text, ListOl, BlogTextLink} from "../../src/blog/Typography"
 
 const Container = styled(Box)`
   background-color: ${Theme.colors.main};
@@ -27,14 +28,6 @@ const Container = styled(Box)`
   `}
 `;
 
-const Text = styled(MediumText).attrs({
-  mt: ['small', 'small', 'medium', 'regular'],
-})``;
-
-const Header = styled(Trafalgar).attrs({
-  mt: ['small', 'small', 'medium', 'regular'],
-})``;
-
 const Index = () => {
   return (
     <>
@@ -44,7 +37,7 @@ const Index = () => {
       />
       <BlogLayout>
         <Container>
-          <Canon>REGULAMIN KONKURSU FACEBOOK</Canon>
+          <Header>REGULAMIN KONKURSU FACEBOOK</Header>
           <Text>Z DNIA 21.11.2019 R.</Text>
           <Header>§ 1. POSTANOWIENIA OG&Oacute;LNE</Header>
           <ListOl>
@@ -84,9 +77,9 @@ const Index = () => {
             <li>
               <Text>
                 Konkurs jest prowadzony na stronie{' '}
-                <TextLink modifiers={['darkGray']} href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
+                <BlogTextLink href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
                   https://www.facebook.com/app.luck/
-                </TextLink>{' '}
+                </BlogTextLink>{' '}
                 (zwanej dalej &ldquo;Fanpage&rdquo;).
               </Text>
             </li>
@@ -186,9 +179,9 @@ const Index = () => {
                 Konkurs jest dostępny w formie ogłoszenia konkursowego (dalej: &bdquo;post
                 konkursowy&ldquo;) na portalu społecznościowym Facebook na profilu Organizatora pod
                 adresem{' '}
-                <TextLink modifiers={['darkGray']} href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
+                <BlogTextLink href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
                   https://www.facebook.com/app.luck/
-                </TextLink>
+                </BlogTextLink>
               </Text>
             </li>
             <li>
@@ -212,9 +205,9 @@ const Index = () => {
             <li>
               <Text>
                 Informacje o konkursie będą dostępne na Facebooku pod adresem{' '}
-                <TextLink modifiers={['darkGray']} href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
+                <BlogTextLink href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
                   https://www.facebook.com/app.luck/
-                </TextLink>
+                </BlogTextLink>
               </Text>
             </li>
           </ListOl>
@@ -252,18 +245,18 @@ const Index = () => {
               <Text>
                 Publiczna informacja o wygranej zostanie r&oacute;wnież umieszczona w komentarzu do
                 posta konkursowego na stronie{' '}
-                <TextLink modifiers={['darkGray']} href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
+                <BlogTextLink href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
                   https://www.facebook.com/app.luck/
-                </TextLink>
+                </BlogTextLink>
               </Text>
             </li>
             <li>
               <Text>
                 Warunkiem odebrania przez wyr&oacute;żnionego Uczestnika nagrody jest przesłanie w
                 ciągu 36 godzin od ogłoszenia wynik&oacute;w Konkursu na Fanpage`u -{' '}
-                <TextLink modifiers={['darkGray']} href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
+                <BlogTextLink href="https://www.facebook.com/app.luck/?__xts__%5B0%5D=68.ARBgZNg7Ajiq2oMFmWzit53wPtjRNpN9ZNyxNC-vtiq-q7o_XjBC4PQzf-cWXkoZ37NxgcYGo5Z7t3pMPXqge5COIbUw_Kqzefx_Ose7BQvm1DsJa7BWIzyqjGCKQOf5HaexKcSgGvhqhNl_0JEEBa8jHcOWvChUKQHEuZdH9D8lSVb6l98HF0gh42jBZltD4JqAkIo6teapBY8FZhPOwk1L-24iSUc-JlegQETa3vpnjJaOyEzyheJuoWXq3BGN4skhRFtbaFQn1l_6foGUcBdP6RLCSW_eys3xW8t5tR5tHhXv9k6CUPiyVGnVMsHrmPkkebt9tZALhLWTJHgYOjXT5g">
                   https://www.facebook.com/app.luck/
-                </TextLink>{' '}
+                </BlogTextLink>{' '}
                 wiadomości prywatnej z następującymi danymi:
               </Text>
             </li>
@@ -483,7 +476,7 @@ const Index = () => {
             <li>
               <Text>
                 Regulamin Konkursu dostępny jest na oficjalnej stronie Organizatora:{' '}
-                <TextLink modifiers={['darkGray']} href="https://luck.org.pl/">https://luck.org.pl</TextLink>
+                <BlogTextLink href="https://luck.org.pl/">https://luck.org.pl</BlogTextLink>
               </Text>
             </li>
           </ListOl>

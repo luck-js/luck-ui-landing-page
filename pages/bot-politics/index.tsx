@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import BlogLayout from '../../src/blog/BlogLayout';
 import { Theme } from '../../src/utils';
 import { NextSeo } from 'next-seo/lib';
-import {Canon, MediumText, List, TextLink, Box} from '../../src/components';
+import {Box} from '../../src/components';
 import media from '../../src/utils/media';
+import {Header, Text, List, BlogTextLink} from "../../src/blog/Typography"
 
 const Container = styled(Box)`
   background-color: ${Theme.colors.main};
@@ -27,9 +28,7 @@ const Container = styled(Box)`
   `}
 `;
 
-const Text = styled(MediumText).attrs({
-  mt: ['small', 'small', 'medium', 'regular'],
-})``;
+
 
 const Index = () => {
   return (
@@ -40,7 +39,7 @@ const Index = () => {
       />
       <BlogLayout>
         <Container>
-          <Canon>Polityka prywatności Pan Mikołaj Luck</Canon>
+          <Header>Polityka prywatności Pan Mikołaj Luck</Header>
           <Text>
             Zesp&oacute;ł LUCK, jako tw&oacute;rca aplikacji LUCK, ułatwiającej organizowanie
             losowań prezent&oacute;w, w swoich działaniach szanuje Twoją prywatność. Chronimy
@@ -73,9 +72,9 @@ const Index = () => {
               <Text>
                 Administrator wyznaczył inspektora ochrony danych, z kt&oacute;rym można
                 skontaktować się poprzez email{' '}
-                <TextLink modifiers={['darkGray']} href="mailto:info@luck.org.pl">
+                <BlogTextLink href="mailto:info@luck.org.pl">
                   info@luck.org.pl
-                </TextLink>
+                </BlogTextLink>
                 . Z Inspektorem ochrony danych można się kontaktować we wszystkich sprawach
                 dotyczących przetwarzania danych osobowych oraz korzystania z praw związanych z
                 przetwarzaniem danych.

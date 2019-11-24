@@ -3,8 +3,9 @@ import BlogLayout from '../../src/blog/BlogLayout';
 import { Theme } from '../../src/utils';
 import { NextSeo } from 'next-seo/lib';
 import styled from 'styled-components';
-import {Box, Canon, List, MediumText, TextLink} from '../../src/components';
+import {Box} from '../../src/components';
 import media from '../../src/utils/media';
+import {Header, Text, List, BlogTextLink} from "../../src/blog/Typography"
 
 const Container = styled(Box)`
   background-color: ${Theme.colors.main};
@@ -27,10 +28,6 @@ const Container = styled(Box)`
   `}
 `;
 
-const Text = styled(MediumText).attrs({
-  mt: ['small', 'small', 'medium', 'regular'],
-})``;
-
 const Index = () => {
   return (
     <>
@@ -40,7 +37,7 @@ const Index = () => {
       />
       <BlogLayout>
         <Container>
-          <Canon>Polityka prywatności strony</Canon>
+          <Header>Polityka prywatności strony</Header>
           <Text>OŚWIADCZENIE O OCHRONIE DANYCH OSOBOWYCH</Text>
           <Text>&sect; 1 Informacja dotycząca zbierania danych osobowych</Text>
           <Text>
@@ -51,7 +48,7 @@ const Index = () => {
           <Text>
             (2) Podmiotem odpowiedzialnym zgodnie z art. 4 ust. 7 Og&oacute;lnego rozporządzenia o
             ochronie danych (RODO) jest zesp&oacute;ł LUCK,{' '}
-            <TextLink href="mailto:info@luck.org.pl" modifiers={["darkGray"]}>info@luck.org.pl</TextLink>. Z naszym pełnomocnikiem do
+            <BlogTextLink href="mailto:info@luck.org.pl" >info@luck.org.pl</BlogTextLink>. Z naszym pełnomocnikiem do
             spraw ochrony danych osobowych można skontaktować się przez e-mail lub tradycyjną pocztą
             z dopiskiem &bdquo;Pełnomocnik ds. ochrony danych osobowych&rdquo;.
           </Text>

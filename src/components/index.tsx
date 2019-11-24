@@ -9,7 +9,6 @@ export * from './Layout';
 export * from './Modal';
 export * from './Popup';
 export * from './LazyImage';
-export * from './List';
 export * from './Navigation';
 export * from './RatioContainer';
 export * from './RatioLazyImage';
