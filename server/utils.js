@@ -19,6 +19,7 @@ const ROUTE_MAP_SITEMAP = {
 
 const ROUTE_MAP_CONFIG = {
   'blog/[id]': false,
+  'tag/[id]': false,
   'app/happening/new-happening': false,
   'app/happening/share': false,
   'app/participation-happening/participation-happening': false,

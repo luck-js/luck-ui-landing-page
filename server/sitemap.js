@@ -36,7 +36,6 @@ const createSitemap = async () => {
    * STEP 1: Store all static pages url
    **/
   let diskPages = glob.sync(SOURCE);
-  console.log(diskPages)
   let xml = '';
   xml += '<?xml version="1.0" encoding="UTF-8"?>';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
@@ -47,7 +46,7 @@ const createSitemap = async () => {
   xml += '</url>';
 
 
-  diskPages.forEach(page => {
+  diskPages.forEach( page => {
     let stats = fs.statSync(page);
     let lastMod = dateTemplate(new Date(stats.mtime));
 
@@ -63,7 +62,6 @@ const createSitemap = async () => {
     }
 
     const pathname = getPathnameByKey(page);
-    console.log("getPathnameByKey: ", pathname, page)
     page = pathname !== undefined ? pathname : withousSlash(page);
     page = page ? `${SITE_ROOT}/${page}` : SITE_ROOT;
 
@@ -80,7 +78,7 @@ const createSitemap = async () => {
    * In the following snippet we gather all posts available
    * TODO: Add <lastmod>${lastMod}</lastmod> tag and set priority order
    **/
-  return axios
+  xml = await axios
     .post(
       API_SOURCE,
       {
@@ -103,7 +101,37 @@ const createSitemap = async () => {
         xml += '<url><loc>';
         xml += `${SITE_ROOT}/blog/${post.slug}`;
         xml += `</loc><lastmod>${dateTemplate(new Date(post.updatedAt))}</lastmod><changefreq>always</changefreq><priority>0.5</priority></url>`;
-        if (index === posts.length - 1) {
+      });
+      return xml;
+    })
+    .catch(error => {
+      console.log(error.message, error.name);
+    });
+
+  xml = await axios
+    .post(
+      API_SOURCE,
+      {
+        query: `{
+        hashtags(limit: 999, sort: "date:desc") {
+          name 
+          updatedAt 
+        }
+      }`,
+      },
+      {
+        headers: {
+          authorization: `Bearer ${process.env.APPOLO_CLIENT_TOKEN}`,
+        },
+      },
+    )
+    .then(resp => {
+      let { hashtags } = resp.data.data;
+      hashtags.forEach((hashtag, index) => {
+        xml += '<url><loc>';
+        xml += `${SITE_ROOT}/tag/${hashtag.name}`;
+        xml += `</loc><lastmod>${dateTemplate(new Date(hashtag.updatedAt))}</lastmod><changefreq>always</changefreq><priority>0.5</priority></url>`;
+        if (index === hashtags.length - 1) {
           xml += '</urlset>';
         }
       });
@@ -112,6 +140,9 @@ const createSitemap = async () => {
     .catch(error => {
       console.log(error.message, error.name);
     });
+
+  return xml
+
 };
 
 module.exports = { DESTINATION, createSitemap };
