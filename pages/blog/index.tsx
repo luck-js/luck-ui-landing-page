@@ -2,10 +2,10 @@ import React from 'react';
 import {NextSeo} from 'next-seo';
 import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import Card from '../../src/blog/Card';
 import BlogLayout from '../../src/blog/BlogLayout';
 import {Post, UploadFile, withApollo} from '../../src/utils';
-import {CardsContainer} from "../../src/blog/Card/CardsContainer"
+import BlogListView from "../../src/blog/BlogListView"
+import Error from "next/error"
 
 interface StatelessPage<P = { cmsUrl: string; shouldShowDraft: boolean }>
   extends React.FunctionComponent<P> {
@@ -93,7 +93,7 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   const posts = shouldShowDraft ? data.posts : data.posts.filter(({ isDraft }) => !isDraft)
   const viewPosts = mapToViewPosts(posts, cmsUrl);
 
-  if (error) return <div>Error loading users.</div>;
+  if (error) return <Error statusCode={404} />;
   if (loading) return <div>Loading</div>;
 
   return (
@@ -103,11 +103,7 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
         description="Blog posty związane z aplikacją Luck. Znajdziesz tu podsumowania, najbliższe plany dotyczące rozwoju, ale także i ciekawostki dotyczące Mikołajek"
       />
       <BlogLayout>
-        <CardsContainer breakpointCols={3} maxWidth={["none", "none", "962px"]} py={["small", "small", "regular", "xregular"]}>
-          {viewPosts.map((post, index) => (
-            <Card key={`${post._id}-${index}`} {...post} />
-          ))}
-        </CardsContainer>
+        <BlogListView posts={viewPosts}/>
       </BlogLayout>
     </>
   );

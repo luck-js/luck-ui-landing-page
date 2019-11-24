@@ -20,6 +20,7 @@ import Pagination, { PaginationSlugs } from '../../src/blog/Pagination';
 import { SubHeader, Text, BlogTextLink, List, ListOl, Header } from '../../src/blog/Typography';
 import Suggestions from '../../src/blog/Suggestions';
 import Link from "next/link"
+import Error from "next/error"
 
 const cssTextMinusMargin = css`
   margin-top: -${Theme.space.small}px;
@@ -152,7 +153,7 @@ const PostContent: React.FunctionComponent<{
         <HashtagsText mb={['regular', 'regular', 'large', 'xlarge']}>
           {(hashtags as Hashtag[]).map(({ name }, index) => (
             <Link href={`/tag/${name.toLowerCase()}`}>
-              <BlogTextLink key={`PostContent-${name}-${index}`} href={`/tag/${name.toLowerCase()}`} aria-label={`przejdź do tagu ${name}`}>#{name}</BlogTextLink>
+              <BlogTextLink key={`PostContent-${name}-${index}`} href={`/tag/${name}`} aria-label={`przejdź do tagu ${name}`}>#{name}</BlogTextLink>
             </Link>
           ))}
         </HashtagsText>
@@ -238,7 +239,7 @@ const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const suggestionsPosts = getSuggestionsPosts(viewPost, all);
   const suggestionsViewPost = mapToViewPosts(suggestionsPosts, cmsUrl);
 
-  if (error) return <div>Error loading users.</div>;
+  if (error) return <Error statusCode={404} />;;
   if (loading) return <div>Loading</div>;
 
   return (
