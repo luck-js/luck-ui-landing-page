@@ -5,7 +5,15 @@ import styled, { css } from 'styled-components';
 import { NextSeo } from 'next-seo/lib';
 import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
 import BlogLayout from '../../src/blog/BlogLayout';
-import {getProcessor, getRandom, Hashtag, Post, QueryPostsArgs, Theme, withApollo} from '../../src/utils';
+import {
+  getProcessor,
+  getRandom,
+  Hashtag,
+  Post,
+  QueryPostsArgs,
+  Theme,
+  withApollo,
+} from '../../src/utils';
 import media from '../../src/utils/media';
 import { Box, Flex, RatioLazyImage, TinySecond } from '../../src/components';
 import Pagination, { PaginationSlugs } from '../../src/blog/Pagination';
@@ -145,7 +153,7 @@ const PostContent: React.FunctionComponent<{
             <span key={`PostContent-${name}-${index}`}>#{name}</span>
           ))}
         </HashtagsText>
-        <Pagination mb={[]} {...paginationSlugs} />
+        <Pagination mb={['regular', 'regular', 'large', 'xlarge']} {...paginationSlugs} />
         <Suggestions posts={suggestionsPosts} />
       </ContentContainer>
     </Container>
@@ -178,29 +186,32 @@ const getPaginationSlugs = (slug: string, posts: Post[]): PaginationSlugs => {
 };
 
 const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
-  console.log(toMatchPost, posts)
+  if (!toMatchPost) return [];
   const toMatchHashtags = toMatchPost.hashtags ? toMatchPost.hashtags : [];
   const p = posts.filter(post => post.slug !== toMatchPost.slug);
 
   const candidatePosts = p.filter(post =>
-    toMatchHashtags.some(toMatchHashtag =>
-      post.hashtags ? post.hashtags.some(hashtag => hashtag === toMatchHashtag) : false,
+    (toMatchHashtags as Hashtag[]).some(({ name: toMatchHashtag }) =>
+      post.hashtags ? (post.hashtags as Hashtag[]).some(({ name: hashtag }) => hashtag === toMatchHashtag) : false,
     ),
   );
 
-  const getLackedPost = (count: number)  => {
-    return getRandom(p, count)
-  }
+  const getLackedPost = (count: number) => {
+    if (p.length < count) {
+      return getRandom(p, p.length);
+    } else {
+      return getRandom(p, count);
+    }
+  };
 
-  if(candidatePosts.length === 2 ){
-    return candidatePosts
-  }else if (candidatePosts.length > 2 ){
-    return getRandom(candidatePosts, 2)
-  }else if(candidatePosts.length < 2 ){
+  if (candidatePosts.length === 2) {
+    return candidatePosts;
+  } else if (candidatePosts.length > 2) {
+    return getRandom(candidatePosts, 2);
+  } else if (candidatePosts.length < 2) {
     const lackCount = 2 - candidatePosts.length;
-    return [...candidatePosts, ...getLackedPost(lackCount)]
-  } else return []
-
+    return [...candidatePosts, ...getLackedPost(lackCount)];
+  } else return [];
 };
 
 interface IndexPage<P = { host: string; slug: string; cmsUrl: string; shouldShowDraft: boolean }>

@@ -1,77 +1,11 @@
-import React, { Fragment } from 'react';
-import { NextSeo } from 'next-seo';
-import { useQuery } from '@apollo/react-hooks';
+import React from 'react';
+import {NextSeo} from 'next-seo';
+import {useQuery} from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import styled from 'styled-components';
 import Card from '../../src/blog/Card';
-import { Flex } from '../../src/components';
 import BlogLayout from '../../src/blog/BlogLayout';
-import media from '../../src/utils/media';
-import { withApollo, Theme, Post, UploadFile } from '../../src/utils';
-// @ts-ignore
-import Masonry from 'react-masonry-css';
-
-const Container = styled(Flex)`
-  background-color: ${Theme.colors.main};
-  color: ${Theme.colors.black};
-  flex-wrap: wrap;
-  max-width: 1012px;
-  margin: 0 auto;
-  padding: ${Theme.space.small}px ${Theme.space.xregular}px;
-  
-  ${media.greaterThan('mobile')`
-    
-  `}
-  
-  ${media.greaterThan('tablet')`
-    padding: ${Theme.space.regular}px ${Theme.space.xregular}px;
-  `}
-  
-  ${media.greaterThan('desktop')`
-    max-width: 1138px;
-    padding: ${Theme.space.xregular}px ${Theme.space.xregular}px;
-  `}
-`;
-
-const MasonryContainer = styled(Container)`
-  .my-masonry-grid {
-    display: flex;
-    margin-left: ${-Theme.space.regular / 2}px; /* gutter size offset */
-    width: 100%;
-  }
-
-  .my-masonry-grid_column {
-    padding-left: ${Theme.space.regular}px; /* gutter size */
-    background-clip: padding-box;
-  }
-
-  .my-masonry-grid_column > div {
-    margin-bottom: ${Theme.space.regular}px;
-  }
-`;
-
-const breakpointCols = {
-  default: 3,
-};
-
-const CardsContainer: React.FunctionComponent<any> = ({ children, ...props }) => {
-  return (
-    <Fragment>
-      <Container display={['flex', 'flex', 'none']} {...props}>
-        {children}
-      </Container>
-      <MasonryContainer display={['none', 'none', 'flex']} {...props}>
-        <Masonry
-          breakpointCols={breakpointCols}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {children}
-        </Masonry>
-      </MasonryContainer>
-    </Fragment>
-  );
-};
+import {Post, UploadFile, withApollo} from '../../src/utils';
+import {CardsContainer} from "../../src/blog/Card/CardsContainer"
 
 interface StatelessPage<P = { cmsUrl: string; shouldShowDraft: boolean }>
   extends React.FunctionComponent<P> {
@@ -169,7 +103,7 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
         description="Blog posty związane z aplikacją Luck. Znajdziesz tu podsumowania, najbliższe plany dotyczące rozwoju, ale także i ciekawostki dotyczące Mikołajek"
       />
       <BlogLayout>
-        <CardsContainer>
+        <CardsContainer breakpointCols={3} maxWidth={["none", "none", "962px"]} py={["small", "small", "regular", "xregular"]}>
           {viewPosts.map((post, index) => (
             <Card key={`${post._id}-${index}`} {...post} />
           ))}
