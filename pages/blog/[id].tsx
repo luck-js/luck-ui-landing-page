@@ -1,16 +1,16 @@
 import React from 'react';
-import {useQuery} from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import styled, {css} from 'styled-components';
-import {NextSeo} from 'next-seo/lib';
-import {mapToViewPosts, POST_FRAGMENT, ViewPost} from './index';
+import styled, { css } from 'styled-components';
+import { NextSeo } from 'next-seo/lib';
+import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
 import BlogLayout from '../../src/blog/BlogLayout';
-import {getProcessor, Hashtag, Post, QueryPostsArgs, Theme, withApollo} from '../../src/utils';
+import {getProcessor, getRandom, Hashtag, Post, QueryPostsArgs, Theme, withApollo} from '../../src/utils';
 import media from '../../src/utils/media';
-import {Box, Flex, RatioLazyImage, TinySecond,} from '../../src/components';
-import Pagination, {PaginationSlugs} from "../../src/blog/Pagination"
-import {SubHeader, Text, BlogTextLink, List, ListOl, Header} from "../../src/blog/Typography"
-
+import { Box, Flex, RatioLazyImage, TinySecond } from '../../src/components';
+import Pagination, { PaginationSlugs } from '../../src/blog/Pagination';
+import { SubHeader, Text, BlogTextLink, List, ListOl, Header } from '../../src/blog/Typography';
+import Suggestions from '../../src/blog/Suggestions';
 
 const cssTextMinusMargin = css`
   margin-top: -${Theme.space.small}px;
@@ -25,15 +25,19 @@ const cssTextMinusMargin = css`
   ${media.greaterThan('desktop')`
     margin-top: -${Theme.space.regular}px;
   `}
-`
-const ContentImage = styled(Box).attrs({ as:'img', alt: '' ,  py: ['small', 'small', 'medium', 'regular']})`
+`;
+const ContentImage = styled(Box).attrs({
+  as: 'img',
+  alt: '',
+  py: ['small', 'small', 'medium', 'regular'],
+})`
   width: 100%;
 `;
 
 const components = {
   p: Text,
   h2: SubHeader,
-  a: BlogTextLink ,
+  a: BlogTextLink,
   img: ContentImage,
   ul: List,
   ol: ListOl,
@@ -78,12 +82,10 @@ const HashtagsText = styled(TinySecond)`
   }
 `;
 
-
-
-
 const PostContent: React.FunctionComponent<{
   paginationSlugs: PaginationSlugs;
   viewPost: ViewPost;
+  suggestionsPosts: ViewPost[];
   host: string;
 }> = ({
   viewPost: {
@@ -100,6 +102,7 @@ const PostContent: React.FunctionComponent<{
     hashtags = [],
   },
   paginationSlugs,
+  suggestionsPosts,
   host,
   ...props
 }) => (
@@ -142,7 +145,8 @@ const PostContent: React.FunctionComponent<{
             <span key={`PostContent-${name}-${index}`}>#{name}</span>
           ))}
         </HashtagsText>
-        <Pagination mb={[]}{...paginationSlugs} />
+        <Pagination mb={[]} {...paginationSlugs} />
+        <Suggestions posts={suggestionsPosts} />
       </ContentContainer>
     </Container>
   </>
@@ -155,7 +159,7 @@ export const POST_QUERY = gql`
       ...Post
     }
     all: posts(limit: 999, sort: "date:desc") {
-      slug
+      ...Post
     }
   }
 `;
@@ -165,12 +169,38 @@ const getPaginationSlugs = (slug: string, posts: Post[]): PaginationSlugs => {
 
   const nextIndex = index <= 0 ? null : index - 1;
   const previousIndex = index === posts.length - 1 ? null : index + 1;
-  console.log(index, nextIndex, previousIndex, posts)
+  console.log(index, nextIndex, previousIndex, posts);
 
   return {
     next: nextIndex === 0 || !!nextIndex ? posts[nextIndex].slug : null,
     previous: previousIndex ? posts[previousIndex].slug : null,
   };
+};
+
+const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
+  console.log(toMatchPost, posts)
+  const toMatchHashtags = toMatchPost.hashtags ? toMatchPost.hashtags : [];
+  const p = posts.filter(post => post.slug !== toMatchPost.slug);
+
+  const candidatePosts = p.filter(post =>
+    toMatchHashtags.some(toMatchHashtag =>
+      post.hashtags ? post.hashtags.some(hashtag => hashtag === toMatchHashtag) : false,
+    ),
+  );
+
+  const getLackedPost = (count: number)  => {
+    return getRandom(p, count)
+  }
+
+  if(candidatePosts.length === 2 ){
+    return candidatePosts
+  }else if (candidatePosts.length > 2 ){
+    return getRandom(candidatePosts, 2)
+  }else if(candidatePosts.length < 2 ){
+    const lackCount = 2 - candidatePosts.length;
+    return [...candidatePosts, ...getLackedPost(lackCount)]
+  } else return []
+
 };
 
 interface IndexPage<P = { host: string; slug: string; cmsUrl: string; shouldShowDraft: boolean }>
@@ -191,13 +221,22 @@ const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
 
   const viewPost = mapToViewPosts(posts, cmsUrl)[0];
   const paginationSlugs = getPaginationSlugs(slug, all);
+  const suggestionsPosts = getSuggestionsPosts(viewPost, all);
+  const suggestionsViewPost = mapToViewPosts(suggestionsPosts, cmsUrl);
 
   if (error) return <div>Error loading users.</div>;
   if (loading) return <div>Loading</div>;
 
   return (
     <BlogLayout>
-      {viewPost && <PostContent paginationSlugs={paginationSlugs} viewPost={viewPost} host={host} />}
+      {viewPost && (
+        <PostContent
+          suggestionsPosts={suggestionsViewPost}
+          paginationSlugs={paginationSlugs}
+          viewPost={viewPost}
+          host={host}
+        />
+      )}
     </BlogLayout>
   );
 };
