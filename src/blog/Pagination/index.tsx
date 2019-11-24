@@ -11,6 +11,7 @@ type directionType = 'left' | 'right';
 interface TextLinkArrowProps {
   href: string;
   direction: directionType;
+  ariaLabel: string;
 }
 
 interface TextLinkArrowComponent extends React.FunctionComponent<TextLinkArrowProps> {
@@ -18,9 +19,9 @@ interface TextLinkArrowComponent extends React.FunctionComponent<TextLinkArrowPr
   TextLink: any;
 }
 
-const TextLinkArrow: TextLinkArrowComponent = ({ href, children, direction }) => (
+const TextLinkArrow: TextLinkArrowComponent = ({ href, children, ariaLabel, direction }) => (
   <TextLinkArrow.Container href={href}>
-    <TextLinkArrow.TextLink direction={direction} modifiers={['black']}>
+    <TextLinkArrow.TextLink href={href} direction={direction} modifiers={['black']} aria-label={ariaLabel}>
       {children}
       <WideArrow />
     </TextLinkArrow.TextLink>
@@ -66,14 +67,14 @@ const Pagination: PaginationComponent = ({ previous, next, ...props }) => {
   return (
     <Pagination.Container {...props}>
       {previous ? (
-        <TextLinkArrow direction="left" href={`/blog/${previous}`}>
+        <TextLinkArrow direction="left" href={`/blog/${previous}`} ariaLabel={`przejdź do poprzedniego postu`}>
           Poprzedni
         </TextLinkArrow>
       ) : (
         <div />
       )}
       {next ? (
-        <TextLinkArrow direction="right" href={`/blog/${next}`}>
+        <TextLinkArrow direction="right" href={`/blog/${next}`} ariaLabel={`przejdź do następnego postu`}>
           Następny
         </TextLinkArrow>
       ) : (

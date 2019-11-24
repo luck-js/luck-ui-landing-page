@@ -19,6 +19,7 @@ import { Box, Flex, RatioLazyImage, TinySecond } from '../../src/components';
 import Pagination, { PaginationSlugs } from '../../src/blog/Pagination';
 import { SubHeader, Text, BlogTextLink, List, ListOl, Header } from '../../src/blog/Typography';
 import Suggestions from '../../src/blog/Suggestions';
+import Link from "next/link"
 
 const cssTextMinusMargin = css`
   margin-top: -${Theme.space.small}px;
@@ -81,7 +82,7 @@ const ContentContainer = styled(Flex)`
 
 const HashtagsText = styled(TinySecond)`
   ${cssTextMinusMargin};
-  span {
+  a {
     text-transform: uppercase;
 
     &:not(:first-of-type) {
@@ -150,7 +151,9 @@ const PostContent: React.FunctionComponent<{
         {processor.processSync(content).contents}
         <HashtagsText mb={['regular', 'regular', 'large', 'xlarge']}>
           {(hashtags as Hashtag[]).map(({ name }, index) => (
-            <span key={`PostContent-${name}-${index}`}>#{name}</span>
+            <Link href={`/tag/${name.toLowerCase()}`}>
+              <BlogTextLink key={`PostContent-${name}-${index}`} href={`/tag/${name.toLowerCase()}`} aria-label={`przejdź do tagu ${name}`}>#{name}</BlogTextLink>
+            </Link>
           ))}
         </HashtagsText>
         <Pagination mb={['regular', 'regular', 'large', 'xlarge']} {...paginationSlugs} />
