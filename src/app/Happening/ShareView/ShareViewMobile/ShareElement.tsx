@@ -3,26 +3,31 @@ import styled from 'styled-components';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { BaseButton } from '../../../../components';
 import { Theme } from '../../../../utils';
-import { Element } from '../../shared';
+import { Container, Text } from '../../shared';
 // @ts-ignore
 import Share from '../../../../../static/share.svg';
 import { Participant } from '../../model';
 
 export const ShareButton = ({ children, contrast = false, ...props }: any) => {
   return (
-    <ShareButton.Button contrast={contrast} onMouseDown={(e: any) => e.preventDefault()} {...props} >
-      <Element.Text>{children}</Element.Text>
+    <ShareButton.Container
+      contrast={contrast}
+      onMouseDown={(e: any) => e.preventDefault()}
+      {...props}
+    >
+      <ShareButton.Text>{children}</ShareButton.Text>
       <Share />
-    </ShareButton.Button>
+    </ShareButton.Container>
   );
 };
 
-ShareButton.Button = styled(Element.Container).attrs({ as: BaseButton })`
+ShareButton.Container = styled(Container).attrs({ as: BaseButton })`
+  text-align: left;
+  padding: 9px 40px 8px 10px;
   cursor: pointer;
-  background-color: ${props => props.contrast ? Theme.colors.main : Theme.colors.mainContrast};
-  color: ${props => props.contrast ? Theme.colors.black : Theme.colors.main};
-  box-shadow: ${props => props.contrast ? "inset 2px 2px 15px rgba(0, 0, 0, 0.25)" : ""};
-  
+  background-color: ${props => (props.contrast ? Theme.colors.main : Theme.colors.mainContrast)};
+  color: ${props => (props.contrast ? Theme.colors.black : Theme.colors.main)};
+  box-shadow: ${props => (props.contrast ? 'inset 2px 2px 15px rgba(0, 0, 0, 0.25)' : '')};
   transition: background-color 0.5s, color 0.5s, box-shadow 0.5s;
 
   svg {
@@ -35,12 +40,14 @@ ShareButton.Button = styled(Element.Container).attrs({ as: BaseButton })`
     height: 20px;
     display: block;
     path {
-      fill: ${props => props.contrast ? Theme.colors.black : Theme.colors.main};
+      fill: ${props => (props.contrast ? Theme.colors.black : Theme.colors.main)};
     }
   }
 `;
 
-const ShareElement = ({ participant, onClick }: { participant: Participant, onClick: any }) => {
+ShareButton.Text = Text;
+
+const ShareElement = ({ participant, onClick }: { participant: Participant; onClick: any }) => {
   const handleOnCopy = () => {
     onClick(participant.uniqueLink);
   };
@@ -49,8 +56,7 @@ const ShareElement = ({ participant, onClick }: { participant: Participant, onCl
     <CopyToClipboard text={participant.uniqueLink} onCopy={handleOnCopy}>
       <ShareButton contrast={participant.isCopied}>{participant.name}</ShareButton>
     </CopyToClipboard>
-
-  )
-}
+  );
+};
 
 export default ShareElement;

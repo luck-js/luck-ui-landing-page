@@ -7,6 +7,7 @@ const {
   canon,
   canonApp,
   trafalgar,
+  trafalgarApp,
   bodyText,
   inputApp,
   buttonApp,
@@ -36,6 +37,12 @@ export const CanonApp = (props: any) => (
 
 export const Trafalgar = (props: any) => (
   <DynamicComponent {...trafalgar} {...props}>
+    {props.children}
+  </DynamicComponent>
+);
+
+export const TrafalgarApp = (props: any) => (
+  <DynamicComponent {...trafalgarApp} {...props}>
     {props.children}
   </DynamicComponent>
 );

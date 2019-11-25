@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ShareStatic } from 'react-native';
-import ShareElement, {ShareButton} from './ShareElement';
 import { BubblesNarrowBackground } from '../../../BubblesNarrowBackground';
-import { CanonApp, Flex, Box } from '../../../../components';
+import { CanonApp, Box } from '../../../../components';
 import { Theme } from '../../../../utils';
 import { ShareViewProps } from '../index';
+import ShareElementList from './ShareElementList';
 
 declare global {
   interface Navigator extends ShareStatic {}
@@ -13,12 +13,12 @@ declare global {
 
 const CONTAINER_BOTTOM_PADDING = 60;
 
-const Index = ( { happening , onCopy, ...props }: ShareViewProps) => {
+const Index = ({ happening, onCopy, ...props }: ShareViewProps) => {
   const handleOnClick = (uniqueLink: string) => {
     if (window.navigator.share) {
       window.navigator.share({ url: uniqueLink }).then(() => onCopy(uniqueLink));
     } else {
-      onCopy(uniqueLink)
+      onCopy(uniqueLink);
     }
   };
 
@@ -30,12 +30,8 @@ const Index = ( { happening , onCopy, ...props }: ShareViewProps) => {
       >
         UDOSTĘPNIJ LINKI
       </CanonApp>
-      <Index.ShareButtonsContainer>
-        {happening.participants.map(participant => (
-          <ShareElement key={participant.uniqueLink} participant={participant} onClick={handleOnClick}/>
-        ))}
-      </Index.ShareButtonsContainer>
-      <Index.Background/>
+      <ShareElementList participants={happening.participants} onClick={handleOnClick} />
+      <Index.Background />
     </Index.Container>
   );
 };
@@ -44,24 +40,6 @@ Index.Container = styled(Box)`
   padding: 0 ${Theme.space.small}px calc(${CONTAINER_BOTTOM_PADDING}px) ${Theme.space.small}px;
   color: ${Theme.colors.black};
   text-align: center;
-`;
-
-Index.ShareButtonsContainer = styled(Flex)`
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: self-start;
-
-  ${ShareButton.Button} {
-    width: calc(50% - ${Theme.space.xsmall}px);
-    margin-bottom: ${Theme.space.small}px;
-    &:nth-child(odd) {
-      margin-right: ${Theme.space.xsmall}px;
-    }
-
-    &:nth-child(even) {
-      margin-left: ${Theme.space.xsmall}px;
-    }
-  }
 `;
 
 Index.Background = styled(BubblesNarrowBackground)`

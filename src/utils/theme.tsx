@@ -73,6 +73,12 @@ export const textStyles: TextStyles = {
     fontWeight: 700,
     fontFamily: fontFamilies.body,
   },
+  trafalgarApp: {
+    tag: 'h1',
+    fontSize: [18, 18, 18, 21],
+    fontWeight: 700,
+    fontFamily: fontFamilies.body,
+  },
   bodyText: {
     tag: 'p',
     fontSize: [16, 16, 18, 21],

@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Router from 'next/router';
 import TextareaAutosize from 'react-autosize-textarea';
+import useComponentSize from '@rehooks/component-size';
 import { Theme, usePrevious } from '../../../../utils';
-import { ElementList } from '../ElementList';
+
 import { InputWithButton } from '../InputWithButton';
 import { BubblesNarrowBackground } from '../../../BubblesNarrowBackground';
 import { NewParticipant } from '../../model';
@@ -18,16 +19,15 @@ import {
   SpinnerFadingCircle,
 } from '../../../../components';
 import media from '../../../../utils/media';
-import useComponentSize from "@rehooks/component-size"
-import {useNewHappeningFlow} from "../NewHappeningContext"
+import { useNewHappeningFlow } from '../NewHappeningContext';
+import NewParticipantElementList from './NewParticipantElementList';
 
 interface FormHappeningSectionData {}
 
-interface FormHappeningSectionProps extends FormHappeningSectionData{
+interface FormHappeningSectionProps extends FormHappeningSectionData {}
 
-}
-
-interface FormHappeningSectionPage<P = FormHappeningSectionProps> extends React.FunctionComponent<P> {
+interface FormHappeningSectionPage<P = FormHappeningSectionProps>
+  extends React.FunctionComponent<P> {
   Button: any;
   Background: any;
   Container: any;
@@ -41,7 +41,7 @@ const scrollToRef = (ref: any) => {
 
 const TEXTAREA_ROWS_NUMBERS = [5, 5, 7];
 
-const Index: FormHappeningSectionPage = (  ) => {
+const Index: FormHappeningSectionPage = () => {
   const { state, setNewHappening } = useNewHappeningFlow();
   const previousParticipants = usePrevious<NewParticipant[]>(state.participants);
 
@@ -124,11 +124,10 @@ const Index: FormHappeningSectionPage = (  ) => {
       ? TEXTAREA_ROWS_NUMBERS[breakpointIndex]
       : TEXTAREA_ROWS_NUMBERS[TEXTAREA_ROWS_NUMBERS.length - 1];
     setTextareaRows(textareaRowsNumber);
-
   }, [width]);
 
   return (
-    <Index.Container ref={containerRef} >
+    <Index.Container ref={containerRef}>
       <Index.ContentContainer>
         <CanonApp
           pt={['xregular', 'xregular', 'large', 'large']}
@@ -168,9 +167,9 @@ const Index: FormHappeningSectionPage = (  ) => {
           disabled={isEmpty(participantName)}
           label="Imię uczestnika"
         />
-        <ElementList
+        <NewParticipantElementList
           mt={['small', 'small', 'small', 'small']}
-          list={state.participants.map(({ name }) => name)}
+          names={state.participants.map(({ name }) => name)}
           onClose={handleOnCloseParticipantName}
         />
       </Index.ContentContainer>
@@ -245,7 +244,7 @@ Index.Container = styled(Box)`
   position: relative;
 `;
 
-Index.Button = styled(ButtonWithIcon).attrs({...Theme.textStyles.buttonApp})`
+Index.Button = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.buttonApp })`
   width: 270px;
 `;
 

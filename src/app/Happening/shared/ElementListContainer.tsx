@@ -1,27 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
-import {Theme} from '../../../utils';
+import { Flex } from '../../../components';
 import media from '../../../utils/media';
-import {Flex} from "../../../components"
-import {Element} from "../shared"
-
-interface ListContainerProps {
-  list: string[];
-  onClose?: (value: string) => void;
-  mt?: any;
-}
-
-export const ElementList = ({ list, onClose = () => {}, ...props }: ListContainerProps) => {
-  const handleOnClose = (value: string) => () => onClose(value);
-
-  return (
-    <ElementList.Container {...props}>
-      {list.reverse().map((value, index) => (
-        <Element key={`${value}-${index}`} value={value} onClose={handleOnClose(value)} />
-      ))}
-    </ElementList.Container>
-  );
-};
+import { Theme } from '../../../utils';
 
 function getGridStyles(space: number) {
   return `
@@ -45,14 +25,12 @@ function getGridStyles(space: number) {
   `;
 }
 
-ElementList.Container = styled(Flex)`
+export const ElementListContainer = styled(Flex)`
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: self-start;
-    min-height: 40px;
     
-
-  ${Element.Container} {
+  & > div {
       width: calc(50% - ${Theme.space.xsmall}px);
       margin-bottom: ${Theme.space.small}px;
   

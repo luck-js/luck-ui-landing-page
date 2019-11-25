@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Box } from '../../../components';
 import styled from 'styled-components';
-import FormHappeningSection from './FormHappeningSection'
-import PreviewHappeningSection from './PreviewHappeningSection'
-import {NewHappeningFlowProvider} from "./NewHappeningContext"
+import FormHappeningSection from './FormHappeningSection';
+import PreviewHappeningSection from './PreviewHappeningSection';
+import { NewHappeningFlowProvider } from './NewHappeningContext';
 
 export interface NewHappeningViewData {
   name: string;
@@ -18,7 +18,7 @@ interface NewHappeningViewPage<P = NewHappeningViewProps> extends React.Function
 }
 
 const Index: NewHappeningViewPage = ({ data: { name } }) => {
-  const [stepIndex] = useState(0);
+  const [stepIndex] = useState(1);
   return (
     <Index.Container>
       <NewHappeningFlowProvider name={name}>
@@ -26,15 +26,13 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
           <FormHappeningSection />
         </Box>
         <Box display={stepIndex === 1 ? 'block' : 'none'}>
-          <PreviewHappeningSection name={name}/>
+          <PreviewHappeningSection />
         </Box>
       </NewHappeningFlowProvider>
     </Index.Container>
   );
 };
 
-Index.Container = styled(Box)`
-  
-`;
+Index.Container = styled(Box)``;
 
-export default Index
+export default Index;
