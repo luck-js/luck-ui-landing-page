@@ -9,6 +9,7 @@ interface CardsContainerProps {
   breakpointCols?: number;
   maxWidth: string[];
   py: string[];
+  px: string[];
 }
 
 interface CardsContainerComponent extends React.FunctionComponent<CardsContainerProps> {

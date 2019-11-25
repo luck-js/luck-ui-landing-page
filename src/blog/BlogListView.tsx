@@ -13,7 +13,7 @@ interface BlogListViewComponent extends React.FunctionComponent<BlogListViewProp
 
 const BlogListView:BlogListViewComponent = ({posts}) => {
   return (
-    <BlogListView.Container breakpointCols={3} maxWidth={["none", "none", "962px"]} py={["small", "small", "regular", "xregular"]}>
+    <BlogListView.Container breakpointCols={3} maxWidth={["none", "none", "962px"]} px={["xregular", "xregular", "none", "none"]} py={["small", "small", "regular", "xregular"]}>
       {posts.map((post, index) => (
         <Card key={`${post._id}-${index}`} {...post} />
       ))}
