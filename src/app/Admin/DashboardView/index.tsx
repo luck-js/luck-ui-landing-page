@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Box } from '../../../components';
 import { Theme } from '../../../utils';
 import { Table } from './table';
+import media from "../../../utils/media"
 
 interface IParticipantsView {
   name: string;
@@ -90,10 +91,29 @@ const Index = ({ data: { happenings }, ...props }: DashboardViewProps) => {
 };
 
 Index.Container = styled(Box)`
+  overflow: scroll;
   margin: 0 auto;
-  max-width: 700px;
   color: ${Theme.colors.black};
   text-align: center;
+  
+  background-color: ${Theme.colors.main};
+  color: ${Theme.colors.black};
+  flex-wrap: wrap;
+  max-width: 1012px;
+  padding: ${Theme.space.small}px ${Theme.space.xregular}px;
+  
+  ${media.greaterThan('mobile')`
+    
+  `}
+  
+  ${media.greaterThan('tablet')`
+    padding: ${Theme.space.regular}px 0;
+  `}
+  
+  ${media.greaterThan('desktop')`
+    max-width: 1138px;
+    padding: ${Theme.space.xregular}px 0;
+  `}
 `;
 
 export default Index;
