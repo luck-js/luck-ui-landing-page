@@ -19,12 +19,10 @@ const NewParticipantElementList: NewParticipantElementListPage = ({
   onClose = () => {},
   ...props
 }) => {
-  const handleOnClose = (name: string) => () => onClose(name);
-
   return (
     <NewParticipantElementList.Container {...props}>
       {names.reverse().map((name, index) => (
-        <NewParticipantElement key={`${name}-${index}`} name={name} onClose={handleOnClose} />
+        <NewParticipantElement key={`${name}-${index}`} name={name} onClose={onClose} />
       ))}
     </NewParticipantElementList.Container>
   );

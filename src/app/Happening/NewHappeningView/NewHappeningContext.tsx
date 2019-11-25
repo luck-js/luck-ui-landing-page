@@ -1,24 +1,46 @@
 import * as React from 'react';
-import { createContext, Reducer, useCallback, useEffect, useReducer } from 'react';
-import {INIT_NEW_HAPPENING, NewHappening} from "../model"
+import { createContext, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
+import { INIT_NEW_HAPPENING, NewHappening } from '../model';
+import ConfirmModal from './ConfirmModal';
+import { apiAxios } from '../../api.axios';
+import Router from 'next/router';
 
-type NewHappeningReducer = Reducer<NewHappening, any>;
+interface NewHappeningForm {
+  happening: NewHappening;
+  step: number;
+  isLoading: boolean;
+}
+
+type NewHappeningReducer = Reducer<NewHappeningForm, any>;
 
 export const NewHappeningContext = createContext<any>(null);
 
-const initialState: NewHappening = { name: '', description: '', participants: [] };
+const STORAGE_ITEM_NAME = 'happening';
 
 const reducer: NewHappeningReducer = (state, action) => {
-  console.log(state)
   switch (action.type) {
-    case 'SET_HAPPENING':
-      return action.payload;
+    case 'LOAD_STATE':
+      return { ...state, happening: action.payload };
+    case 'EDIT_HAPPENING ':
+      return { ...state, happening: action.payload };
+    case 'BACK_TO_EDIT ':
+      return { ...state, step: 0 };
+    case 'GO_TO_PREVIEW ':
+      return { ...state, step: 1 };
+    case 'PUBLISH_HAPPENING ':
+      return { ...state, isLoading: true };
     default:
       throw new Error();
   }
 };
 
-export function useNewHappeningFlow(): {state: NewHappening, setNewHappening: any} {
+export function useNewHappeningFlow(): {
+  state: NewHappeningForm;
+  editNewHappening: any;
+  goToPreview: any;
+  backToEdit: any;
+  publishHappening: any;
+} {
   const context = React.useContext(NewHappeningContext);
 
   if (!context) {
@@ -27,32 +49,74 @@ export function useNewHappeningFlow(): {state: NewHappening, setNewHappening: an
 
   const { state, dispatch } = context;
 
-  const setNewHappening = useCallback(happening => {
-    dispatch({type: "SET_HAPPENING", payload: happening})
-    console.log("SET_HAPPENING -> happening.id", happening, happening.id)
-    localStorage.setItem("happening", JSON.stringify(happening))
+  const editNewHappening = useCallback(
+    happening => {
+      dispatch({ type: 'EDIT_HAPPENING ', payload: happening });
+      localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(happening));
+    },
+    [dispatch],
+  );
+
+  const goToPreview = useCallback(() => dispatch({ type: 'GO_TO_PREVIEW ' }), [dispatch]);
+
+  const backToEdit = useCallback(() => dispatch({ type: 'BACK_TO_EDIT ' }), [dispatch]);
+
+  const publishHappening = useCallback(async () => {
+    console.log("publishHappening")
+    dispatch({ type: 'PUBLISH_HAPPENING ' });
+    const { data } = await apiAxios.post('/api/v1/published-happening', { happening:state.happening });
+    Router.push({
+      pathname: '/app/udostepnij-linki',
+      query: { id: data.id },
+    });
   }, [dispatch]);
 
-  return { state, setNewHappening };
+  return { state, editNewHappening, goToPreview, backToEdit, publishHappening };
 }
 
 export const NewHappeningFlowProvider = ({ children, name }: any) => {
-  const [state, dispatch] = useReducer<NewHappeningReducer>(reducer, initialState);
-
-  const initStateByLocalStorage = () => {
-    const item = localStorage.getItem("happening");
-    const happening = item ? JSON.parse(item ) : {};
-    if(happening.hasOwnProperty("name") && happening.hasOwnProperty("description") && happening.hasOwnProperty("participants")){
-      dispatch({type: "SET_HAPPENING", payload: happening})
-    } else {
-      dispatch({type: "SET_HAPPENING", payload: { ...INIT_NEW_HAPPENING, name }})
-    }
-  }
-
-  useEffect(() => {
-    initStateByLocalStorage()
-  }, []);
+  const [state, dispatch] = useReducer<NewHappeningReducer>(reducer, {
+    step: 0,
+    isLoading: false,
+    happening: {
+      ...INIT_NEW_HAPPENING,
+      name,
+    },
+  });
 
   const context = { state, dispatch };
-  return <NewHappeningContext.Provider value={context}>{children}</NewHappeningContext.Provider>;
+
+  const [storageHappening, setStorageHappening] = useState(null);
+  const [shouldBeOpen, setShouldBeOpen] = useState(false);
+
+  useEffect(() => {
+    const item = localStorage.getItem(STORAGE_ITEM_NAME);
+    const happening = item ? JSON.parse(item) : {};
+
+    if (
+      happening.hasOwnProperty('name') &&
+      happening.hasOwnProperty('description') &&
+      happening.hasOwnProperty('participants')
+    ) {
+      setStorageHappening(happening);
+      setShouldBeOpen(true);
+    }
+  }, []);
+
+  const handleOnConfirm = (isConfirm: boolean) => {
+    if (isConfirm) {
+      dispatch({ type: 'LOAD_STATE', payload: storageHappening });
+      setShouldBeOpen(false);
+    } else {
+      localStorage.removeItem(STORAGE_ITEM_NAME);
+      setShouldBeOpen(false);
+    }
+  };
+
+  return (
+    <NewHappeningContext.Provider value={context}>
+      <ConfirmModal shouldBeOpen={shouldBeOpen} onConfirm={handleOnConfirm} />
+      {children[state.step]}
+    </NewHappeningContext.Provider>
+  );
 };

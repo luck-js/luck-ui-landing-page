@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '../../../components';
 import styled from 'styled-components';
 import FormHappeningSection from './FormHappeningSection';
@@ -18,16 +18,11 @@ interface NewHappeningViewPage<P = NewHappeningViewProps> extends React.Function
 }
 
 const Index: NewHappeningViewPage = ({ data: { name } }) => {
-  const [stepIndex] = useState(1);
   return (
     <Index.Container>
       <NewHappeningFlowProvider name={name}>
-        <Box display={stepIndex === 0 ? 'block' : 'none'}>
-          <FormHappeningSection />
-        </Box>
-        <Box display={stepIndex === 1 ? 'block' : 'none'}>
-          <PreviewHappeningSection />
-        </Box>
+        <FormHappeningSection />
+        <PreviewHappeningSection />
       </NewHappeningFlowProvider>
     </Index.Container>
   );

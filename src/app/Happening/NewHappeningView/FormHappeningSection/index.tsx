@@ -1,26 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Router from 'next/router';
 import TextareaAutosize from 'react-autosize-textarea';
 import useComponentSize from '@rehooks/component-size';
 import { Theme, usePrevious } from '../../../../utils';
 
 import { InputWithButton } from '../InputWithButton';
-import { BubblesNarrowBackground } from '../../../BubblesNarrowBackground';
 import { NewParticipant } from '../../model';
-import { apiAxios } from '../../../api.axios';
-import {
-  Box,
-  ButtonWithIcon,
-  CanonApp,
-  Flex,
-  Input,
-  NAVIGATION_HEIGHT,
-  SpinnerFadingCircle,
-} from '../../../../components';
-import media from '../../../../utils/media';
+import { Box, ButtonWithIcon, CanonApp, Input, NAVIGATION_HEIGHT } from '../../../../components';
 import { useNewHappeningFlow } from '../NewHappeningContext';
 import NewParticipantElementList from './NewParticipantElementList';
+import { ButtonContainer, ContentContainer, SectionBackground } from '../SectionLayout';
 
 interface FormHappeningSectionData {}
 
@@ -40,17 +29,17 @@ const scrollToRef = (ref: any) => {
 };
 
 const TEXTAREA_ROWS_NUMBERS = [5, 5, 7];
-
 const Index: FormHappeningSectionPage = () => {
-  const { state, setNewHappening } = useNewHappeningFlow();
-  const previousParticipants = usePrevious<NewParticipant[]>(state.participants);
+  const { state, editNewHappening, goToPreview } = useNewHappeningFlow();
+  console.log(state);
+  const previousParticipants = usePrevious<NewParticipant[]>(state.happening.participants);
 
   const handleOnChangeTitle = ({ target: { value } }: any) => {
-    setNewHappening({ ...state, name: value });
+    editNewHappening({ ...state.happening, name: value });
   };
 
   const handleOnChangeDescription = ({ target: { value } }: any) => {
-    setNewHappening({ ...state, description: value });
+    editNewHappening({ ...state.happening, description: value });
   };
 
   const [participantName, setParticipantName] = useState<string>('');
@@ -61,17 +50,18 @@ const Index: FormHappeningSectionPage = () => {
 
   const handleOnEnterParticipantName = () => {
     if (isEmpty(participantName)) return;
-    setNewHappening({
-      ...state,
-      participants: [...state.participants, { name: participantName }],
+    editNewHappening({
+      ...state.happening,
+      participants: [...state.happening.participants, { name: participantName }],
     });
 
     setParticipantName('');
   };
 
   const handleOnCloseParticipantName = (value: string) => {
-    const participants = state.participants.filter(({ name }) => name !== value);
-    setNewHappening({ ...state, participants });
+    console.log(name, value);
+    const participants = state.happening.participants.filter(({ name }) => name !== value);
+    editNewHappening({ ...state.happening, participants });
   };
 
   const handleKeyPress = (e: any) => {
@@ -83,32 +73,22 @@ const Index: FormHappeningSectionPage = () => {
     }
   };
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const handleOnClickButton = () => {
-    setIsLoading(true);
-    apiAxios.post('/api/v1/published-happening', { state }).then(({ data }) => {
-      Router.push({
-        pathname: '/app/udostepnij-linki',
-        query: { id: data.id },
-      });
-    });
-  };
+  const handleOnClickButton = () => goToPreview();
 
   const myRef = useRef(null);
   const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
-    if (previousParticipants && previousParticipants.length < state.participants.length) {
+    if (previousParticipants && previousParticipants.length < state.happening.participants.length) {
       executeScroll();
     }
-  }, [state.participants]);
+  }, [state.happening.participants]);
 
-  const [isValid, setIsValid] = useState<boolean>(false);
+  const [isValid, setIsValid] = useState<boolean>(state.happening.participants.length > 2);
 
   useEffect(() => {
-    setIsValid(state.participants.length > 2);
-  }, [state.participants]);
+    setIsValid(state.happening.participants.length > 2);
+  }, [state.happening.participants]);
 
   const [textareaRows, setTextareaRows] = useState<number>(5);
 
@@ -138,7 +118,7 @@ const Index: FormHappeningSectionPage = () => {
         <Input
           type="text"
           label="Nazwa wydarzenia"
-          value={state.name}
+          value={state.happening.name}
           onChange={handleOnChangeTitle}
         />
         <Input
@@ -147,7 +127,7 @@ const Index: FormHappeningSectionPage = () => {
           type="text"
           rows={textareaRows}
           as={TextareaAutosize}
-          value={state.description}
+          value={state.happening.description}
           onChange={handleOnChangeDescription}
           label="Opis wydarzenia"
         />
@@ -169,7 +149,7 @@ const Index: FormHappeningSectionPage = () => {
         />
         <NewParticipantElementList
           mt={['small', 'small', 'small', 'small']}
-          names={state.participants.map(({ name }) => name)}
+          names={state.happening.participants.map(({ name }) => name)}
           onClose={handleOnCloseParticipantName}
         />
       </Index.ContentContainer>
@@ -178,10 +158,10 @@ const Index: FormHappeningSectionPage = () => {
 
         <Index.Button
           colorfull
+          modifiers={['contrast']}
           onClick={handleOnClickButton}
           onMouseDown={(e: any) => e.preventDefault()}
           disabled={!isValid}
-          Icon={isLoading ? SpinnerFadingCircle : null}
         >
           UTWÓRZ WYDARZENIE
         </Index.Button>
@@ -194,65 +174,18 @@ function isEmpty(str: string): boolean {
   return !str.replace(/\s+/, '').length;
 }
 
-Index.ButtonContainer = styled(Flex)`
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  padding: ${Theme.space.small}px ${Theme.space.small}px 50px;
-  background-color: ${Theme.colors.main};
-  justify-content: center;
-  
-  ${media.greaterThan('mobile')`
-    
-  `}
-  
-  ${media.greaterThan('tablet')`
-    max-width: 558px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: ${Theme.space.small}px ${Theme.space.small}px 74px;
-  `}
-  
-  ${media.greaterThan('desktop')`
-  
-  `}
-`;
-
-Index.ContentContainer = styled(Flex)`
-  flex-direction: column;
-  overflow: hidden;
-  padding: 0 ${Theme.space.small}px calc(103px + 60px) ${Theme.space.small}px;
-  margin: 0 auto;
-
-  color: ${Theme.colors.black};
-  text-align: center;
-     
-  ${media.greaterThan('mobile')`
-    
-  `}
-  
-  ${media.greaterThan('tablet')`
-    max-width: 558px;
-  `}
-  
-  ${media.greaterThan('desktop')`
-  
-  `}
-`;
-
 Index.Container = styled(Box)`
   position: relative;
 `;
+
+Index.ContentContainer = ContentContainer;
+
+Index.ButtonContainer = ButtonContainer;
 
 Index.Button = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.buttonApp })`
   width: 270px;
 `;
 
-Index.Background = styled(BubblesNarrowBackground)`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: -100%;
-`;
+Index.Background = SectionBackground;
 
 export default Index;

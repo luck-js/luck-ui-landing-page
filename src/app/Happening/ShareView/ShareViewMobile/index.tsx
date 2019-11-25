@@ -48,7 +48,6 @@ Index.Background = styled(BubblesNarrowBackground)`
   left: 0;
   height: 103px;
   position: fixed;
-  transition: 0.5s opacity;
 `;
 
 export default Index;

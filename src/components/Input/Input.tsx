@@ -6,7 +6,7 @@ import { Box } from '../Box';
 import {useEffect, useState} from 'react';
 
 export const Input = ({ id, label, onBlur, onFocus, type, refs, className, mt, ...otherProps }: any) => {
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(otherProps.value.length !== 0);
   const [isFocus, setIsFocus] = useState(false);
 
   const handleFocus = (event: any) => {
