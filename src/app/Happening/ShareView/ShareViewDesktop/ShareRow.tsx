@@ -1,15 +1,23 @@
-import React, {useRef} from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Participant } from '../../model';
 import { Theme } from '../../../../utils';
-import {BaseButton, BaseInput, Box, Flex} from '../../../../components';
+import {
+  BaseButton,
+  BaseInput,
+  Box,
+  Flex,
+} from '../../../../components';
 // @ts-ignore
 import WideArrow from '../../../../../static/wide-arrow.svg';
 // @ts-ignore
 import Copy from '../../../../../static/copy.svg';
 
-interface ShareRowProps { participant: Participant, onCopy: any }
+interface ShareRowProps {
+  participant: Participant;
+  onCopy: any;
+}
 
 interface ShareRowComponent extends React.FunctionComponent<ShareRowProps> {
   Container: any;
@@ -17,36 +25,41 @@ interface ShareRowComponent extends React.FunctionComponent<ShareRowProps> {
   Input: any;
   Button: any;
 }
-export const ShareRow:ShareRowComponent = ({ participant, onCopy }) => {
+export const ShareRow: ShareRowComponent = ({ participant, onCopy }) => {
   const inputRef = useRef(null);
   const handleOnCopy = () => {
-    onCopy()
-    if(inputRef && inputRef.current){
+    onCopy();
+    if (inputRef && inputRef.current) {
       // @ts-ignore
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
   };
 
   const handleFocus = (e: any) => {
     e.currentTarget.select();
-  }
+  };
 
   return (
-      <ShareRow.Container isCopied={participant.isCopied}>
-        <ShareRow.Element {...Theme.textStyles.inputApp} className="name">
-          {participant.name}
+    <ShareRow.Container isCopied={participant.isCopied}>
+      <ShareRow.Element {...Theme.textStyles.inputApp} className="name">
+        {participant.name}
+      </ShareRow.Element>
+      <CopyToClipboard text={participant.uniqueLink} onCopy={handleOnCopy}>
+        <ShareRow.Element className="uniqueLink" {...Theme.textStyles.buttonApp}>
+          <WideArrow className="wideArrow" />
+          <ShareRow.Input
+            ref={inputRef}
+            type="text"
+            value={participant.uniqueLink}
+            onFocus={handleFocus}
+            readOnly
+          />
+          <ShareRow.Button onMouseDown={(e: any) => e.preventDefault()}>
+            <Copy />
+          </ShareRow.Button>
         </ShareRow.Element>
-        <CopyToClipboard text={participant.uniqueLink} onCopy={handleOnCopy}>
-          <ShareRow.Element className="uniqueLink" {...Theme.textStyles.buttonApp} >
-            <WideArrow className="wideArrow" />
-            <ShareRow.Input ref={inputRef} type="text" value={participant.uniqueLink}
-                            onFocus={ handleFocus } readOnly/>
-            <ShareRow.Button onMouseDown={(e: any) => e.preventDefault()}>
-              <Copy />
-            </ShareRow.Button>
-          </ShareRow.Element>
-        </CopyToClipboard>
-      </ShareRow.Container>
+      </CopyToClipboard>
+    </ShareRow.Container>
   );
 };
 
@@ -99,8 +112,8 @@ ShareRow.Element = styled(Box)`
     width: 13px;
     height: auto;
     transition: left 1s;
-    
-    path  {
+
+    path {
       stroke: ${Theme.colors.black};
     }
   }
