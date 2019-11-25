@@ -21,13 +21,21 @@ const cssTextMinusMargin = css`
 
 export const Text = styled(MediumText).attrs({
   mb: ['regular', 'regular', 'xregular', 'large'],
-})``;
+})`
+  line-height: 1.4;
+`;
+
 export const Header = styled(Canon).attrs({
   mb: ['small', 'small', 'medium', 'regular'],
-})``;
+})`
+  line-height: 1.4;
+`;
+
 export const SubHeader = styled(Trafalgar).attrs({
   mb: ['small', 'small', 'medium', 'regular'],
-})``;
+})`
+  line-height: 1.4;
+`;
 
 export const BlogTextLink = ({ children, ...props }: any) => (
   <TextLink modifiers={['darkGray']} {...props}>
