@@ -63,6 +63,7 @@ const InputWithButton = ({ href, ariaLabel, linkAs, ...props }: any) => {
       <Link href={getUrlWithNameParam(href)} as={getUrlWithNameParam(linkAs)}>
         <InputWithButton.Button
           colorfull
+          modifiers={['contrast']}
           href={getUrlWithNameParam(href)}
           ariaLabel={ariaLabel}
           {...Theme.textStyles.smallText}

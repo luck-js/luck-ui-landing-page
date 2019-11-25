@@ -84,7 +84,7 @@ const Questionnaire: QuestionnaireComponent = ({onClose, onClickStar, onClickSub
           as={TextareaAutosize}
           onChange={handleOnChangeOpinion}
         />
-        <Questionnaire.Button mt={['regular', 'regular', 'xregular', 'xregular']} colorfull onClick={handleOnSubmit} onMouseDown={(e: any) => e.preventDefault()}>Wyślij!</Questionnaire.Button>
+        <Questionnaire.Button mt={['regular', 'regular', 'xregular', 'xregular']} modifiers={['contrast']} colorfull onClick={handleOnSubmit} onMouseDown={(e: any) => e.preventDefault()}>Wyślij!</Questionnaire.Button>
       </Box>
 
       <Box display={stepIndex === 3 ? "block" : "none"}>

@@ -19,17 +19,30 @@ const BUTTON_VARIANTS: ModifiersConfig = {
       text-decoration-color: ${Theme.colors.black};
     }
   `,
+  contrast: props => css`
+    color: ${Theme.colors.main};
+    background-color: ${props.colorfull ? Theme.colors.mainContrast : 'transparent'};
+    border-color: ${props.colorfull ? Theme.colors.main : 'transparent'};
+    
+    &:hover {
+      text-decoration-color: ${Theme.colors.main};
+    }
+
+    :disabled {
+      color: ${props.colorfull ? Theme.colors.mainContrast : Theme.colors.main};
+      border-color: ${props.colorfull ? Theme.colors.mainContrast : 'transparent'};
+    }
+  `,
 };
 
 export const Button = styled(BaseButton)<ButtonProps>`
-  //width: auto;
   font-weight: 700;
   letter-spacing: 0;
   cursor: pointer;
-  background-color: ${props => (props.colorfull ? Theme.colors.mainContrast : 'transparent')};
+  background-color: ${props => (props.colorfull ? Theme.colors.main: 'transparent')};
 
-  color: ${Theme.colors.main};
-  border: 2px solid ${props => (props.colorfull ? Theme.colors.main : 'transparent')};
+  color: ${props => (props.colorfull ? Theme.colors.mainContrast: Theme.colors.main)};
+  border: 2px solid ${props => (props.colorfull ? Theme.colors.mainContrast  : 'transparent')};
 
   padding: 9px 20px 9px;
 
@@ -37,15 +50,16 @@ export const Button = styled(BaseButton)<ButtonProps>`
   text-transform: uppercase;
   text-decoration: underline;
   text-decoration-color: transparent;
-  transition: text-decoration-color 0.5s, background-color 0.5s, color 0.5s, opacity 0.5s, border-color 0.5s;
+  transition: text-decoration-color 0.5s, background-color 0.5s, color 0.5s, opacity 0.5s,
+    border-color 0.5s;
 
   border-radius: 30px;
 
   &:hover {
-    text-decoration-color: ${Theme.colors.main};
+    text-decoration-color: ${Theme.colors.mainContrast };
   }
-  
-  :disabled{
+
+  :disabled {
     cursor: not-allowed;
     background-color: transparent;
     color: ${props => (props.colorfull ? Theme.colors.mainContrast : Theme.colors.main)};
