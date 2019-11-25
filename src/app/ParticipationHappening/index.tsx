@@ -5,7 +5,7 @@ import WelcomeMemberSection, { WelcomeMemberSectionData } from './WelcomeMemberS
 import MatchedMemberSection from './MatchedMemberSection';
 import { MatchedMemberSectionData } from './MatchedMemberSection';
 import styled from 'styled-components';
-import { Box, NAVIGATION_SHADOW } from '../../components';
+import {Flex, NAVIGATION_SHADOW} from '../../components';
 import { Theme } from '../../utils';
 const Bubbles = dynamic(() => import('../../home/Bubbles'), { ssr: false });
 
@@ -40,7 +40,7 @@ const Index = ({ data, onClickBubble }: ParticipationHappeningViewProps) => {
   );
 };
 
-Index.Container = styled(Box)`
+Index.Container = styled(Flex)`
   position: relative;
   padding: ${Theme.space.xregular - NAVIGATION_SHADOW}px ${Theme.space.small}px 200px
     ${Theme.space.small}px;
@@ -51,7 +51,6 @@ Index.Container = styled(Box)`
 
   justify-content: center;
   flex-direction: column;
-  display: flex;
 `;
 
 export default Index;
