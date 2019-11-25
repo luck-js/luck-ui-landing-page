@@ -36,7 +36,7 @@ ConfirmModal.Text = styled(InputApp)`
   
 `;
 
-ConfirmModal.Button = styled(Button)``;
+ConfirmModal.Button = styled(Button).attrs({ ...Theme.textStyles.buttonApp })``;
 
 ConfirmModal.Container = styled(Box)`
   // padding: 0 ${Theme.space.small}px ${Theme.space.small}px ${Theme.space.small}px;

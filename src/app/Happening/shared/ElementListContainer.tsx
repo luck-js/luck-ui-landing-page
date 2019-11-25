@@ -30,7 +30,7 @@ export const ElementListContainer = styled(Flex)`
     justify-content: flex-start;
     align-items: self-start;
     
-  & > div {
+  & > div, & > button {
       width: calc(50% - ${Theme.space.xsmall}px);
       margin-bottom: ${Theme.space.small}px;
   

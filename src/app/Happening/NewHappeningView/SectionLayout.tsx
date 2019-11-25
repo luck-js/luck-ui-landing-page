@@ -6,6 +6,7 @@ import {BubblesNarrowBackground} from "../../BubblesNarrowBackground"
 const SPACE = 10;
 const CONTAINER_BOTTOM_PADDING = [NAVIGATION_HEIGHT + SPACE, NAVIGATION_HEIGHT + SPACE, NAVIGATION_DESKTOP_HEIGHT + SPACE];
 const BUTTON_CONTAINER_MIN_HEIGHTS = [101, 101, 125];
+
 export const ContentContainer = styled(Flex)`
   flex-direction: column;
   overflow: hidden;

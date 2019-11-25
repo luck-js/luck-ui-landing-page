@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ButtonWithIcon, Flex, SpinnerFadingCircle } from '../../../../components';
+import {Box, Button, ButtonWithIcon, SpinnerFadingCircle} from '../../../../components';
 import { useNewHappeningFlow } from '../NewHappeningContext';
 import { CanonApp, InputApp, TrafalgarApp } from '../../../../components/Typography';
 import styled from 'styled-components';
@@ -32,12 +32,12 @@ const Index: PreviewHappeningSectionPage = () => {
     <Index.Container>
       <Index.ContentContainer>
         <CanonApp pt={['xregular', 'xregular', 'large', 'large']}>TWOJE WYDARZENIE</CanonApp>
-        <TrafalgarApp mt={['medium', 'medium', 'medium', 'medium']}>
+        {state.happening.name && (<TrafalgarApp mt={['medium', 'medium', 'medium', 'medium']}>
           {state.happening.name}
-        </TrafalgarApp>
-        <InputApp mt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
+        </TrafalgarApp>)}
+        {state.happening.description && (<InputApp mt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
           {state.happening.description}
-        </InputApp>
+        </InputApp>)}
         <CanonApp mt={['xregular', 'xregular', 'xregular', 'xregular']}>UCZESTNICY</CanonApp>
         <ParticipantElementList
           mt={['medium', 'medium', 'medium', 'medium']}
@@ -71,7 +71,7 @@ const Index: PreviewHappeningSectionPage = () => {
   );
 };
 
-Index.Container = styled(Flex)`
+Index.Container = styled(Box)`
   position: relative;
 `;
 
@@ -79,9 +79,11 @@ Index.ContentContainer = ContentContainer;
 
 Index.ButtonContainer = ButtonContainer;
 
-Index.ButtonWithIcon = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.buttonApp })`
-  width: 270px;
+Index.ButtonWithIcon = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.buttonApp })<any>`
+  width: 270px;  
+  cursor: ${props => props.isLoading ? 'pointer' : 'initial'};
 `;
+
 Index.Button = styled(Button).attrs({ ...Theme.textStyles.buttonApp })`
   text-transform: initial;
   width: 270px;
