@@ -6,7 +6,7 @@ import { Theme, usePrevious } from '../../../../utils';
 import { ElementList } from '../ElementList';
 import { InputWithButton } from '../InputWithButton';
 import { BubblesNarrowBackground } from '../../../BubblesNarrowBackground';
-import { INIT_NEW_HAPPENING, NewHappening, NewParticipant } from '../../model';
+import { NewParticipant } from '../../model';
 import { apiAxios } from '../../../api.axios';
 import {
   Box,
@@ -19,10 +19,9 @@ import {
 } from '../../../../components';
 import media from '../../../../utils/media';
 import useComponentSize from "@rehooks/component-size"
+import {useNewHappeningFlow} from "../NewHappeningContext"
 
-interface FormHappeningSectionData {
-  name: string;
-}
+interface FormHappeningSectionData {}
 
 interface FormHappeningSectionProps extends FormHappeningSectionData{
 
@@ -42,16 +41,16 @@ const scrollToRef = (ref: any) => {
 
 const TEXTAREA_ROWS_NUMBERS = [5, 5, 7];
 
-const Index: FormHappeningSectionPage = ({ name  }) => {
-  const [happening, setHappening] = useState<NewHappening>({ ...INIT_NEW_HAPPENING, name });
-  const previousParticipants = usePrevious<NewParticipant[]>(happening.participants);
+const Index: FormHappeningSectionPage = (  ) => {
+  const { state, setNewHappening } = useNewHappeningFlow();
+  const previousParticipants = usePrevious<NewParticipant[]>(state.participants);
 
   const handleOnChangeTitle = ({ target: { value } }: any) => {
-    setHappening(happening => ({ ...happening, name: value }));
+    setNewHappening({ ...state, name: value });
   };
 
   const handleOnChangeDescription = ({ target: { value } }: any) => {
-    setHappening(happening => ({ ...happening, description: value }));
+    setNewHappening({ ...state, description: value });
   };
 
   const [participantName, setParticipantName] = useState<string>('');
@@ -62,16 +61,17 @@ const Index: FormHappeningSectionPage = ({ name  }) => {
 
   const handleOnEnterParticipantName = () => {
     if (isEmpty(participantName)) return;
-    setHappening(happening => ({
-      ...happening,
-      participants: [...happening.participants, { name: participantName }],
-    }));
+    setNewHappening({
+      ...state,
+      participants: [...state.participants, { name: participantName }],
+    });
+
     setParticipantName('');
   };
 
   const handleOnCloseParticipantName = (value: string) => {
-    const participants = happening.participants.filter(({ name }) => name !== value);
-    setHappening(happening => ({ ...happening, participants }));
+    const participants = state.participants.filter(({ name }) => name !== value);
+    setNewHappening({ ...state, participants });
   };
 
   const handleKeyPress = (e: any) => {
@@ -87,7 +87,7 @@ const Index: FormHappeningSectionPage = ({ name  }) => {
 
   const handleOnClickButton = () => {
     setIsLoading(true);
-    apiAxios.post('/api/v1/published-happening', { happening }).then(({ data }) => {
+    apiAxios.post('/api/v1/published-happening', { state }).then(({ data }) => {
       Router.push({
         pathname: '/app/udostepnij-linki',
         query: { id: data.id },
@@ -99,16 +99,16 @@ const Index: FormHappeningSectionPage = ({ name  }) => {
   const executeScroll = () => scrollToRef(myRef);
 
   useEffect(() => {
-    if (previousParticipants && previousParticipants.length < happening.participants.length) {
+    if (previousParticipants && previousParticipants.length < state.participants.length) {
       executeScroll();
     }
-  }, [happening.participants]);
+  }, [state.participants]);
 
   const [isValid, setIsValid] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsValid(happening.participants.length > 2);
-  }, [happening.participants]);
+    setIsValid(state.participants.length > 2);
+  }, [state.participants]);
 
   const [textareaRows, setTextareaRows] = useState<number>(5);
 
@@ -139,7 +139,7 @@ const Index: FormHappeningSectionPage = ({ name  }) => {
         <Input
           type="text"
           label="Nazwa wydarzenia"
-          value={happening.name}
+          value={state.name}
           onChange={handleOnChangeTitle}
         />
         <Input
@@ -148,7 +148,7 @@ const Index: FormHappeningSectionPage = ({ name  }) => {
           type="text"
           rows={textareaRows}
           as={TextareaAutosize}
-          value={happening.description}
+          value={state.description}
           onChange={handleOnChangeDescription}
           label="Opis wydarzenia"
         />
@@ -170,7 +170,7 @@ const Index: FormHappeningSectionPage = ({ name  }) => {
         />
         <ElementList
           mt={['small', 'small', 'small', 'small']}
-          list={happening.participants.map(({ name }) => name)}
+          list={state.participants.map(({ name }) => name)}
           onClose={handleOnCloseParticipantName}
         />
       </Index.ContentContainer>

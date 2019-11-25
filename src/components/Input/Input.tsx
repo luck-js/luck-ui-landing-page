@@ -3,10 +3,10 @@ import { BaseInput } from './BaseInput';
 import { Theme } from '../../utils';
 import { Flex } from '../Flex';
 import { Box } from '../Box';
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 
 export const Input = ({ id, label, onBlur, onFocus, type, refs, className, mt, ...otherProps }: any) => {
-  const [isActive, setIsActive] = useState(otherProps.value.length !== 0);
+  const [isActive, setIsActive] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
 
   const handleFocus = (event: any) => {
@@ -24,6 +24,12 @@ export const Input = ({ id, label, onBlur, onFocus, type, refs, className, mt, .
       onBlur(event);
     }
   };
+
+  useEffect(() => {
+    console.log("useEffect !", otherProps.value.length)
+    setIsActive(otherProps.value.length !== 0)
+  },[otherProps.value.length])
+
 
   return (
     <Input.Container mt={mt} isFocus={isFocus}>

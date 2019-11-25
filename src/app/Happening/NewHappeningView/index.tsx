@@ -3,6 +3,7 @@ import { Box } from '../../../components';
 import styled from 'styled-components';
 import FormHappeningSection from './FormHappeningSection'
 import PreviewHappeningSection from './PreviewHappeningSection'
+import {NewHappeningFlowProvider} from "./NewHappeningContext"
 
 export interface NewHappeningViewData {
   name: string;
@@ -20,12 +21,14 @@ const Index: NewHappeningViewPage = ({ data: { name } }) => {
   const [stepIndex] = useState(0);
   return (
     <Index.Container>
-      <Box display={stepIndex === 0 ? 'block' : 'none'}>
-        <FormHappeningSection name={name}/>
-      </Box>
-      <Box display={stepIndex === 1 ? 'block' : 'none'}>
-        <PreviewHappeningSection name={name}/>
-      </Box>
+      <NewHappeningFlowProvider name={name}>
+        <Box display={stepIndex === 0 ? 'block' : 'none'}>
+          <FormHappeningSection />
+        </Box>
+        <Box display={stepIndex === 1 ? 'block' : 'none'}>
+          <PreviewHappeningSection name={name}/>
+        </Box>
+      </NewHappeningFlowProvider>
     </Index.Container>
   );
 };
