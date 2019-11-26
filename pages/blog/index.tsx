@@ -99,8 +99,8 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   return (
     <>
       <NextSeo
-        title="Luck - blog posty dotyczące aplikacji"
-        description="Blog posty związane z aplikacją Luck. Znajdziesz tu podsumowania, najbliższe plany dotyczące rozwoju, ale także i ciekawostki dotyczące Mikołajek"
+        title="Luck - artykuły dotyczące aplikacji na mikołajki"
+        description="Wszystkie Artykłu związane z aplikacją na mikołajki Luck. Przeczytasz tu nasze aktualności w roku 2019, podsumowanie i plany dotyczące aplikacji, ciekawostki dotyczące Mikołajek oraz między innymi instrukcję, jak z organizować mikołajki klasowe dzięki aplikacji Lcuk"
       />
       <BlogLayout>
         <BlogListView posts={viewPosts}/>

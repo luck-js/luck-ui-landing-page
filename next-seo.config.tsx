@@ -1,6 +1,6 @@
-export const title = 'Luck - Organizacja Mikołajek nie była nigdy tak łatwa!';
+export const title = 'Luck - Aplikacja na mikołajki. Zorganizuj mikołajki klasowe!';
 export const description =
-  'Poznaj Aplikcaje Luck, która ułatwi Ci z organizowanie mikołajek. Świetnie się na da na mikołajki klasowe, jak i zarówno te organizowane w domu rodzinnym';
+  'Poznaj Aplikcaje Luck, która ułatwi Ci z organizowanie mikołajek. Świetnie się na da na mikołajki klasowe, jak i zarówno te organizowane w dniu Bożego Narodzenia';
 
 export default {
   title,
