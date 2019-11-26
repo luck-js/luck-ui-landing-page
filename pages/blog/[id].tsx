@@ -181,7 +181,6 @@ const getPaginationSlugs = (slug: string, posts: Post[]): PaginationSlugs => {
 
   const nextIndex = index <= 0 ? null : index - 1;
   const previousIndex = index === posts.length - 1 ? null : index + 1;
-  console.log(index, nextIndex, previousIndex, posts);
 
   return {
     next: nextIndex === 0 || !!nextIndex ? posts[nextIndex].slug : null,
@@ -213,8 +212,8 @@ const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
   } else if (candidatePosts.length > 2) {
     return getRandom(candidatePosts, 2);
   } else if (candidatePosts.length < 2) {
-    const lackCount = 2 - candidatePosts.length;
-    return [...candidatePosts, ...getLackedPost(lackCount)];
+    const lackedPosts = getLackedPost(2).filter(lackedPost => !candidatePosts.some(candidatePost => candidatePost.slug === lackedPost.slug));
+    return [...candidatePosts, ...lackedPosts].slice(0, 2)
   } else return [];
 };
 
