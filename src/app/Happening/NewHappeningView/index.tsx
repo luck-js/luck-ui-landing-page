@@ -11,16 +11,17 @@ export interface NewHappeningViewData {
 
 interface NewHappeningViewProps {
   data: NewHappeningViewData;
+  analytics: any;
 }
 
 interface NewHappeningViewPage<P = NewHappeningViewProps> extends React.FunctionComponent<P> {
   Container: any;
 }
 
-const Index: NewHappeningViewPage = ({ data: { name } }) => {
+const Index: NewHappeningViewPage = ({ data: { name }, analytics }) => {
   return (
     <Index.Container>
-      <NewHappeningFlowProvider name={name}>
+      <NewHappeningFlowProvider analytics={analytics}  name={name}>
         <FormHappeningSection />
         <PreviewHappeningSection />
       </NewHappeningFlowProvider>

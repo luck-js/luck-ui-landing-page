@@ -62,7 +62,6 @@ export function useNewHappeningFlow(): {
   const backToEdit = useCallback(() => dispatch({ type: 'BACK_TO_EDIT ' }), [dispatch]);
 
   const publishHappening = useCallback(async () => {
-    console.log("publishHappening")
     dispatch({ type: 'PUBLISH_HAPPENING ' });
     const { data } = await apiAxios.post('/api/v1/published-happening', { happening:state.happening });
     Router.push({
@@ -74,7 +73,7 @@ export function useNewHappeningFlow(): {
   return { state, editNewHappening, goToPreview, backToEdit, publishHappening };
 }
 
-export const NewHappeningFlowProvider = ({ children, name }: any) => {
+export const NewHappeningFlowProvider = ({ children, name, analytics }: any) => {
   const [state, dispatch] = useReducer<NewHappeningReducer>(reducer, {
     step: 0,
     isLoading: false,
@@ -107,9 +106,11 @@ export const NewHappeningFlowProvider = ({ children, name }: any) => {
     if (isConfirm) {
       dispatch({ type: 'LOAD_STATE', payload: storageHappening });
       setShouldBeOpen(false);
+      analytics.event('Confirm Modal', String(true));
     } else {
       localStorage.removeItem(STORAGE_ITEM_NAME);
       setShouldBeOpen(false);
+      analytics.event('Confirm Modal', String(false));
     }
   };
 

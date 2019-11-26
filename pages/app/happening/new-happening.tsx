@@ -4,17 +4,18 @@ import AppLayout from "../../../src/app/AppLayout"
 
 interface NewHappeningProps {
   data: NewHappeningViewData;
+  analytics: any;
 }
 
 interface NewHappeningPage<P = NewHappeningProps> extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<P>;
+  getInitialProps?: (ctx: any) => Promise<{data: NewHappeningViewData}>;
 }
 
-const NewHappening: NewHappeningPage = ({data}) => {
+const NewHappening: NewHappeningPage = ({data, analytics}) => {
 
   return (
     <AppLayout>
-      <NewHappeningView data={data}/>
+      <NewHappeningView analytics={analytics} data={data}/>
     </AppLayout>
   );
 };
