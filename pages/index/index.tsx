@@ -8,9 +8,7 @@ interface IndexProps {
 }
 
 const Index = ({ analytics }: IndexProps) => {
-  const handleOnClickBubble = () => {
-    analytics.event('Home', 'onClickBubble');
-  };
+  const handleOnClickBubble = () => analytics.event('Home', 'onClickBubble')
 
   return (
     <HomeLayout>
