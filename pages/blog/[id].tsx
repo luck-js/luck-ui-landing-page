@@ -44,6 +44,15 @@ const ContentImage = styled(Box).attrs({
   width: 100%;
 `;
 
+const BanerBox = styled(Box).attrs({
+  px: ['small', 'small', 'medium', 'regular'],
+  py: ['regular', 'regular', 'xregular', 'large'],
+})`
+  background-color: ${Theme.colors.darkMain2};
+  border-bottom: 1px solid ${Theme.colors.darkMain3};
+  border-top: 1px solid ${Theme.colors.darkMain3};
+`;
+
 const components = {
   p: Text,
   h2: SubHeader,
@@ -51,6 +60,7 @@ const components = {
   img: ContentImage,
   ul: List,
   ol: ListOl,
+  "baner": BanerBox
 };
 
 const processor = getProcessor(components);
