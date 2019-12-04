@@ -38,7 +38,7 @@ export const SubHeader = styled(Trafalgar).attrs({
 `;
 
 export const BlogTextLink = ({ children, ...props }: any) => (
-  <TextLink modifiers={['darkGray']} {...props}>
+  <TextLink underline modifiers={['darkGray']} {...props}>
     {children}
   </TextLink>
 )

@@ -3,11 +3,13 @@ import { Theme } from '../utils';
 import { applyStyleModifiers, ModifierKeys, ModifiersConfig } from 'styled-components-modifiers';
 
 const BUTTON_VARIANTS: ModifiersConfig = {
-  darkGray: () => css`
+  darkGray: props => css`
     color: ${Theme.colors.darkGray};
+    text-decoration-color: ${props.underline && Theme.colors.darkGray};
 
     &:hover {
       text-decoration-color: ${Theme.colors.darkGray};
+      opacity: ${props.underline && 0.8};
     }
   `,
   black: props => css`
