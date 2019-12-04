@@ -5,6 +5,7 @@ import { Box } from '../Box';
 
 type LayoutProps = {
   backgroundColor: string;
+  minHeight?: any[];
 };
 
 const Container = styled(Box)`
