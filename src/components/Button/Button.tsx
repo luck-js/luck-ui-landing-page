@@ -59,6 +59,8 @@ export const Button = styled(BaseButton)<ButtonProps>`
   text-decoration-color: transparent;
   transition: text-decoration-color 0.5s, background-color 0.5s, color 0.5s, opacity 0.5s,
     border-color 0.5s;
+    
+  box-shadow: ${props => (props.colorfull ? '0px 1px 4px rgba(0, 0, 0, 0.1)' : 'none')};
 
   border-radius: 30px;
 

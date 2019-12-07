@@ -10,4 +10,5 @@ export const BaseInput = styled('input')`
   ${width};
   background: none;
   border: none;
+  outline: none;
 `;

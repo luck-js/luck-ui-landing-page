@@ -45,13 +45,14 @@ export const ShareRow: ShareRowComponent = ({ participant, onCopy }) => {
         {participant.name}
       </ShareRow.Element>
       <CopyToClipboard text={participant.uniqueLink} onCopy={handleOnCopy}>
-        <ShareRow.Element className="uniqueLink" {...Theme.textStyles.buttonApp}>
+        <ShareRow.Element className="uniqueLink" >
           <WideArrow className="wideArrow" />
           <ShareRow.Input
             ref={inputRef}
             type="text"
             value={participant.uniqueLink}
             onFocus={handleFocus}
+            {...Theme.textStyles.buttonApp}
             readOnly
           />
           <ShareRow.Button onMouseDown={(e: any) => e.preventDefault()}>

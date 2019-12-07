@@ -114,8 +114,8 @@ Index.Button = styled(BaseButton)`
   text-align: center;
   text-transform: uppercase;
   border-radius: 23px;
-  padding: 8px 15px;
-  font-weight: 800;
+  padding: 8px 20px;
+  font-weight: 700;
   transition: border-color 0.4s, color 0.4s, background-color 0.4s, box-shadow 0.4s, transform 0.4s,
     scale 0.4s;
   box-shadow: 0 0 50px 0 rgba(0, 0, 0, 0.28);
@@ -125,8 +125,9 @@ Index.Button = styled(BaseButton)`
   `}
   
   ${media.greaterThan('tablet')`
+    margin: ${Theme.space.regular}px auto ${Theme.space.large}px auto
     border-radius: 28px;
-    font-size: 42px;
+    font-size: 41px;
     width: 162px;
     height: 162px
   `}

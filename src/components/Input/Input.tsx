@@ -85,7 +85,6 @@ Input.Label = styled(Box)<any>`
 Input.Input = styled(BaseInput)<any>`  
   margin: 0;
   border: none;
-  outline: none;
   padding: 0 10px 0;
   &::placeholder {
     color: ${Theme.colors.gray2};

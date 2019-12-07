@@ -17,7 +17,7 @@ interface MatchedMemberSectionProps {
 const Index = ({ data: { me, matchedMember } }: MatchedMemberSectionProps) => {
   return (
     <Index.Container>
-      <Index.Text as="h1">
+      <Index.Text as="h1" mb={['small', 'small', 'medium', 'regular']}>
         <b>{me.name}</b>, Twój los to:
       </Index.Text>
       <Index.BigTextContainer>
@@ -36,7 +36,7 @@ Index.Container = styled(Box)`
   text-align: center;;
 `;
 
-Index.Text = styled(BaseTypography)`
+Index.Text = styled(BaseTypography)<any>`
   font-size: 26px;
   font-weight: 400;
   
