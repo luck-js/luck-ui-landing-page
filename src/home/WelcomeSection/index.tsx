@@ -29,7 +29,7 @@ const WelcomeSection = ({ onClickBubble, ...pros }: WelcomeSectionProps) => {
         </LogoHeading>
         <InputWithButton
           pt={['40px', '40px', '50px', '70px']}
-          href="./app/happening"
+          href="./app/happening/new-happening"
           linkAs="./app"
           ariaLabel={`przejdź do aplikacji`}
         />
