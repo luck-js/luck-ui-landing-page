@@ -36,11 +36,8 @@ class MyDocument extends Document {
           <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-300.woff2'} as="font" type="font/woff2" crossOrigin="anonymous" />
-          <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-300.woff'} as="font" type="font/woff" crossOrigin="anonymous" />
           <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-regular.woff2'} as="font" type="font/woff2" crossOrigin="anonymous" />
-          <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-regular.woff'} as="font" type="font/woff" crossOrigin="anonymous" />
           <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-700.woff2'} as="font" type="font/woff2" crossOrigin="anonymous" />
-          <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-700.woff'} as="font" type="font/woff" crossOrigin="anonymous" />
         </Head>
         <body>
           <Main />
