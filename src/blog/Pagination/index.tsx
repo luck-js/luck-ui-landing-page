@@ -65,14 +65,14 @@ const Pagination: PaginationComponent = ({ previous, next, ...props }) => {
   return (
     <Pagination.Container {...props}>
       {previous ? (
-        <TextLinkArrow direction="left" href='/blog/[id]' asLink={`/blog/${previous}`} ariaLabel={`przejdź do poprzedniego postu`}>
+        <TextLinkArrow direction="left" href={`/blog/?slug=${previous}`} asLink={`/blog/${previous}`} ariaLabel={`przejdź do poprzedniego postu`}>
           Poprzedni
         </TextLinkArrow>
       ) : (
         <div />
       )}
       {next ? (
-        <TextLinkArrow direction="right" href='/blog/[id]' asLink={`/blog/${next}`} ariaLabel={`przejdź do następnego postu`}>
+        <TextLinkArrow direction="right" href={`/blog/?slug=${next}`} asLink={`/blog/${next}`} ariaLabel={`przejdź do następnego postu`}>
           Następny
         </TextLinkArrow>
       ) : (
