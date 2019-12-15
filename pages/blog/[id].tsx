@@ -19,8 +19,7 @@ import { Box, Flex, RatioLazyImage, TinySecond } from '../../src/components';
 import Pagination, { PaginationSlugs } from '../../src/blog/Pagination';
 import { SubHeader, Text, BlogTextLink, List, ListOl, Header } from '../../src/blog/Typography';
 import Suggestions from '../../src/blog/Suggestions';
-import Link from "next/link"
-import Error from "next/error"
+import Error from 'next/error';
 
 const cssTextMinusMargin = css`
   margin-top: -${Theme.space.small}px;
@@ -60,7 +59,7 @@ const components = {
   img: ContentImage,
   ul: List,
   ol: ListOl,
-  "baner": BanerBox
+  baner: BanerBox,
 };
 
 const processor = getProcessor(components);
@@ -162,9 +161,13 @@ const PostContent: React.FunctionComponent<{
         {processor.processSync(content).contents}
         <HashtagsText mb={['regular', 'regular', 'large', 'xlarge']}>
           {(hashtags as Hashtag[]).map(({ name }, index) => (
-            <Link href={`/tag/${name.toLowerCase()}`}>
-              <BlogTextLink key={`PostContent-${name}-${index}`} href={`/tag/${name}`} aria-label={`przejdź do tagu ${name}`}>#{name}</BlogTextLink>
-            </Link>
+            <BlogTextLink
+              key={`PostContent-${name}-${index}`}
+              href={`/tag/${name}`}
+              aria-label={`przejdź do tagu ${name}`}
+            >
+              #{name}
+            </BlogTextLink>
           ))}
         </HashtagsText>
         <Pagination mb={['regular', 'regular', 'large', 'xlarge']} {...paginationSlugs} />
@@ -205,7 +208,9 @@ const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
 
   const candidatePosts = p.filter(post =>
     (toMatchHashtags as Hashtag[]).some(({ name: toMatchHashtag }) =>
-      post.hashtags ? (post.hashtags as Hashtag[]).some(({ name: hashtag }) => hashtag === toMatchHashtag) : false,
+      post.hashtags
+        ? (post.hashtags as Hashtag[]).some(({ name: hashtag }) => hashtag === toMatchHashtag)
+        : false,
     ),
   );
 
@@ -222,8 +227,10 @@ const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
   } else if (candidatePosts.length > 2) {
     return getRandom(candidatePosts, 2);
   } else if (candidatePosts.length < 2) {
-    const lackedPosts = getLackedPost(2).filter(lackedPost => !candidatePosts.some(candidatePost => candidatePost.slug === lackedPost.slug));
-    return [...candidatePosts, ...lackedPosts].slice(0, 2)
+    const lackedPosts = getLackedPost(2).filter(
+      lackedPost => !candidatePosts.some(candidatePost => candidatePost.slug === lackedPost.slug),
+    );
+    return [...candidatePosts, ...lackedPosts].slice(0, 2);
   } else return [];
 };
 
@@ -248,7 +255,7 @@ const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const suggestionsPosts = getSuggestionsPosts(viewPost, all);
   const suggestionsViewPost = mapToViewPosts(suggestionsPosts, cmsUrl);
 
-  if (error) return <Error statusCode={404} />;;
+  if (error) return <Error statusCode={404} />;
   if (loading) return <div>Loading</div>;
 
   return (
