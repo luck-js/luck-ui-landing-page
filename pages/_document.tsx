@@ -33,7 +33,7 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+          <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-300.woff2'} as="font" type="font/woff2" crossOrigin="anonymous" />
           <link rel="preload" href={'/static/fonts/lato-v16-latin_latin-ext-regular.woff2'} as="font" type="font/woff2" crossOrigin="anonymous" />
