@@ -3,7 +3,8 @@ const withTypescript = require('@zeit/next-typescript')
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
 module.exports = withTypescript({
-  webpack: config => {
+  distDir: "_next",
+  webpack: async config => {
     // Fixes npm packages that depend on `fs` module
     config.node = {
       fs: "empty"
