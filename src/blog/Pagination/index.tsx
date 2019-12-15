@@ -19,9 +19,9 @@ interface TextLinkArrowComponent extends React.FunctionComponent<TextLinkArrowPr
   TextLink: any;
 }
 
-const TextLinkArrow: TextLinkArrowComponent = ({ asLink, href, children, ariaLabel, direction }) => (
-  <Link href={href} as={asLink}>
-    <TextLinkArrow.TextLink href={asLink} direction={direction} modifiers={['black']} aria-label={ariaLabel}>
+const TextLinkArrow: TextLinkArrowComponent = ({ href, children, ariaLabel, direction }) => (
+  <Link href={href}>
+    <TextLinkArrow.TextLink href={href} direction={direction} modifiers={['black']} aria-label={ariaLabel}>
       {children}
       <WideArrow />
     </TextLinkArrow.TextLink>
@@ -65,14 +65,14 @@ const Pagination: PaginationComponent = ({ previous, next, ...props }) => {
   return (
     <Pagination.Container {...props}>
       {previous ? (
-        <TextLinkArrow direction="left" href='/blog/[id]' asLink={`/blog/${previous}`} ariaLabel={`przejdź do poprzedniego postu`}>
+        <TextLinkArrow direction="left" href={`/blog/${previous}`} ariaLabel={`przejdź do poprzedniego postu`}>
           Poprzedni
         </TextLinkArrow>
       ) : (
         <div />
       )}
       {next ? (
-        <TextLinkArrow direction="right" href='/blog/[id]' asLink={`/blog/${next}`} ariaLabel={`przejdź do następnego postu`}>
+        <TextLinkArrow direction="right" href={`/blog/${next}`} ariaLabel={`przejdź do następnego postu`}>
           Następny
         </TextLinkArrow>
       ) : (
