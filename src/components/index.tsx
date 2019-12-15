@@ -2,7 +2,6 @@ export * from './Button';
 export * from './Typography';
 export * from './Box';
 export * from './Flex';
-export * from './FontProvider';
 export * from './GlobalStyle';
 export * from './Input';
 export * from './Layout';

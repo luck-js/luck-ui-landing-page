@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { ModifierKeys } from 'styled-components-modifiers';
-import Link from 'next/link';
 import { Button } from './Button';
 import { BaseButton } from './BaseButton';
 
@@ -17,7 +16,6 @@ export const NavLink = ({
 }) => {
   return (
     <NavLink.Container {...props}>
-      <Link href={href}>
         <NavLink.Button
           onMouseDown={(e: any) => e.preventDefault()}
           href={href}
@@ -27,7 +25,6 @@ export const NavLink = ({
         >
           Blog
         </NavLink.Button>
-      </Link>
     </NavLink.Container>
   );
 };

@@ -26,7 +26,6 @@ export const Input = ({ id, label, onBlur, onFocus, type, refs, className, mt, .
   };
 
   useEffect(() => {
-    console.log("useEffect !", otherProps.value.length)
     setIsActive(otherProps.value.length !== 0)
   },[otherProps.value.length])
 

@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box } from '../components/Box';
-import { TextLink } from '../components/TextLink';
-import { SmallText } from '../components/Typography';
+import { Box, TextLink, SmallText } from '../components';
 import { Theme } from '../utils';
 import media from '../utils/media';
-import Link from 'next/link';
 
 const Container = styled(Box)`
   text-align: center;
@@ -32,38 +29,32 @@ const Footer = () => {
     <Container>
       <SmallText>
         Polityka prywatności{' '}
-        <Link href={'./polityka-prywatnosci-strony'}>
-          <TextLink
-            href={'./polityka-prywatnosci-strony'}
-            aria-label={'przejdź do polityki prywatnosci strony'}
-            modifiers={['black']}
-            underline
-          >
-            strony
-          </TextLink>
-        </Link>{' '}
+        <TextLink
+          href={'/polityka-prywatnosci-strony'}
+          aria-label={'przejdź do polityki prywatnosci strony'}
+          modifiers={['black']}
+          underline
+        >
+          strony
+        </TextLink>{' '}
         &{' '}
-        <Link href={'./polityka-prywatnosci-pan-mikolaj-luck'}>
-          <TextLink
-            href={'./polityka-prywatnosci-pan-mikolaj-luck'}
-            aria-label={'przejdź do polityki prywatnosci Pan Mikołaj Luck'}
-            modifiers={['black']}
-            underline
-          >
-            Pan Mikołaj Luck
-          </TextLink>
-        </Link>{' '}
+        <TextLink
+          href={'/polityka-prywatnosci-pan-mikolaj-luck'}
+          aria-label={'przejdź do polityki prywatnosci Pan Mikołaj Luck'}
+          modifiers={['black']}
+          underline
+        >
+          Pan Mikołaj Luck
+        </TextLink>{' '}
         &{' '}
-        <Link href={'./regulamin-facebook-konkurs'}>
-          <TextLink
-            href={'./regulamin-facebook-konkurs'}
-            aria-label={'przejdź do regulaminu facebook konkursu'}
-            modifiers={['black']}
-            underline
-          >
-            konkurs
-          </TextLink>
-        </Link>
+        <TextLink
+          href={'/regulamin-facebook-konkurs'}
+          aria-label={'przejdź do regulaminu facebook konkursu'}
+          modifiers={['black']}
+          underline
+        >
+          konkurs
+        </TextLink>
       </SmallText>
     </Container>
   );

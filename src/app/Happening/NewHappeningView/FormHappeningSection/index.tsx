@@ -31,7 +31,6 @@ const scrollToRef = (ref: any) => {
 const TEXTAREA_ROWS_NUMBERS = [5, 5, 7];
 const Index: FormHappeningSectionPage = () => {
   const { state, editNewHappening, goToPreview } = useNewHappeningFlow();
-  console.log(state);
   const previousParticipants = usePrevious<NewParticipant[]>(state.happening.participants);
 
   const handleOnChangeTitle = ({ target: { value } }: any) => {
@@ -59,7 +58,6 @@ const Index: FormHappeningSectionPage = () => {
   };
 
   const handleOnCloseParticipantName = (value: string) => {
-    console.log(name, value);
     const participants = state.happening.participants.filter(({ name }) => name !== value);
     editNewHappening({ ...state.happening, participants });
   };

@@ -64,7 +64,7 @@ const InputWithButton = ({ href, ariaLabel, linkAs, ...props }: any) => {
         <InputWithButton.Button
           colorfull
           modifiers={['contrast']}
-          href={getUrlWithNameParam(href)}
+          href={getUrlWithNameParam(linkAs)}
           ariaLabel={ariaLabel}
           {...Theme.textStyles.smallText}
           onMouseDown={(e: any) => e.preventDefault()}
