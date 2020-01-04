@@ -8,6 +8,7 @@
     "start": "NODE_ENV=production nodemon --exec ts-node server/server.ts",
     "codegen": "graphql-codegen --config codegen.yml"
   },
+  "nodemonConfig": { "ignore": ["*.json", "/node_modules/", "README.md"]},
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

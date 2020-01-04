@@ -1,13 +1,12 @@
 import { Background } from '../../components/Layout';
-import React, { useMemo, useState } from 'react';
-import dynamic from 'next/dist/next-server/lib/dynamic';
+import React, { useState } from 'react';
 import WelcomeMemberSection, { WelcomeMemberSectionData } from './WelcomeMemberSection';
 import MatchedMemberSection from './MatchedMemberSection';
 import { MatchedMemberSectionData } from './MatchedMemberSection';
 import styled from 'styled-components';
-import {Flex, NAVIGATION_SHADOW} from '../../components';
+import { Flex, NAVIGATION_SHADOW } from '../../components';
 import { Theme } from '../../utils';
-const Bubbles = dynamic(() => import('../../home/Bubbles'), { ssr: false });
+import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
 
 export interface ParticipationHappeningViewData {
   welcomeMember: WelcomeMemberSectionData;
@@ -16,11 +15,9 @@ export interface ParticipationHappeningViewData {
 
 interface ParticipationHappeningViewProps {
   data: ParticipationHappeningViewData;
-  onClickBubble: any;
 }
 
-const Index = ({ data, onClickBubble }: ParticipationHappeningViewProps) => {
-  const handleOnClickBubble = useMemo(() => () => onClickBubble(), []);
+const Index = ({ data }: ParticipationHappeningViewProps) => {
 
   const [shouldShowMatchedMember, SetShouldShowMatchedMember] = useState(false);
 
@@ -35,7 +32,7 @@ const Index = ({ data, onClickBubble }: ParticipationHappeningViewProps) => {
         <WelcomeMemberSection data={data.welcomeMember} onClick={handleOnClick} />
       )}
       {shouldShowMatchedMember && <MatchedMemberSection data={data.matchedMember} />}
-      <Bubbles onClickBubble={handleOnClickBubble} />
+      <BackgroundFooterBubbles />
     </Index.Container>
   );
 };

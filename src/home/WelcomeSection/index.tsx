@@ -4,12 +4,7 @@ import { LogoHeading } from '../../components';
 import Content from './Content';
 import Logo from './Logo';
 import InputWithButton from './InputWithButton';
-import dynamic from 'next/dynamic';
-const Bubbles = dynamic(() => import('../Bubbles'), { ssr: false });
-
-export interface WelcomeSectionProps {
-  onClickBubble: any;
-}
+import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
 
 const Container = styled('div')`
   height: 100%;
@@ -17,13 +12,17 @@ const Container = styled('div')`
   position: relative;
 `;
 
-const WelcomeSection = ({ onClickBubble, ...pros }: WelcomeSectionProps) => {
 
+const WelcomeSection = (props: any) => {
   return (
-    <Container {...pros}>
+    <Container {...props}>
       <Content>
         <Logo src="static/logo-luck.png" />
-        <LogoHeading pt={['50px', '50px', '50px', '50px']} maxHeight={['116px', '116px', '160px', '196px']} overflow="hidden">
+        <LogoHeading
+          pt={['50px', '50px', '50px', '50px']}
+          maxHeight={['116px', '116px', '160px', '196px']}
+          overflow="hidden"
+        >
           Organizacja Mikołajek <br />
           nie była nigdy tak łatwa!
         </LogoHeading>
@@ -34,7 +33,7 @@ const WelcomeSection = ({ onClickBubble, ...pros }: WelcomeSectionProps) => {
           ariaLabel={`przejdź do aplikacji`}
         />
       </Content>
-      <Bubbles onClickBubble={onClickBubble} />
+      <BackgroundFooterBubbles />
     </Container>
   );
 };
