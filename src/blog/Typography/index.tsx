@@ -15,24 +15,24 @@ const cssTextMinusMargin = css`
   `}
   
   ${media.greaterThan('desktop')`
-    margin-top: -${Theme.space.regular}px;
+    margin-top: -${Theme.space.medium}px;
   `}
 `
 
 export const Text = styled(MediumText).attrs({
-  mb: ['regular', 'regular', 'xregular', 'large'],
+  mb: ['regular', 'regular', 'xregular', 'xregular'],
 })`
   line-height: 1.4;
 `;
 
 export const Header = styled(Canon).attrs({
-  mb: ['small', 'small', 'medium', 'regular'],
+  mb: ['small', 'small', 'medium', 'medium'],
 })`
   line-height: 1.4;
 `;
 
 export const SubHeader = styled(Trafalgar).attrs({
-  mb: ['small', 'small', 'medium', 'regular'],
+  mb: ['small', 'small', 'medium', 'medium'],
 })`
   line-height: 1.4;
 `;
@@ -54,7 +54,7 @@ export const List = styled(Box).attrs({
 `;
 export const ListOl = styled(Box).attrs({
   as: "ol",
-  mb: ['regular', 'regular', 'large', 'xlarge'],
+  mb: ['regular', 'regular', 'large', 'large'],
 })`
   ${cssTextMinusMargin};
   display: block;

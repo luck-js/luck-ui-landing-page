@@ -58,7 +58,7 @@ Modal.Button = styled(BaseButton)`
 `;
 
 Modal.Content = styled(Box)`
-  padding: ${Theme.space.small}px;
+  padding: 0 ${Theme.space.regular}px ${Theme.space.regular}px ${Theme.space.regular}px;
 `;
 
 Modal.ContentContainer = styled(Box)`
@@ -68,7 +68,7 @@ Modal.ContentContainer = styled(Box)`
   transform: translate(-50%, -50%);
   background-color: ${Theme.colors.main};
   border-radius: 11px;
-  max-width: 340px;
+  max-width: 364px;
   width: 100%;
 `;
 

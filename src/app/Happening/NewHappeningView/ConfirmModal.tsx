@@ -33,7 +33,7 @@ ConfirmModal.Header = styled(CanonApp)`
 `;
 
 ConfirmModal.Text = styled(InputApp)`
-  
+  line-height: 1.4;
 `;
 
 ConfirmModal.Button = styled(Button).attrs({ ...Theme.textStyles.buttonApp })``;

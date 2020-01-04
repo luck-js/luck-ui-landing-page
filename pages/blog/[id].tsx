@@ -32,20 +32,20 @@ const cssTextMinusMargin = css`
   `}
   
   ${media.greaterThan('desktop')`
-    margin-top: -${Theme.space.regular}px;
+    margin-top: -${Theme.space.medium}px;
   `}
 `;
 const ContentImage = styled(Box).attrs({
   as: 'img',
   alt: '',
-  py: ['small', 'small', 'medium', 'regular'],
+  py: ['small', 'small', 'medium', 'medium'],
 })`
   width: 100%;
 `;
 
 const BanerBox = styled(Box).attrs({
-  px: ['small', 'small', 'medium', 'regular'],
-  py: ['regular', 'regular', 'xregular', 'large'],
+  px: ['small', 'small', 'medium', 'medium'],
+  py: ['regular', 'regular', 'xregular', 'xregular'],
 })`
   background-color: ${Theme.colors.darkMain2};
   border-bottom: 1px solid ${Theme.colors.darkMain3};
@@ -86,7 +86,8 @@ const ContentContainer = styled(Flex)`
   `}
   
   ${media.greaterThan('desktop')`
-    padding: ${Theme.space.xregular}px ${Theme.space.xregular}px;
+    max-width: 784px;
+    padding: ${Theme.space.regular}px ${Theme.space.xregular}px;
   `}
 `;
 
@@ -157,9 +158,9 @@ const PostContent: React.FunctionComponent<{
         ratio="34%"
       />
       <ContentContainer>
-        <Header mb={['small', 'small', 'medium', 'regular']}>{title}</Header>
+        <Header mb={['small', 'small', 'medium', 'medium']}>{title}</Header>
         {processor.processSync(content).contents}
-        <HashtagsText mb={['regular', 'regular', 'large', 'xlarge']}>
+        <HashtagsText mb={['regular', 'regular', 'large', 'large']}>
           {(hashtags as Hashtag[]).map(({ name }, index) => (
             <BlogTextLink
               key={`PostContent-${name}-${index}`}
@@ -170,7 +171,7 @@ const PostContent: React.FunctionComponent<{
             </BlogTextLink>
           ))}
         </HashtagsText>
-        <Pagination mb={['regular', 'regular', 'large', 'xlarge']} {...paginationSlugs} />
+        <Pagination mb={['regular', 'regular', 'large', 'large']} {...paginationSlugs} />
         <Suggestions posts={suggestionsPosts} />
       </ContentContainer>
     </Container>

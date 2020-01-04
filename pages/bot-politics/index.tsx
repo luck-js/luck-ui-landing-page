@@ -24,11 +24,9 @@ const Container = styled(Box)`
   
   ${media.greaterThan('desktop')`
     max-width: 1138px;
-    padding: ${Theme.space.xregular}px ${Theme.space.xregular}px;
+    padding: ${Theme.space.regular}px ${Theme.space.xregular}px;
   `}
 `;
-
-
 
 const Index = () => {
   return (
