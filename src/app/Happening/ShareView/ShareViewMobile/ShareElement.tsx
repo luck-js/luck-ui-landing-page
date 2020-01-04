@@ -27,7 +27,7 @@ ShareButton.Container = styled(Container).attrs({ as: BaseButton })`
   cursor: pointer;
   background-color: ${props => (props.contrast ? Theme.colors.main : Theme.colors.mainContrast)};
   color: ${props => (props.contrast ? Theme.colors.black : Theme.colors.main)};
-  box-shadow: ${props => (props.contrast ? 'inset 2px 2px 15px rgba(0, 0, 0, 0.25)' : '')};
+  box-shadow: ${props => (props.contrast ? 'inset 0px 2px 4px rgba(0, 0, 0, 0.15)' : '')};
   transition: background-color 0.5s, color 0.5s, box-shadow 0.5s;
 
   svg {
