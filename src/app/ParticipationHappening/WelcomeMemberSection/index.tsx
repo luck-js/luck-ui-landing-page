@@ -21,7 +21,8 @@ interface WelcomeMemberSectionProps {
   data: WelcomeMemberSectionData;
   onClick: any;
 }
-
+//TODO: 12px
+//TODO: font-family -> Lato
 const Index: any = ({ data: { member, happening }, onClick }: WelcomeMemberSectionProps) => {
 
   const renderHappeningContent = () => {
@@ -111,6 +112,7 @@ Index.Button = styled(BaseButton)`
   background-color: ${Theme.colors.main};
   border: 2px solid ${Theme.colors.main};
   color: ${Theme.colors.mainContrast};
+  font-family: ${Theme.fontFamilies.body};
   text-align: center;
   text-transform: uppercase;
   border-radius: 23px;
