@@ -6,12 +6,13 @@ export const LazyImage: React.FunctionComponent<any> = ({
   src,
   placeholderSrc,
   onImageError,
+  useSensor = true
 }) => {
   const rootNode = useRef(null);
   const { isVisible } = useVisibilitySensor(rootNode, {
     intervalCheck: false,
-    scrollCheck: true,
-    resizeCheck: true,
+    scrollCheck: useSensor,
+    resizeCheck: useSensor,
   });
 
   if (!children || typeof children !== 'function') {
@@ -49,11 +50,15 @@ export const LazyImage: React.FunctionComponent<any> = ({
   };
 
   useEffect(() => {
-    if (loading && isVisible) loadImage();
-  }, [isVisible]);
+    if (loading){
+      if(isVisible || !useSensor){
+        loadImage();
+      }
+    }
+  }, [isVisible, useSensor]);
 
   return (
-    <div ref={rootNode} style={{ width: '1px', height: '1px' }}>
+    <div ref={rootNode} style={{ minWidth: "1px", minHeight:"1px" }}>
       {children(imageSrc, loading, isVisible)}
     </div>
   );

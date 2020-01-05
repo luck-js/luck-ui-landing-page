@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Theme } from '../../../utils';
-
 import {
   Box,
   BaseTypography,
@@ -57,7 +56,8 @@ const Index: any = ({ data: { member, happening }, onClick }: WelcomeMemberSecti
   return (
     <>
       <Index.HappeningContentWrapper>{renderHappeningContent()}</Index.HappeningContentWrapper>
-      <Index.Text as="h2" pt={['xregular', 'xregular', 'large', 'large']}>
+      <Index.Text as="h2" pt={['xregular', 'xregular', 'large', 'large']}
+                  mb={['small', 'small', 'small', 'small']}>
         <b>{member.name}</b>, to Ty?
       </Index.Text>
       <Index.Text as="p" mb={['regular', 'regular', 'regular', 'regular']}>

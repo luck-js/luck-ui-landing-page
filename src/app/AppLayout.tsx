@@ -1,10 +1,15 @@
 import React, { Fragment } from 'react';
-import {Box, NAVIGATION_HEIGHT, NavigationWithLogo, BaseLayout} from '../components';
+import { Box, NAVIGATION_HEIGHT, NavigationWithLogo, BaseLayout, NAVIGATION_DESKTOP_HEIGHT } from '../components';
 import {Theme} from "../utils"
 import styled from "styled-components"
+import media from '../utils/media';
 
 const Container = styled(Box)`
   height: calc(100% - ${NAVIGATION_HEIGHT}px);
+  
+  ${media.greaterThan('tablet')`
+    height: calc(100% - ${NAVIGATION_DESKTOP_HEIGHT}px);
+  `}
 `;
 
 const AppLayout: React.FunctionComponent<{contrast?:boolean}> = ({ children, contrast = false }) => (
