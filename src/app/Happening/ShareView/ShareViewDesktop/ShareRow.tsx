@@ -52,7 +52,7 @@ export const ShareRow: ShareRowComponent = ({ participant, onCopy }) => {
             type="text"
             value={participant.uniqueLink}
             onFocus={handleFocus}
-            {...Theme.textStyles.buttonApp}
+            {...Theme.textStyles.smallText}
             readOnly
           />
           <ShareRow.Button onMouseDown={(e: any) => e.preventDefault()}>

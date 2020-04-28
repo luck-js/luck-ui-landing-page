@@ -7,10 +7,8 @@ const {
   canon,
   canonApp,
   trafalgar,
-  trafalgarApp,
   bodyText,
   inputApp,
-  buttonApp,
   mediumText,
   smallText,
   tinySecond,
@@ -41,12 +39,6 @@ export const Trafalgar = (props: any) => (
   </DynamicComponent>
 );
 
-export const TrafalgarApp = (props: any) => (
-  <DynamicComponent {...trafalgarApp} {...props}>
-    {props.children}
-  </DynamicComponent>
-);
-
 export const BodyText = (props: any) => (
   <DynamicComponent {...bodyText} {...props}>
     {props.children}
@@ -55,11 +47,6 @@ export const BodyText = (props: any) => (
 
 export const InputApp = (props: any) => (
   <DynamicComponent {...inputApp} {...props}>
-    {props.children}
-  </DynamicComponent>
-);
-export const ButtonApp = (props: any) => (
-  <DynamicComponent {...buttonApp} {...props}>
     {props.children}
   </DynamicComponent>
 );

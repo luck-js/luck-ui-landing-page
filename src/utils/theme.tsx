@@ -48,6 +48,8 @@ export const fontFamilies = {
   body: "'Lato', sans-serif",
 };
 
+
+//TODO: inputApp not should be merge with mediumText?
 export const textStyles: TextStyles = {
   logoHeading: {
     tag: 'h1',
@@ -73,12 +75,6 @@ export const textStyles: TextStyles = {
     fontWeight: 700,
     fontFamily: fontFamilies.body,
   },
-  trafalgarApp: {
-    tag: 'h1',
-    fontSize: [18, 18, 18, 21],
-    fontWeight: 700,
-    fontFamily: fontFamilies.body,
-  },
   bodyText: {
     tag: 'p',
     fontSize: [16, 16, 18, 21],
@@ -88,12 +84,6 @@ export const textStyles: TextStyles = {
   inputApp: {
     tag: 'p',
     fontSize: [16, 16, 16, 16],
-    fontWeight: 400,
-    fontFamily: fontFamilies.body,
-  },
-  buttonApp: {
-    tag: 'p',
-    fontSize: [14, 14, 14, 14],
     fontWeight: 400,
     fontFamily: fontFamilies.body,
   },

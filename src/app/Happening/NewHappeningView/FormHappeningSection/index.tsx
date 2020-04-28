@@ -180,7 +180,7 @@ Index.ContentContainer = ContentContainer;
 
 Index.ButtonContainer = ButtonContainer;
 
-Index.Button = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.buttonApp })`
+Index.Button = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.smallText })`
   width: 270px;
 `;
 

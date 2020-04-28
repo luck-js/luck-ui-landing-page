@@ -6,8 +6,8 @@ import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import fetch from 'isomorphic-unfetch';
+import axios from "axios";
 
-const token = process.env.APPOLO_CLIENT_TOKEN;
 let apolloClient: any = null;
 /**
  * Creates and provides the apolloContext
@@ -18,8 +18,9 @@ let apolloClient: any = null;
  * @param {Boolean} [config.ssr=true]
  */
 export function withApollo(PageComponent: any, { ssr = true } = {}) {
+  let token = '';
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }: any) => {
-    const client = useMemo(() => apolloClient || initApolloClient(apolloState), []);
+    const client = useMemo(() => apolloClient || initApolloClient(token, apolloState), []);
     return (
       <ApolloProvider client={client}>
         <PageComponent {...pageProps} />
@@ -40,11 +41,17 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
 
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async (ctx: any) => {
+      token = await authenticate(process.env.CMS_USERNAME as string, process.env.CMS_PASSWORD as string)
+      async function authenticate(identifier: string, password: string): Promise<string> {
+        return await axios
+          .post(`${process.env.CLIENT_URL}/admin/auth/local`, { identifier, password })
+          .then(response => response.data.jwt)
+      }
       const { AppTree } = ctx;
 
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
-      const apolloClient = (ctx.apolloClient = initApolloClient());
+      const apolloClient = (ctx.apolloClient = initApolloClient(token));
 
       // Run wrapped getInitialProps methods
       let pageProps = {};
@@ -104,16 +111,16 @@ export function withApollo(PageComponent: any, { ssr = true } = {}) {
  * Creates or reuses apollo client in the browser.
  * @param  {Object} initialState
  */
-function initApolloClient(initialState?: any): any {
+function initApolloClient(token: string, initialState?: any): any {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (typeof window === 'undefined') {
-    return createApolloClient(initialState);
+    return createApolloClient(initialState, token);
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = createApolloClient(initialState);
+    apolloClient = createApolloClient(initialState, token);
   }
 
   return apolloClient;
@@ -123,7 +130,7 @@ function initApolloClient(initialState?: any): any {
  * Creates and configures the ApolloClient
  * @param  {Object} [initialState={}]
  */
-function createApolloClient(initialState = {}) {
+function createApolloClient(initialState = {}, token: string) {
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)

@@ -25,10 +25,10 @@ interface QuestionnaireComponent extends React.FunctionComponent<QuestionnairePr
 
 const Questionnaire: QuestionnaireComponent = ({onClose, onClickStar, onClickSubmit}) => {
   const [stepIndex, setStepIndex] = useState(0);
-  const [isStarClicked, setIsStarCliked] = useState(false);
+  const [isStarClicked, setIsStarClicked] = useState(false);
   const handleOnClickStar = async (index: number) => {
     if(isStarClicked) return
-    setIsStarCliked(true)
+    setIsStarClicked(true)
     onClickStar(index)
     await delay(500);
     setStepIndex(1)
@@ -93,8 +93,6 @@ const Questionnaire: QuestionnaireComponent = ({onClose, onClickStar, onClickSub
         </Questionnaire.Header>
         <Questionnaire.TextLink underline modifiers={['black']} onClick={onClose} onMouseDown={(e: any) => e.preventDefault()}>Wróć do udostępniania linków</Questionnaire.TextLink>
       </Box>
-
-
     </Questionnaire.Container>
   );
 };

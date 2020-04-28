@@ -36,7 +36,7 @@ ConfirmModal.Text = styled(InputApp)`
   line-height: 1.4;
 `;
 
-ConfirmModal.Button = styled(Button).attrs({ ...Theme.textStyles.buttonApp })``;
+ConfirmModal.Button = styled(Button).attrs({ ...Theme.textStyles.smallText })``;
 
 ConfirmModal.Container = styled(Box)`
   // padding: 0 ${Theme.space.small}px ${Theme.space.small}px ${Theme.space.small}px;

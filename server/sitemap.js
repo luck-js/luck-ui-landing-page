@@ -30,6 +30,12 @@ const DESTINATION = process.env.DESTINATION || path.join(resolveApp('.next/stati
 
 const dateTemplate = (date) => `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`
 
+async function authenticate(identifier, password) {
+  return await axios
+    .post(`${process.env.CLIENT_URL}/admin/auth/local`, { identifier, password })
+    .then(response => response.data.jwt)
+}
+
 //https://www.sitemaps.org/pl/protocol.html
 const createSitemap = async () => {
   /**
@@ -78,6 +84,8 @@ const createSitemap = async () => {
    * In the following snippet we gather all posts available
    * TODO: Add <lastmod>${lastMod}</lastmod> tag and set priority order
    **/
+  const token = await authenticate(process.env.CMS_USERNAME, process.env.CMS_PASSWORD);
+
   xml = await axios
     .post(
       API_SOURCE,
@@ -91,7 +99,7 @@ const createSitemap = async () => {
       },
       {
         headers: {
-          authorization: `Bearer ${process.env.APPOLO_CLIENT_TOKEN}`,
+          authorization: `Bearer ${token}`,
         },
       },
     )
@@ -121,7 +129,7 @@ const createSitemap = async () => {
       },
       {
         headers: {
-          authorization: `Bearer ${process.env.APPOLO_CLIENT_TOKEN}`,
+          authorization: `Bearer ${token}`,
         },
       },
     )

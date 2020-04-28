@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Button, ButtonWithIcon, SpinnerFadingCircle} from '../../../../components';
 import { useNewHappeningFlow } from '../NewHappeningContext';
-import { CanonApp, InputApp, TrafalgarApp } from '../../../../components/Typography';
+import { CanonApp, InputApp, Trafalgar } from '../../../../components/Typography';
 import styled from 'styled-components';
 import { Theme } from '../../../../utils';
 import ParticipantElementList from './ParticipantElementList';
@@ -32,9 +32,9 @@ const Index: PreviewHappeningSectionPage = () => {
     <Index.Container>
       <Index.ContentContainer>
         <CanonApp pt={['xregular', 'xregular', 'large', 'large']}>TWOJE WYDARZENIE</CanonApp>
-        {state.happening.name && (<TrafalgarApp mt={['medium', 'medium', 'medium', 'medium']}>
+        {state.happening.name && (<Trafalgar mt={['medium', 'medium', 'medium', 'medium']}>
           {state.happening.name}
-        </TrafalgarApp>)}
+        </Trafalgar>)}
         {state.happening.description && (<InputApp mt={['xsmall', 'xsmall', 'xsmall', 'xsmall']}>
           {state.happening.description}
         </InputApp>)}
@@ -79,12 +79,12 @@ Index.ContentContainer = ContentContainer;
 
 Index.ButtonContainer = ButtonContainer;
 
-Index.ButtonWithIcon = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.buttonApp })<any>`
+Index.ButtonWithIcon = styled(ButtonWithIcon).attrs({ ...Theme.textStyles.smallText })<any>`
   width: 270px;  
   cursor: ${props => props.isLoading ? 'pointer' : 'initial'};
 `;
 
-Index.Button = styled(Button).attrs({ ...Theme.textStyles.buttonApp })`
+Index.Button = styled(Button).attrs({ ...Theme.textStyles.smallText })`
   text-transform: initial;
   width: 270px;
 `;
