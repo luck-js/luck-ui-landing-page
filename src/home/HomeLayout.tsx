@@ -5,7 +5,7 @@ import { Theme } from '../utils';
 const HomeLayout: React.FunctionComponent = ({ children }) => (
   <BaseLayout
     backgroundColor={Theme.colors.mainContrast}
-    minHeight={[null, null, '800px', '800px']}
+    minHeight={['520px', '520px', '800px', '800px']}
   >
     <Background />
     <Navigation isAbsolutePosition />
