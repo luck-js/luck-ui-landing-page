@@ -12,7 +12,7 @@ const Container = styled(Box)`
   padding: ${Theme.space.xxlarge}px ${Theme.space.large}px 0 ${Theme.space.regular}px
   
   ${media.greaterThan('mobile')`
-    padding: 200px ${Theme.space.xlarge}px 0 ${Theme.space.xlarge}px;
+    padding: 180px ${Theme.space.xlarge}px 0 ${Theme.space.xlarge}px;
     margin-bottom: -70px;
   `}
 `;
@@ -21,6 +21,7 @@ const HowToSection = () => {
   return (
     <Container>
       <Step
+        key={1}
         header={'Opisz wydarzenie'}
         descriptions={[
           'Wpisz nazwę i opis wydarzenia, które zobaczą Twoi znajomi po otrzymaniu zaproszenia do losowania.',
@@ -30,6 +31,7 @@ const HowToSection = () => {
         placeholderSrc={'/static/how-to-describe-event-placeholder.jpg'}
       />
       <Step
+        key={2}
         header={'Dodaj uczestników'}
         descriptions={[
           'Wpisz nazwy uczestników (np imię i nazwisko). Powinna to być unikalna nazwa oraz na tyle czytelna by było wiadomo o kogo chodzi.',
@@ -39,6 +41,7 @@ const HowToSection = () => {
         placeholderSrc={'/static/how-to-add-participants-placeholder.jpg'}
       />
       <Step
+        key={3}
         header={'Prześlij linki'}
         descriptions={[
           'Wyślij unilakny link uczestnika do swojego znajomego za pomocą komunikatora, którego używacie np messanger, email czy sms.',
@@ -48,6 +51,7 @@ const HowToSection = () => {
         placeholderSrc={'/static/how-to-send-links-placeholder.jpg'}
       />
       <Step
+        key={4}
         header={'Losuj!'}
         descriptions={[
           'Po rozesłaniu linków zacznijcie losować swoją parę. Po wejściu na unikalny link zostaniesz zaproszony do losowania.',

@@ -27,7 +27,7 @@ const Index = ({ cmsUrl }: { cmsUrl: string }) => {
       'podsumowanie-aplikacji-mikolajkowej-luck-w-2018-roku',
     ],
   };
-  const { loading, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
+  const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
     POST_QUERY,
     {
       variables: { where },
@@ -39,11 +39,7 @@ const Index = ({ cmsUrl }: { cmsUrl: string }) => {
       <WelcomeSection />
       <DescriptionSection />
       <HowToSection />
-      {loading ? (
-        <div>Loading</div>
-      ) : (
-        <BlogPostSection posts={mapToViewPosts(data.posts, cmsUrl)} />
-      )}
+      {!loading && !error && <BlogPostSection posts={mapToViewPosts(data.posts, cmsUrl)} />}
       <Footer />
     </HomeLayout>
   );
