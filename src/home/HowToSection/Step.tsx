@@ -15,18 +15,27 @@ interface StepProps {
 
 const StepContainer = styled(Flex)<{ last: any }>`
   position: relative;
-  padding-bottom: 200px;
   border-left: 3px solid ${Theme.colors.gray3};
   border-color: ${props => (props.last ? 'transparent' : Theme.colors.gray3)};
+
+  flex-direction: column;
+  padding-bottom: 100px;
+
+  ${media.greaterThan('mobile')`
+    flex-direction: row;
+    padding-bottom: 200px;
+  `};
 `;
 
 const Content = styled(Box)`
-  margin-top: -${Theme.space.xregular}px
-  
+  margin-top: -14px;
+  padding-left: ${Theme.space.regular}px;
+
   ${media.greaterThan('mobile')`
-    padding-left: ${Theme.space.large}px
-    padding-right: ${Theme.space.xlarge}px
-  `}
+    margin-top: -${Theme.space.xregular}px;
+    padding-left: ${Theme.space.large}px;
+    padding-right: ${Theme.space.xlarge}px;
+  `};
 `;
 
 const Header = styled(Canon).attrs({ tag: 'h3' })`
@@ -37,16 +46,22 @@ const Text = styled(MediumText)`
 `;
 
 const Image = styled('img')`
-  margin-top: -125px;
+  height: auto;
+  width: 100%;
+  max-width: 340px;
+  margin-top: ${Theme.space.medium}px;
+
+  ${media.greaterThan('mobile')`
+    margin-top: -125px;
+  `};
 `;
 
 const StepperImage = styled(Stepper)`
   position: absolute;
   left: 0;
   top: 0;
-  transform: translateX(-55%) translateY(-50%) ;
+  transform: translateX(-55%) translateY(-50%);
 `;
-
 
 const Step = ({ header, descriptions, src, last = false }: StepProps) => (
   <StepContainer last={last}>
