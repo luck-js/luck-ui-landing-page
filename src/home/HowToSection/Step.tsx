@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 // @ts-ignore
 import Stepper from '../../../static/how-to-stepper.svg';
-import { Box, Canon, Flex, MediumText } from '../../components';
+import { Box, Canon, Flex, LazyImage, MediumText } from '../../components';
 import { Theme } from '../../utils';
 import media from '../../utils/media';
 
@@ -10,6 +10,7 @@ interface StepProps {
   header: string;
   descriptions: string[];
   src: string;
+  placeholderSrc: string;
   last?: boolean;
 }
 
@@ -45,12 +46,14 @@ const Text = styled(MediumText)`
   line-height: 1.4;
 `;
 
-const Image = styled('img')`
+const Image = styled('img')<{ loading: any }>`
   height: auto;
   width: 100%;
   max-width: 340px;
   margin-top: ${Theme.space.medium}px;
   align-self: flex-start;
+  filter: ${props => (props.loading ? 'blur(10px)' : 'blur(0)')};
+  opacity: ${props => (props.loading ? 0.8 : 1)};
   
   ${media.greaterThan('tablet')`
     margin-top: -125px;
@@ -64,7 +67,13 @@ const StepperImage = styled(Stepper)`
   transform: translateX(-55%) translateY(-50%);
 `;
 
-const Step = ({ header, descriptions, src, last = false }: StepProps) => (
+const StepImage = (props: { src: string; placeholderSrc: string }) => (
+  <LazyImage useSensor={false} {...props}>
+    {(src: any, loading: boolean) => <Image src={src} alt={loading.toString()} loading={loading} />}
+  </LazyImage>
+);
+
+const Step = ({ header, descriptions, src, placeholderSrc, last = false }: StepProps) => (
   <StepContainer last={last}>
     <Content>
       <Header mb={['small', 'small', 'regular']}>{header}</Header>
@@ -72,7 +81,7 @@ const Step = ({ header, descriptions, src, last = false }: StepProps) => (
         <Text mb={['xsmall', 'xsmall', 'medium']}>{description}</Text>
       ))}
     </Content>
-    <Image src={src} />
+    <StepImage src={src} placeholderSrc={placeholderSrc} />
     <StepperImage />
   </StepContainer>
 );
