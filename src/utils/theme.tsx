@@ -42,6 +42,7 @@ export const colors = {
   darkGray: '#4d4d4d',
   gray: '#bababa',
   gray2: '#B8B8B8',
+  green: '#ACC7BA',
 };
 
 export const fontFamilies = {
@@ -49,7 +50,7 @@ export const fontFamilies = {
 };
 
 
-//TODO: inputApp not should be merge with mediumText?
+// TODO: inputApp not should be merge with mediumText?
 export const textStyles: TextStyles = {
   logoHeading: {
     tag: 'h1',
