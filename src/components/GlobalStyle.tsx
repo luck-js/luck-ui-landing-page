@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
   html {
+    scroll-behavior: smooth;
     background-color: ${Theme.colors.main};
   }
   

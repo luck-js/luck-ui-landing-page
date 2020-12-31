@@ -42,7 +42,7 @@ const Text = styled(MediumText)`
 
 const DescriptionSection = () => {
   return (
-    <Container>
+    <Container id="description-section">
       <Header>
         Aplikacja powstała z myślą o tym, by ułatwić Ci zorganizowanie losowania w gronie Twoich
         znajomych
