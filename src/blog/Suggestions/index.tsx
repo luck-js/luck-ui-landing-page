@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from '../Card';
 import { ViewPost } from '../../../pages/blog';
 import { Box } from '../../components';
-import {Text} from '../Typography';
 import {Theme} from "../../utils"
+import Card from '../Card';
 import {CardsContainer} from "../Card/CardsContainer"
+import {Text} from '../Typography';
 
 interface SuggestionsProps {
   posts: ViewPost[];

@@ -9,10 +9,11 @@ const Container = styled(Box)`
   max-width: 1000px;
   margin: 0 auto;
   color: ${Theme.colors.black};
-  padding: 100px ${Theme.space.large}px 0 ${Theme.space.regular}px
+  padding: ${Theme.space.xxlarge}px ${Theme.space.large}px 0 ${Theme.space.regular}px
   
   ${media.greaterThan('mobile')`
     padding: 200px ${Theme.space.xlarge}px 0 ${Theme.space.xlarge}px;
+    margin-bottom: -70px;
   `}
 `;
 
