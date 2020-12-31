@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LogoHeading } from '../../components';
+import { BackgroundFooterBubbles, LogoHeading } from '../../components';
 import Content from './Content';
-import Logo from './Logo';
 import InputWithButton from './InputWithButton';
-import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
+import Logo from './Logo';
 
 const Container = styled('div')`
   height: 100%;
   overflow: hidden;
   position: relative;
 `;
-
 
 const WelcomeSection = (props: any) => {
   return (
