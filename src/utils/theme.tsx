@@ -42,6 +42,7 @@ export const colors = {
   darkGray: '#4d4d4d',
   gray: '#bababa',
   gray2: '#B8B8B8',
+  gray3: '#DBDBDB',
   green: '#ACC7BA',
 };
 
