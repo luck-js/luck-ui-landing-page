@@ -1,23 +1,24 @@
-import React from 'react';
-import App, { Container } from 'next/app';
-import Router from 'next/router';
 import { DefaultSeo } from 'next-seo';
+// tslint:disable-next-line:no-submodule-imports
+import App from 'next/app';
+// tslint:disable-next-line:no-submodule-imports
+import Router from 'next/router';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import SEO from '../next-seo.config';
-import { Theme } from '../src/utils';
 import { GlobalStyle } from '../src/components';
+import { Theme } from '../src/utils';
 
 // @ts-ignore
 import withGA from 'next-ga';
 
 // @ts-ignore
-if (typeof global.navigator === 'undefined') global.navigator = {};
+if (typeof global.navigator === 'undefined') { global.navigator = {}; }
 
 class MyApp extends App<{ analytics: any }> {
-  render() {
+  public render() {
     const { Component, pageProps, analytics } = this.props;
     return (
-      <Container>
         <ThemeProvider theme={Theme}>
           <>
             <GlobalStyle />
@@ -25,7 +26,6 @@ class MyApp extends App<{ analytics: any }> {
             <Component {...pageProps} analytics={analytics} />
           </>
         </ThemeProvider>
-      </Container>
     );
   }
 }

@@ -1,9 +1,8 @@
+import * as React from 'react';
 import styled from 'styled-components';
 import media from '../utils/media';
-import * as React from 'react';
-import { LazyImage } from './LazyImage';
 import { Box } from './Box';
-// import { Flex } from './Flex';
+import { LazyImage } from './LazyImage';
 
 const Container = styled(Box)`
   z-index: 0;
@@ -11,7 +10,6 @@ const Container = styled(Box)`
   pointer-events: none;
   width: 100%;
   height: auto;
-  //background-repeat-y: no-repeat;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -28,6 +26,11 @@ const Container = styled(Box)`
   
   ${media.greaterThan('desktop')`
     height: 192px;
+    width: 100%;
+    
+    img {
+      width: 100%;
+    }
   `}
 
 `;
@@ -53,30 +56,26 @@ const Image = styled('img')<{ loading: any }>`
   `}
 `;
 
+const BackgroundFooterBubblesImage = (props: { src: string; placeholderSrc: string }) => (
+  <LazyImage useSensor={false} {...props}>
+    {(src: any, loading: boolean) => <Image src={src} alt={loading.toString()} loading={loading} />}
+  </LazyImage>
+);
+
 export const BackgroundFooterBubbles = () => {
   return (
     <>
       <Container display={['inline-block', 'none']}>
-        <LazyImage
+        <BackgroundFooterBubblesImage
           src={'/static/bg-narrow-bubbles.png'}
           placeholderSrc={'/static/compr-bg-narrow-bubbles.png'}
-          useSensor={false}
-        >
-          {(src: any, loading: boolean) => (
-            <Image src={src} alt={loading.toString()} loading={loading} />
-          )}
-        </LazyImage>
+        />
       </Container>
       <Container display={['none', 'inline-block']}>
-        <LazyImage
+        <BackgroundFooterBubblesImage
           src={'/static/bg-footer-bubbles.png'}
           placeholderSrc={'/static/compr-bg-footer-bubbles.png'}
-          useSensor={false}
-        >
-          {(src: any, loading: boolean) => (
-            <Image src={src} alt={loading.toString()} loading={loading} />
-          )}
-        </LazyImage>
+        />
       </Container>
     </>
   );
