@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:14.15.3
 WORKDIR /usr/src/luck-ui-2
 COPY package.json ./
 RUN yarn install

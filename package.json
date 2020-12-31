@@ -8,7 +8,13 @@
     "start": "NODE_ENV=production nodemon --exec ts-node server/server.ts",
     "codegen": "graphql-codegen --config codegen.yml"
   },
-  "nodemonConfig": { "ignore": ["*.json", "/node_modules/", "README.md"]},
+  "nodemonConfig": {
+    "ignore": [
+      "*.json",
+      "/node_modules/",
+      "README.md"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -81,5 +87,9 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.6.2"
+  },
+  "engines": {
+    "node": "14.15.3",
+    "npm": "6.14.9"
   }
 }
