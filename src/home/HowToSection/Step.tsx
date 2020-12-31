@@ -56,7 +56,7 @@ const Image = styled('img')<{ loading: any }>`
   opacity: ${props => (props.loading ? 0.8 : 1)};
   
   ${media.greaterThan('tablet')`
-    margin-top: -125px;
+    margin-top: -105px;
   `};
 `;
 
