@@ -14,3 +14,4 @@ export * from './RatioLazyImage';
 export * from './Spinner';
 export * from './TextLink';
 export * from './BackgroundFooterBubbles';
+export * from './Separator';

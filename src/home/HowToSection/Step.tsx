@@ -19,9 +19,9 @@ const StepContainer = styled(Flex)<{ last: any }>`
   border-color: ${props => (props.last ? 'transparent' : Theme.colors.gray3)};
 
   flex-direction: column;
-  padding-bottom: 100px;
+  padding-bottom: ${Theme.space.xxlarge}px;
 
-  ${media.greaterThan('mobile')`
+  ${media.greaterThan('tablet')`
     flex-direction: row;
     padding-bottom: 200px;
   `};
@@ -31,7 +31,7 @@ const Content = styled(Box)`
   margin-top: -14px;
   padding-left: ${Theme.space.regular}px;
 
-  ${media.greaterThan('mobile')`
+  ${media.greaterThan('tablet')`
     margin-top: -${Theme.space.xregular}px;
     padding-left: ${Theme.space.large}px;
     padding-right: ${Theme.space.xlarge}px;
@@ -50,8 +50,9 @@ const Image = styled('img')`
   width: 100%;
   max-width: 340px;
   margin-top: ${Theme.space.medium}px;
-
-  ${media.greaterThan('mobile')`
+  align-self: flex-start;
+  
+  ${media.greaterThan('tablet')`
     margin-top: -125px;
   `};
 `;
@@ -66,9 +67,9 @@ const StepperImage = styled(Stepper)`
 const Step = ({ header, descriptions, src, last = false }: StepProps) => (
   <StepContainer last={last}>
     <Content>
-      <Header mb={['small', 'regular', 'regular']}>{header}</Header>
+      <Header mb={['small', 'small', 'regular']}>{header}</Header>
       {descriptions.map(description => (
-        <Text mb={['xsmall', 'medium', 'medium']}>{description}</Text>
+        <Text mb={['xsmall', 'xsmall', 'medium']}>{description}</Text>
       ))}
     </Content>
     <Image src={src} />
