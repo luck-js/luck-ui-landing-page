@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, TextLink, SmallText } from '../components';
+import { Box, SmallText, TextLink } from '../components';
 import { Theme } from '../utils';
 import media from '../utils/media';
 
@@ -28,32 +28,13 @@ const Footer = () => {
   return (
     <Container>
       <SmallText>
-        Polityka prywatności{' '}
         <TextLink
           href={'/polityka-prywatnosci-strony'}
           aria-label={'przejdź do polityki prywatnosci strony'}
           modifiers={['black']}
           underline
         >
-          strony
-        </TextLink>{' '}
-        &{' '}
-        <TextLink
-          href={'/polityka-prywatnosci-pan-mikolaj-luck'}
-          aria-label={'przejdź do polityki prywatnosci Pan Mikołaj Luck'}
-          modifiers={['black']}
-          underline
-        >
-          Pan Mikołaj Luck
-        </TextLink>{' '}
-        &{' '}
-        <TextLink
-          href={'/regulamin-facebook-konkurs'}
-          aria-label={'przejdź do regulaminu facebook konkursu'}
-          modifiers={['black']}
-          underline
-        >
-          konkurs
+          Polityka prywatności strony
         </TextLink>
       </SmallText>
     </Container>
