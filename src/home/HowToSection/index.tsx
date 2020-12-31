@@ -2,14 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box } from '../../components';
 import { Theme } from '../../utils';
-import Step from './Step';
 import media from '../../utils/media';
+import Step from './Step';
 
 const Container = styled(Box)`
   max-width: 1000px;
   margin: 0 auto;
   color: ${Theme.colors.black};
-
+  padding: 100px ${Theme.space.large}px 0 ${Theme.space.regular}px
+  
   ${media.greaterThan('mobile')`
     padding: 200px ${Theme.space.xlarge}px 0 ${Theme.space.xlarge}px;
   `}
