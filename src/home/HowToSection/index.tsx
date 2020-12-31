@@ -27,6 +27,7 @@ const HowToSection = () => {
           'Na przykład takim tytułem może być “Mikołajki klasy 6b”, a opis “Maksymalna kwota prezentu 50zł. Nie kupujemy słodyczy!',
         ]}
         src={'/static/how-to-describe-event.png'}
+        placeholderSrc={'/static/how-to-describe-event-placeholder.jpg'}
       />
       <Step
         header={'Dodaj uczestników'}
@@ -35,6 +36,7 @@ const HowToSection = () => {
           'Pamiętaj by wpisać siebie jeśli bierzesz udział.',
         ]}
         src={'/static/how-to-add-participants.png'}
+        placeholderSrc={'/static/how-to-add-participants-placeholder.jpg'}
       />
       <Step
         header={'Prześlij linki'}
@@ -43,6 +45,7 @@ const HowToSection = () => {
           'Uważaj, by nie wysłać linku do niewłaściwej osoby.',
         ]}
         src={'/static/how-to-send-links.png'}
+        placeholderSrc={'/static/how-to-send-links-placeholder.jpg'}
       />
       <Step
         header={'Losuj!'}
@@ -51,6 +54,7 @@ const HowToSection = () => {
           'Po kliknięciu w losuj wyświetli się osoba, która została przypisana do Ciebie.',
         ]}
         src={'/static/how-to-randomize.png'}
+        placeholderSrc={'/static/how-to-randomize-placeholder.jpg'}
         last
       />
     </Container>
