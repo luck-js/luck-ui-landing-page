@@ -32,6 +32,7 @@ export const Header = styled(Canon).attrs({
 `;
 
 export const SubHeader = styled(Trafalgar).attrs({
+  tag: "h2",
   mb: ['small', 'small', 'medium', 'medium'],
 })`
   line-height: 1.4;
