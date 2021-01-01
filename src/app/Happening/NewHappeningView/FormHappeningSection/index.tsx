@@ -131,6 +131,7 @@ const Index: FormHappeningSectionPage = () => {
         />
         <Box ref={myRef}>
           <CanonApp
+            tag={"h2"}
             mt={['xregular', 'xregular', 'large', 'large']}
             mb={['regular', 'regular', 'large', 'large']}
           >
