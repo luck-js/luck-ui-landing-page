@@ -22,9 +22,10 @@ export const POST_QUERY = gql`
 const Index = ({ cmsUrl }: { cmsUrl: string }) => {
   const where = {
     slug_in: [
+      'co-sie-dzialo-w-2020-w-aplikacji-luck',
       'dlaczego-odradzam-dawanie-prezentow-w-swieta-bozego-narodzenia',
       'luck-aplikacja-na-mikolajki-w-roku-2019',
-      'podsumowanie-aplikacji-mikolajkowej-luck-w-2018-roku',
+      // 'podsumowanie-aplikacji-mikolajkowej-luck-w-2018-roku',
     ],
   };
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
