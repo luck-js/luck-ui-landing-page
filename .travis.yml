@@ -1,6 +1,9 @@
 language: node_js
 node_js:
 - '16.17.0'
+install:
+  # We use "force" because upstream dependency conflict isn't fixed
+  - "npm install --force"
 env:
   global:
   - DEV_IMAGE_NAME=luckjs/ts-luck-ui-landing-page
