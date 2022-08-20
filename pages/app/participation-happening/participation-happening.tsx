@@ -9,6 +9,7 @@ import { MatchedMemberSectionData } from '../../../src/app/ParticipationHappenin
 
 interface ParticipationHappeningProps {
   data: ParticipationHappeningViewData;
+  analytics: any;
 }
 
 interface ParticipationHappeningPage<P = ParticipationHappeningProps>
@@ -16,10 +17,10 @@ interface ParticipationHappeningPage<P = ParticipationHappeningProps>
   getInitialProps?: (ctx: any) => Promise<{ data: ParticipationHappeningViewData }>;
 }
 
-const ParticipationHappening: ParticipationHappeningPage = ({ data }) => {
+const ParticipationHappening: ParticipationHappeningPage = ({ data, analytics }) => {
   return (
     <AppLayout contrast>
-      <ParticipationHappeningView data={data} />
+      <ParticipationHappeningView data={data} analytics={analytics} />
     </AppLayout>
   );
 };

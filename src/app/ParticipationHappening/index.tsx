@@ -15,14 +15,18 @@ export interface ParticipationHappeningViewData {
 
 interface ParticipationHappeningViewProps {
   data: ParticipationHappeningViewData;
+  analytics: any;
 }
 
-const Index = ({ data }: ParticipationHappeningViewProps) => {
-
+const Index = ({ data, analytics }: ParticipationHappeningViewProps) => {
   const [shouldShowMatchedMember, SetShouldShowMatchedMember] = useState(false);
 
   const handleOnClick = () => {
     SetShouldShowMatchedMember(true);
+  };
+
+  const handleBannerClick = () => {
+    analytics.event('Banner Click', 'palisienaturalnie');
   };
 
   return (
@@ -35,7 +39,7 @@ const Index = ({ data }: ParticipationHappeningViewProps) => {
       )}
       {shouldShowMatchedMember && (
         <Index.MatchedMemberSectionContainer>
-          <MatchedMemberSection data={data.matchedMember} />
+          <MatchedMemberSection data={data.matchedMember} handleBannerClick={handleBannerClick} />
         </Index.MatchedMemberSectionContainer>
       )}
       <BackgroundFooterBubbles />
@@ -52,10 +56,7 @@ Index.Container = styled(Box)`
   background-color: ${Theme.colors.mainContrast};
   min-height: 100%;
   display: grid;
-  //flex-direction: column;
-  //justify-content: center;
 `;
-
 
 Index.WelcomeMemberSectionContainer = styled(Flex)`
   justify-content: center;

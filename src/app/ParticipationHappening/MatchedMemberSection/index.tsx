@@ -12,6 +12,7 @@ export interface MatchedMemberSectionData {
 
 interface MatchedMemberSectionProps {
   data: MatchedMemberSectionData;
+  handleBannerClick: () => void;
 }
 const Image = styled('img')<{ loading: any }>`
   width: 100%;
@@ -46,7 +47,7 @@ const BannerImage = (props: { src: string; placeholderSrc: string }) => (
   </LazyImage>
 );
 
-const Index = ({ data: { me, matchedMember } }: MatchedMemberSectionProps) => {
+const Index = ({ data: { me, matchedMember }, handleBannerClick }: MatchedMemberSectionProps) => {
   return (
     <Index.Container>
       <Index.AppContainer>
@@ -61,7 +62,11 @@ const Index = ({ data: { me, matchedMember } }: MatchedMemberSectionProps) => {
         </Index.BigTextContainer>
       </Index.AppContainer>
       <Index.BannerImageContainer>
-        <a href="https://palisienaturalnie.pl/pl/c/Swiece/16" target="_blank">
+        <a
+          href="https://palisienaturalnie.pl/pl/c/Swiece/16"
+          target="_blank"
+          onClick={handleBannerClick}
+        >
           <BannerImage src={'/static/banner.png'} placeholderSrc={'/static/compr-banner.jpg'} />
         </a>
       </Index.BannerImageContainer>
