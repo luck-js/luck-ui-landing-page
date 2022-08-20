@@ -2,18 +2,10 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import styled, { css } from 'styled-components';
-import { NextSeo } from 'next-seo/lib';
+import { NextSeo } from 'next-seo';
 import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
 import BlogLayout from '../../src/blog/BlogLayout';
-import {
-  getProcessor,
-  getRandom,
-  Hashtag,
-  Post,
-  QueryPostsArgs,
-  Theme,
-  withApollo,
-} from '../../src/utils';
+import { getProcessor, getRandom, Hashtag, Post, QueryPostsArgs, Theme } from '../../src/utils';
 import media from '../../src/utils/media';
 import { Box, Flex, RatioLazyImage, TinySecond } from '../../src/components';
 import Pagination, { PaginationSlugs } from '../../src/blog/Pagination';
@@ -26,7 +18,7 @@ const cssTextMinusMargin = css`
   ${media.greaterThan('mobile')`
     
   `}
-  
+
   ${media.greaterThan('tablet')`
     margin-top: -${Theme.space.medium}px;
   `}
@@ -74,13 +66,13 @@ const ContentContainer = styled(Flex)`
   max-width: 664px;
   width: 100%;
   margin: 0 auto;
-  flex-direction: column;  
+  flex-direction: column;
   padding: ${Theme.space.medium}px ${Theme.space.small}px;
-  
+
   ${media.greaterThan('mobile')`
     
   `}
-  
+
   ${media.greaterThan('tablet')`
     padding: ${Theme.space.regular}px ${Theme.space.xregular}px;
   `}
@@ -191,7 +183,7 @@ export const POST_QUERY = gql`
 `;
 
 const getPaginationSlugs = (slug: string, posts: Post[]): PaginationSlugs => {
-  const index = posts.findIndex(post => post.slug === slug);
+  const index = posts.findIndex((post) => post.slug === slug);
 
   const nextIndex = index <= 0 ? null : index - 1;
   const previousIndex = index === posts.length - 1 ? null : index + 1;
@@ -205,9 +197,9 @@ const getPaginationSlugs = (slug: string, posts: Post[]): PaginationSlugs => {
 const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
   if (!toMatchPost) return [];
   const toMatchHashtags = toMatchPost.hashtags ? toMatchPost.hashtags : [];
-  const p = posts.filter(post => post.slug !== toMatchPost.slug);
+  const p = posts.filter((post) => post.slug !== toMatchPost.slug);
 
-  const candidatePosts = p.filter(post =>
+  const candidatePosts = p.filter((post) =>
     (toMatchHashtags as Hashtag[]).some(({ name: toMatchHashtag }) =>
       post.hashtags
         ? (post.hashtags as Hashtag[]).some(({ name: hashtag }) => hashtag === toMatchHashtag)
@@ -229,7 +221,8 @@ const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
     return getRandom(candidatePosts, 2);
   } else if (candidatePosts.length < 2) {
     const lackedPosts = getLackedPost(2).filter(
-      lackedPost => !candidatePosts.some(candidatePost => candidatePost.slug === lackedPost.slug),
+      (lackedPost) =>
+        !candidatePosts.some((candidatePost) => candidatePost.slug === lackedPost.slug),
     );
     return [...candidatePosts, ...lackedPosts].slice(0, 2);
   } else return [];
@@ -242,10 +235,11 @@ interface IndexPage<P = { host: string; slug: string; cmsUrl: string; shouldShow
 
 const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const where = { slug };
-  const { loading, error, data = { posts: [], all: [] } } = useQuery<
-    { posts: Post[]; all: Post[] },
-    QueryPostsArgs
-  >(POST_QUERY, {
+  const {
+    loading,
+    error,
+    data = { posts: [], all: [] },
+  } = useQuery<{ posts: Post[]; all: Post[] }, QueryPostsArgs>(POST_QUERY, {
     variables: { where },
   });
   const posts = shouldShowDraft ? data.posts : data.posts.filter(({ isDraft }) => !isDraft);
@@ -273,7 +267,7 @@ const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   );
 };
 
-Index.getInitialProps = async function({ query }) {
+Index.getInitialProps = async function ({ query }) {
   return {
     host: process.env.VIRTUAL_HOST ? process.env.VIRTUAL_HOST : '',
     slug: query.id,
@@ -282,7 +276,4 @@ Index.getInitialProps = async function({ query }) {
   };
 };
 
-export default withApollo(Index, {
-  // Disable apollo ssr fetching in favour of automatic static optimization
-  ssr: true,
-});
+export default Index;

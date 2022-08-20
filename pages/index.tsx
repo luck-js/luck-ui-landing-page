@@ -1,14 +1,14 @@
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import React from 'react';
-import BlogPostSection from '../../src/home/BlogPostSection';
-import DescriptionSection from '../../src/home/DescriptionSection';
-import Footer from '../../src/home/Footer';
-import HomeLayout from '../../src/home/HomeLayout';
-import HowToSection from '../../src/home/HowToSection';
-import WelcomeSection from '../../src/home/WelcomeSection';
-import { Post, QueryPostsArgs, withApollo } from '../../src/utils';
-import { mapToViewPosts, POST_FRAGMENT } from '../blog';
+import BlogPostSection from '../src/home/BlogPostSection';
+import DescriptionSection from '../src/home/DescriptionSection';
+import Footer from '../src/home/Footer';
+import HomeLayout from '../src/home/HomeLayout';
+import HowToSection from '../src/home/HowToSection';
+import WelcomeSection from '../src/home/WelcomeSection';
+import { Post, QueryPostsArgs } from '../src/utils';
+import { mapToViewPosts, POST_FRAGMENT } from './blog';
 
 export const POST_QUERY = gql`
   ${POST_FRAGMENT}
@@ -27,12 +27,13 @@ const Index = ({ cmsUrl }: { cmsUrl: string }) => {
       'podsumowanie-aplikacji-mikolajkowej-luck-w-2018-roku',
     ],
   };
-  const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }, QueryPostsArgs>(
-    POST_QUERY,
-    {
-      variables: { where },
-    },
-  );
+  const {
+    loading,
+    error,
+    data = { posts: [] },
+  } = useQuery<{ posts: Post[] }, QueryPostsArgs>(POST_QUERY, {
+    variables: { where },
+  });
 
   return (
     <HomeLayout>
@@ -45,13 +46,10 @@ const Index = ({ cmsUrl }: { cmsUrl: string }) => {
   );
 };
 
-Index.getInitialProps = async function() {
+Index.getInitialProps = async function () {
   return {
     cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
   };
 };
 
-export default withApollo(Index, {
-  // Disable apollo ssr fetching in favour of automatic static optimization
-  ssr: true,
-});
+export default Index;

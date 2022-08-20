@@ -1,7 +1,7 @@
 import { useSortBy, useTable } from 'react-table';
 import styled from 'styled-components';
-import React from "react"
-import {Theme} from "../../../utils"
+import React from 'react';
+import { Theme } from '../../../utils';
 
 export const Table = ({ columns, data }: any) => {
   // Use the state and functions returned from useTable to build your UI
@@ -17,10 +17,10 @@ export const Table = ({ columns, data }: any) => {
   return (
     <Table.Container {...getTableProps()}>
       <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column: any) => (
-              <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+        {headerGroups.map((headerGroup, key) => (
+          <tr key={key} {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column: any, key) => (
+              <th key={key} {...column.getHeaderProps(column.getSortByToggleProps())}>
                 <>
                   {column.render('Header')}
                   <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span>
@@ -31,12 +31,16 @@ export const Table = ({ columns, data }: any) => {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
+        {rows.map((row, key) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+            <tr key={key} {...row.getRowProps()}>
+              {row.cells.map((cell, key) => {
+                return (
+                  <td key={key} {...cell.getCellProps()}>
+                    {cell.render('Cell')}
+                  </td>
+                );
               })}
             </tr>
           );

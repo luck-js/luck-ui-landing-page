@@ -3,16 +3,11 @@ import styled from 'styled-components';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Participant } from '../../model';
 import { Theme } from '../../../../utils';
-import {
-  BaseButton,
-  BaseInput,
-  Box,
-  Flex,
-} from '../../../../components';
+import { BaseButton, BaseInput, Box, Flex } from '../../../../components';
 // @ts-ignore
-import WideArrow from '../../../../../static/wide-arrow.svg';
+import WideArrow from '../../../../../public/static/wide-arrow.svg';
 // @ts-ignore
-import Copy from '../../../../../static/copy.svg';
+import Copy from '../../../../../public/static/copy.svg';
 
 interface ShareRowProps {
   participant: Participant;
@@ -45,7 +40,7 @@ export const ShareRow: ShareRowComponent = ({ participant, onCopy }) => {
         {participant.name}
       </ShareRow.Element>
       <CopyToClipboard text={participant.uniqueLink} onCopy={handleOnCopy}>
-        <ShareRow.Element className="uniqueLink" >
+        <ShareRow.Element className="uniqueLink">
           <WideArrow className="wideArrow" />
           <ShareRow.Input
             ref={inputRef}
@@ -122,7 +117,7 @@ ShareRow.Element = styled(Box)`
 
 ShareRow.Container = styled(Flex)<{ isCopied: boolean }>`
   ${ShareRow.Element} {
-    background-color: ${props =>
+    background-color: ${(props) =>
       props.isCopied ? Theme.colors.darkMain3 : Theme.colors.darkMain2};
   }
 

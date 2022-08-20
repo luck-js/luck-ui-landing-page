@@ -3,7 +3,8 @@ import { Theme } from '../utils';
 import { applyStyleModifiers, ModifierKeys, ModifiersConfig } from 'styled-components-modifiers';
 
 const BUTTON_VARIANTS: ModifiersConfig = {
-  darkGray: props => css`
+  // @ts-ignore
+  darkGray: (props) => css`
     color: ${Theme.colors.darkGray};
     text-decoration-color: ${props.underline && Theme.colors.darkGray};
 
@@ -12,7 +13,8 @@ const BUTTON_VARIANTS: ModifiersConfig = {
       opacity: ${props.underline && 0.8};
     }
   `,
-  black: props => css`
+  // @ts-ignore
+  black: (props) => css`
     color: ${Theme.colors.black};
     text-decoration-color: ${props.underline && Theme.colors.black};
 

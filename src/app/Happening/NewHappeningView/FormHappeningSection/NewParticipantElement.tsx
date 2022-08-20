@@ -5,7 +5,7 @@ import { BaseButton } from '../../../../components/Button';
 import { Theme } from '../../../../utils';
 
 // @ts-ignore
-import Close from '../../../../../static/close.svg';
+import Close from '../../../../../public/static/close.svg';
 
 interface NewParticipantElementProps {
   name: string;

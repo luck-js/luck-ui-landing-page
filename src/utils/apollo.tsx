@@ -1,146 +1,99 @@
 require('dotenv').config();
-import React, { useMemo } from 'react';
-import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import fetch from 'isomorphic-unfetch';
-import axios from "axios";
+import { useMemo } from 'react';
+import merge from 'deepmerge';
+import type { GetServerSidePropsContext } from 'next';
+import type { NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import isEqual from 'lodash.isequal';
+import axios from 'axios';
 
-let apolloClient: any = null;
-/**
- * Creates and provides the apolloContext
- * to a next.js PageTree. Use it by wrapping
- * your PageComponent via HOC pattern.
- * @param {Function|Class} PageComponent
- * @param {Object} [config]
- * @param {Boolean} [config.ssr=true]
- */
-export function withApollo(PageComponent: any, { ssr = true } = {}) {
-  let token = '';
-  const WithApollo = ({ apolloClient, apolloState, ...pageProps }: any) => {
-    const client = useMemo(() => apolloClient || initApolloClient(token, apolloState), []);
-    return (
-      <ApolloProvider client={client}>
-        <PageComponent {...pageProps} />
-      </ApolloProvider>
-    );
-  };
-
-  // Set the correct displayName in development
-  if (process.env.NODE_ENV !== 'production') {
-    const displayName = PageComponent.displayName || PageComponent.name || 'Component';
-
-    if (displayName === 'App') {
-      console.warn('This withApollo HOC only works with PageComponents.');
-    }
-
-    WithApollo.displayName = `withApollo(${displayName})`;
-  }
-
-  if (ssr || PageComponent.getInitialProps) {
-    WithApollo.getInitialProps = async (ctx: any) => {
-      token = await authenticate(process.env.CMS_USERNAME as string, process.env.CMS_PASSWORD as string)
-      async function authenticate(identifier: string, password: string): Promise<string> {
-        return await axios
-          .post(`${process.env.CLIENT_URL}/admin/auth/local`, { identifier, password })
-          .then(response => response.data.jwt)
-      }
-      const { AppTree } = ctx;
-
-      // Initialize ApolloClient, add it to the ctx object so
-      // we can use it in `PageComponent.getInitialProp`.
-      const apolloClient = (ctx.apolloClient = initApolloClient(token));
-
-      // Run wrapped getInitialProps methods
-      let pageProps = {};
-      if (PageComponent.getInitialProps) {
-        pageProps = await PageComponent.getInitialProps(ctx);
-      }
-
-      // Only on the server:
-      if (typeof window === 'undefined') {
-        // When redirecting, the response is finished.
-        // No point in continuing to render
-        if (ctx.res && ctx.res.finished) {
-          return pageProps;
-        }
-
-        // Only if ssr is enabled
-        if (ssr) {
-          try {
-            // Run all GraphQL queries
-            const { getDataFromTree } = await import('@apollo/react-ssr');
-            await getDataFromTree(
-              <AppTree
-                pageProps={{
-                  ...pageProps,
-                  apolloClient,
-                }}
-              />,
-            );
-          } catch (error) {
-            // Prevent Apollo Client GraphQL errors from crashing SSR.
-            // Handle them in components via the data.error prop:
-            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
-            console.error('Error while running `getDataFromTree`', error);
-          }
-
-          // getDataFromTree does not call componentWillUnmount
-          // head side effect therefore need to be cleared manually
-          Head.rewind();
-        }
-      }
-
-      // Extract query data from the Apollo store
-      const apolloState = apolloClient.cache.extract();
-
-      return {
-        ...pageProps,
-        apolloState,
-      };
-    };
-  }
-
-  return WithApollo;
+interface PageProps {
+  props?: Record<string, any>;
 }
 
-/**
- * Always creates a new apollo client on the server
- * Creates or reuses apollo client in the browser.
- * @param  {Object} initialState
- */
-function initApolloClient(token: string, initialState?: any): any {
-  // Make sure to create a new client for every server-side request so that data
-  // isn't shared between connections (which would be bad)
-  if (typeof window === 'undefined') {
-    return createApolloClient(initialState, token);
-  }
+export const APOLLO_STATE_PROPERTY_NAME = '__APOLLO_STATE__';
 
-  // Reuse client on the client-side
-  if (!apolloClient) {
-    apolloClient = createApolloClient(initialState, token);
-  }
-
-  return apolloClient;
+async function getToken(identifier: string, password: string): Promise<string> {
+  return await axios
+    .post(`${process.env.CLIENT_URL}/admin/auth/local`, { identifier, password })
+    .then((response) => response.data.jwt);
 }
 
-/**
- * Creates and configures the ApolloClient
- * @param  {Object} [initialState={}]
- */
-function createApolloClient(initialState = {}, token: string) {
-  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
-  return new ApolloClient({
-    ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
-    link: new HttpLink({
-      uri: `${process.env.CLIENT_URL}/graphql`, // Server URL (must be absolute)
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      fetch,
-    }),
-    cache: new InMemoryCache().restore(initialState),
+let apolloClient: ApolloClient<NormalizedCacheObject>;
+
+const createApolloClient = (ctx?: GetServerSidePropsContext) => {
+  const httpLink = new HttpLink({
+    uri: `${process.env.CLIENT_URL}/graphql`,
   });
+
+  const authLink = setContext(async (_, { headers }) => {
+    // Get the authentication token from cookies
+    const token = await getToken(
+      process.env.CMS_USERNAME as string,
+      process.env.CMS_PASSWORD as string,
+    );
+
+    return {
+      headers: {
+        ...headers,
+        Authorization: token ? `Bearer ${token}` : '',
+      },
+    };
+  });
+
+  return new ApolloClient({
+    ssrMode: typeof window === 'undefined',
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+};
+
+export function initializeApollo(initialState = null, ctx?: GetServerSidePropsContext) {
+  const client = apolloClient ?? createApolloClient(ctx);
+
+  // If your page has Next.js data fetching methods that use Apollo Client,
+  // the initial state gets hydrated here
+  if (initialState) {
+    // Get existing cache, loaded during client side data fetching
+    const existingCache = client.extract();
+
+    // Merge the existing cache into data passed from getStaticProps/getServerSideProps
+    const data = merge(initialState, existingCache, {
+      // combine arrays using object equality (like in sets)
+      arrayMerge: (destinationArray, sourceArray) => [
+        ...sourceArray,
+        ...destinationArray.filter((d) => sourceArray.every((s) => !isEqual(d, s))),
+      ],
+    });
+
+    // Restore the cache with the merged data
+    client.cache.restore(data);
+  }
+
+  // For SSG and SSR always create a new Apollo Client
+  if (typeof window === 'undefined') {
+    return client;
+  }
+
+  // Create the Apollo Client once in the client
+  if (!apolloClient) {
+    apolloClient = client;
+  }
+
+  return client;
+}
+
+export function addApolloState(client: ApolloClient<NormalizedCacheObject>, pageProps: PageProps) {
+  if (pageProps?.props) {
+    pageProps.props[APOLLO_STATE_PROPERTY_NAME] = client.cache.extract();
+  }
+
+  return pageProps;
+}
+
+export function useApollo(pageProps: PageProps) {
+  // @ts-ignore
+  const state = pageProps[APOLLO_STATE_PROPERTY_NAME];
+  return useMemo(() => initializeApollo(state), [state]);
 }

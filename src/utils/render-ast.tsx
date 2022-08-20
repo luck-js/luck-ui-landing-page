@@ -1,6 +1,6 @@
 import React from 'react';
 // @ts-ignore
-import unified from 'unified';
+import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 // @ts-ignore
 import remarkSlug from 'remark-slug';
@@ -12,7 +12,7 @@ import rehypeReact from 'rehype-react';
 import rehypeRaw from 'rehype-raw';
 
 function makeCreateElement(components: any) {
-  return function(component: any, props: any, children: any) {
+  return function (component: any, props: any, children: any) {
     const Tag = (components && component && components[component]) || component || 'div';
 
     return <Tag {...props}>{children}</Tag>;
@@ -24,9 +24,9 @@ export const getProcessor = (components: any) => {
 
   return (
     unified()
-      // @ts-ignore
       .use(remarkParse)
       .use(remarkSlug)
+      // @ts-ignore
       .use(remarkRehype, { allowDangerousHTML: true })
       .use(rehypeRaw)
       .use(rehypeReact, { createElement })

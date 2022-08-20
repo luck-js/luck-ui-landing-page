@@ -4,7 +4,7 @@ import { Box } from '../Box';
 import { Theme } from '../../utils';
 
 // @ts-ignore
-import Close from '../../../static/close.svg';
+import Close from '../../../public/static/close.svg';
 import { BaseButton } from '../Button';
 import { Flex } from '../Flex';
 
@@ -85,11 +85,11 @@ Modal.Container = styled(Box)`
   left: 0;
   top: 0;
   position: fixed;
-  z-index: ${props => (props.shouldBeOpen ? 100 : -1)};
-  opacity: ${props => (props.shouldBeOpen ? 1 : 0)};
+  z-index: ${(props) => (props.shouldBeOpen ? 100 : -1)};
+  opacity: ${(props) => (props.shouldBeOpen ? 1 : 0)};
   transition: opacity 0.5s;
 
   ${Modal.Content} {
-    display: ${props => (props.shouldBeOpen ? 'block' : 'none')};
+    display: ${(props) => (props.shouldBeOpen ? 'block' : 'none')};
   }
 `;

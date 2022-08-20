@@ -1,7 +1,7 @@
-FROM node:14.15.3
+FROM node:16.17.0
 WORKDIR /usr/src/luck-ui-2
 COPY package.json ./
-RUN yarn install
+RUN npm install --legacy-peer-deps
 COPY . .
 ARG CMS_USERNAME
 ARG CMS_PASSWORD
@@ -18,4 +18,4 @@ ENV VIRTUAL_HOST=$VIRTUAL_HOST
 RUN yarn run build
 ENV PORT 3000
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

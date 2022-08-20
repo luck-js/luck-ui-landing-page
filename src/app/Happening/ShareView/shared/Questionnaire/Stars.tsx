@@ -4,7 +4,7 @@ import useHover from '../../../../../utils/useHover';
 import { BaseButton } from '../../../../../components/Button';
 import { helper, Theme } from '../../../../../utils';
 // @ts-ignore
-import Star from '../../../../../../static/star.svg';
+import Star from '../../../../../../public/static/star.svg';
 
 interface StarsProps {
   count: number;
@@ -22,27 +22,30 @@ export const Stars: StarsComponent = ({ count, onClick, isShouldBeFreeze }) => {
   const [hoverStarIndex, setHoverStarIndex] = useState(-1);
 
   const handleMouseOver = (index: number) => {
-    if(isShouldBeFreeze) return;
+    if (isShouldBeFreeze) return;
     setHoverStarIndex(index);
   };
 
   const handleMouseOut = () => {
-    if(isShouldBeFreeze) return;
+    if (isShouldBeFreeze) return;
     setHoverStarIndex(-1);
   };
 
   const [activeStarIndex, setActiveStarIndex] = useState(-1);
 
   const handleOnClick = (index: number) => () => {
-    if(isShouldBeFreeze) return;
-    setActiveStarIndex(prevState => (prevState === index ? -1 : index));
-    onClick(index)
+    if (isShouldBeFreeze) return;
+    setActiveStarIndex((prevState) => (prevState === index ? -1 : index));
+    onClick(index);
   };
 
   return (
     <>
-      {stars.map(index => {
-        let [hoverRef] = useHover(() => handleMouseOver(index), () => handleMouseOut());
+      {stars.map((index) => {
+        let [hoverRef] = useHover(
+          () => handleMouseOver(index),
+          () => handleMouseOut(),
+        );
         return (
           <Stars.Button
             key={index}
@@ -73,15 +76,13 @@ Stars.Button = styled(BaseButton)<any>`
   svg {
     height: 100%;
     width: auto;
-    opacity: ${props => (!props.isHover || props.isActive ? 1 : 0.6)};
+    opacity: ${(props) => (!props.isHover || props.isActive ? 1 : 0.6)};
     transition: opacity 0.5s;
 
     path {
       transition: fill 0.5s;
-      fill: ${props =>
+      fill: ${(props) =>
         props.isHover || props.isActive ? Theme.colors.mainContrast : Theme.colors.darkMain3};
     }
   }
 `;
-
-

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 // @ts-ignore
-import WideArrow from '../../static/wide-arrow.svg';
+import WideArrow from '../../public/static/wide-arrow.svg';
 import { Theme } from '../utils';
 import media from '../utils/media';
 import { Box } from './Box';
@@ -24,8 +24,8 @@ const Container = styled(Box)`
     width: auto;
     height: 180px;
   `}
-  
-   ${media.greaterThan('tablet')`
+
+  ${media.greaterThan('tablet')`
     
   `}
   
@@ -37,22 +37,21 @@ const Container = styled(Box)`
       width: 100%;
     }
   `}
-
 `;
 
 const Image = styled('img')<{ loading: any }>`
   width: 100%;
   height: auto;
-  filter: ${props => (props.loading ? 'blur(10px)' : 'blur(0)')};
-  opacity: ${props => (props.loading ? 0.8 : 1)};
+  filter: ${(props) => (props.loading ? 'blur(10px)' : 'blur(0)')};
+  opacity: ${(props) => (props.loading ? 0.8 : 1)};
   transition: opacity 0.5s;
-  
+
   ${media.greaterThan('mobile')`
     width: auto;
     height: 100%;
   `}
-  
-   ${media.greaterThan('tablet')`
+
+  ${media.greaterThan('tablet')`
     
   `}
   
