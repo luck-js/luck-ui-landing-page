@@ -1,12 +1,12 @@
 import BlogLayout from '../../src/blog/BlogLayout';
 import BlogListView from '../../src/blog/BlogListView';
 import React from 'react';
-import { NextSeo } from 'next-seo/lib';
+import { NextSeo } from 'next-seo';
 import { useQuery } from '@apollo/react-hooks';
-import { Post, QueryHashtagsArgs, withApollo } from '../../src/utils';
-import {mapToViewPosts, POST_FRAGMENT} from '../blog';
+import { Post, QueryHashtagsArgs } from '../../src/utils';
+import { mapToViewPosts, POST_FRAGMENT } from '../blog';
 import gql from 'graphql-tag';
-import Error from "next/error"
+import Error from 'next/error';
 
 const POSTS_FILTERED_QUERY = gql`
   ${POST_FRAGMENT}
@@ -26,13 +26,18 @@ interface IndexPage<P = { hashtag: string; cmsUrl: string; shouldShowDraft: bool
 
 const Index: IndexPage = ({ hashtag, cmsUrl, shouldShowDraft }) => {
   const where = { name: hashtag };
-  const { loading, error, data = { hashtags: [{ posts: [] }] } } = useQuery<
-    { hashtags: { posts: Post[] }[] },
-    QueryHashtagsArgs
-  >(POSTS_FILTERED_QUERY, { variables: { where } });
+  const {
+    loading,
+    error,
+    data = { hashtags: [{ posts: [] }] },
+  } = useQuery<{ hashtags: { posts: Post[] }[] }, QueryHashtagsArgs>(POSTS_FILTERED_QUERY, {
+    variables: { where },
+  });
   if (error || data.hashtags.length === 0) return <Error statusCode={404} />;
   if (loading) return <div>Loading</div>;
-  const posts = shouldShowDraft ? data.hashtags[0].posts : data.hashtags[0].posts.filter(({ isDraft }) => !isDraft);
+  const posts = shouldShowDraft
+    ? data.hashtags[0].posts
+    : data.hashtags[0].posts.filter(({ isDraft }) => !isDraft);
   const viewPosts = mapToViewPosts(posts, cmsUrl);
   return (
     <>
@@ -47,7 +52,7 @@ const Index: IndexPage = ({ hashtag, cmsUrl, shouldShowDraft }) => {
   );
 };
 
-Index.getInitialProps = async function({ query }) {
+Index.getInitialProps = async function ({ query }) {
   return {
     hashtag: query.id,
     cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
@@ -55,7 +60,4 @@ Index.getInitialProps = async function({ query }) {
   };
 };
 
-export default withApollo(Index, {
-  // Disable apollo ssr fetching in favour of automatic static optimization
-  ssr: true,
-});
+export default Index;

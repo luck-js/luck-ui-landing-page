@@ -5,7 +5,7 @@ import { BaseButton } from '../../../../components';
 import { Theme } from '../../../../utils';
 import { Container, Text } from '../../shared';
 // @ts-ignore
-import Share from '../../../../../static/share.svg';
+import Share from '../../../../../public/static/share.svg';
 import { Participant } from '../../model';
 
 export const ShareButton = ({ children, contrast = false, ...props }: any) => {
@@ -25,9 +25,9 @@ ShareButton.Container = styled(Container).attrs({ as: BaseButton })`
   text-align: left;
   padding: 9px 40px 8px 10px;
   cursor: pointer;
-  background-color: ${props => (props.contrast ? Theme.colors.main : Theme.colors.mainContrast)};
-  color: ${props => (props.contrast ? Theme.colors.black : Theme.colors.main)};
-  box-shadow: ${props => (props.contrast ? 'inset 0px 2px 4px rgba(0, 0, 0, 0.15)' : '')};
+  background-color: ${(props) => (props.contrast ? Theme.colors.main : Theme.colors.mainContrast)};
+  color: ${(props) => (props.contrast ? Theme.colors.black : Theme.colors.main)};
+  box-shadow: ${(props) => (props.contrast ? 'inset 0px 2px 4px rgba(0, 0, 0, 0.15)' : '')};
   transition: background-color 0.5s, color 0.5s, box-shadow 0.5s;
 
   svg {
@@ -40,7 +40,7 @@ ShareButton.Container = styled(Container).attrs({ as: BaseButton })`
     height: 20px;
     display: block;
     path {
-      fill: ${props => (props.contrast ? Theme.colors.black : Theme.colors.main)};
+      fill: ${(props) => (props.contrast ? Theme.colors.black : Theme.colors.main)};
     }
   }
 `;

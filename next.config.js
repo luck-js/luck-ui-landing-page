@@ -1,9 +1,12 @@
-// next.config.js
-const withTypescript = require('@zeit/next-typescript')
-const path = require("path");
-const Dotenv = require("dotenv-webpack");
-module.exports = withTypescript({
-  distDir: "_next",
+/** @type {import('next').NextConfig} */
+
+const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
+module.exports = {
+  reactStrictMode: true,
+  swcMinify: true,
+  distDir: '_next',
   generateBuildId: async () => {
     if (process.env.BUILD_ID) {
       return process.env.BUILD_ID;
@@ -11,26 +14,36 @@ module.exports = withTypescript({
       return `${new Date().getTime()}`;
     }
   },
-  webpack: config => {
+  webpack: (config, { isServer }) => {
     // Fixes npm packages that depend on `fs` module
-    config.node = {
-      fs: "empty"
-    };
+    if (!isServer) config.resolve.fallback.fs = false;
 
-    const envFileName = process.env.NODE_ENV === "production" ? ".env" : ".env.develop";
+    const envFileName = process.env.NODE_ENV === 'production' ? '.env' : '.env.develop';
 
     config.plugins.push(
       new Dotenv({
         path: path.join(__dirname, envFileName),
-        systemvars: true
-      })
+        systemvars: true,
+      }),
     );
 
     config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      test: /\.svg$/i,
+      use: [{ loader: '@svgr/webpack', options: { icon: true } }],
     });
 
     return config;
-  }
-})
+  },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
+  },
+};

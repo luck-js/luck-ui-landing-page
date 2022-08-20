@@ -12,7 +12,8 @@ interface ButtonProps extends TextStyle {
 }
 
 const BUTTON_VARIANTS: ModifiersConfig = {
-  black: props => css`
+  // @ts-ignore
+  black: (props) => css`
     color: ${Theme.colors.black};
     text-decoration-color: ${props.underline && Theme.colors.black};
 
@@ -20,13 +21,14 @@ const BUTTON_VARIANTS: ModifiersConfig = {
       text-decoration-color: ${Theme.colors.black};
       opacity: ${props.underline && 0.8};
     }
-    
+
     :disabled {
       color: ${Theme.colors.black};
       text-decoration-color: ${props.underline && Theme.colors.black};
     }
   `,
-  contrast: props => css`
+  // @ts-ignore
+  contrast: (props) => css`
     color: ${Theme.colors.main};
     background-color: ${props.colorfull ? Theme.colors.mainContrast : 'transparent'};
     border-color: ${props.colorfull ? Theme.colors.main : 'transparent'};
@@ -46,10 +48,10 @@ export const Button = styled(BaseButton)<ButtonProps>`
   font-weight: 700;
   letter-spacing: 0;
   cursor: pointer;
-  background-color: ${props => (props.colorfull ? Theme.colors.main : 'transparent')};
+  background-color: ${(props) => (props.colorfull ? Theme.colors.main : 'transparent')};
 
-  color: ${props => (props.colorfull ? Theme.colors.mainContrast : Theme.colors.main)};
-  border: 2px solid ${props => (props.colorfull ? Theme.colors.mainContrast : 'transparent')};
+  color: ${(props) => (props.colorfull ? Theme.colors.mainContrast : Theme.colors.main)};
+  border: 2px solid ${(props) => (props.colorfull ? Theme.colors.mainContrast : 'transparent')};
 
   padding: 9px 20px 9px;
 
@@ -59,8 +61,8 @@ export const Button = styled(BaseButton)<ButtonProps>`
   text-decoration-color: transparent;
   transition: text-decoration-color 0.5s, background-color 0.5s, color 0.5s, opacity 0.5s,
     border-color 0.5s;
-    
-  box-shadow: ${props => (props.colorfull ? '0px 1px 4px rgba(0, 0, 0, 0.1)' : 'none')};
+
+  box-shadow: ${(props) => (props.colorfull ? '0px 1px 4px rgba(0, 0, 0, 0.1)' : 'none')};
 
   border-radius: 30px;
 
@@ -71,8 +73,8 @@ export const Button = styled(BaseButton)<ButtonProps>`
   :disabled {
     cursor: not-allowed;
     background-color: transparent;
-    color: ${props => (props.colorfull ? Theme.colors.mainContrast : Theme.colors.main)};
-    border: 2px solid ${props => (props.colorfull ? Theme.colors.mainContrast : 'transparent')};
+    color: ${(props) => (props.colorfull ? Theme.colors.mainContrast : Theme.colors.main)};
+    border: 2px solid ${(props) => (props.colorfull ? Theme.colors.mainContrast : 'transparent')};
     opacity: 0.8;
   }
 

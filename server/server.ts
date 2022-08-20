@@ -15,6 +15,9 @@ const fs = require('fs');
 const { DESTINATION, createSitemap } = require('./sitemap');
 const { getKeyByPathname } = require('./utils');
 
+console.log('dev: ', dev);
+console.log('port: ', port);
+
 const robots = `User-agent: *
 Allow: /
 Host: https://luck.org.pl

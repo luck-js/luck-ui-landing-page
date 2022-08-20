@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import {helper, Theme} from '../../utils';
-import {Box} from "../Box"
+import { helper, Theme } from '../../utils';
+import { Box } from '../Box';
 
 const ANIMATION_DURATION = 1.2;
 const CIRCLE_COUNT = 12;
@@ -10,8 +10,8 @@ const CIRCLES = helper(0, CIRCLE_COUNT);
 export const SpinnerFadingCircle = () => {
   return (
     <SpinnerFadingCircle.Container>
-      {CIRCLES.map(index => (
-        <SpinnerFadingCircle.Circle className={`circle-${index}`} />
+      {CIRCLES.map((index, key) => (
+        <SpinnerFadingCircle.Circle key={key} className={`circle-${index}`} />
       ))}
     </SpinnerFadingCircle.Container>
   );
@@ -41,7 +41,7 @@ SpinnerFadingCircle.Container = styled(Box)`
   height: 100%;
   position: relative;
   ${createCSS()};
-`
+`;
 SpinnerFadingCircle.Circle = styled('div')`
   width: 100%;
   height: 100%;

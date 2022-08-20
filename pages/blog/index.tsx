@@ -1,11 +1,11 @@
 import React from 'react';
-import {NextSeo} from 'next-seo';
-import {useQuery} from '@apollo/react-hooks';
+import { NextSeo } from 'next-seo';
+import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import BlogLayout from '../../src/blog/BlogLayout';
-import {Post, UploadFile, withApollo} from '../../src/utils';
-import BlogListView from "../../src/blog/BlogListView"
-import Error from "next/error"
+import { Post, UploadFile } from '../../src/utils';
+import BlogListView from '../../src/blog/BlogListView';
+import Error from 'next/error';
 
 interface StatelessPage<P = { cmsUrl: string; shouldShowDraft: boolean }>
   extends React.FunctionComponent<P> {
@@ -63,7 +63,7 @@ const isSomeCoverUndefined = ({
   wideCover,
   wideCoverPlaceholder,
 }: Post): boolean => {
-  return ![cover, coverPlaceholder, wideCover, wideCoverPlaceholder].some(c => !c);
+  return ![cover, coverPlaceholder, wideCover, wideCoverPlaceholder].some((c) => !c);
 };
 
 const mapCoverUrls = (
@@ -78,19 +78,14 @@ const mapCoverUrls = (
   return { cover, coverPlaceholder, wideCover, wideCoverPlaceholder, ...post };
 };
 
-export const mapToViewPosts = (
-  posts: Post[],
-  cmsUrl: string,
-): ViewPost[] => {
-  return posts
-    .filter(isSomeCoverUndefined)
-    .map(post => mapCoverUrls(post as ViewPost, cmsUrl));
+export const mapToViewPosts = (posts: Post[], cmsUrl: string): ViewPost[] => {
+  return posts.filter(isSomeCoverUndefined).map((post) => mapCoverUrls(post as ViewPost, cmsUrl));
 };
 
 const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   const { loading, error, data = { posts: [] } } = useQuery<{ posts: Post[] }>(ALL_POSTS_QUERY);
 
-  const posts = shouldShowDraft ? data.posts : data.posts.filter(({ isDraft }) => !isDraft)
+  const posts = shouldShowDraft ? data.posts : data.posts.filter(({ isDraft }) => !isDraft);
   const viewPosts = mapToViewPosts(posts, cmsUrl);
 
   if (error) return <Error statusCode={404} />;
@@ -103,20 +98,17 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
         description="Wszystkie Artykłu związane z aplikacją na mikołajki Luck. Przeczytasz tu nasze aktualności w roku 2019, podsumowanie i plany dotyczące aplikacji, ciekawostki dotyczące Mikołajek oraz między innymi instrukcję, jak z organizować mikołajki klasowe dzięki aplikacji Lcuk"
       />
       <BlogLayout>
-        <BlogListView posts={viewPosts}/>
+        <BlogListView posts={viewPosts} />
       </BlogLayout>
     </>
   );
 };
 
-Index.getInitialProps = async function() {
+Index.getInitialProps = async function () {
   return {
     cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
     shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
   };
 };
 
-export default withApollo(Index, {
-  // Disable apollo ssr fetching in favour of automatic static optimization
-  ssr: true,
-});
+export default Index;

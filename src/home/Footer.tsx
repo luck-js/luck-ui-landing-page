@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 // @ts-ignore
-import Behance from '../../static/behance-icon.svg';
+import Behance from '../../public/static/behance-icon.svg';
 // @ts-ignore
-import Email from '../../static/email-icon.svg';
+import Email from '../../public/static/email-icon.svg';
 // @ts-ignore
-import Fb from '../../static/fb-icon.svg';
+import Fb from '../../public/static/fb-icon.svg';
 // @ts-ignore
-import Gh from '../../static/gh-icon.svg';
+import Gh from '../../public/static/gh-icon.svg';
 import { Box, SmallText, TextLink } from '../components';
 import { Theme } from '../utils';
 import media from '../utils/media';
@@ -16,13 +16,13 @@ const Container = styled(Box)`
   text-align: center;
   color: ${Theme.colors.black};
   background-color: ${Theme.colors.main};
-  
+
   padding: ${Theme.space.small}px ${Theme.space.xregular}px;
-  
+
   ${media.greaterThan('mobile')`
     
   `}
-  
+
   ${media.greaterThan('tablet')`
     padding: ${Theme.space.regular}px ${Theme.space.xregular}px;
   `}
@@ -38,7 +38,7 @@ const SocialContainer = styled(Box)`
   ${TextLink}:not(:first-of-type) {
     padding-left: ${Theme.space.small}px;
   }
-  
+
   ${media.greaterThan('mobile')`
     padding-bottom: ${Theme.space.large}px;
   

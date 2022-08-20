@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Flex, TextLink } from '../../components';
 import { Theme } from '../../utils';
 // @ts-ignore
-import WideArrow from '../../../static/wide-arrow.svg';
+import WideArrow from '../../../public/static/wide-arrow.svg';
 
 type directionType = 'left' | 'right';
 
@@ -20,7 +20,12 @@ interface TextLinkArrowComponent extends React.FunctionComponent<TextLinkArrowPr
 
 const TextLinkArrow: TextLinkArrowComponent = ({ href, children, ariaLabel, direction }) => (
   <Link href={href}>
-    <TextLinkArrow.TextLink href={href} direction={direction} modifiers={['black']} aria-label={ariaLabel}>
+    <TextLinkArrow.TextLink
+      href={href}
+      direction={direction}
+      modifiers={['black']}
+      aria-label={ariaLabel}
+    >
       {children}
       <WideArrow />
     </TextLinkArrow.TextLink>
@@ -28,19 +33,19 @@ const TextLinkArrow: TextLinkArrowComponent = ({ href, children, ariaLabel, dire
 );
 TextLinkArrow.TextLink = styled(TextLink)<{ direction: directionType }>`
   position: relative;
-  padding-left: ${props => (props.direction === 'left' ? Theme.space.regular : 0)}px;
-  padding-right: ${props => (props.direction === 'right' ? Theme.space.regular : 0)}px;
+  padding-left: ${(props) => (props.direction === 'left' ? Theme.space.regular : 0)}px;
+  padding-right: ${(props) => (props.direction === 'right' ? Theme.space.regular : 0)}px;
 
   svg {
     position: absolute;
-    left: ${props => (props.direction === 'left' ? 0 : 'initial')};
-    right: ${props => (props.direction === 'right' ? 0 : 'initial')};
+    left: ${(props) => (props.direction === 'left' ? 0 : 'initial')};
+    right: ${(props) => (props.direction === 'right' ? 0 : 'initial')};
     top: 50%;
     margin-top: -5px;
     width: 13px;
     height: auto;
-    transform: ${props => (props.direction === 'left' ? 'rotate(180deg)' : 'rotate(0deg)')};
-    
+    transform: ${(props) => (props.direction === 'left' ? 'rotate(180deg)' : 'rotate(0deg)')};
+
     path {
       stroke: ${Theme.colors.black};
     }
@@ -54,7 +59,7 @@ export interface PaginationSlugs {
 
 interface PaginationProps extends PaginationSlugs {
   mb: string[];
-};
+}
 
 interface PaginationComponent extends React.FunctionComponent<PaginationProps> {
   Container: any;
@@ -64,14 +69,22 @@ const Pagination: PaginationComponent = ({ previous, next, ...props }) => {
   return (
     <Pagination.Container {...props}>
       {previous ? (
-        <TextLinkArrow direction="left" href={`/blog/${previous}`} ariaLabel={`przejdź do poprzedniego postu`}>
+        <TextLinkArrow
+          direction="left"
+          href={`/blog/${previous}`}
+          ariaLabel={`przejdź do poprzedniego postu`}
+        >
           Poprzedni
         </TextLinkArrow>
       ) : (
         <div />
       )}
       {next ? (
-        <TextLinkArrow direction="right" href={`/blog/${next}`} ariaLabel={`przejdź do następnego postu`}>
+        <TextLinkArrow
+          direction="right"
+          href={`/blog/${next}`}
+          ariaLabel={`przejdź do następnego postu`}
+        >
           Następny
         </TextLinkArrow>
       ) : (

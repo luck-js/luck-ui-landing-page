@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 // @ts-ignore
-import Stepper from '../../../static/how-to-stepper.svg';
+import Stepper from '../../../public/static/how-to-stepper.svg';
 import { Box, Canon, Flex, LazyImage, MediumText } from '../../components';
 import { Theme } from '../../utils';
 import media from '../../utils/media';
@@ -17,7 +17,7 @@ interface StepProps {
 const StepContainer = styled(Flex)<{ last: any }>`
   position: relative;
   border-left: 3px solid ${Theme.colors.gray3};
-  border-color: ${props => (props.last ? 'transparent' : Theme.colors.gray3)};
+  border-color: ${(props) => (props.last ? 'transparent' : Theme.colors.gray3)};
 
   flex-direction: column;
   padding-bottom: ${Theme.space.xxlarge}px;
@@ -52,9 +52,9 @@ const Image = styled('img')<{ loading: any }>`
   max-width: 340px;
   margin-top: ${Theme.space.medium}px;
   align-self: flex-start;
-  filter: ${props => (props.loading ? 'blur(10px)' : 'blur(0)')};
-  opacity: ${props => (props.loading ? 0.8 : 1)};
-  
+  filter: ${(props) => (props.loading ? 'blur(10px)' : 'blur(0)')};
+  opacity: ${(props) => (props.loading ? 0.8 : 1)};
+
   ${media.greaterThan('tablet')`
     margin-top: -105px;
   `};
@@ -77,8 +77,10 @@ const Step = ({ header, descriptions, src, placeholderSrc, last = false }: StepP
   <StepContainer last={last}>
     <Content>
       <Header mb={['small', 'small', 'regular']}>{header}</Header>
-      {descriptions.map(description => (
-        <Text mb={['xsmall', 'xsmall', 'medium']}>{description}</Text>
+      {descriptions.map((description, key) => (
+        <Text key={key} mb={['xsmall', 'xsmall', 'medium']}>
+          {description}
+        </Text>
       ))}
     </Content>
     <StepImage src={src} placeholderSrc={placeholderSrc} />
