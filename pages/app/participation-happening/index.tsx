@@ -6,6 +6,7 @@ import ParticipationHappeningView, {
 import { apiAxios } from '../../../src/app/api.axios';
 import { WelcomeMemberSectionData } from '../../../src/app/ParticipationHappening/WelcomeMemberSection';
 import { MatchedMemberSectionData } from '../../../src/app/ParticipationHappening/MatchedMemberSection';
+import { GetServerSideProps } from 'next';
 
 interface ParticipationHappeningProps {
   data: ParticipationHappeningViewData;
@@ -13,11 +14,9 @@ interface ParticipationHappeningProps {
 }
 
 interface ParticipationHappeningPage<P = ParticipationHappeningProps>
-  extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<{ data: ParticipationHappeningViewData }>;
-}
+  extends React.FunctionComponent<P> {}
 
-const ParticipationHappening: ParticipationHappeningPage = ({ data, analytics }) => {
+const Index: ParticipationHappeningPage = ({ data, analytics }) => {
   return (
     <AppLayout contrast>
       <ParticipationHappeningView data={data} analytics={analytics} />
@@ -25,17 +24,18 @@ const ParticipationHappening: ParticipationHappeningPage = ({ data, analytics })
   );
 };
 
-ParticipationHappening.getInitialProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { data: welcomeMember } = await apiAxios.get<WelcomeMemberSectionData>(
     `/api/v1/participation-happening/${query.id}`,
   );
   const { data: matchedMember } = await apiAxios.get<MatchedMemberSectionData>(
     `/api/v1/participation-happening/matched-member/${query.id}`,
   );
-
+  const data = { welcomeMember, matchedMember };
   return {
-    data: { welcomeMember, matchedMember },
+    props: {
+      data,
+    },
   };
 };
-
-export default ParticipationHappening;
+export default Index;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { gql, useQuery } from '@apollo/client';
 import styled, { css } from 'styled-components';
 import { NextSeo } from 'next-seo';
 import { mapToViewPosts, POST_FRAGMENT, ViewPost } from './index';
@@ -12,6 +11,7 @@ import Pagination, { PaginationSlugs } from '../../src/blog/Pagination';
 import { SubHeader, Text, BlogTextLink, List, ListOl, Header } from '../../src/blog/Typography';
 import Suggestions from '../../src/blog/Suggestions';
 import Error from 'next/error';
+import { GetServerSideProps } from 'next';
 
 const cssTextMinusMargin = css`
   margin-top: -${Theme.space.small}px;
@@ -229,9 +229,7 @@ const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
 };
 
 interface IndexPage<P = { host: string; slug: string; cmsUrl: string; shouldShowDraft: boolean }>
-  extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<P>;
-}
+  extends React.FunctionComponent<P> {}
 
 const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const where = { slug };
@@ -267,12 +265,14 @@ const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   );
 };
 
-Index.getInitialProps = async function ({ query }) {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
-    host: process.env.VIRTUAL_HOST ? process.env.VIRTUAL_HOST : '',
-    slug: query.id,
-    cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
-    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
+    props: {
+      host: process.env.VIRTUAL_HOST ? process.env.VIRTUAL_HOST : '',
+      slug: query.id,
+      cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+      shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
+    },
   };
 };
 

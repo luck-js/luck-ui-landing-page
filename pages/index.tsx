@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { gql, useQuery } from '@apollo/client';
 import React from 'react';
 import BlogPostSection from '../src/home/BlogPostSection';
 import DescriptionSection from '../src/home/DescriptionSection';
@@ -46,10 +45,12 @@ const Index = ({ cmsUrl }: { cmsUrl: string }) => {
   );
 };
 
-Index.getInitialProps = async function () {
+export async function getStaticProps() {
   return {
-    cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+    props: {
+      cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+    },
   };
-};
+}
 
 export default Index;

@@ -1,16 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { gql, useQuery } from '@apollo/client';
 import BlogLayout from '../../src/blog/BlogLayout';
 import { Post, UploadFile } from '../../src/utils';
 import BlogListView from '../../src/blog/BlogListView';
 import Error from 'next/error';
 
 interface StatelessPage<P = { cmsUrl: string; shouldShowDraft: boolean }>
-  extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<P>;
-}
+  extends React.FunctionComponent<P> {}
 
 export const POST_FRAGMENT = gql`
   fragment Post on Post {
@@ -104,11 +101,13 @@ const Index: StatelessPage = ({ cmsUrl, shouldShowDraft }) => {
   );
 };
 
-Index.getInitialProps = async function () {
+export async function getStaticProps() {
   return {
-    cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
-    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
+    props: {
+      cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+      shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
+    },
   };
-};
+}
 
 export default Index;

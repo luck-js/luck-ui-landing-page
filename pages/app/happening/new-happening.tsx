@@ -1,15 +1,16 @@
 import React from 'react';
-import NewHappeningView, {NewHappeningViewData} from "../../../src/app/Happening/NewHappeningView"
-import AppLayout from "../../../src/app/AppLayout"
+import NewHappeningView, {
+  NewHappeningViewData,
+} from '../../../src/app/Happening/NewHappeningView';
+import AppLayout from '../../../src/app/AppLayout';
+import { GetServerSideProps } from 'next';
 
 interface NewHappeningProps {
   data: NewHappeningViewData;
   analytics: any;
 }
 
-interface NewHappeningPage<P = NewHappeningProps> extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<{data: NewHappeningViewData}>;
-}
+interface NewHappeningPage<P = NewHappeningProps> extends React.FunctionComponent<P> {}
 
 const NewHappening: NewHappeningPage = ({data, analytics}) => {
 
@@ -20,13 +21,14 @@ const NewHappening: NewHappeningPage = ({data, analytics}) => {
   );
 };
 
-NewHappening.getInitialProps = async ({query}) => {
-
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
-    data: {
-      name: query.name ? query.name  : '',
-    }
-  }
+    props: {
+      data: {
+        name: query.name ? query.name : '',
+      },
+    },
+  };
 };
 
 export default NewHappening;

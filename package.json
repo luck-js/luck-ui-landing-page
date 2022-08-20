@@ -5,7 +5,7 @@
   "scripts": {
     "develop": "nodemon --exec ts-node server/server.ts",
     "build": "next build",
-    "start": "NODE_ENV=production nodemon --exec ts-node server/server.ts",
+    "start": "next start -p 3000",
     "codegen": "graphql-codegen --config codegen.yml",
     "lint": "next lint",
     "prepare": "husky install"
@@ -15,9 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@apollo/react-hooks": "^4.0.0",
     "@rehooks/component-size": "^1.0.3",
-    "@zeit/next-typescript": "^1.1.1",
     "axios": "^0.27.2",
     "deepmerge": "^4.2.2",
     "dotenv": "^16.0.1",

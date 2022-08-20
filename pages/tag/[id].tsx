@@ -2,11 +2,11 @@ import BlogLayout from '../../src/blog/BlogLayout';
 import BlogListView from '../../src/blog/BlogListView';
 import React from 'react';
 import { NextSeo } from 'next-seo';
-import { useQuery } from '@apollo/react-hooks';
+import { gql, useQuery } from '@apollo/client';
 import { Post, QueryHashtagsArgs } from '../../src/utils';
 import { mapToViewPosts, POST_FRAGMENT } from '../blog';
-import gql from 'graphql-tag';
 import Error from 'next/error';
+import { GetServerSideProps } from 'next';
 
 const POSTS_FILTERED_QUERY = gql`
   ${POST_FRAGMENT}
@@ -20,9 +20,7 @@ const POSTS_FILTERED_QUERY = gql`
 `;
 
 interface IndexPage<P = { hashtag: string; cmsUrl: string; shouldShowDraft: boolean }>
-  extends React.FunctionComponent<P> {
-  getInitialProps?: (ctx: any) => Promise<P>;
-}
+  extends React.FunctionComponent<P> {}
 
 const Index: IndexPage = ({ hashtag, cmsUrl, shouldShowDraft }) => {
   const where = { name: hashtag };
@@ -52,11 +50,13 @@ const Index: IndexPage = ({ hashtag, cmsUrl, shouldShowDraft }) => {
   );
 };
 
-Index.getInitialProps = async function ({ query }) {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
-    hashtag: query.id,
-    cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
-    shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
+    props: {
+      hashtag: query.id,
+      cmsUrl: process.env.CLIENT_URL ? process.env.CLIENT_URL : '',
+      shouldShowDraft: process.env.SHOULD_SHOW_DRAFT === 'true',
+    },
   };
 };
 

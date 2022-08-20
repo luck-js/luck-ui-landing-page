@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import TextareaAutosize from 'react-autosize-textarea';
 import useComponentSize from '@rehooks/component-size';
 import { Theme, usePrevious } from '../../../../utils';
-
 import { InputWithButton } from '../InputWithButton';
 import { NewParticipant } from '../../model';
 import { Box, ButtonWithIcon, CanonApp, Input, NAVIGATION_HEIGHT } from '../../../../components';
@@ -95,7 +94,7 @@ const Index: FormHappeningSectionPage = () => {
 
   useEffect(() => {
     const breakpointIndex = Theme.breakpoints.findIndex(
-      breakpoint => window.innerWidth < parseInt(breakpoint),
+      (breakpoint) => window.innerWidth < parseInt(breakpoint),
     );
 
     const textareaRowsNumber = TEXTAREA_ROWS_NUMBERS[breakpointIndex]

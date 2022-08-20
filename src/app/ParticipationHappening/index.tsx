@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Box, Flex, NAVIGATION_SHADOW } from '../../components';
 import { Theme } from '../../utils';
 import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
+import { event } from 'nextjs-google-analytics';
 
 export interface ParticipationHappeningViewData {
   welcomeMember: WelcomeMemberSectionData;

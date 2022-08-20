@@ -3,7 +3,7 @@ import ShareViewMobile from './ShareViewMobile';
 import ShareViewDesktop from './ShareViewDesktop';
 import { PublishedHappening } from '../model';
 import { useQuestionnaire } from './shared/Questionnaire/Questionnaire';
-import {usePopup} from "../../../components/Popup"
+import { usePopup } from '../../../components/Popup';
 
 export interface ShareViewData {
   happening: PublishedHappening;
@@ -17,16 +17,16 @@ export interface ShareViewProps {
 
 const Index: React.FunctionComponent<{ data: ShareViewData }> = ({ ...props }) => {
   const { setShouldBeOpen } = useQuestionnaire();
-  const {showPopup} = usePopup()
+  const { showPopup } = usePopup();
   const [happening, setHappening] = useState<PublishedHappening>(props.data.happening);
 
   const handleOnCopy = (uniqueLink: string) => {
-    showPopup("Skopiowano !")
-    setHappening(prevHappening => {
+    void showPopup('Skopiowano !');
+    setHappening((prevHappening) => {
       const participants = prevHappening.participants.map((participant) => {
         if (participant.uniqueLink === uniqueLink) {
           return { ...participant, isCopied: true };
-        } else{
+        } else {
           return participant;
         }
       });
@@ -39,7 +39,7 @@ const Index: React.FunctionComponent<{ data: ShareViewData }> = ({ ...props }) =
 
   useEffect(() => {
     if (
-      !happening.participants.some(participant => !participant.isCopied) &&
+      !happening.participants.some((participant) => !participant.isCopied) &&
       !isQuestionnaireShowed
     ) {
       setShouldBeOpen(true);

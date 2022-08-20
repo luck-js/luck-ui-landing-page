@@ -50,7 +50,7 @@ export function useNewHappeningFlow(): {
   const { state, dispatch } = context;
 
   const editNewHappening = useCallback(
-    happening => {
+    (happening) => {
       dispatch({ type: 'EDIT_HAPPENING ', payload: happening });
       localStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(happening));
     },
@@ -63,9 +63,11 @@ export function useNewHappeningFlow(): {
 
   const publishHappening = useCallback(async () => {
     dispatch({ type: 'PUBLISH_HAPPENING ' });
-    const { data } = await apiAxios.post('/api/v1/published-happening', { happening:state.happening });
+    const { data } = await apiAxios.post('/api/v1/published-happening', {
+      happening: state.happening,
+    });
     Router.push({
-      pathname: '/app/udostepnij-linki',
+      pathname: '/app/happening/share',
       query: { id: data.id },
     });
   }, [dispatch]);
