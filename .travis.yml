@@ -62,7 +62,7 @@ jobs:
 
 
   - <<: *deploy
-    if: branch = master OR tag =~ ^v.*$
+    if: branch = master
     env:
       - IMAGE_NAME=$PROD_IMAGE_NAME
       - CONTAINER_NAME=$PROD_CONTAINER_NAME
@@ -73,5 +73,4 @@ jobs:
         script: bash .travis/deploy.sh $HOST_IP $DOCKER_PASSWORD $DOCKER_USERNAME $IMAGE_NAME $CONTAINER_NAME
         on:
           branch: master
-          tags: true
 
