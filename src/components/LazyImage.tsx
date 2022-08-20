@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useVisibilitySensor from '@rooks/use-visibility-sensor';
+import React, { useEffect, useState } from 'react';
+import { useInViewRef } from "rooks";
 
 export const LazyImage: React.FunctionComponent<any> = ({
   children,
@@ -8,12 +8,7 @@ export const LazyImage: React.FunctionComponent<any> = ({
   onImageError,
   useSensor = true
 }) => {
-  const rootNode = useRef(null);
-  const { isVisible } = useVisibilitySensor(rootNode, {
-    intervalCheck: false,
-    scrollCheck: useSensor,
-    resizeCheck: useSensor,
-  });
+  const [ref, isVisible] = useInViewRef();
 
   if (!children || typeof children !== 'function') {
     throw new Error(`LazyImage requires a function as its only child`);
@@ -58,7 +53,7 @@ export const LazyImage: React.FunctionComponent<any> = ({
   }, [isVisible, useSensor]);
 
   return (
-    <div ref={rootNode} style={{ minWidth: "1px", minHeight:"1px" }}>
+    <div ref={ref} style={{ minWidth: "1px", minHeight:"1px" }}>
       {children(imageSrc, loading, isVisible)}
     </div>
   );
