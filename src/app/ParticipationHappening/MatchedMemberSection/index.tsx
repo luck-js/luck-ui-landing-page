@@ -62,7 +62,7 @@ const Index = ({ data: { me, matchedMember } }: MatchedMemberSectionProps) => {
       </Index.AppContainer>
       <Index.BannerImageContainer>
         <a href="https://palisienaturalnie.pl/pl/c/Swiece/16" target="_blank">
-          <BannerImage src={'/static/banner.png'} placeholderSrc={'/static/banner.png'} />
+          <BannerImage src={'/static/banner.png'} placeholderSrc={'/static/compr-banner.jpg'} />
         </a>
       </Index.BannerImageContainer>
     </Index.Container>
