@@ -4,7 +4,7 @@ import WelcomeMemberSection, { WelcomeMemberSectionData } from './WelcomeMemberS
 import MatchedMemberSection from './MatchedMemberSection';
 import { MatchedMemberSectionData } from './MatchedMemberSection';
 import styled from 'styled-components';
-import { Flex, NAVIGATION_SHADOW } from '../../components';
+import { Box, Flex, NAVIGATION_SHADOW } from '../../components';
 import { Theme } from '../../utils';
 import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
 
@@ -29,15 +29,21 @@ const Index = ({ data }: ParticipationHappeningViewProps) => {
     <Index.Container>
       <Background />
       {!shouldShowMatchedMember && (
-        <WelcomeMemberSection data={data.welcomeMember} onClick={handleOnClick} />
+        <Index.WelcomeMemberSectionContainer>
+          <WelcomeMemberSection data={data.welcomeMember} onClick={handleOnClick} />
+        </Index.WelcomeMemberSectionContainer>
       )}
-      {shouldShowMatchedMember && <MatchedMemberSection data={data.matchedMember} />}
+      {shouldShowMatchedMember && (
+        <Index.MatchedMemberSectionContainer>
+          <MatchedMemberSection data={data.matchedMember} />
+        </Index.MatchedMemberSectionContainer>
+      )}
       <BackgroundFooterBubbles />
     </Index.Container>
   );
 };
 
-Index.Container = styled(Flex)`
+Index.Container = styled(Box)`
   position: relative;
   padding: ${Theme.space.xregular - NAVIGATION_SHADOW}px ${Theme.space.small}px 200px
     ${Theme.space.small}px;
@@ -45,9 +51,20 @@ Index.Container = styled(Flex)`
   text-align: center;
   background-color: ${Theme.colors.mainContrast};
   min-height: 100%;
+  display: grid;
+  //flex-direction: column;
+  //justify-content: center;
+`;
 
+
+Index.WelcomeMemberSectionContainer = styled(Flex)`
   justify-content: center;
   flex-direction: column;
+  min-height: 100%;
+`;
+
+Index.MatchedMemberSectionContainer = styled(Box)`
+  display: grid;
 `;
 
 export default Index;
