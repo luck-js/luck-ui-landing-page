@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Theme } from '../../../../utils';
 import ParticipantElementList from './ParticipantElementList';
 import { ButtonContainer, ContentContainer, SectionBackground } from '../SectionLayout';
+import ErrorModal from '../ErrorModal';
 
 interface PreviewHappeningSectionData {}
 
@@ -22,11 +23,18 @@ interface PreviewHappeningSectionPage<P = PreviewHappeningSectionProps>
 }
 
 const Index: PreviewHappeningSectionPage = () => {
-  const { state, backToEdit, publishHappening } = useNewHappeningFlow();
+  const { state, backToEdit, publishHappening, readPublishHappeningError } = useNewHappeningFlow();
 
   const handleOnClickBack = () => backToEdit();
 
   const handleOnClickPublishHappening = () => !state.isLoading && publishHappening();
+
+  const handleErrorModalClose = () => {
+    readPublishHappeningError()
+  }
+  const handleErrorModalMainButtonClick = () => {
+    publishHappening()
+  }
 
   return (
     <Index.Container>
@@ -67,6 +75,7 @@ const Index: PreviewHappeningSectionPage = () => {
           Wróć do edycji wydarzenia
         </Index.Button>
       </Index.ButtonContainer>
+      <ErrorModal shouldBeOpen={state.error != null} onClose={handleErrorModalClose} onMainButtonClick={handleErrorModalMainButtonClick} />
     </Index.Container>
   );
 };
