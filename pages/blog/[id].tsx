@@ -151,7 +151,7 @@ const PostContent: React.FunctionComponent<{
       />
       <ContentContainer>
         <Header mb={['small', 'small', 'medium', 'medium']}>{title}</Header>
-        {processor.processSync(content).contents}
+        {processor.processSync(content).result}
         <HashtagsText mb={['regular', 'regular', 'large', 'large']}>
           {(hashtags as Hashtag[]).map(({ name }, index) => (
             <BlogTextLink
