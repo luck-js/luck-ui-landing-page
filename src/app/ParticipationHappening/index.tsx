@@ -35,6 +35,20 @@ const bannerItems = [
       placeholderSrc: "/static/palisienaturalnie-compr-desktop-banner.jpg",
       type: BannerType.Palisienaturalnie
     }
+  },
+  {
+    mobile: {
+      href: "https://nexstand.pl/",
+      src: '/static/podstawka-mobile-banner.png',
+      placeholderSrc: "/static/podstawka-compr-mobile-banner.jpg",
+      type: BannerType.Podstawka,
+    },
+    desktop: {
+      href: "https://nexstand.pl/",
+      src: '/static/podstawka-desktop-banner.png',
+      placeholderSrc: "/static/podstawka-compr-desktop-banner.jpg",
+      type: BannerType.Podstawka
+    }
   }
 ]
 

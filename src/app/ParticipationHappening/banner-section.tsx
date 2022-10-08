@@ -13,7 +13,7 @@ interface BannerSectionProps {
 }
 
 const BannerSection = ({ bannerItems, onBannerClick }: BannerSectionProps) => {
-  const bannerItem = bannerItems[0];
+  const bannerItem = bannerItems[1];
 
   return (
     <>
