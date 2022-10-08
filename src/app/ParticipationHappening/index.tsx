@@ -4,10 +4,11 @@ import WelcomeMemberSection, { WelcomeMemberSectionData } from './WelcomeMemberS
 import MatchedMemberSection from './MatchedMemberSection';
 import { MatchedMemberSectionData } from './MatchedMemberSection';
 import styled from 'styled-components';
-import { Box, Flex, LazyImage, NAVIGATION_SHADOW } from '../../components';
+import { Box, Flex, NAVIGATION_SHADOW } from '../../components';
 import { Theme } from '../../utils';
 import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
-import media from '../../utils/media';
+import BannerSection from './banner-section';
+import { BannerType } from './banner-item';
 
 export interface ParticipationHappeningViewData {
   welcomeMember: WelcomeMemberSectionData;
@@ -19,38 +20,24 @@ interface ParticipationHappeningViewProps {
   analytics: any;
 }
 
-const Image = styled('img')<{ loading: any }>`
-  width: 100%;
-  height: auto;
-  filter: ${(props) => (props.loading ? 'blur(10px)' : 'blur(0)')};
-  opacity: ${(props) => (props.loading ? 0.8 : 0.95)};
-  cursor: pointer;
-  transition: opacity 0.5s, all 0.2s ease-in-out;
 
-  &:hover {
-    transform: scale(1.05);
-    opacity: 1;
+const bannerItems = [
+  {
+    mobile: {
+      href: "https://palisienaturalnie.pl/pl/c/Swiece/16",
+      src: '/static/palisienaturalnie-mobile-banner.png',
+      placeholderSrc: "/static/palisienaturalnie-compr-mobile-banner.jpg",
+      type: BannerType.Palisienaturalnie,
+    },
+    desktop: {
+      href: "https://palisienaturalnie.pl/pl/c/Swiece/16",
+      src: '/static/palisienaturalnie-desktop-banner.png',
+      placeholderSrc: "/static/palisienaturalnie-compr-desktop-banner.jpg",
+      type: BannerType.Palisienaturalnie
+    }
   }
-  ${media.greaterThan('mobile')`
-    width: 100%;
-    max-width: 450px;
-    height: auto;
-  `}
+]
 
-  ${media.greaterThan('tablet')`
-    
-  `}
-  
-  ${media.greaterThan('desktop')`
-  
-  `}
-`;
-
-const BannerImage = (props: { src: string; placeholderSrc: string }) => (
-  <LazyImage useSensor={false} {...props}>
-    {(src: any, loading: boolean) => <Image src={src} alt={loading.toString()} loading={loading} />}
-  </LazyImage>
-);
 
 const Index = ({ data, analytics }: ParticipationHappeningViewProps) => {
   const [shouldShowMatchedMember, SetShouldShowMatchedMember] = useState(false);
@@ -59,8 +46,8 @@ const Index = ({ data, analytics }: ParticipationHappeningViewProps) => {
     SetShouldShowMatchedMember(true);
   };
 
-  const handleBannerClick = () => {
-    analytics.event('Banner Click', 'palisienaturalnie');
+  const handleBannerClick = (type: BannerType) => {
+    analytics.event('Banner Click', type);
   };
 
   return (
@@ -71,13 +58,7 @@ const Index = ({ data, analytics }: ParticipationHappeningViewProps) => {
       )}
       {shouldShowMatchedMember && <MatchedMemberSection data={data.matchedMember} />}
       <Index.BannerImageContainer>
-        <a
-          href="https://palisienaturalnie.pl/pl/c/Swiece/16"
-          target="_blank"
-          onClick={handleBannerClick}
-        >
-          <BannerImage src={'/static/banner.png'} placeholderSrc={'/static/compr-banner.jpg'} />
-        </a>
+        <BannerSection onBannerClick={handleBannerClick} bannerItems={bannerItems} />
       </Index.BannerImageContainer>
       <BackgroundFooterBubbles />
     </Index.Container>
