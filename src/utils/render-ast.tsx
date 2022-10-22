@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 // @ts-ignore
 import { unified } from 'unified';
 import remarkParse from 'remark-parse';
@@ -26,8 +26,7 @@ export const getProcessor = (components: any) => {
     unified()
       .use(remarkParse)
       .use(remarkSlug)
-      // @ts-ignore
-      .use(remarkRehype, { allowDangerousHTML: true })
+      .use(remarkRehype, { allowDangerousHtml: true })
       .use(rehypeRaw)
       .use(rehypeReact, { createElement })
   );
