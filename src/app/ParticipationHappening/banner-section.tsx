@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BannerItem, { Banner, BannerType } from './banner-item';
 import { Box } from '../../components';
 
@@ -32,9 +32,11 @@ const getBannerItem = (bannerItems: BannerItemProps[]): BannerItemProps => {
       filteredFactorKeys.reduce((prev, filteredFactorKey) => {
         return prev + bannerItemFactors[filteredFactorKey];
       }, 0) / filteredFactorKeys.length;
-    return r - Math.random()
+    return r - Math.random();
   });
-  return bannerItems.find((item) => item.desktop.type === bannerItemFactorsSorted[0]) ?? bannerItems[0];
+  return (
+    bannerItems.find((item) => item.desktop.type === bannerItemFactorsSorted[0]) ?? bannerItems[0]
+  );
 };
 
 interface BannerItemProps {
@@ -48,17 +50,20 @@ interface BannerSectionProps {
 }
 
 const BannerSection = ({ bannerItems, onBannerClick }: BannerSectionProps) => {
-  const bannerItem = getBannerItem(bannerItems);
+  const [bannerItem, setBannerItem] = useState<BannerItemProps>(bannerItems[0]);
+  useEffect(() => {
+    setBannerItem(getBannerItem(bannerItems));
+  }, []);
 
   return (
-    <>
+    <div key={bannerItem.mobile.src}>
       <Box display={['block', 'none']}>
         <BannerItem onBannerClick={onBannerClick} {...bannerItem.mobile} />
       </Box>
       <Box display={['none', 'block']}>
         <BannerItem onBannerClick={onBannerClick} {...bannerItem.desktop} />
       </Box>
-    </>
+    </div>
   );
 };
 
