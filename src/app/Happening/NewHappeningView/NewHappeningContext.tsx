@@ -2,8 +2,8 @@ import * as React from 'react';
 import { createContext, Reducer, useCallback, useEffect, useReducer, useState } from 'react';
 import { INIT_NEW_HAPPENING, NewHappening } from '../model';
 import ConfirmModal from './ConfirmModal';
-import { apiAxios } from '../../api.axios';
 import Router from 'next/router';
+import { createNewPublishedHappening } from './create-new-published-happening';
 
 interface NewHappeningForm {
   happening: NewHappening;
@@ -74,13 +74,11 @@ export function useNewHappeningFlow(): {
   const publishHappening = useCallback(async () => {
     dispatch({ type: 'PUBLISH_HAPPENING' });
     try {
-      const { data } = await apiAxios.post('/api/v1/published-happening', {
-        happening: state.happening,
-      });
+      const id = await createNewPublishedHappening(state.happening)
 
       Router.push({
         pathname: '/app/happening/share',
-        query: { id: data.id },
+        query: { id },
       });
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error.';
