@@ -51,20 +51,6 @@ const bannerItems = [
   },
   {
     mobile: {
-      href: 'https://nexstand.pl/',
-      src: '/static/podstawka-mobile-banner.png',
-      placeholderSrc: '/static/podstawka-compr-mobile-banner.jpg',
-      type: BannerType.Podstawka,
-    },
-    desktop: {
-      href: 'https://nexstand.pl/',
-      src: '/static/podstawka-desktop-banner.png',
-      placeholderSrc: '/static/podstawka-compr-desktop-banner.jpg',
-      type: BannerType.Podstawka,
-    },
-  },
-  {
-    mobile: {
       href: 'https://wytworniapomyslow.com/dobre-tablice-manipulacyjne-czyli-jak-pomagamy-wyjsc-z-bezdomnosci',
       src: '/static/wytwornia-2-mobile-banner.png',
       placeholderSrc: '/static/wytwornia-2-compr-mobile-banner.jpg',
@@ -75,6 +61,20 @@ const bannerItems = [
       src: '/static/wytwornia-2-desktop-banner.png',
       placeholderSrc: '/static/wytwornia-2-compr-desktop-banner.jpg',
       type: BannerType.Wytwornia2,
+    },
+  },
+  {
+    mobile: {
+      href: 'https://nexstand.pl/',
+      src: '/static/podstawka-mobile-banner.png',
+      placeholderSrc: '/static/podstawka-compr-mobile-banner.jpg',
+      type: BannerType.Podstawka,
+    },
+    desktop: {
+      href: 'https://nexstand.pl/',
+      src: '/static/podstawka-desktop-banner.png',
+      placeholderSrc: '/static/podstawka-compr-desktop-banner.jpg',
+      type: BannerType.Podstawka,
     },
   },
   {
