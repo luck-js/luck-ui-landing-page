@@ -5,6 +5,9 @@ import media from '../../utils/media';
 
 export enum BannerType {
   Palisienaturalnie = 'Palisienaturalnie',
+  Palisienaturalnie2 = 'Palisienaturalnie2',
+  Wytwornia = 'Wytwornia',
+  Wytwornia2 = 'Wytwornia2',
   Podstawka = 'Podstawka',
 }
 
