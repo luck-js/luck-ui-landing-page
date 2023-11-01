@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import BannerItem, { Banner, BannerType } from './banner-item';
 import { Box } from '../../components';
 
@@ -7,7 +7,7 @@ const getBannerItem = (bannerItems: BannerItemProps[]): BannerItemProps => {
   return bannerItems[index];
 };
 
-interface BannerItemProps {
+export interface BannerItemProps {
   mobile: Banner;
   desktop: Banner;
 }
@@ -24,14 +24,18 @@ const BannerSection = ({ bannerItems, onBannerClick }: BannerSectionProps) => {
   }, []);
 
   return (
-    <div key={bannerItem.mobile.src}>
-      <Box display={['block', 'none']}>
-        <BannerItem onBannerClick={onBannerClick} {...bannerItem.mobile} />
-      </Box>
-      <Box display={['none', 'block']}>
-        <BannerItem onBannerClick={onBannerClick} {...bannerItem.desktop} />
-      </Box>
-    </div>
+    <Fragment>
+      {bannerItem !== undefined && (
+        <div key={bannerItem.mobile.src}>
+          <Box display={['block', 'none']}>
+            <BannerItem onBannerClick={onBannerClick} {...bannerItem.mobile} />
+          </Box>
+          <Box display={['none', 'block']}>
+            <BannerItem onBannerClick={onBannerClick} {...bannerItem.desktop} />
+          </Box>
+        </div>
+      )}
+    </Fragment>
   );
 };
 

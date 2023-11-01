@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Box, Flex, NAVIGATION_SHADOW } from '../../components';
 import { Theme } from '../../utils';
 import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
-import BannerSection from './banner-section';
+import BannerSection, { BannerItemProps } from './banner-section';
 import { BannerType } from './banner-item';
 
 export interface ParticipationHappeningViewData {
@@ -20,78 +20,7 @@ interface ParticipationHappeningViewProps {
   analytics: any;
 }
 
-const bannerItems = [
-  {
-    mobile: {
-      href: 'https://palisienaturalnie.pl/pl/c/Swiece/16',
-      src: '/static/palisienaturalnie-mobile-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-compr-mobile-banner.jpg',
-      type: BannerType.Palisienaturalnie,
-    },
-    desktop: {
-      href: 'https://palisienaturalnie.pl/pl/c/Swiece/16',
-      src: '/static/palisienaturalnie-desktop-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-compr-desktop-banner.jpg',
-      type: BannerType.Palisienaturalnie,
-    },
-  },
-  {
-    mobile: {
-      href: 'https://palisienaturalnie.pl/pl/c/Swiece/16',
-      src: '/static/palisienaturalnie-2-mobile-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-2-compr-mobile-banner.jpg',
-      type: BannerType.Palisienaturalnie2,
-    },
-    desktop: {
-      href: 'https://palisienaturalnie.pl/pl/c/Swiece/16',
-      src: '/static/palisienaturalnie-2-desktop-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-2-compr-desktop-banner.jpg',
-      type: BannerType.Palisienaturalnie2,
-    },
-  },
-  {
-    mobile: {
-      href: 'https://wytworniapomyslow.com/dobre-tablice-manipulacyjne-czyli-jak-pomagamy-wyjsc-z-bezdomnosci',
-      src: '/static/wytwornia-2-mobile-banner.png',
-      placeholderSrc: '/static/wytwornia-2-compr-mobile-banner.jpg',
-      type: BannerType.Wytwornia2,
-    },
-    desktop: {
-      href: 'https://wytworniapomyslow.com/dobre-tablice-manipulacyjne-czyli-jak-pomagamy-wyjsc-z-bezdomnosci',
-      src: '/static/wytwornia-2-desktop-banner.png',
-      placeholderSrc: '/static/wytwornia-2-compr-desktop-banner.jpg',
-      type: BannerType.Wytwornia2,
-    },
-  },
-  {
-    mobile: {
-      href: 'https://nexstand.pl/',
-      src: '/static/podstawka-mobile-banner.png',
-      placeholderSrc: '/static/podstawka-compr-mobile-banner.jpg',
-      type: BannerType.Podstawka,
-    },
-    desktop: {
-      href: 'https://nexstand.pl/',
-      src: '/static/podstawka-desktop-banner.png',
-      placeholderSrc: '/static/podstawka-compr-desktop-banner.jpg',
-      type: BannerType.Podstawka,
-    },
-  },
-  {
-    mobile: {
-      href: 'https://wytworniapomyslow.com/2022/05/03/jak-zlozyc-tablice-manipulacyjna-wstep',
-      src: '/static/wytwornia-mobile-banner.png',
-      placeholderSrc: '/static/wytwornia-compr-mobile-banner.jpg',
-      type: BannerType.Wytwornia,
-    },
-    desktop: {
-      href: 'https://wytworniapomyslow.com/2022/05/03/jak-zlozyc-tablice-manipulacyjna-wstep',
-      src: '/static/wytwornia-desktop-banner.png',
-      placeholderSrc: '/static/wytwornia-compr-desktop-banner.jpg',
-      type: BannerType.Wytwornia,
-    },
-  },
-];
+const bannerItems: BannerItemProps[] = []
 
 const Index = ({ data, analytics }: ParticipationHappeningViewProps) => {
   const [shouldShowMatchedMember, SetShouldShowMatchedMember] = useState(false);
