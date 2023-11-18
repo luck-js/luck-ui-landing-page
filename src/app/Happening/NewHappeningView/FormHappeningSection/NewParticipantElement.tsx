@@ -6,6 +6,7 @@ import { Theme } from '../../../../utils';
 
 // @ts-ignore
 import Close from '../../../../../public/static/close.svg';
+import { FunctionComponent } from '../../../../utils/function-component.interface';
 
 interface NewParticipantElementProps {
   name: string;
@@ -13,7 +14,7 @@ interface NewParticipantElementProps {
 }
 
 interface NewParticipantElementPage<P = NewParticipantElementProps>
-  extends React.FunctionComponent<P> {
+  extends FunctionComponent<P> {
   Container: any;
   Text: any;
   Button: any;

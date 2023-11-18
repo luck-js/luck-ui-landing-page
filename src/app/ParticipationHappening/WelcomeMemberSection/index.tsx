@@ -8,12 +8,12 @@ import {
   Trafalgar,
   BaseButton,
 } from '../../../components';
-import { Happening, Member } from '../model';
 import media from '../../../utils/media';
 
 export interface WelcomeMemberSectionData {
-  happening: Happening;
-  member: Member;
+  name: string;
+  description: string;
+  memberName: string;
 }
 
 interface WelcomeMemberSectionProps {
@@ -22,32 +22,32 @@ interface WelcomeMemberSectionProps {
 }
 //TODO: 12px
 //TODO: font-family -> Lato
-const Index: any = ({ data: { member, happening }, onClick }: WelcomeMemberSectionProps) => {
+const Index: any = ({ data: { memberName, name, description }, onClick }: WelcomeMemberSectionProps) => {
 
   const renderHappeningContent = () => {
-    if (happening.description) {
+    if (description) {
       return (
         <Index.HappeningContentContainer>
           <Canon as="h1" mt={['small', 'small', 'medium', 'regular']}>
-            {happening.name}
+            {name}
           </Canon>
           <Trafalgar
             as="p"
             mt={['small', 'small', 'medium', 'regular']}
             mb={['small', 'small', 'medium', 'regular']}
           >
-            {happening.description}
+            {description}
           </Trafalgar>
         </Index.HappeningContentContainer>
       );
-    } else if (happening.name) {
+    } else if (name) {
       return (
         <Index.Text
           as="h1"
           pt={['xregular', 'xregular', 'large', 'large']}
           mb={['regular', 'regular', 'regular', 'regular']}
         >
-          {happening.name}
+          {name}
         </Index.Text>
       );
     } else return null;
@@ -58,7 +58,7 @@ const Index: any = ({ data: { member, happening }, onClick }: WelcomeMemberSecti
       <Index.HappeningContentWrapper>{renderHappeningContent()}</Index.HappeningContentWrapper>
       <Index.Text as="h2" pt={['xregular', 'xregular', 'large', 'large']}
                   mb={['small', 'small', 'small', 'small']}>
-        <b>{member.name}</b>, to Ty?
+        <b>{memberName}</b>, to Ty?
       </Index.Text>
       <Index.Text as="p" mb={['regular', 'regular', 'regular', 'regular']}>
         Przejdź do losowania.

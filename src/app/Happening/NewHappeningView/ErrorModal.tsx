@@ -2,6 +2,7 @@ import * as React from "react"
 import {Box, Button, CanonApp, InputApp, Modal} from "../../../components"
 import styled from "styled-components"
 import {Theme} from "../../../utils"
+import { FunctionComponent } from '../../../utils/function-component.interface';
 
 interface ErrorModalProps {
   shouldBeOpen: any;
@@ -9,7 +10,7 @@ interface ErrorModalProps {
   onMainButtonClick: () => void;
 }
 
-interface ErrorModalComponent extends React.FunctionComponent<ErrorModalProps> {
+interface ErrorModalComponent extends FunctionComponent<ErrorModalProps> {
   Container: any;
   Header: any;
   Button: any;

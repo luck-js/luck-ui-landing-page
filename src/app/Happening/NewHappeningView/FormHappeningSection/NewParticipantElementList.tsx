@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ElementListContainer } from '../../shared/ElementListContainer';
 import NewParticipantElement from './NewParticipantElement';
+import { FunctionComponent } from '../../../../utils/function-component.interface';
 
 interface NewParticipantElementListProps {
   names: string[];
@@ -10,7 +11,7 @@ interface NewParticipantElementListProps {
 }
 
 interface NewParticipantElementListPage<P = NewParticipantElementListProps>
-  extends React.FunctionComponent<P> {
+  extends FunctionComponent<P> {
   Container: any;
 }
 

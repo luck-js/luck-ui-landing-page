@@ -6,12 +6,13 @@ import {Theme} from "../../utils"
 import Card from '../Card';
 import {CardsContainer} from "../Card/CardsContainer"
 import {Text} from '../Typography';
+import { FunctionComponent } from '../../utils/function-component.interface';
 
 interface SuggestionsProps {
   posts: ViewPost[];
 }
 
-interface SuggestionsComponent extends React.FunctionComponent<SuggestionsProps> {
+interface SuggestionsComponent extends FunctionComponent<SuggestionsProps> {
   Container: any;
   Text: any;
   CardContainer: any;

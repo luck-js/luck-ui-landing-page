@@ -1,30 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Member } from '../model';
 import { Box, BaseTypography, Spinner } from '../../../components';
 import { Theme } from '../../../utils';
 import media from '../../../utils/media';
 
 export interface MatchedMemberSectionData {
-  me: Member;
-  matchedMember: Member;
+  memberName: string;
+  matchedMemberName: string;
 }
 
 interface MatchedMemberSectionProps {
   data: MatchedMemberSectionData;
 }
 
-const Index = ({ data: { me, matchedMember } }: MatchedMemberSectionProps) => {
+const Index = ({ data: { memberName, matchedMemberName } }: MatchedMemberSectionProps) => {
   return (
     <Index.Container>
       <Index.Text as="h1" mb={['small', 'small', 'medium', 'regular']}>
-        <b>{me.name}</b>, Twój los to:
+        <b>{memberName}</b>, Twój los to:
       </Index.Text>
       <Index.BigTextContainer>
         <Index.SpinnerContainer>
           <Index.Spinner />
         </Index.SpinnerContainer>
-        <Index.BigText as="p">{matchedMember.name}</Index.BigText>
+        <Index.BigText as="p">{matchedMemberName}</Index.BigText>
       </Index.BigTextContainer>
     </Index.Container>
   );

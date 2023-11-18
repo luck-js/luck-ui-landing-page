@@ -7,13 +7,14 @@ import { Theme } from '../../utils';
 import Close from '../../../public/static/close.svg';
 import { BaseButton } from '../Button';
 import { Flex } from '../Flex';
+import { FunctionComponent } from '../../utils/function-component.interface';
 
 interface ModalProps {
   shouldBeOpen: boolean;
   onClose: any;
 }
 
-interface ModalComponent extends React.FunctionComponent<ModalProps> {
+interface ModalComponent extends FunctionComponent<ModalProps> {
   Overlay: any;
   Container: any;
   ContentContainer: any;

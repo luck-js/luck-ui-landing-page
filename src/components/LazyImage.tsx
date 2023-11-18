@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useInViewRef } from "rooks";
+import { FunctionComponent } from '../utils/function-component.interface';
 
-export const LazyImage: React.FunctionComponent<any> = ({
+export const LazyImage: FunctionComponent<any> = ({
   children,
   src,
   placeholderSrc,

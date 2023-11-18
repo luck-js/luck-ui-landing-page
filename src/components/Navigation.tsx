@@ -6,6 +6,7 @@ import { Flex } from './Flex';
 import { NavLink } from './Button';
 import media from '../utils/media';
 import { Theme } from '../utils';
+import { FunctionComponent } from '../utils/function-component.interface';
 
 interface NavigationProps {
   shouldShowShadow?: boolean;
@@ -69,7 +70,7 @@ const NavigationLogo = styled('img')`
   cursor: pointer;
 `;
 
-export const Navigation: React.FunctionComponent<NavigationProps> = ({ ...props }) => {
+export const Navigation: FunctionComponent<NavigationProps> = ({ ...props }) => {
   return (
     <NavigationHorizontalPadding bg="transparent" {...props}>
       <NavigationContainer>
@@ -79,7 +80,7 @@ export const Navigation: React.FunctionComponent<NavigationProps> = ({ ...props 
   );
 };
 
-export const NavigationWithLogo: React.FunctionComponent<NavigationProps> = ({ ...props }) => {
+export const NavigationWithLogo: FunctionComponent<NavigationProps> = ({ ...props }) => {
   return (
     <NavigationHorizontalPadding bg={Theme.colors.mainContrast} {...props}>
       <NavigationContainer withLogo>

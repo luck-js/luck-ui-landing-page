@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box } from './Box';
 import { Flex } from './Flex';
+import { FunctionComponent } from '../utils/function-component.interface';
 
-const RatioContainer: React.FunctionComponent<any> = ({
+const RatioContainer: FunctionComponent<any> = ({
   children,
   ratio = '100%',
   padding = 0,

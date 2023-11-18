@@ -3,6 +3,7 @@ import { Box, NAVIGATION_HEIGHT, NavigationWithLogo, BaseLayout, NAVIGATION_DESK
 import {Theme} from "../utils"
 import styled from "styled-components"
 import media from '../utils/media';
+import { FunctionComponent } from '../utils/function-component.interface';
 
 const Container = styled(Box)`
   height: calc(100% - ${NAVIGATION_HEIGHT}px);
@@ -12,7 +13,7 @@ const Container = styled(Box)`
   `}
 `;
 
-const AppLayout: React.FunctionComponent<{contrast?:boolean}> = ({ children, contrast = false }) => (
+const AppLayout: FunctionComponent<{contrast?:boolean}> = ({ children, contrast = false }) => (
   <Fragment>
     <BaseLayout backgroundColor={contrast ? Theme.colors.mainContrast : Theme.colors.main }>
       <NavigationWithLogo shouldShowShadow={contrast} />

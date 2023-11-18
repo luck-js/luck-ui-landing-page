@@ -9,13 +9,14 @@ import { Box, ButtonWithIcon, CanonApp, Input, NAVIGATION_HEIGHT } from '../../.
 import { useNewHappeningFlow } from '../NewHappeningContext';
 import NewParticipantElementList from './NewParticipantElementList';
 import { ButtonContainer, ContentContainer, SectionBackground } from '../SectionLayout';
+import { FunctionComponent } from '../../../../utils/function-component.interface';
 
 interface FormHappeningSectionData {}
 
 interface FormHappeningSectionProps extends FormHappeningSectionData {}
 
 interface FormHappeningSectionPage<P = FormHappeningSectionProps>
-  extends React.FunctionComponent<P> {
+  extends FunctionComponent<P> {
   Button: any;
   Background: any;
   Container: any;

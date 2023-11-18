@@ -7,13 +7,14 @@ import { Theme } from '../../../../utils';
 import ParticipantElementList from './ParticipantElementList';
 import { ButtonContainer, ContentContainer, SectionBackground } from '../SectionLayout';
 import ErrorModal from '../ErrorModal';
+import { FunctionComponent } from '../../../../utils/function-component.interface';
 
 interface PreviewHappeningSectionData {}
 
 interface PreviewHappeningSectionProps extends PreviewHappeningSectionData {}
 
 interface PreviewHappeningSectionPage<P = PreviewHappeningSectionProps>
-  extends React.FunctionComponent<P> {
+  extends FunctionComponent<P> {
   Container: any;
   ContentContainer: any;
   ButtonContainer: any;

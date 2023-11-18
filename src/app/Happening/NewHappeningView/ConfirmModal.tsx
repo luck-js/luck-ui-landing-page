@@ -2,13 +2,14 @@ import * as React from "react"
 import {Box, Button, CanonApp, InputApp, Modal} from "../../../components"
 import styled from "styled-components"
 import {Theme} from "../../../utils"
+import { FunctionComponent } from '../../../utils/function-component.interface';
 
 interface ConfirmModalProps {
   shouldBeOpen: any;
   onConfirm: any;
 }
 
-interface ConfirmModalComponent extends React.FunctionComponent<ConfirmModalProps> {
+interface ConfirmModalComponent extends FunctionComponent<ConfirmModalProps> {
   Container: any;
   Header: any;
   Button: any;

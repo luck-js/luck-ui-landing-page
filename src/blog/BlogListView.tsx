@@ -2,12 +2,13 @@ import React from "react"
 import Card from "./Card"
 import {CardsContainer} from "./Card/CardsContainer"
 import {ViewPost} from "../../pages/blog"
+import { FunctionComponent } from "../utils/function-component.interface";
 
 interface BlogListViewProps {
   posts: ViewPost[];
 }
 
-interface BlogListViewComponent extends React.FunctionComponent<BlogListViewProps> {
+interface BlogListViewComponent extends FunctionComponent<BlogListViewProps> {
   Container: any;
 }
 

@@ -12,6 +12,7 @@ import { SubHeader, Text, BlogTextLink, List, ListOl, Header } from '../../src/b
 import Suggestions from '../../src/blog/Suggestions';
 import Error from 'next/error';
 import { GetServerSideProps } from 'next';
+import { FunctionComponent } from '../../src/utils/function-component.interface';
 
 const cssTextMinusMargin = css`
   margin-top: -${Theme.space.small}px;
@@ -94,7 +95,7 @@ const HashtagsText = styled(TinySecond)`
   }
 `;
 
-const PostContent: React.FunctionComponent<{
+const PostContent: FunctionComponent<{
   paginationSlugs: PaginationSlugs;
   viewPost: ViewPost;
   suggestionsPosts: ViewPost[];
@@ -229,7 +230,7 @@ const getSuggestionsPosts = (toMatchPost: Post, posts: Post[]): Post[] => {
 };
 
 interface IndexPage<P = { host: string; slug: string; cmsUrl: string; shouldShowDraft: boolean }>
-  extends React.FunctionComponent<P> {}
+  extends FunctionComponent<P> {}
 
 const Index: IndexPage = ({ host, slug, cmsUrl, shouldShowDraft }) => {
   const where = { slug };

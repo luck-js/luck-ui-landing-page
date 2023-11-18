@@ -5,6 +5,7 @@ import { delay, Theme } from '../../../../../utils';
 import { CanonApp, InputApp } from '../../../../../components/Typography';
 import { Box, Button, Flex, Input, TextLink, Modal } from '../../../../../components';
 import { Stars } from './Stars';
+import { FunctionComponent } from '../../../../../utils/function-component.interface';
 
 interface QuestionnaireProps {
   onClose: any;
@@ -12,7 +13,7 @@ interface QuestionnaireProps {
   onClickSubmit: any;
 }
 
-interface QuestionnaireComponent extends React.FunctionComponent<QuestionnaireProps> {
+interface QuestionnaireComponent extends FunctionComponent<QuestionnaireProps> {
   Container: any;
   Header: any;
   Content: any;

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import RatioContainer from './RatioContainer';
 import { LazyImage } from './LazyImage';
+import { FunctionComponent } from '../utils/function-component.interface';
 
 interface RatioLazyImageProps {
   display?: string | string[];
@@ -26,7 +27,7 @@ const Image = styled('img')<{ loading: any }>`
   transition: filter 0.5s, opacity 0.5s;
 `;
 
-export const RatioLazyImage: React.FunctionComponent<RatioLazyImageProps> = ({
+export const RatioLazyImage: FunctionComponent<RatioLazyImageProps> = ({
   url,
   placeholderUrl,
   ...props

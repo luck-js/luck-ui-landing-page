@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NextSeo } from 'next-seo';
 import { gql, useQuery } from '@apollo/client';
 import BlogLayout from '../../src/blog/BlogLayout';
 import { Post, UploadFile } from '../../src/utils';
 import BlogListView from '../../src/blog/BlogListView';
 import Error from 'next/error';
+import { FunctionComponent } from '../../src/utils/function-component.interface';
 
 interface StatelessPage<P = { cmsUrl: string; shouldShowDraft: boolean }>
-  extends React.FunctionComponent<P> {}
+  extends FunctionComponent<P> {}
 
 export const POST_FRAGMENT = gql`
   fragment Post on Post {

@@ -2,12 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button } from './Button';
 import { Box } from '../Box';
+import { FunctionComponent } from '../../utils/function-component.interface';
 
-interface ButtonWithIconComponent<P = { Icon: React.FunctionComponent }>
-  extends React.FunctionComponent<P> {
-  Button: React.FunctionComponent;
-  Text: React.FunctionComponent;
-  IconContainer: React.FunctionComponent;
+interface ButtonWithIconComponent<P = { Icon: FunctionComponent }>
+  extends FunctionComponent<P> {
+  Button: FunctionComponent;
+  Text: FunctionComponent;
+  IconContainer: FunctionComponent;
 }
 
 export const ButtonWithIcon: ButtonWithIconComponent = ({ children, Icon, ...props }) => {
@@ -30,6 +31,7 @@ ButtonWithIcon.Button = styled(Button)`
   position: relative;
   padding: 9px 40px 9px 20px;
 `;
+// @ts-ignore
 ButtonWithIcon.IconContainer = styled(Box)`
   position: absolute;
   top: 0;

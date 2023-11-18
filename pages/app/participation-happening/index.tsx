@@ -7,6 +7,15 @@ import { apiAxios } from '../../../src/app/api.axios';
 import { WelcomeMemberSectionData } from '../../../src/app/ParticipationHappening/WelcomeMemberSection';
 import { MatchedMemberSectionData } from '../../../src/app/ParticipationHappening/MatchedMemberSection';
 import { GetServerSideProps } from 'next';
+import { FunctionComponent } from '../../../src/utils/function-component.interface';
+
+export interface DrawLinkData {
+  id: string;
+  name: string;
+  description: string;
+  memberName: string;
+  matchedMemberName: string;
+}
 
 interface ParticipationHappeningProps {
   data: ParticipationHappeningViewData;
@@ -14,7 +23,7 @@ interface ParticipationHappeningProps {
 }
 
 interface ParticipationHappeningPage<P = ParticipationHappeningProps>
-  extends React.FunctionComponent<P> {}
+  extends FunctionComponent<P> {}
 
 const Index: ParticipationHappeningPage = ({ data, analytics }) => {
   return (
@@ -25,13 +34,22 @@ const Index: ParticipationHappeningPage = ({ data, analytics }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { data: welcomeMember } = await apiAxios.get<WelcomeMemberSectionData>(
-    `/api/v1/participation-happening/${query.id}`,
-  );
-  const { data: matchedMember } = await apiAxios.get<MatchedMemberSectionData>(
-    `/api/v1/participation-happening/matched-member/${query.id}`,
-  );
-  const data = { welcomeMember, matchedMember };
+  const {
+    data: { memberName, matchedMemberName, name, description },
+  } = await apiAxios.get<DrawLinkData>(`/api/v1/draw-link/${query.id}`);
+
+  const welcomeMember: WelcomeMemberSectionData = {
+    memberName,
+    name,
+    description,
+  };
+
+  const matchedMember: MatchedMemberSectionData = {
+    memberName,
+    matchedMemberName,
+  };
+
+  const data: ParticipationHappeningViewData = { welcomeMember, matchedMember };
   return {
     props: {
       data,

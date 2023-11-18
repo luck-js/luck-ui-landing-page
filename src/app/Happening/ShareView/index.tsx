@@ -4,6 +4,7 @@ import ShareViewDesktop from './ShareViewDesktop';
 import { PublishedHappening } from '../model';
 import { useQuestionnaire } from './shared/Questionnaire/Questionnaire';
 import { usePopup } from '../../../components/Popup';
+import { FunctionComponent } from '../../../utils/function-component.interface';
 
 export interface ShareViewData {
   happening: PublishedHappening;
@@ -15,7 +16,7 @@ export interface ShareViewProps {
   onCopy: any;
 }
 
-const Index: React.FunctionComponent<{ data: ShareViewData }> = ({ ...props }) => {
+const Index: FunctionComponent<{ data: ShareViewData }> = ({ ...props }) => {
   const { setShouldBeOpen } = useQuestionnaire();
   const { showPopup } = usePopup();
   const [happening, setHappening] = useState<PublishedHappening>(props.data.happening);

@@ -7,6 +7,7 @@ import { Post, QueryHashtagsArgs } from '../../src/utils';
 import { mapToViewPosts, POST_FRAGMENT } from '../blog';
 import Error from 'next/error';
 import { GetServerSideProps } from 'next';
+import { FunctionComponent } from '../../src/utils/function-component.interface';
 
 const POSTS_FILTERED_QUERY = gql`
   ${POST_FRAGMENT}
@@ -20,7 +21,7 @@ const POSTS_FILTERED_QUERY = gql`
 `;
 
 interface IndexPage<P = { hashtag: string; cmsUrl: string; shouldShowDraft: boolean }>
-  extends React.FunctionComponent<P> {}
+  extends FunctionComponent<P> {}
 
 const Index: IndexPage = ({ hashtag, cmsUrl, shouldShowDraft }) => {
   const where = { name: hashtag };

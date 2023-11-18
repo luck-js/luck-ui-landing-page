@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import FormHappeningSection from './FormHappeningSection';
 import PreviewHappeningSection from './PreviewHappeningSection';
 import { NewHappeningFlowProvider } from './NewHappeningContext';
+import { FunctionComponent } from '../../../utils/function-component.interface';
 
 export interface NewHappeningViewData {
   name: string;
@@ -14,7 +15,7 @@ interface NewHappeningViewProps {
   analytics: any;
 }
 
-interface NewHappeningViewPage<P = NewHappeningViewProps> extends React.FunctionComponent<P> {
+interface NewHappeningViewPage<P = NewHappeningViewProps> extends FunctionComponent<P> {
   Container: any;
 }
 

@@ -5,6 +5,7 @@ import { Flex, TextLink } from '../../components';
 import { Theme } from '../../utils';
 // @ts-ignore
 import WideArrow from '../../../public/static/wide-arrow.svg';
+import { FunctionComponent } from '../../utils/function-component.interface';
 
 type directionType = 'left' | 'right';
 
@@ -14,7 +15,7 @@ interface TextLinkArrowProps {
   ariaLabel: string;
 }
 
-interface TextLinkArrowComponent extends React.FunctionComponent<TextLinkArrowProps> {
+interface TextLinkArrowComponent extends FunctionComponent<TextLinkArrowProps> {
   TextLink: any;
 }
 
@@ -61,7 +62,7 @@ interface PaginationProps extends PaginationSlugs {
   mb: string[];
 }
 
-interface PaginationComponent extends React.FunctionComponent<PaginationProps> {
+interface PaginationComponent extends FunctionComponent<PaginationProps> {
   Container: any;
 }
 

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Theme } from '../../utils';
 import { ViewPost } from '../../../pages/blog';
 import { Box, Flex, Trafalgar, RatioLazyImage } from '../../components';
+import { FunctionComponent } from '../../utils/function-component.interface';
 
 const Container = styled(Flex)`
   margin-bottom: ${Theme.space.small}px;
@@ -52,7 +53,7 @@ export interface CardMobileProps extends ViewPost {
   display: any;
 }
 
-const CardMobile: React.FunctionComponent<CardMobileProps> = ({
+const CardMobile: FunctionComponent<CardMobileProps> = ({
   title,
   description,
   slug,

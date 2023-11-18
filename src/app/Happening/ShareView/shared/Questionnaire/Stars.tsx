@@ -5,6 +5,7 @@ import { BaseButton } from '../../../../../components/Button';
 import { helper, Theme } from '../../../../../utils';
 // @ts-ignore
 import Star from '../../../../../../public/static/star.svg';
+import { FunctionComponent } from '../../../../../utils/function-component.interface';
 
 interface StarsProps {
   count: number;
@@ -12,7 +13,7 @@ interface StarsProps {
   isShouldBeFreeze: boolean;
 }
 
-interface StarsComponent extends React.FunctionComponent<StarsProps> {
+interface StarsComponent extends FunctionComponent<StarsProps> {
   Button: any;
 }
 

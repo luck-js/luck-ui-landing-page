@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
 import { Box } from '../Box';
+import { FunctionComponent } from '../../utils/function-component.interface';
 
 type LayoutProps = {
   backgroundColor: string;
@@ -13,7 +14,7 @@ const Container = styled(Box)`
   height: 100%;
 `;
 
-export const BaseLayout: React.FunctionComponent<LayoutProps> = ({ children, ...props }) => {
+export const BaseLayout: FunctionComponent<LayoutProps> = ({ children, ...props }) => {
   return (
     <Container {...props}>
       <Head>

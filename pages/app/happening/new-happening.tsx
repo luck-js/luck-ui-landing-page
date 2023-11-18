@@ -4,13 +4,14 @@ import NewHappeningView, {
 } from '../../../src/app/Happening/NewHappeningView';
 import AppLayout from '../../../src/app/AppLayout';
 import { GetServerSideProps } from 'next';
+import { FunctionComponent } from '../../../src/utils/function-component.interface';
 
 interface NewHappeningProps {
   data: NewHappeningViewData;
   analytics: any;
 }
 
-interface NewHappeningPage<P = NewHappeningProps> extends React.FunctionComponent<P> {}
+interface NewHappeningPage<P = NewHappeningProps> extends FunctionComponent<P> {}
 
 const NewHappening: NewHappeningPage = ({data, analytics}) => {
 

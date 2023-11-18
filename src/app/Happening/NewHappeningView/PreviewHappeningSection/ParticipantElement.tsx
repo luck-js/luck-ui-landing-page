@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FunctionComponent } from '../../../../utils/function-component.interface';
 import { Container, Text } from '../../shared';
 
 interface ParticipantElementProps {}
 
-interface ParticipantElementPage<P = ParticipantElementProps> extends React.FunctionComponent<P> {
+interface ParticipantElementPage<P = ParticipantElementProps> extends FunctionComponent<P> {
   Container: any;
   Text: any;
 }

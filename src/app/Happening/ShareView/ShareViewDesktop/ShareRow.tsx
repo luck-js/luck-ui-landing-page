@@ -8,13 +8,14 @@ import { BaseButton, BaseInput, Box, Flex } from '../../../../components';
 import WideArrow from '../../../../../public/static/wide-arrow.svg';
 // @ts-ignore
 import Copy from '../../../../../public/static/copy.svg';
+import { FunctionComponent } from '../../../../utils/function-component.interface';
 
 interface ShareRowProps {
   participant: Participant;
   onCopy: any;
 }
 
-interface ShareRowComponent extends React.FunctionComponent<ShareRowProps> {
+interface ShareRowComponent extends FunctionComponent<ShareRowProps> {
   Container: any;
   Element: any;
   Input: any;

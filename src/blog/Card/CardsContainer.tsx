@@ -4,6 +4,7 @@ import {Theme} from "../../utils"
 import {Flex} from "../../components"
 // @ts-ignore
 import Masonry from 'react-masonry-css';
+import { FunctionComponent } from "../../utils/function-component.interface";
 
 interface CardsContainerProps {
   breakpointCols?: number;
@@ -12,7 +13,7 @@ interface CardsContainerProps {
   px: string[];
 }
 
-interface CardsContainerComponent extends React.FunctionComponent<CardsContainerProps> {
+interface CardsContainerComponent extends FunctionComponent<CardsContainerProps> {
   Container: any;
   MasonryContainer: any;
   Masonry: any;

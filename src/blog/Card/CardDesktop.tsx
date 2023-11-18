@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Theme, Hashtag } from '../../utils';
 import { ViewPost } from '../../../pages/blog';
 import { TinyText, Trafalgar, Box, RatioLazyImage } from '../../components';
+import { FunctionComponent } from '../../utils/function-component.interface';
 
 const Container = styled(Box)`
   position: relative;
@@ -49,7 +50,7 @@ export interface CardDesktopProps extends ViewPost {
   display: any;
 }
 
-const CardDesktop: React.FunctionComponent<CardDesktopProps> = ({
+const CardDesktop: FunctionComponent<CardDesktopProps> = ({
   title,
   description,
   slug,
