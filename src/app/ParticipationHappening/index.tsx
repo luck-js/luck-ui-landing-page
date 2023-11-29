@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Box, Flex, NAVIGATION_SHADOW } from '../../components';
 import { Theme } from '../../utils';
 import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
-import BannerSection, { BannerItemProps } from './banner-section';
+import BannerSection from './banner-section';
 import { BannerType } from './banner-item';
 
 export interface ParticipationHappeningViewData {
@@ -20,7 +20,36 @@ interface ParticipationHappeningViewProps {
   analytics: any;
 }
 
-const bannerItems: BannerItemProps[] = []
+const bannerItems = [
+  {
+    mobile: {
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      src: '/static/palisienaturalnie-mobile-banner.png',
+      placeholderSrc: '/static/palisienaturalnie-compr-mobile-banner.jpg',
+      type: BannerType.Palisienaturalnie,
+    },
+    desktop: {
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      src: '/static/palisienaturalnie-desktop-banner.png',
+      placeholderSrc: '/static/palisienaturalnie-compr-desktop-banner.jpg',
+      type: BannerType.Palisienaturalnie,
+    },
+  },
+  {
+    mobile: {
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      src: '/static/palisienaturalnie-2-mobile-banner.png',
+      placeholderSrc: '/static/palisienaturalnie-2-compr-mobile-banner.jpg',
+      type: BannerType.Palisienaturalnie2,
+    },
+    desktop: {
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      src: '/static/palisienaturalnie-2-desktop-banner.png',
+      placeholderSrc: '/static/palisienaturalnie-2-compr-desktop-banner.jpg',
+      type: BannerType.Palisienaturalnie2,
+    },
+  },
+];
 
 const Index = ({ data, analytics }: ParticipationHappeningViewProps) => {
   const [shouldShowMatchedMember, SetShouldShowMatchedMember] = useState(false);
