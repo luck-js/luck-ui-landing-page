@@ -21,32 +21,46 @@ interface ParticipationHappeningViewProps {
 }
 
 const bannerItems = [
+  // {
+  //   mobile: {
+  //     href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+  //     src: '/static/palisienaturalnie-mobile-banner.png',
+  //     placeholderSrc: '/static/palisienaturalnie-compr-mobile-banner.jpg',
+  //     type: BannerType.Palisienaturalnie,
+  //   },
+  //   desktop: {
+  //     href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+  //     src: '/static/palisienaturalnie-desktop-banner.png',
+  //     placeholderSrc: '/static/palisienaturalnie-compr-desktop-banner.jpg',
+  //     type: BannerType.Palisienaturalnie,
+  //   },
+  // },
+  // {
+  //   mobile: {
+  //     href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+  //     src: '/static/palisienaturalnie-2-mobile-banner.png',
+  //     placeholderSrc: '/static/palisienaturalnie-2-compr-mobile-banner.jpg',
+  //     type: BannerType.Palisienaturalnie2,
+  //   },
+  //   desktop: {
+  //     href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+  //     src: '/static/palisienaturalnie-2-desktop-banner.png',
+  //     placeholderSrc: '/static/palisienaturalnie-2-compr-desktop-banner.jpg',
+  //     type: BannerType.Palisienaturalnie2,
+  //   },
+  // },
   {
     mobile: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
-      src: '/static/palisienaturalnie-mobile-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-compr-mobile-banner.jpg',
-      type: BannerType.Palisienaturalnie,
+      href: 'https://mudita-2.kckb.me/df381d0d',
+      src: '/static/muditakompakt-mobile-banner.png',
+      placeholderSrc: '/static/muditakompakt-mobile-banner.png',
+      type: BannerType.Muditakompakt,
     },
     desktop: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
-      src: '/static/palisienaturalnie-desktop-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-compr-desktop-banner.jpg',
-      type: BannerType.Palisienaturalnie,
-    },
-  },
-  {
-    mobile: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
-      src: '/static/palisienaturalnie-2-mobile-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-2-compr-mobile-banner.jpg',
-      type: BannerType.Palisienaturalnie2,
-    },
-    desktop: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
-      src: '/static/palisienaturalnie-2-desktop-banner.png',
-      placeholderSrc: '/static/palisienaturalnie-2-compr-desktop-banner.jpg',
-      type: BannerType.Palisienaturalnie2,
+      href: 'https://mudita-2.kckb.me/df381d0d',
+      src: '/static/muditakompakt-mobile-banner.png',
+      placeholderSrc: '/static/muditakompakt-mobile-banner.png',
+      type: BannerType.Muditakompakt,
     },
   },
 ];

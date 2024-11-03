@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import media from '../../utils/media';
 
 export enum BannerType {
+  Muditakompakt = 'Muditakompakt',
   Palisienaturalnie = 'Palisienaturalnie',
   Palisienaturalnie2 = 'Palisienaturalnie2',
   Wytwornia = 'Wytwornia',
