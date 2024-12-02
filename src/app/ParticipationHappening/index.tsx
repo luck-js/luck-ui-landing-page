@@ -1,9 +1,9 @@
-import { Background } from '../../components/Layout';
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Background } from '../../components/Layout';
 import WelcomeMemberSection, { WelcomeMemberSectionData } from './WelcomeMemberSection';
 import MatchedMemberSection from './MatchedMemberSection';
 import { MatchedMemberSectionData } from './MatchedMemberSection';
-import styled from 'styled-components';
 import { Box, Flex, NAVIGATION_SHADOW } from '../../components';
 import { Theme } from '../../utils';
 import { BackgroundFooterBubbles } from '../../components/BackgroundFooterBubbles';
@@ -23,13 +23,13 @@ interface ParticipationHappeningViewProps {
 const bannerItems = [
   {
     mobile: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy',
       src: '/static/palisienaturalnie-mobile-banner.png',
       placeholderSrc: '/static/palisienaturalnie-compr-mobile-banner.jpg',
       type: BannerType.Palisienaturalnie,
     },
     desktop: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy',
       src: '/static/palisienaturalnie-desktop-banner.png',
       placeholderSrc: '/static/palisienaturalnie-compr-desktop-banner.jpg',
       type: BannerType.Palisienaturalnie,
@@ -37,13 +37,13 @@ const bannerItems = [
   },
   {
     mobile: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy',
       src: '/static/palisienaturalnie-2-mobile-banner.png',
       placeholderSrc: '/static/palisienaturalnie-2-compr-mobile-banner.jpg',
       type: BannerType.Palisienaturalnie2,
     },
     desktop: {
-      href: 'https://palisienaturalnie.pl/kategoria/zestawy-idealne-na-prezent',
+      href: 'https://palisienaturalnie.pl/kategoria/zestawy',
       src: '/static/palisienaturalnie-2-desktop-banner.png',
       placeholderSrc: '/static/palisienaturalnie-2-compr-desktop-banner.jpg',
       type: BannerType.Palisienaturalnie2,
